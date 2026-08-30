@@ -27,13 +27,17 @@
   // A chapter can hold 20+ sections; laid out in one line the whole graph becomes
   // a few pixels tall and a mile wide. Wrapping long layers keeps the aspect
   // readable without breaking the top-to-bottom prerequisite reading.
-  const ROW = 128, COL = 76, COMPONENT_GAP = 130, WRAP = 11, SUBROW = 30;
+  // Chapter labels are centred on their node and run wide, so the gap between book
+// cards has to clear a label, not just a node.
+const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
 
   let nodes = [], edges = [], byId = new Map(), mastery = new Map();
   let prereqIn = new Map(), prereqOut = new Map();
   let view = { x: 0, y: 0, k: 0.7 };
   let hover = null, selected = null, panning = null;
   let bounds = { minX: 0, maxX: 1, minY: 0, maxY: 1 };
+  let groups = [];
+  const BOOK_TITLES = {};
 
   const css = (v, f) =>
     getComputedStyle(document.documentElement).getPropertyValue(v).trim() || f;
@@ -43,11 +47,13 @@
   // ---- load ---------------------------------------------------------------
 
   async function load() {
-    const [g, m, stats] = await Promise.all([
+    const [g, m, stats, books] = await Promise.all([
       fetch("/api/graph").then((r) => r.json()),
       fetch("/api/mastery").then((r) => r.json()).catch(() => []),
       fetch("/api/stats").then((r) => r.json()).catch(() => null),
+      fetch("/api/books").then((r) => r.json()).catch(() => []),
     ]);
+    for (const b of books) BOOK_TITLES[b.id] = b.title;
     mastery = new Map(m.map((x) => [x.concept_id, x]));
 
     const keep = new Set(["concept", "domain_part"]);
@@ -126,34 +132,20 @@
       }
     }
 
-    // 2. connected components over structural edges, packed left to right.
-    const adj = new Map(nodes.map((n) => [n.id, []]));
-    for (const e of structuralEdges()) {
-      adj.get(e.src).push(e.dst);
-      adj.get(e.dst).push(e.src);
-    }
-    const comp = new Map();
-    let cid = 0;
+    // 2. One block per book. Connected components fragment into dozens of
+    //    two-node islands here — every concept without a cross-reference is its
+    //    own component — which made the picture a field of tiny overlapping
+    //    cards. A book is the grouping a reader actually has in mind.
+    const byBook = new Map();
     for (const n of nodes) {
-      if (comp.has(n.id)) continue;
-      const stack = [n.id];
-      comp.set(n.id, cid);
-      while (stack.length) {
-        const u = stack.pop();
-        for (const v of adj.get(u)) if (!comp.has(v)) { comp.set(v, cid); stack.push(v); }
-      }
-      cid++;
+      const key = n.book_id ?? "other";
+      if (!byBook.has(key)) byBook.set(key, []);
+      byBook.get(key).push(n);
     }
+    const components = [...byBook.values()].sort((a, b) => b.length - a.length);
 
-    // 3. within each component: order nodes per layer, then sweep barycentres to
+    // 3. within each block: order nodes per layer, then sweep barycentres to
     //    cut edge crossings.
-    const components = [...new Set(comp.values())].map((c) =>
-      nodes.filter((n) => comp.get(n.id) === c));
-    components.sort((a, b) => b.length - a.length);
-
-    // Components are packed into a grid, not a single strip. With seven books a
-    // strip is thousands of pixels wide and a few hundred tall, so fitting it to
-    // the screen shrinks everything to specks.
     const perRow = Math.max(1, Math.round(Math.sqrt(components.length)));
     let xCursor = 0, yCursor = 0, rowHeight = 0, placedInRow = 0;
 
@@ -165,10 +157,11 @@
       }
       const keys = [...layers.keys()].sort((a, b) => a - b);
       for (const k of keys) {
-        layers.get(k).sort((a, b) => (a.book_id ?? "").localeCompare(b.book_id ?? "")
-          || (a.order ?? 0) - (b.order ?? 0));
+        layers.get(k).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
         layers.get(k).forEach((n, i) => { n.pos = i; });
       }
+      // Barycentre sweeps: order each layer by where its neighbours sit, which
+      // is what keeps the prerequisite edges from crossing into a hairball.
       for (let sweep = 0; sweep < 6; sweep++) {
         const order = sweep % 2 ? [...keys].reverse() : keys;
         for (const k of order) {
@@ -176,10 +169,8 @@
           for (const n of row) {
             const nbrs = (sweep % 2 ? prereqOut.get(n.id).map((e) => e.t)
                                     : prereqIn.get(n.id).map((e) => e.s))
-              .filter((x) => comp.get(x.id) === comp.get(n.id));
-            n.bary = nbrs.length
-              ? nbrs.reduce((s, x) => s + x.pos, 0) / nbrs.length
-              : n.pos;
+              .filter((x) => x.book_id === n.book_id);
+            n.bary = nbrs.length ? nbrs.reduce((s2, x) => s2 + x.pos, 0) / nbrs.length : n.pos;
           }
           row.sort((a, b) => a.bary - b.bary);
           row.forEach((n, i) => { n.pos = i; });
@@ -203,11 +194,27 @@
       xCursor += width * COL + COMPONENT_GAP;
       if (++placedInRow >= perRow) {
         xCursor = 0;
-        yCursor += rowHeight + COMPONENT_GAP * 1.6;
+        yCursor += rowHeight + 190;
         rowHeight = 0;
         placedInRow = 0;
       }
     }
+
+    // Per-component bounds, so each book can be drawn on its own card.
+    groups = components.map((group) => {
+      const xs = group.map((n) => n.x), ys = group.map((n) => n.y);
+      const book = group[0]?.book_id ?? "";
+      return {
+        book,
+        domain: book === "putnam" ? "contest" : group[0]?.domain,
+        nodes: group,
+        // Extra headroom at the top: the card title sits above the first row of
+        // chapter labels, which are themselves drawn above their nodes.
+        x0: Math.min(...xs) - 52, x1: Math.max(...xs) + 52,
+        y0: Math.min(...ys) - 96, y1: Math.max(...ys) + 34,
+        size: group.length,
+      };
+    }).filter((g) => g.size > 1);
 
     bounds = nodes.reduce((b, n) => ({
       minX: Math.min(b.minX, n.x), maxX: Math.max(b.maxX, n.x),
@@ -217,15 +224,17 @@
 
   function fit() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;                       // still hidden; refit on activation
     const gw = bounds.maxX - bounds.minX || 1, gh = bounds.maxY - bounds.minY || 1;
-    view.k = Math.max(0.12, Math.min(1.4, Math.min(w / (gw + 260), h / (gh + 160))));
+    // Padding leaves room for the labels, which extend well past the node centres.
+    view.k = Math.max(0.1, Math.min(1.3, Math.min(w / (gw + 340), h / (gh + 200))));
     view.x = -((bounds.minX + bounds.maxX) / 2) * view.k;
     view.y = -((bounds.minY + bounds.maxY) / 2) * view.k;
   }
 
   // ---- drawing ------------------------------------------------------------
 
-  const radius = (n) => n.kind === "domain_part" ? 9 : 5 + Math.min(Math.sqrt(n.deg) * 1.6, 9);
+  const radius = (n) => n.kind === "domain_part" ? 11 : 6 + Math.min(Math.sqrt(n.deg) * 2.0, 11);
 
   function masteryColor(n) {
     const m = mastery.get(n.id);
@@ -256,6 +265,7 @@
     const q = document.getElementById("graphSearch").value.trim().toLowerCase();
     const line = css("--line", "#ccc"), ink = css("--ink", "#222");
     const accent = css("--accent", "#d05b2d");
+    const df = document.getElementById("domainFilter").value;
 
     const focus = selected || hover;
     const near = new Set();
@@ -266,6 +276,26 @@
         if (e.t === focus) near.add(e.s.id);
       }
     }
+
+    // Each book on its own card: without them the picture is one undifferentiated
+    // field of dots, and the fact that these are seven separate curricula is the
+    // first thing worth seeing.
+    const surface = css("--surface-alt", "#f5f5f5");
+    for (const g of groups) {
+      if (df && g.domain !== df) continue;
+      ctx.fillStyle = surface;
+      ctx.globalAlpha = 0.55;
+      const r = 18;
+      const w2 = g.x1 - g.x0, h2 = g.y1 - g.y0;
+      ctx.beginPath();
+      ctx.roundRect(g.x0, g.y0, w2, h2, r);
+      ctx.fill();
+      ctx.globalAlpha = 0.5;
+      ctx.strokeStyle = line;
+      ctx.lineWidth = 1 / view.k;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
 
     for (const e of edges) {
       if (!visible(e.s) || !visible(e.t)) continue;
@@ -348,7 +378,7 @@
         const size = (big ? 12.5 : 10.5) / view.k;
         if (big || view.k > 0.5) {
           ctx.font = `${size}px "Space Grotesk", system-ui`;
-          const label = n.label.length > 30 ? n.label.slice(0, 28) + "…" : n.label;
+          const label = n.label.length > 26 ? n.label.slice(0, 24) + "…" : n.label;
           const wid = ctx.measureText(label).width;
           // Everything competes for label space; priority comes from draw order.
           if (fits(n.x, n.y - r - 6 / view.k, wid)) {
@@ -361,6 +391,46 @@
       }
     }
     ctx.restore();
+    ctx.globalAlpha = 1;
+
+    // Card titles are drawn in screen space, not world space: scaled with the
+    // view they either vanish at low zoom or overflow their card at high zoom.
+    const toScreen = (x, y) => ({
+      x: w / 2 + view.x + x * view.k,
+      y: h / 2 + view.y + y * view.k,
+    });
+    for (const g of groups) {
+      if (df && g.domain !== df) continue;
+      const a = toScreen(g.x0, g.y0), b = toScreen(g.x1, g.y1);
+      if (b.x < 0 || a.x > w || b.y < 0 || a.y > h) continue;
+      const cardW = b.x - a.x;
+      if (cardW < 90) continue;                       // too small to label honestly
+      const title = (BOOK_TITLES[g.book] ?? g.book ?? "").toUpperCase();
+      ctx.font = '600 11.5px "Space Grotesk", system-ui';
+      const tw = Math.min(ctx.measureText(title).width, cardW - 26);
+      ctx.fillStyle = css("--card", "#fff");
+      ctx.globalAlpha = 0.94;
+      ctx.beginPath();
+      ctx.roundRect(a.x + 10, a.y + 8, tw + 20, 32, 8);
+      ctx.fill();
+      ctx.globalAlpha = 0.55;
+      ctx.strokeStyle = DOMAIN_COLORS[g.domain] ?? "#888";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(a.x + 16, a.y + 8, tw + 8, 32);
+      ctx.clip();
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = DOMAIN_COLORS[g.domain] ?? "#888";
+      ctx.textAlign = "left";
+      ctx.fillText(title, a.x + 20, a.y + 23);
+      ctx.globalAlpha = 0.5;
+      ctx.fillStyle = ink;
+      ctx.font = '9.5px "Space Grotesk", system-ui';
+      ctx.fillText(`${g.size} concepts · ${g.domain ?? ""}`, a.x + 20, a.y + 35);
+      ctx.restore();
+    }
     ctx.globalAlpha = 1;
   }
 

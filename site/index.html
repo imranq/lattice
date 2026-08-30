@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lattice — concepts, partially ordered</title>
+  <title>Lattice</title>
   <script>
     (function () {
       const saved = localStorage.getItem("putnam_theme_v1");
@@ -24,163 +24,72 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <!-- The shell defines the registry the modules call, so it must run first;
-       deferred scripts execute in document order. -->
   <script defer src="app-shell.js"></script>
   <script defer src="generators.js"></script>
   <script defer src="graph.js"></script>
-  <script defer src="problems-page.js"></script>
-  <script defer src="practice.js"></script>
-  <script defer src="test.js"></script>
+  <script defer src="study.js"></script>
   <script defer src="progress.js"></script>
 </head>
 <body>
-  <div class="bg-orb orb-a"></div>
-  <div class="bg-orb orb-b"></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#study" aria-label="Lattice home">
+        <img class="brand-mark" src="favicon.svg" alt="" width="34" height="34" />
+        <span><strong>Lattice</strong><small>Concepts, partially ordered</small></span>
+      </a>
 
-  <header class="topbar">
-    <a class="brand" href="#explore" aria-label="Lattice home">
-      <img class="brand-mark" src="favicon.svg" alt="" width="38" height="38" />
-      <span><strong>Lattice</strong><small>Concepts, partially ordered</small></span>
-    </a>
-    <div class="top-context">
-      <strong id="view-title">The graph</strong>
-      <span id="view-subtitle">Every concept, ordered by what it needs first</span>
-    </div>
-    <nav aria-label="Primary navigation">
-      <button data-view="explore" class="nav-button active">Explore</button>
-      <button data-view="problems" class="nav-button">Problems</button>
-      <button data-view="practice" class="nav-button">Practice</button>
-      <button data-view="test" class="nav-button">Test</button>
-      <button data-view="progress" class="nav-button">Stats</button>
-      <button data-view="putnam" class="nav-button">Putnam</button>
+      <nav aria-label="Primary">
+        <button data-view="study" class="nav-button active">Study</button>
+        <button data-view="explore" class="nav-button">Graph</button>
+        <button data-view="progress" class="nav-button">Stats</button>
+      </nav>
+
+      <div id="sideStudy" class="side-section">
+        <p class="eyebrow">Field</p>
+        <select id="studyDomain" aria-label="Field"><option value="">All fields</option></select>
+
+        <p class="eyebrow">Sources</p>
+        <label class="toggle"><input type="checkbox" id="srcTextbook" checked /><span>Textbooks</span></label>
+        <label class="toggle"><input type="checkbox" id="srcContest" checked /><span>Putnam</span></label>
+        <label class="toggle"><input type="checkbox" id="srcGenerated" checked /><span>Generated drills</span></label>
+
+        <p class="eyebrow">Your level</p>
+        <div id="abilityBox" class="ability-box"></div>
+
+        <p class="eyebrow">Up next</p>
+        <ol id="queuePreview" class="queue-preview"></ol>
+      </div>
+
+      <div id="sideGraph" class="side-section" hidden>
+        <p class="eyebrow">Display</p>
+        <label class="toggle"><input type="checkbox" id="showMastery" checked /><span>Colour by mastery</span></label>
+        <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
+        <p class="eyebrow">Filter</p>
+        <select id="domainFilter" aria-label="Filter by domain"><option value="">All domains</option></select>
+        <input id="graphSearch" type="search" placeholder="Find a concept" />
+        <button id="replay" class="ghost-btn" type="button">Fit to screen</button>
+        <p class="eyebrow">Legend</p>
+        <div id="legend" class="legend-stack"></div>
+        <p id="graphCount" class="data-count"></p>
+      </div>
+
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
-    </nav>
-  </header>
+    </aside>
 
-  <main>
-    <!-- ============ Explore: the graph ============ -->
-    <section id="explore" class="view active">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <label class="toggle"><input type="checkbox" id="showMastery" checked /><span>Colour by mastery</span></label>
-          <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
-          <select id="domainFilter" aria-label="Filter by domain"><option value="">All domains</option></select>
-          <input id="graphSearch" type="search" placeholder="Find a concept" />
-        </div>
-        <div class="toolbar-right">
-          <span id="graphCount" class="data-count"></span>
-          <button id="replay" class="ghost-btn" type="button">Fit to screen</button>
-        </div>
-      </div>
-      <div class="explorer-grid">
-        <section class="panel graph-panel">
-          <div class="panel-heading">
-            <div><p class="eyebrow">VISUALIZER</p><h2>Concept graph</h2></div>
-            <span class="legend-inline" id="legend"></span>
-          </div>
-          <div class="graph-stage"><canvas id="canvas"></canvas></div>
-        </section>
-        <aside id="inspector" class="panel inspector" hidden></aside>
-      </div>
-    </section>
-
-    <!-- ============ Problems ============ -->
-    <section id="problems" class="view">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <input id="q" type="search" placeholder="Search problem text…" />
-          <select id="domain"><option value="">All domains</option></select>
-          <select id="book"><option value="">All books</option></select>
-          <select id="tier">
-            <option value="">All tiers</option>
-            <option value="W1">W1 — warm-up</option>
-            <option value="W2">W2 — bridge</option>
-            <option value="core">core</option>
-          </select>
-          <select id="sort">
-            <option value="">Book order</option>
-            <option value="easy">Easiest first</option>
-            <option value="hard">Hardest first</option>
-          </select>
-          <label class="toggle"><input id="unsolved" type="checkbox" /><span>Unsolved</span></label>
-          <label class="toggle"><input id="garbled" type="checkbox" /><span>Include unreadable</span></label>
-        </div>
-        <div class="toolbar-right">
-          <span id="garbledNote" class="dim"></span>
-          <span id="count" class="data-count"></span>
-        </div>
-      </div>
-      <section id="pfList" class="problem-feed"></section>
-      <div class="feed-foot">
-        <button id="more" class="ghost-btn" type="button" hidden>Load more</button>
-        <span id="footNote" class="dim"></span>
-      </div>
-    </section>
-
-    <!-- ============ Practice: generated drills ============ -->
-    <section id="practice" class="view">
-      <div class="panel-heading standalone">
-        <div><p class="eyebrow">GENERATORS</p><h2>Levelled drills</h2></div>
-        <p class="panel-note">One problem at a time. Three right in a row moves you up a level,
-          two wrong moves you down; the level is remembered per skill.</p>
-      </div>
-      <section id="skillGrid" class="skill-grid"></section>
-      <section id="drill" class="drill panel" hidden>
-        <div class="drill-head">
-          <button id="drillBack" class="ghost-btn" type="button">← All skills</button>
-          <span id="drillName" class="drill-name"></span>
-          <span id="drillLevel" class="level-chip"></span>
-          <span id="drillStreak" class="streak"></span>
-        </div>
-        <div class="level-track"><span id="levelFill" class="level-fill"></span></div>
-        <p id="prompt" class="drill-prompt"></p>
-        <form id="answerForm" class="answer-row" autocomplete="off">
-          <input id="answer" type="text" placeholder="Answer" aria-label="Answer" />
-          <button type="submit" class="grade">Check</button>
-          <button id="skipBtn" type="button" class="ghost-btn">Skip</button>
-          <button id="showBtn" type="button" class="ghost-btn">Show me</button>
-        </form>
-        <div id="feedback" class="feedback"></div>
-        <div id="work" class="work" hidden></div>
-        <p id="trick" class="trick"></p>
+    <main>
+      <section id="study" class="view active">
+        <div id="studyRoot"></div>
       </section>
-    </section>
 
-    <!-- ============ Test ============ -->
-    <section id="test" class="view"><div id="testRoot"></div></section>
-
-    <!-- ============ Stats ============ -->
-    <section id="progress" class="view"><div id="content" class="progress-content"></div></section>
-
-    <!-- ============ Putnam bank (lazy-loaded) ============ -->
-    <section id="putnam" class="view">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <input id="search" type="search" placeholder="Search text, symbols, or keywords" />
-          <select id="yearFilter"><option value="">All years</option></select>
-          <select id="sessionFilter">
-            <option value="">All sections</option><option value="A">A</option><option value="B">B</option>
-          </select>
-          <select id="topicFilter"><option value="">All topics</option></select>
-          <label class="toggle"><input id="hasSolution" type="checkbox" /><span>Has solution</span></label>
-        </div>
-        <div class="toolbar-right"><p id="stats" class="data-count"></p></div>
-      </div>
-      <section class="mobile-nav">
-        <button id="mobileFiltersToggle" class="mobile-filters-btn" type="button">☰ Filters</button>
-        <select id="mobileProblemPicker" aria-label="Select problem"></select>
+      <section id="explore" class="view">
+        <div class="graph-stage"><canvas id="canvas"></canvas></div>
+        <aside id="inspector" class="inspector" hidden></aside>
       </section>
-      <section id="recentWrap" class="recent-wrap">
-        <div class="recent-label">Recently viewed</div>
-        <div id="recentRow" class="recent-row"></div>
+
+      <section id="progress" class="view">
+        <div id="content" class="progress-content"></div>
       </section>
-      <section id="memoryPanel" class="memory-panel" hidden></section>
-      <div class="layout">
-        <aside><div id="list" class="problem-list"></div></aside>
-        <article id="detail" class="detail"><h2>Select a problem</h2></article>
-      </div>
-    </section>
-  </main>
+    </main>
+  </div>
 </body>
 </html>

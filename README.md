@@ -58,18 +58,32 @@ personal use on the machine that owns the book.
 
 ## Pages
 
-One page, six views (`site/index.html` + `app-shell.js`). Each module registers an
-initialiser and boots the first time its view is opened — the Putnam bank pulls a 4.3 MB
-data bundle, so nothing loads until you look at it.
+One page, a sidebar, three views (`site/index.html` + `app-shell.js`).
 
 | View | What it does |
 |---|---|
-| **Explore** | the concept graph as a partial order, with learning plans — the landing view |
-| **Problems** | every exercise in the graph: filter by domain, book and tier, read it, grade it |
-| **Practice** | 16 generated drill skills, 5 levels, one problem at a time |
-| **Test** | a scored session sampling your weakest concepts, generated + textbook |
-| **Stats** | coverage, mastery, gaps, activity, sources |
-| **Putnam** | the contest bank: search, filter, hints, warm-up ladder per problem |
+| **Study** | one problem at a time, chosen at the edge of your ability — textbooks, Putnam and generated drills in one queue |
+| **Graph** | the concept graph as a partial order, one card per source, with learning plans |
+| **Stats** | level by field, coverage, mastery, gaps, activity, sources |
+
+## Adaptive difficulty
+
+Study does not shuffle. Every attempt is scored as an **Elo match between you and the
+problem**, which estimates your skill and the problem's difficulty at the same time — the
+approach [Pelánek surveys for educational systems](https://www.fi.muni.cz/~xpelanek/publications/CAE-elo.pdf),
+robust at the sample sizes one learner produces where IRT needs hundreds of students.
+Ratings are kept **per field**, so being strong in probability does not inflate what you are
+handed in algebra.
+
+The target is the [Eighty Five Percent Rule](https://www.nature.com/articles/s41467-019-12552-4)
+(Wilson et al., *Nature Communications* 2019): learning is fastest at roughly 85% accuracy.
+On the logistic scale that is a problem rated ~301 points below you, which is what the queue
+aims at — `fit` ranks candidates by distance from that point, softened by how well you hold
+the concept's prerequisites.
+
+Generated drills are auto-graded. Textbook and contest problems are self-graded: no string
+comparison can mark a proof, and pretending otherwise would feed the ability estimate noise
+it would never shake off.
 
 ## Run
 

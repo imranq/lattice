@@ -44,9 +44,10 @@
   }
 
   async function render() {
-    const [stats, coverage, books, weak, rec, due, mastery] = await Promise.all([
+    const [stats, coverage, books, weak, rec, due, mastery, ability] = await Promise.all([
       get("/stats"), get("/coverage"), get("/books"), get("/weak-edges"),
       get("/recommend?limit=6"), get("/due?n=8"), get("/mastery"),
+      get("/ability").catch(() => ({ domains: [], target_success: 0.85 })),
     ]);
     const activity = await get("/activity?days=126").catch(() => []);
 
@@ -66,6 +67,26 @@
         <h2>Activity</h2>
         ${activity.length ? heatmap(activity)
           : `<p class="dim">No attempts recorded yet.</p>`}
+      </section>
+
+      <section class="panel">
+        <h2>Level by field</h2>
+        <p class="panel-note">An Elo rating per field: each attempt is scored as a match
+          between you and the problem, which estimates both at once. Study aims one notch
+          below your rating, where the predicted success rate is
+          ${Math.round((ability.target_success ?? 0.85) * 100)}% — the point at which
+          learning is fastest.</p>
+        ${ability.domains.filter((d) => d.pool).map((d) => `
+          <div class="cov-row">
+            <span class="cov-label">${esc(d.domain)}</span>
+            <span class="cov-track"><span class="cov-fill"
+              style="width:${Math.max(3, Math.min(100, ((d.rating - 700) / 1400) * 100))}%"></span></span>
+            <span class="cov-num">${d.rating}</span>
+            <span class="cov-sub">${d.attempts
+              ? `${d.attempts} attempt${d.attempts === 1 ? "" : "s"}${
+                  d.confident ? "" : " · provisional"}`
+              : "not started"} · aims at ${d.target_rating}</span>
+          </div>`).join("")}
       </section>
 
       <section class="panel">

@@ -11,6 +11,7 @@ import {
   dueItems, allStates, attemptsFor, stats, activity, streak,
 } from './lib/db.mjs';
 import { conceptMastery, weakEdges, recommend } from './lib/mastery.mjs';
+import { abilityReport, suggest, TARGET_P } from './lib/ability.mjs';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const SITE = join(ROOT, 'site');
@@ -31,6 +32,26 @@ const LINKED_PATH = join(ROOT, 'data', 'processed', 'graph', 'probability.linked
 // committed. Serving it is fine — this is the machine that owns the books — but it
 // stays out of the graph file so the repo carries pointers only.
 let localText = new Map();
+
+// Putnam problems carry progressive hints and a solution; they live in the
+// labeled dataset rather than the graph, which keeps the graph lean.
+let putnamExtras = new Map();
+
+async function loadPutnamExtras() {
+  try {
+    const raw = JSON.parse(await readFile(
+      join(ROOT, 'data', 'processed', 'problems.labeled.json'), 'utf8'));
+    putnamExtras = new Map(raw.problems.map((p) => [p.id, {
+      hints: p.hints ?? [p.hint_1, p.hint_2, p.hint_3].filter(Boolean),
+      solution: p.solution_text ?? p.solution_tex ?? null,
+      techniques: p.techniques ?? [],
+      topic: p.topic, difficulty: p.difficulty, year: p.year, code: p.code,
+    }]));
+    console.log(`putnam extras: hints and solutions for ${putnamExtras.size} problems`);
+  } catch {
+    // Optional: the bank may not have been labeled yet.
+  }
+}
 
 async function loadLocalText() {
   const dir = join(ROOT, 'data', 'local');
@@ -177,6 +198,23 @@ async function api(req, res, url) {
           .sort((a, b) => a.mastery - b.mastery));
       }
 
+      case p === '/ability':
+        return json(res, { target_success: TARGET_P, domains: abilityReport(db, graph) });
+
+      case p === '/next': {
+        // The study queue: problems sitting at the edge of what you can do.
+        const picks = suggest(db, graph, {
+          domain: url.searchParams.get('domain') || null,
+          sources: url.searchParams.get('sources')?.split(',').filter(Boolean) || null,
+          limit: Number(url.searchParams.get('limit') ?? 10),
+        });
+        const byId = new Map(graph.exercises.map((e) => [e.id, e]));
+        return json(res, picks.map((s) => {
+          const full = byId.get(s.id);
+          return { ...s, ...withText(full), ...s };
+        }));
+      }
+
       case p === '/weak-edges':
         return json(res, weakEdges(db, graph).slice(0, 25));
 
@@ -194,6 +232,11 @@ async function api(req, res, url) {
         const id = decodeURIComponent(p.slice('/ladder/'.length));
         const l = ladders.ladders.find((x) => x.target_problem_id === id);
         return l ? json(res, l) : json(res, { error: 'no ladder for problem' }, 404);
+      }
+
+      case p.startsWith('/extras/'): {
+        const id = decodeURIComponent(p.slice('/extras/'.length));
+        return json(res, putnamExtras.get(id) ?? { hints: [], solution: null });
       }
 
       case p.startsWith('/attempts/'):
@@ -325,6 +368,7 @@ const server = createServer(async (req, res) => {
 
 await loadGraph();
 await loadLocalText();
+await loadPutnamExtras();
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`Lattice on http://127.0.0.1:${PORT}  (db: ${DB_PATH})`);
 });

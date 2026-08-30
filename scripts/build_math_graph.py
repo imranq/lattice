@@ -43,7 +43,7 @@ STOP = set("the a an of and or to for in on with by is are as from that this it 
            "some more less into problems problem exercises exercise section chapter "
            "further other first second".split())
 
-CONF = {"textbook_order": 0.40, "cross_reference": 0.85, "term_reuse": 0.55,
+CONF = {"putnam_link": 0.60, "textbook_order": 0.40, "cross_reference": 0.85, "term_reuse": 0.55,
         "cross_book_consensus": 0.75}
 
 TIER_FROM_PRIOR = lambda s: "W1" if s < 0.35 else ("W2" if s < 0.62 else "core")
@@ -196,6 +196,76 @@ def load_pdf_book(book, nodes, edges, exercises, add_node, add_edge):
         add_edge(concept_id, e["id"], "assessed_by", "textbook_structure", 1.0)
 
 
+# Putnam topics map onto the domains the textbooks cover. Contest problems are not
+# a separate world — they are the hard end of the same concepts.
+PUTNAM_DOMAIN = {
+    "Probability": "probability", "Combinatorics": "combinatorics",
+    "Number Theory": "number theory", "Real Analysis": "real analysis",
+    "Calculus": "real analysis", "Algebra": "abstract algebra",
+    "Abstract Algebra": "abstract algebra", "Linear Algebra": "linear algebra",
+    "Complex Analysis": "complex analysis", "Geometry": "geometry",
+    "Inequalities": "inequalities", "Functional Equations": "abstract algebra",
+    "Other": "unknown",
+}
+DIFFICULTY_PRIOR = {"easy": 0.45, "medium": 0.65, "hard": 0.85, "very_hard": 0.97}
+
+
+def load_putnam(path, linked_path, nodes, edges, exercises, add_node, add_edge):
+    """The contest bank as a source like any other: one concept node per topic,
+    every problem attached to it, and prerequisite edges in from whichever textbook
+    concepts the linker matched."""
+    data = json.loads(Path(path).read_text())
+    problems = data["problems"]
+
+    linked = {}
+    try:
+        lk = json.loads(Path(linked_path).read_text())
+        for l in lk.get("links", []):
+            best = l["matches"][0]
+            if best["score"] >= 0.5:
+                linked[l["problem_id"]] = best["concept_id"]
+    except FileNotFoundError:
+        pass
+
+    add_node("book:putnam", kind="book", label="Putnam archive 1985-2025",
+             authors="MAA", license="public archive", domain="contest",
+             extraction="latex_source")
+
+    topics = sorted({p.get("topic") or "Other" for p in problems})
+    topic_nodes = {}
+    for topic in topics:
+        domain = PUTNAM_DOMAIN.get(topic, "unknown")
+        cid = f"concept:putnam:{re.sub(r'[^a-z0-9]+', '_', topic.lower()).strip('_')}"
+        add_node(cid, kind="concept", label=f"Putnam: {topic}", domain=domain,
+                 book_id="putnam", contest=True)
+        topic_nodes[topic] = cid
+
+    for p in problems:
+        topic = p.get("topic") or "Other"
+        cid = topic_nodes[topic]
+        score = DIFFICULTY_PRIOR.get(p.get("difficulty"), 0.85)
+        exercises.append({
+            "id": p["id"], "concept_id": cid, "book_id": "putnam",
+            "domain": PUTNAM_DOMAIN.get(topic, "unknown"),
+            "label": p["id"], "chapter": p.get("year"),
+            "section_title": f"Putnam {p.get('year')} {p.get('code')}",
+            "page": None, "difficulty_prior": score,
+            "tier": "core", "contest": True,
+            "has_published_solution": bool(p.get("solution_tex")),
+            "has_text": True,
+            "text": p.get("problem_text") or p.get("problem_tex") or "",
+            "techniques": p.get("techniques") or [],
+        })
+        add_edge(cid, p["id"], "assessed_by", "textbook_structure", 1.0)
+
+        # A matched textbook concept is a prerequisite for the contest problem.
+        src = linked.get(p["id"])
+        if src and src in nodes:
+            add_edge(src, cid, "prerequisite", "putnam_link", 0.6, cognitive=True)
+
+    return len(problems)
+
+
 def align_across_books(nodes, add_edge, min_overlap=0.5):
     """Same concept, different author. Two books agreeing is the strongest
     evidence available that a concept boundary is real and not one author's
@@ -228,6 +298,9 @@ def align_across_books(nodes, add_edge, min_overlap=0.5):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--books", nargs="+", required=True)
+    ap.add_argument("--putnam", default="data/processed/problems.labeled.json")
+    ap.add_argument("--putnam-links", default="data/processed/graph/probability.linked.json")
+    ap.add_argument("--no-putnam", action="store_true")
     ap.add_argument("--out", default="data/processed/graph/math.json")
     args = ap.parse_args()
 
@@ -253,6 +326,11 @@ def main():
             load_pdf_book(book, nodes, raw_edges, exercises, add_node, add_edge)
         print(f"  {bid:<18} {book.get('extraction','?'):<14} "
               f"{len(exercises) - before:>4} exercises  ({DOMAINS.get(bid,'unknown')})")
+
+    if not args.no_putnam:
+        n = load_putnam(args.putnam, args.putnam_links, nodes, raw_edges, exercises,
+                        add_node, add_edge)
+        print(f"  {'putnam':<18} {'latex_source':<14} {n:>4} problems  (contest)")
 
     aligned = align_across_books(nodes, add_edge)
 
