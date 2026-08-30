@@ -230,6 +230,83 @@ async function api(req, res, url) {
         }));
       }
 
+      case p === '/subjects': {
+        // One row per field: the books that teach it, how much of it is assessed,
+        // and where you sit. This is what Home draws instead of the full graph.
+        const m = conceptMastery(db);
+        const ability = new Map(abilityReport(db, graph).map((a) => [a.domain, a]));
+        const rows = new Map();
+        for (const n of graph.nodes) {
+          if (n.kind !== 'concept' || !n.domain) continue;
+          const r = rows.get(n.domain) ?? {
+            domain: n.domain, concepts: 0, assessed: 0, mastery_sum: 0,
+            books: new Set(), exercises: 0,
+          };
+          r.concepts += 1;
+          if (n.book_id) r.books.add(n.book_id);
+          const mm = m.get(n.id);
+          if (mm) { r.assessed += 1; r.mastery_sum += mm.mastery; }
+          rows.set(n.domain, r);
+        }
+        for (const e of graph.exercises) {
+          const r = rows.get(e.domain);
+          if (r) r.exercises += 1;
+        }
+        return json(res, [...rows.values()].map((r) => ({
+          domain: r.domain, concepts: r.concepts, assessed: r.assessed,
+          exercises: r.exercises, books: [...r.books],
+          mastery: r.assessed ? +(r.mastery_sum / r.assessed).toFixed(3) : null,
+          coverage: +(r.assessed / r.concepts).toFixed(3),
+          rating: ability.get(r.domain)?.rating ?? null,
+          attempts: ability.get(r.domain)?.attempts ?? 0,
+        })).sort((a, b) => b.exercises - a.exercises));
+      }
+
+      case p === '/subject': {
+        // One field in full: its books, their chapters, and every topic under
+        // them with mastery and how many problems sit there.
+        const domain = url.searchParams.get('domain');
+        if (!domain) return json(res, { error: 'domain required' }, 400);
+        const m = conceptMastery(db);
+        const counts = new Map();
+        for (const e of graph.exercises) {
+          counts.set(e.concept_id, (counts.get(e.concept_id) ?? 0) + 1);
+        }
+        const bookTitles = new Map(graph.nodes.filter((n) => n.kind === 'book')
+          .map((n) => [n.id.replace(/^book:/, ''), n.label]));
+        const chapters = new Map(graph.nodes.filter((n) => n.kind === 'domain_part')
+          .map((n) => [`${n.book_id}:${n.chapter}`, n.label]));
+
+        const byBook = new Map();
+        for (const n of graph.nodes) {
+          if (n.kind !== 'concept' || n.domain !== domain) continue;
+          const book = n.book_id ?? 'other';
+          const b = byBook.get(book) ?? {
+            book_id: book, title: bookTitles.get(book) ?? book, topics: [],
+          };
+          const mm = m.get(n.id);
+          b.topics.push({
+            id: n.id, label: n.label, chapter: n.chapter ?? null,
+            chapter_title: chapters.get(`${book}:${n.chapter}`) ?? null,
+            page: n.page ?? null,
+            exercises: counts.get(n.id) ?? 0,
+            mastery: mm ? mm.mastery : null,
+            attempts: mm ? mm.attempts : 0,
+          });
+          byBook.set(book, b);
+        }
+        for (const b of byBook.values()) {
+          b.exercises = b.topics.reduce((a, t) => a + t.exercises, 0);
+          b.topics.sort((x, y) => (x.chapter ?? 0) - (y.chapter ?? 0)
+            || y.exercises - x.exercises);
+        }
+        const ability = abilityReport(db, graph).find((a) => a.domain === domain) ?? null;
+        return json(res, {
+          domain, ability,
+          books: [...byBook.values()].sort((a, b) => b.exercises - a.exercises),
+        });
+      }
+
       case p === '/weak-edges':
         return json(res, weakEdges(db, graph).slice(0, 25));
 

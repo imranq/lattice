@@ -942,3 +942,47 @@ main { padding: 22px 24px 60px; max-width: 1560px; margin: 0 auto; }
   display: block; height: 100%;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
+
+/* ---- home subject map ---- */
+.subject-map {
+  display: grid; gap: 10px; margin-top: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+}
+.subject-card {
+  display: grid; gap: 7px; padding: 13px 15px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 13px;
+  background: var(--surface-alt); color: var(--ink);
+}
+.subject-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.subject-name { font-family: "Libre Baskerville", serif; font-size: 0.98rem; }
+.subject-count { font-size: 0.74rem; opacity: 0.6; }
+.subject-bar {
+  height: 6px; border-radius: 999px; background: var(--surface-strong);
+  overflow: hidden; border: 1px solid var(--line);
+}
+.subject-fill {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.subject-foot { display: flex; justify-content: space-between; font-size: 0.72rem; }
+
+/* ---- subject page ---- */
+.subject-head {
+  display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end;
+  justify-content: space-between; margin-bottom: 18px;
+}
+.subject-title { font-family: "Libre Baskerville", serif; font-size: 1.7rem; margin: 4px 0 6px; }
+.subject-head .eyebrow a { color: var(--accent-2); text-decoration: none; }
+.subject-actions { display: flex; gap: 12px; align-items: center; }
+.subject-actions .btn-primary { text-decoration: none; }
+.topic-list { list-style: none; margin: 6px 0 4px; padding: 0; display: grid; gap: 2px; }
+.topic-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(120px, 190px);
+  gap: 12px; align-items: center; padding: 7px 0;
+  border-top: 1px solid var(--line); font-size: 0.86rem;
+}
+.topic-name { color: var(--ink); text-decoration: none; }
+.topic-name:hover { color: var(--accent-2); text-decoration: underline; }
+.topic-meta { font-size: 0.74rem; opacity: 0.5; white-space: nowrap; }
+.topic-bar { display: flex; align-items: center; gap: 8px; }
+.topic-unseen { font-size: 0.72rem; opacity: 0.35; }

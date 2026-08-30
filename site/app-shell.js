@@ -11,6 +11,8 @@ window.Lattice = (() => {
     home: ["Home", "Where you are and what to do today"],
     study: ["Study", "One problem at a time, at the edge of what you can do"],
     explore: ["The graph", "Every concept, ordered by what it needs first"],
+    stats: ["Stats", "What the evidence says you know"],
+    subject: ["Subject", "One field, its books and its topics"],
   };
 
   async function boot(name) {
@@ -37,13 +39,19 @@ window.Lattice = (() => {
     document.title = `Lattice — ${title}`;
     document.body.dataset.view = name;
     boot(name);
+    // Views that take an argument re-render on every hash change, not just the
+    // first — #subject|probability and #subject|geometry are the same view.
+    window.dispatchEvent(new CustomEvent("lattice:route", {
+      detail: { view: name, arg: decodeURIComponent(location.hash.slice(1)).split("|")[1] },
+    }));
     // Views measure themselves on activation (the graph canvas especially), so
     // tell anyone who cares that they are now visible and have real dimensions.
     window.dispatchEvent(new CustomEvent("lattice:view", { detail: { view: name } }));
   }
 
   function route() {
-    // Deep links keep working: #explore, but also #concept:… straight to a node.
+    // Deep links keep working: #explore, #subject|probability, or a bare concept
+    // id straight to a node on the graph.
     const raw = decodeURIComponent(location.hash.slice(1));
     const [head] = raw.split("|");
     show(VIEWS[head] ? head : (raw.includes(":") ? "explore" : "home"));

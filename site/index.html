@@ -29,6 +29,8 @@
   <script defer src="graph.js"></script>
   <script defer src="study.js"></script>
   <script defer src="home.js"></script>
+  <script defer src="subject.js"></script>
+  <script defer src="stats.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -40,6 +42,7 @@
       <button data-view="home" class="nav-button active">Home</button>
       <button data-view="study" class="nav-button">Study</button>
       <button data-view="explore" class="nav-button">Graph</button>
+      <button data-view="stats" class="nav-button">Stats</button>
     </nav>
     <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
   </header>
@@ -47,21 +50,19 @@
   <main>
     <!-- ============ Home ============ -->
     <section id="home" class="view active">
+      <section class="stat-row" id="homeStats"></section>
       <div class="home-grid">
         <div class="home-main">
-          <section class="stat-row" id="homeStats"></section>
           <section class="panel" id="homePlan"></section>
-          <div id="homeDeep"></div>
+          <section class="panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">SUBJECTS</p><h2>Pick a field</h2></div>
+              <a class="link-btn" href="#explore">full graph →</a>
+            </div>
+            <div id="subjectMap" class="subject-map"></div>
+          </section>
         </div>
         <aside class="home-side">
-          <section class="panel map-panel">
-            <div class="panel-heading">
-              <div><p class="eyebrow">THE GRAPH</p><h2>Where you are</h2></div>
-              <a class="link-btn" href="#explore">open</a>
-            </div>
-            <canvas id="miniCanvas" class="mini-canvas"></canvas>
-            <div id="miniLegend" class="legend-stack"></div>
-          </section>
           <section class="panel" id="homeWeak"></section>
         </aside>
       </div>
@@ -114,6 +115,12 @@
         <div id="studyRoot"></div>
       </div>
     </section>
+
+    <!-- ============ Subject ============ -->
+    <section id="subject" class="view"><div id="subjectRoot"></div></section>
+
+    <!-- ============ Stats ============ -->
+    <section id="stats" class="view"><div id="statsRoot" class="progress-content"></div></section>
 
     <!-- ============ Graph ============ -->
     <section id="explore" class="view">

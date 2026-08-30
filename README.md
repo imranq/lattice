@@ -63,9 +63,11 @@ sidebar; Home and Graph take the full width.
 
 | View | What it does |
 |---|---|
-| **Home** | where you are and what to do today: streak and counts, the recommended schedule, the graph as a map alongside, weak-edge diagnosis, coverage and sources |
+| **Home** | where you are and what to do today: streak and counts, the recommended schedule, a simplified subject map, weak-edge diagnosis |
+| **Subject** | one field: its books, their chapters, and every topic with mastery, page reference and problem count |
 | **Study** | one problem at a time, chosen at the edge of your ability — due reviews first, then textbooks, Putnam and generated drills in one queue. Practice runs endlessly; Test fixes a length and scores it. A hard problem offers its warm-up ladder underneath. |
 | **Graph** | the concept graph as a partial order, one card per source, with learning plans |
+| **Stats** | activity, level by field, coverage against its denominator, weakest concepts, review queue, sources |
 
 ## Cadence
 
