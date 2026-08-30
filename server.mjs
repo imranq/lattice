@@ -13,6 +13,7 @@ import {
 import { conceptMastery, weakEdges, recommend } from './lib/mastery.mjs';
 import { abilityReport, suggest, TARGET_P } from './lib/ability.mjs';
 import { buildPlan, writeSession } from './lib/cadence.mjs';
+import { appendActivity } from './lib/activity.mjs';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const SITE = join(ROOT, 'site');
@@ -409,7 +410,23 @@ async function api(req, res, url) {
         if (!body.item_id || !OUTCOMES.has(body.outcome) || !ITEM_TYPES.has(body.item_type)) {
           return json(res, { error: 'item_id, item_type and a valid outcome are required' }, 400);
         }
-        return json(res, recordAttempt(db, body));
+        const state = recordAttempt(db, body);
+        // Tell the machine-wide log, so Cadence can measure a Lattice block
+        // without either app knowing about the other.
+        const item = graph.exercises.find((e) => e.id === body.item_id);
+        appendActivity({
+          app: 'lattice',
+          kind: 'attempt',
+          ok: body.outcome === 'solved',
+          outcome: body.outcome,
+          id: body.item_id,
+          item_type: body.item_type,
+          domain: item?.domain
+            ?? (body.concept_id?.startsWith('skill:') ? 'mental math' : null),
+          concept: body.concept_id ?? null,
+          seconds: body.seconds ?? null,
+        });
+        return json(res, state);
       }
       case '/star':
         if (!body.item_id) return json(res, { error: 'item_id required' }, 400);

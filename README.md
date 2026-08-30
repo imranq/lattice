@@ -71,6 +71,23 @@ sidebar; Home and Graph take the full width.
 
 ## Cadence
 
+Lattice is a **connected app** in Cadence. Two halves, and they are independent:
+
+1. **Registration.** Cadence reads Switchboard's `apps.json` and treats an app as a producer
+   when it declares an `activity` block. Lattice declares `{"kinds": ["attempt"], "unit":
+   "problem"}` plus a launch URL, which is what makes it appear in Cadence's connected apps.
+2. **Measurement.** Every graded attempt appends one line to the machine-wide activity log at
+   `~/.local/share/activity/events.jsonl` (`$ACTIVITY_LOG` to move it):
+
+   ```json
+   {"at":"…","app":"lattice","kind":"attempt","ok":true,"domain":"probability","id":"grinstead_snell:exer_3.2.5","seconds":180}
+   ```
+
+   A Cadence card timing a Lattice block is then measured by what Lattice actually recorded in
+   that window — no self-reporting, no API between the two apps, just a file and a clock. The
+   nine-line writer is reimplemented in `lib/activity.mjs` rather than imported across
+   checkouts, as Switchboard's own README suggests.
+
 Lattice knows what to study and for how long; [Cadence](../cadence) runs timed sequences.
 **Send to Cadence** on Home writes today's plan into `content/sessions/lattice-today.json` as
 a playable session — a warm-up block, a review block when items are due, and a block on your
