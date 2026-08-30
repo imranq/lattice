@@ -591,7 +591,7 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
   }
 
   async function init() {
-    await load();
+    await ensureLoaded();
     routeFromHash();
     frame();
     // The canvas has no size until its view is on screen, so refit on activation.
@@ -600,6 +600,44 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
     });
     setTimeout(fit, 0);
   }
+
+  /** A still miniature of the same layout, for Home. Cards and nodes only: at
+   *  200px wide, edges and labels are noise. */
+  async function drawMini(mini) {
+    await ensureLoaded();
+    const dpr = window.devicePixelRatio || 1;
+    const w = mini.clientWidth, h = mini.clientHeight;
+    if (!w || !h) return;
+    mini.width = w * dpr; mini.height = h * dpr;
+    const c = mini.getContext("2d");
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, w, h);
+    const gw = bounds.maxX - bounds.minX || 1, gh = bounds.maxY - bounds.minY || 1;
+    const k = Math.min((w - 16) / gw, (h - 16) / gh);
+    const ox = 8 - bounds.minX * k, oy = 8 - bounds.minY * k;
+    for (const g of groups) {
+      c.fillStyle = css("--surface-alt", "#eee");
+      c.globalAlpha = 0.7;
+      c.beginPath();
+      c.roundRect(g.x0 * k + ox, g.y0 * k + oy, (g.x1 - g.x0) * k, (g.y1 - g.y0) * k, 4);
+      c.fill();
+    }
+    for (const n of nodes) {
+      const mc = masteryColor(n);
+      c.globalAlpha = mc ? 1 : 0.5;
+      c.fillStyle = mc ?? DOMAIN_COLORS[n.domain] ?? "#888";
+      c.beginPath();
+      c.arc(n.x * k + ox, n.y * k + oy, n.kind === "domain_part" ? 2.4 : 1.7, 0, Math.PI * 2);
+      c.fill();
+    }
+    c.globalAlpha = 1;
+    return [...new Set(nodes.map((n) => n.domain).filter(Boolean))].sort();
+  }
+
+  let loaded = null;
+  const ensureLoaded = () => (loaded ??= load());
+
+  window.LatticeGraph = { drawMini, colors: DOMAIN_COLORS };
 
   window.Lattice.register("explore", () => init().catch((err) => {
     document.getElementById("graphCount").textContent =

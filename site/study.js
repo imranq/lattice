@@ -57,6 +57,19 @@
     }
     queue = picks.map((p) => ({ kind: "problem", problem: p }));
 
+    // Spaced repetition earns its keep only if the reviews actually surface. Due
+    // items go to the front: a scheduled review is worth more than a new problem.
+    const due = await get("/due?n=6").catch(() => []);
+    const dueProblems = [];
+    for (const d of due) {
+      if (d.item_type === "drill") continue;          // regenerated below, not stored
+      const full = await get(`/exercises?limit=1&concept=${
+        encodeURIComponent(d.concept_id ?? "")}`).catch(() => null);
+      const match = full?.items?.find((x) => x.id === d.item_id);
+      if (match) dueProblems.push({ kind: "problem", problem: match, due: true });
+    }
+    queue = [...dueProblems, ...queue];
+
     // Generated drills are interleaved rather than appended: a run of ten proofs
     // with the arithmetic all at the end is not what "mixed practice" means.
     if (s.generated && window.MathGen) {
@@ -211,6 +224,7 @@
           ${p.concept_id ? `<a class="chip chip-link"
             href="#explore|${encodeURIComponent(p.concept_id)}">${esc(p.section_title ?? "concept")}</a>` : ""}
           <span class="chip">${esc(p.cite ?? p.book_id)}</span>
+          ${current.due ? '<span class="chip chip-due">review due</span>' : ""}
           <span class="chip chip-fit" title="predicted chance you solve it">${
             Math.round((p.predicted_success ?? 0) * 100)}%</span>
         </header>
@@ -223,6 +237,7 @@
           <span class="hint-note">copies the problem, your answer and the official
             solution — paste it into an AI to have it marked</span>
         </div>
+        <div id="ladder" class="ladder-slot"></div>
         <div id="extras" class="extras"></div>
         <footer class="card-actions">
           <span class="self-label">How did it go?</span>
@@ -235,6 +250,26 @@
         </footer>
       </section>`;
     if (window.MathJax?.typesetPromise) MathJax.typesetPromise([root()]).catch(() => {});
+    loadLadder(p);
+  }
+
+  /** A hard problem gets its rungs offered underneath it — the founding idea of
+   *  the project, and until now built but never surfaced. */
+  async function loadLadder(p) {
+    const slot = el("ladder");
+    if (!slot || (p.predicted_success ?? 1) > 0.5) return;
+    const ladder = await get(`/ladder/${encodeURIComponent(p.id)}`).catch(() => null);
+    if (!ladder?.rungs?.length) return;
+    slot.innerHTML = `
+      <details class="ladder">
+        <summary>Warm up first — ${ladder.rungs.length} rungs toward
+          <em>${esc(ladder.target_concept)}</em></summary>
+        <ol class="ladder-rungs">${ladder.rungs.map((r) => `
+          <li><span class="chip chip-${esc(r.tier)}">${esc(r.tier)}</span>
+            <span class="rung-meta">${esc(r.section)} · ${esc(r.label)}</span>
+            <span class="rung-text">${esc(r.text)}</span></li>`).join("")}</ol>
+      </details>`;
+    if (window.MathJax?.typesetPromise) MathJax.typesetPromise([slot]).catch(() => {});
   }
 
   // ---- grading -------------------------------------------------------------

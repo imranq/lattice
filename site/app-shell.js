@@ -8,9 +8,9 @@ window.Lattice = (() => {
   const started = new Set();
 
   const VIEWS = {
+    home: ["Home", "Where you are and what to do today"],
     study: ["Study", "One problem at a time, at the edge of what you can do"],
     explore: ["The graph", "Every concept, ordered by what it needs first"],
-    progress: ["Stats", "What the evidence says you know"],
   };
 
   async function boot(name) {
@@ -26,7 +26,7 @@ window.Lattice = (() => {
   }
 
   function show(name) {
-    if (!VIEWS[name]) name = "study";
+    if (!VIEWS[name]) name = "home";
     for (const el of document.querySelectorAll(".view")) {
       el.classList.toggle("active", el.id === name);
     }
@@ -35,9 +35,7 @@ window.Lattice = (() => {
     }
     const [title] = VIEWS[name];
     document.title = `Lattice — ${title}`;
-    // The sidebar is Study's control panel; Graph and Stats take the full width
-    // and carry their own controls.
-    document.querySelector(".shell").dataset.view = name;
+    document.body.dataset.view = name;
     boot(name);
     // Views measure themselves on activation (the graph canvas especially), so
     // tell anyone who cares that they are now visible and have real dimensions.
@@ -48,7 +46,7 @@ window.Lattice = (() => {
     // Deep links keep working: #explore, but also #concept:… straight to a node.
     const raw = decodeURIComponent(location.hash.slice(1));
     const [head] = raw.split("|");
-    show(VIEWS[head] ? head : (raw.includes(":") ? "explore" : "study"));
+    show(VIEWS[head] ? head : (raw.includes(":") ? "explore" : "home"));
   }
 
   document.addEventListener("click", (e) => {

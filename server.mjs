@@ -12,6 +12,7 @@ import {
 } from './lib/db.mjs';
 import { conceptMastery, weakEdges, recommend } from './lib/mastery.mjs';
 import { abilityReport, suggest, TARGET_P } from './lib/ability.mjs';
+import { buildPlan, writeSession } from './lib/cadence.mjs';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const SITE = join(ROOT, 'site');
@@ -216,6 +217,19 @@ async function api(req, res, url) {
         }));
       }
 
+      case p === '/plan': {
+        // The recommended schedule, shown on Home and exported to Cadence.
+        const ability = abilityReport(db, graph);
+        const rated = ability.filter((a) => a.pool > 0);
+        const weakest = rated.find((a) => a.attempts > 0) ?? rated[0] ?? null;
+        return json(res, buildPlan({
+          due: stats(db).due,
+          weakest,
+          ability: rated.slice(0, 5),
+          minutes: Number(url.searchParams.get('minutes') ?? 45),
+        }));
+      }
+
       case p === '/weak-edges':
         return json(res, weakEdges(db, graph).slice(0, 25));
 
@@ -328,6 +342,26 @@ async function api(req, res, url) {
         if (!body.item_id) return json(res, { error: 'item_id required' }, 400);
         recordView(db, body.item_id);
         return json(res, { ok: true });
+
+      case '/cadence': {
+        // Write today's plan into Cadence as a playable session.
+        const ability = abilityReport(db, graph);
+        const rated = ability.filter((a) => a.pool > 0);
+        const plan = buildPlan({
+          due: stats(db).due,
+          weakest: rated.find((a) => a.attempts > 0) ?? rated[0] ?? null,
+          ability: rated.slice(0, 5),
+          minutes: Number(body.minutes ?? 45),
+        });
+        try {
+          return json(res, { ok: true, plan, ...(await writeSession(plan)) });
+        } catch (err) {
+          return json(res, {
+            error: `Cadence not reachable at ${process.env.CADENCE_DIR ?? '~/projects/cadence'}`
+              + ` (${err.code ?? err.message})`,
+          }, 502);
+        }
+      }
     }
   }
 

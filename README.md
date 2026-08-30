@@ -58,13 +58,23 @@ personal use on the machine that owns the book.
 
 ## Pages
 
-One page, a sidebar, three views (`site/index.html` + `app-shell.js`).
+One page, a topbar, three views (`site/index.html` + `app-shell.js`). Only Study carries a
+sidebar; Home and Graph take the full width.
 
 | View | What it does |
 |---|---|
-| **Study** | one problem at a time, chosen at the edge of your ability — textbooks, Putnam and generated drills in one queue. Practice runs endlessly; Test fixes a length and scores it. |
+| **Home** | where you are and what to do today: streak and counts, the recommended schedule, the graph as a map alongside, weak-edge diagnosis, coverage and sources |
+| **Study** | one problem at a time, chosen at the edge of your ability — due reviews first, then textbooks, Putnam and generated drills in one queue. Practice runs endlessly; Test fixes a length and scores it. A hard problem offers its warm-up ladder underneath. |
 | **Graph** | the concept graph as a partial order, one card per source, with learning plans |
-| **Stats** | level by field, coverage, mastery, gaps, activity, sources |
+
+## Cadence
+
+Lattice knows what to study and for how long; [Cadence](../cadence) runs timed sequences.
+**Send to Cadence** on Home writes today's plan into `content/sessions/lattice-today.json` as
+a playable session — a warm-up block, a review block when items are due, and a block on your
+weakest field, each a `render: "site"` card that opens Lattice already filtered. Cadence's own
+validator accepts it. Point `CADENCE_DIR` elsewhere if your checkout is not at
+`~/projects/cadence`.
 
 ## Adaptive difficulty
 
