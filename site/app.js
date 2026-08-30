@@ -186,6 +186,13 @@
 
     bindCopyActions(p, problemBody, solutionBody);
 
+    // memory.js listens for this to attach practice controls, the warm-up ladder,
+    // and attempt history. Kept as an event so app.js stays unaware of the API.
+    // Also parked on window: memory.js is a deferred script that loads after this
+    // one, so it misses the very first dispatch and replays from here instead.
+    window.latticeCurrent = { problem: p, container: el.detail };
+    document.dispatchEvent(new CustomEvent("lattice:problem", { detail: window.latticeCurrent }));
+
     if (window.MathJax && window.MathJax.typesetPromise) {
       window.MathJax.typesetPromise([el.detail]).catch(() => {});
     }
