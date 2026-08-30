@@ -34,6 +34,8 @@ DOMAINS = {
     "pugh": "real analysis",
     "tao": "real analysis",
     "axler": "linear algebra",
+    "stein": "complex analysis",
+    "steele": "inequalities",
     "andrews": "number theory",
 }
 
@@ -164,6 +166,19 @@ def load_pdf_book(book, nodes, edges, exercises, add_node, add_edge):
                 if parent in nodes:
                     add_edge(parent, gid, "contains", "textbook_structure", 0.9)
             concept_id = gid
+        if not concept_id and e.get("chapter") is not None:
+            # No section and no topic group: attach to the chapter itself rather
+            # than dropping the exercise out of the graph entirely.
+            cid = f"concept:{bid}:ch{e['chapter']}"
+            if cid not in nodes:
+                ch = chapters.get(e["chapter"], {})
+                add_node(cid, kind="concept", label=ch.get("title", f"Chapter {e['chapter']}"),
+                         domain=domain, book_id=bid, chapter=e["chapter"],
+                         page=ch.get("page"), whole_chapter=True)
+                parent = f"domain:{domain}:{bid}:ch{e['chapter']}"
+                if parent in nodes:
+                    add_edge(parent, cid, "contains", "textbook_structure", 1.0)
+            concept_id = cid
         if not concept_id:
             continue
         score = difficulty_prior(e, group_sizes.get(group, 20))

@@ -147,10 +147,15 @@
 
     // 3. within each component: order nodes per layer, then sweep barycentres to
     //    cut edge crossings.
-    let xCursor = 0;
     const components = [...new Set(comp.values())].map((c) =>
       nodes.filter((n) => comp.get(n.id) === c));
     components.sort((a, b) => b.length - a.length);
+
+    // Components are packed into a grid, not a single strip. With seven books a
+    // strip is thousands of pixels wide and a few hundred tall, so fitting it to
+    // the screen shrinks everything to specks.
+    const perRow = Math.max(1, Math.round(Math.sqrt(components.length)));
+    let xCursor = 0, yCursor = 0, rowHeight = 0, placedInRow = 0;
 
     for (const group of components) {
       const layers = new Map();
@@ -181,7 +186,7 @@
         }
       }
       const width = Math.min(WRAP, Math.max(...keys.map((k) => layers.get(k).length)));
-      let y = 0;
+      let y = yCursor;
       for (const k of keys) {
         const row = layers.get(k);
         const lines = Math.ceil(row.length / WRAP);
@@ -194,7 +199,14 @@
         });
         y += Math.max(ROW, lines * SUBROW + 58);
       }
+      rowHeight = Math.max(rowHeight, y - yCursor);
       xCursor += width * COL + COMPONENT_GAP;
+      if (++placedInRow >= perRow) {
+        xCursor = 0;
+        yCursor += rowHeight + COMPONENT_GAP * 1.6;
+        rowHeight = 0;
+        placedInRow = 0;
+      }
     }
 
     bounds = nodes.reduce((b, n) => ({
@@ -297,7 +309,10 @@
       return true;
     };
 
-    const sorted = [...nodes].sort((a, b) => (b.deg - a.deg));
+    // Chapter labels get first claim on space, then the best-connected concepts.
+    const sorted = [...nodes].sort((a, b) =>
+      (a.kind === "domain_part" ? 0 : 1) - (b.kind === "domain_part" ? 0 : 1)
+      || b.deg - a.deg);
     for (const n of sorted) {
       if (!visible(n)) continue;
       const r = radius(n);
@@ -335,7 +350,8 @@
           ctx.font = `${size}px "Space Grotesk", system-ui`;
           const label = n.label.length > 30 ? n.label.slice(0, 28) + "…" : n.label;
           const wid = ctx.measureText(label).width;
-          if (big || fits(n.x, n.y - r - 6 / view.k, wid)) {
+          // Everything competes for label space; priority comes from draw order.
+          if (fits(n.x, n.y - r - 6 / view.k, wid)) {
             ctx.globalAlpha = big ? 1 : 0.72;
             ctx.fillStyle = ink;
             ctx.textAlign = "center";

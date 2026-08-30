@@ -59,7 +59,7 @@ def parse_toc(pages, scan=14):
             if page is None:
                 continue
             num, title, page = m.group(1), m.group(2).strip(), int(page)
-            title = re.sub(r"\s+", " ", title)
+            title = norm_title(title)
             if "." in num:
                 sections.append({"number": num, "title": title, "page": page,
                                  "chapter": int(num.split(".")[0])})
@@ -70,7 +70,7 @@ def parse_toc(pages, scan=14):
             if m:
                 chapters.setdefault(int(m.group(1)),
                                     {"chapter": int(m.group(1)),
-                                     "title": re.sub(r"\s+", " ", m.group(2).strip()),
+                                     "title": norm_title(m.group(2)),
                                      "page": int(m.group(3))})
     return chapters, sorted(sections, key=lambda s: s["page"])
 
@@ -83,19 +83,51 @@ def parse_toc_indent(pages, scan=14):
     RE_SEC = re.compile(r"^\s{3,}(\d{1,2})\s{2,}(\S.*?)\s{2,}(\d+)\s*$")
     chapters, sections, cur = {}, [], None
     for pg in pages[:scan]:
-        for line in pg.split("\n"):
+        for raw in pg.split("\n"):
+            # This layout mixes indentation with dot leaders; collapse the leaders
+            # so the same "wide gap" rule works for both halves of the line.
+            line = re.sub(r"(?:\.\s*){3,}", "   ", raw)
             m = RE_CH.match(line)
             if m:
                 cur = int(m.group(1))
                 chapters[cur] = {"chapter": cur,
-                                 "title": re.sub(r"\s+", " ", m.group(2)).strip(),
+                                 "title": norm_title(m.group(2)),
                                  "page": int(m.group(3))}
                 continue
             m = RE_SEC.match(line)
             if m and cur is not None:
                 sections.append({"number": f"{cur}.{m.group(1)}",
-                                 "title": re.sub(r"\s+", " ", m.group(2)).strip(),
+                                 "title": norm_title(m.group(2)),
                                  "page": int(m.group(3)), "chapter": cur})
+    return chapters, sorted(sections, key=lambda s: s["page"])
+
+
+def parse_toc_chapter_line(pages, scan=16):
+    """A table of contents that puts "Chapter 3" on its own line with the title
+    beneath it, and lists unnumbered sections under that (Axler)."""
+    RE_CH = re.compile(r"^\s*Chapter\s+(\d{1,2})\s*$")
+    RE_TITLE = re.compile(r"^\s*(\S.*?)\s{2,}(\d+)\s*$")
+    RE_SEC = re.compile(r"^\s+(\S.*?)\s*(?:\.\s*){3,}(\d+)\s*$")
+    chapters, sections, pending, cur = {}, [], None, None
+    for pg in pages[:scan]:
+        for line in pg.split("\n"):
+            m = RE_CH.match(line)
+            if m:
+                pending = int(m.group(1))
+                continue
+            if pending is not None:
+                t = RE_TITLE.match(line)
+                if t:
+                    cur = pending
+                    chapters[cur] = {"chapter": cur, "title": norm_title(t.group(1)),
+                                     "page": int(t.group(2))}
+                    pending = None
+                continue
+            m = RE_SEC.match(line)
+            if m and cur is not None:
+                sections.append({"number": f"{cur}.{len([s for s in sections if s['chapter'] == cur]) + 1}",
+                                 "title": norm_title(m.group(1)),
+                                 "page": int(m.group(2)), "chapter": cur})
     return chapters, sorted(sections, key=lambda s: s["page"])
 
 
@@ -123,8 +155,23 @@ def page_offset(pages):
     return max(votes, key=votes.get) if votes else 0
 
 
+# pdftotext preserves typographic ligatures, so "Inﬁnite" and "Diﬀerentiation"
+# arrive with single glyphs that break search and look wrong everywhere.
+LIGATURES = {"\ufb00": "ff", "\ufb01": "fi", "\ufb02": "fl", "\ufb03": "ffi",
+             "\ufb04": "ffl", "\ufb05": "st", "\ufb06": "st"}
+
+
+def norm_title(t):
+    t = re.sub(r"\s+", " ", (t or "")).strip()
+    for lig, plain in LIGATURES.items():
+        t = t.replace(lig, plain)
+    return t
+
+
 def clean(text):
     text = text.replace("\x01", "").replace("\x00", "")
+    for lig, plain in LIGATURES.items():
+        text = text.replace(lig, plain)
     text = re.sub(r"[ \t]+", " ", text)
     return re.sub(r"\n{3,}", "\n\n", text).strip()
 
@@ -249,19 +296,25 @@ def main():
     ap.add_argument("--title", required=True)
     ap.add_argument("--authors", default="")
     ap.add_argument("--out", default=None)
-    ap.add_argument("--item-style", choices=["block", "inline"], default="block",
+    ap.add_argument("--item-style", choices=["block", "inline", "labelled"], default="block",
                     help="block: item number alone on a line (Blitzstein). "
                          "inline: '12. text' after a Problems/Exercises heading.")
     ap.add_argument("--heads",
-                    default=r"^(Easier Problems|Middle-Level Problems|Harder Problems|"
-                            r"Very Hard Problems|Supplementary Problems|Problems|Exercises)$")
-    ap.add_argument("--toc-style", choices=["leaders", "indent"], default="leaders")
+                    # A leading number covers books that head sections "4 Exercises".
+                    default=r"^\d{0,2}\s*(Easier Problems|Middle-Level Problems|"
+                            r"Harder Problems|Very Hard Problems|Supplementary Problems|"
+                            r"Problems|Exercises)$")
+    ap.add_argument("--toc-style", choices=["leaders", "indent", "chapter-line"],
+                    default="leaders")
     ap.add_argument("--text-out", default=None,
                     help="verbatim exercise text (kept local; gitignored)")
     args = ap.parse_args()
 
     pdf = Path(args.pdf).expanduser()
-    if args.item_style == "inline":
+    if args.item_style == "labelled":
+        chapters, sections, exercises = extract_labelled(pdf, args.book_id,
+                                                         toc_style=args.toc_style)
+    elif args.item_style == "inline":
         chapters, sections, exercises = extract_inline(
             pdf, args.book_id, args.heads, toc_style=args.toc_style)
     else:
@@ -310,7 +363,9 @@ def main():
 # these books, so the heading - not the numbering - is what anchors a block.
 # ---------------------------------------------------------------------------
 
-RE_ITEM_INLINE = re.compile(r"^\s*(\d{1,3})[.)]\s+(\S.*)$")
+# Some books put the item text on the same line as its number ("12. Prove that…"),
+# others put the number alone and start the text after a blank line. Accept both.
+RE_ITEM_INLINE = re.compile(r"^\s*(\d{1,3})[.)](?:\s+(\S.*))?\s*$")
 
 # Herstein grades its own problem sets; that is a difficulty signal no
 # heuristic could reconstruct as reliably.
@@ -329,9 +384,42 @@ def extract_inline(pdf, book_id, head_re, max_gap_pages=2, toc_style="leaders"):
     pages = pdf_pages(pdf)
     layout = pdf_pages(pdf, layout=True)
     chapters, sections = (parse_toc_indent(layout) if toc_style == "indent"
+                          else parse_toc_chapter_line(layout) if toc_style == "chapter-line"
                           else parse_toc(layout))
     offset = page_offset(pages)
     heads = re.compile(head_re, re.I)
+
+    # Fallback when the table of contents yields no chapters: many books print
+    # "Chapter 2" and the chapter title as a running head on every page, which is
+    # a more reliable source than reverse-engineering another TOC layout.
+    running = {}
+    if not chapters:
+        RE_RUN = re.compile(r"^\s*Chapter\s+(\d{1,2})\s*$")
+        for idx, pg in enumerate(pages):
+            lines = [l.strip() for l in pg.split("\n")]
+            for i, l in enumerate(lines):
+                m = RE_RUN.match(l)
+                if not m:
+                    continue
+                ch = int(m.group(1))
+                title = next((t for t in lines[max(0, i - 3):i]
+                              if t and not t.isdigit() and len(t) > 3), None)
+                running[idx - offset] = ch
+                if ch not in chapters and title:
+                    chapters[ch] = {"chapter": ch, "title": norm_title(title),
+                                    "page": idx - offset}
+                break
+        if running:
+            # Carry the last seen chapter forward across pages with no running head.
+            last = None
+            for printed in range(min(running), max(running) + 1):
+                if printed in running:
+                    last = running[printed]
+                elif last is not None:
+                    running[printed] = last
+
+    def chapter_for(printed):
+        return running.get(printed)
 
     def section_for(printed):
         best = None
@@ -345,10 +433,13 @@ def extract_inline(pdf, book_id, head_re, max_gap_pages=2, toc_style="leaders"):
     expected = 1
     cur = None
     gap = 0
+    # Skip the front matter: a table of contents is full of "Exercises" lines that
+    # would otherwise register as problem blocks.
+    first_page = min((c["page"] for c in chapters.values()), default=1)
 
     for idx, pg in enumerate(pages):
         printed = idx - offset
-        if printed < 1:
+        if printed < first_page:
             continue
         lines = pg.split("\n")
         body = lines[1:] if RE_PAGENO.match(lines[0] or "") else lines
@@ -357,27 +448,28 @@ def extract_inline(pdf, book_id, head_re, max_gap_pages=2, toc_style="leaders"):
         for line in body:
             h = heads.match(line.strip())
             if h:
-                if cur:
-                    exercises.append(cur); cur = None
                 group = line.strip()
-                # A fresh block usually restarts at 1, but some books continue
-                # numbering across the tiers of one problem set.
-                expected = 1
+                # Deliberately does NOT reset the counter. Several books repeat the
+                # section title as a running head on every continuation page, and
+                # resetting there rejects every item after the first page break
+                # (Pugh silently lost 70% of its exercises this way). A genuine new
+                # block is recognised instead by its item numbering restarting at 1.
                 saw = True
                 continue
 
             m = RE_ITEM_INLINE.match(line)
-            if m and group and expected <= int(m.group(1)) <= expected + 3:
+            n_item = int(m.group(1)) if m else None
+            if m and group and (expected <= n_item <= expected + 3 or n_item == 1):
                 if cur:
                     exercises.append(cur)
-                n = int(m.group(1))
+                n = n_item
                 expected = n + 1
                 sec = section_for(printed)
                 cur = {"number": n, "group": group, "page": printed,
                        "section": sec["number"] if sec else None,
                        "section_title": sec["title"] if sec else None,
-                       "chapter": sec["chapter"] if sec else None,
-                       "lines": [m.group(2)]}
+                       "chapter": sec["chapter"] if sec else chapter_for(printed),
+                       "lines": [m.group(2) or ""]}
                 saw = True
             elif cur is not None:
                 cur["lines"].append(line)
@@ -402,6 +494,62 @@ def extract_inline(pdf, book_id, head_re, max_gap_pages=2, toc_style="leaders"):
             "section": e["section"], "section_title": e["section_title"],
             "group": e["group"], "page": e["page"],
             "tier_hint": TIER_BY_HEAD.get(head),
+            "has_multipart": bool(re.search(r"\(a\)", text)),
+            "n_chars": len(text), "text": text,
+        })
+    return chapters, sections, out
+
+
+
+
+# ---------------------------------------------------------------------------
+# Labelled profile: books that number every exercise in the running text, e.g.
+# Tao's "Exercise 2.2.1. Prove Proposition 2.2.5." The label carries chapter,
+# section and number, so this needs neither a heading anchor nor a sequence
+# guard - the most reliable of the three profiles when a book supports it.
+# ---------------------------------------------------------------------------
+
+RE_LABELLED = re.compile(r"^\s*Exercise\s+(\d+)\.(\d+)(?:\.(\d+))?\.?\s*(.*)$")
+
+
+def extract_labelled(pdf, book_id, toc_style="leaders"):
+    pages = pdf_pages(pdf)
+    layout = pdf_pages(pdf, layout=True)
+    chapters, sections = (parse_toc_indent(layout) if toc_style == "indent"
+                          else parse_toc(layout))
+    offset = page_offset(pages)
+    sec_titles = {s["number"]: s["title"] for s in sections}
+
+    found, cur = [], None
+    for idx, pg in enumerate(pages):
+        printed = idx - offset
+        lines = pg.split("\n")
+        body = lines[1:] if RE_PAGENO.match(lines[0] or "") else lines
+        for line in body:
+            m = RE_LABELLED.match(line)
+            # A cross-reference ("see Exercise 6.2.4 for an answer") appears
+            # mid-sentence; a real exercise starts the line.
+            if m and m.group(3):
+                if cur:
+                    found.append(cur)
+                ch, sec, num = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                cur = {"chapter": ch, "section": f"{ch}.{sec}", "number": num,
+                       "page": printed, "lines": [m.group(4)]}
+            elif cur is not None:
+                cur["lines"].append(line)
+    if cur:
+        found.append(cur)
+
+    out = []
+    for e in found:
+        text = clean("\n".join(e["lines"]))
+        if len(text) < 12:
+            continue
+        out.append({
+            "id": f"{book_id}:{e['section']}.{e['number']}",
+            "book_id": book_id, "chapter": e["chapter"], "number": e["number"],
+            "section": e["section"], "section_title": sec_titles.get(e["section"]),
+            "group": None, "page": e["page"], "tier_hint": None,
             "has_multipart": bool(re.search(r"\(a\)", text)),
             "n_chars": len(text), "text": text,
         })
