@@ -422,3 +422,100 @@ input, select {
   .rung { grid-template-columns: 2.4rem 1fr; }
   .rung-grade { grid-column: 2; justify-self: start; }
 }
+
+/* ---- generated practice (practice.js) ---- */
+.nav-link { color: var(--accent-2); text-decoration: none; font-size: 0.9rem; }
+.nav-link:hover { text-decoration: underline; }
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.skill-card {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  cursor: pointer;
+}
+.skill-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.skill-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.skill-name { font-family: "Libre Baskerville", serif; font-size: 1rem; }
+.skill-blurb { font-size: 0.82rem; opacity: 0.72; }
+.skill-foot { display: flex; justify-content: space-between; font-size: 0.72rem; opacity: 0.6; }
+.skill-domain { text-transform: uppercase; letter-spacing: 0.05em; }
+.level-chip {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-2);
+  color: var(--accent-2);
+  white-space: nowrap;
+}
+
+.drill {
+  max-width: 680px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+.drill-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.drill-name { font-family: "Libre Baskerville", serif; font-size: 1.05rem; }
+.streak { font-size: 0.78rem; color: var(--accent); margin-left: auto; }
+.ghost-btn {
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0.75;
+}
+.ghost-btn:hover { opacity: 1; border-color: var(--accent); }
+.level-track {
+  height: 5px;
+  margin: 12px 0 6px;
+  border-radius: 999px;
+  background: var(--surface-strong);
+  overflow: hidden;
+}
+.level-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.25s ease;
+}
+.drill-prompt {
+  font-family: "Libre Baskerville", serif;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  margin: 18px 0;
+  font-variant-numeric: tabular-nums;
+}
+.answer-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.answer-row input {
+  flex: 1 1 160px;
+  font: inherit;
+  font-size: 1.05rem;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--input-bg);
+  color: var(--ink);
+}
+.answer-row input:focus { outline: 2px solid var(--accent-2); outline-offset: 1px; }
+.feedback { min-height: 1.4em; margin-top: 12px; font-size: 0.92rem; }
+.feedback.ok { color: var(--accent-2); }
+.feedback.no { color: var(--accent); }
+.work { margin-top: 6px; }
+.work-steps { margin: 0; padding-left: 20px; font-size: 0.88rem; opacity: 0.85; }
+.work-steps li { margin: 3px 0; font-variant-numeric: tabular-nums; }
+.trick { font-size: 0.82rem; opacity: 0.65; font-style: italic; margin-top: 8px; }

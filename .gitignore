@@ -11,3 +11,7 @@ data/raw/books/
 data/lattice.db
 data/lattice.db-wal
 data/lattice.db-shm
+
+# Verbatim exercise text from copyrighted books — personal use only.
+# Committed data is pointers + derived metadata (chapter, page, group, difficulty).
+data/local/

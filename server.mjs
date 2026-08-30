@@ -69,7 +69,9 @@ async function readBody(req, limit = 1_000_000) {
 }
 
 const OUTCOMES = new Set(['solved', 'partial', 'failed', 'skipped']);
-const ITEM_TYPES = new Set(['putnam', 'exercise']);
+// 'drill' is a generated problem: it has no bank id, so its concept_id is the
+// skill it exercises. That keeps generated practice in the same mastery model.
+const ITEM_TYPES = new Set(['putnam', 'exercise', 'drill']);
 
 async function api(req, res, url) {
   const p = url.pathname.replace(/^\/api/, '');
