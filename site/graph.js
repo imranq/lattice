@@ -386,7 +386,7 @@
     selected = n;
     // The hash makes a concept linkable: graph.html#<concept id> opens its plan.
     if (push) {
-      const want = n ? `#${encodeURIComponent(n.id)}` : "";
+      const want = n ? `#explore|${encodeURIComponent(n.id)}` : "#explore";
       if (location.hash !== want) history.replaceState(null, "", want || location.pathname);
     }
     if (!n) { inspector.hidden = true; return; }
@@ -480,13 +480,26 @@
 
   function frame() { draw(); requestAnimationFrame(frame); }
   function routeFromHash() {
-    const id = decodeURIComponent(location.hash.slice(1));
+    // The shell owns the hash; a concept id arrives as "explore|<id>" or bare.
+    const raw = decodeURIComponent(location.hash.slice(1));
+    const id = raw.startsWith("explore|") ? raw.slice("explore|".length) : raw;
     const n = id && byId.get(id);
     if (n) { view.x = -n.x * view.k; view.y = -n.y * view.k; inspect(n, false); }
   }
 
-  load().then(() => { routeFromHash(); frame(); }).catch((err) => {
+  async function init() {
+    await load();
+    routeFromHash();
+    frame();
+    // The canvas has no size until its view is on screen, so refit on activation.
+    window.addEventListener("lattice:view", (e) => {
+      if (e.detail.view === "explore") setTimeout(fit, 0);
+    });
+    setTimeout(fit, 0);
+  }
+
+  window.Lattice.register("explore", () => init().catch((err) => {
     document.getElementById("graphCount").textContent =
       `graph unavailable (${err.message}) — run the pipeline, then reload`;
-  });
+  }));
 })();

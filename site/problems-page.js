@@ -57,22 +57,22 @@
   async function load(reset) {
     if (loading) return;
     loading = true;
-    if (reset) { offset = 0; el("list").innerHTML = ""; }
+    if (reset) { offset = 0; el("pfList").innerHTML = ""; }
     try {
       const data = await fetch(`/api/exercises?${params()}`).then((r) => {
         if (!r.ok) throw new Error(`API ${r.status}`);
         return r.json();
       });
       total = data.total;
-      el("list").insertAdjacentHTML("beforeend", data.items.map(card).join(""));
+      el("pfList").insertAdjacentHTML("beforeend", data.items.map(card).join(""));
       offset += data.items.length;
       el("count").textContent = `${total.toLocaleString()} problems`;
       el("more").hidden = offset >= total;
       el("footNote").textContent = total ? `showing ${offset} of ${total.toLocaleString()}`
         : "nothing matches those filters";
-      if (window.MathJax?.typesetPromise) MathJax.typesetPromise([el("list")]).catch(() => {});
+      if (window.MathJax?.typesetPromise) MathJax.typesetPromise([el("pfList")]).catch(() => {});
     } catch (err) {
-      el("list").innerHTML = `<p class="dim">Problems need the server API (${esc(err.message)}).
+      el("pfList").innerHTML = `<p class="dim">Problems need the server API (${esc(err.message)}).
         Start it with <code>npm start</code>.</p>`;
       el("more").hidden = true;
     } finally {
@@ -101,7 +101,7 @@
     } catch { /* offline: filters stay minimal */ }
   }
 
-  el("list").addEventListener("click", async (ev) => {
+  el("pfList").addEventListener("click", async (ev) => {
     const card = ev.target.closest(".p-card");
     if (!card) return;
     const grade = ev.target.closest(".grade");
@@ -141,5 +141,5 @@
   }
   el("more").addEventListener("click", () => load(false));
 
-  facets().then(() => load(true));
+  window.Lattice.register("problems", () => facets().then(() => load(true)));
 })();

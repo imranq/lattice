@@ -141,7 +141,7 @@
     if (!MathGen.SKILLS.some((s) => s.id === id)) return renderGrid();
     skillId = id;
     // The hash makes a drill linkable: practice.html#multiply opens it directly.
-    if (push && location.hash.slice(1) !== id) location.hash = id;
+    if (push) location.hash = `practice|${id}`;
     correctRun = 0; wrongRun = 0;
     const s = MathGen.SKILLS.find((x) => x.id === id);
     el("skillGrid").hidden = true;
@@ -155,7 +155,7 @@
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".skill-card");
     if (card) openSkill(card.dataset.skill);
-    if (e.target.closest("#drillBack")) { skillId = null; location.hash = ""; renderGrid(); }
+    if (e.target.closest("#drillBack")) { skillId = null; location.hash = "practice"; renderGrid(); }
     if (e.target.closest("#skipBtn") && current) {
       postAttempt(current.problem, "skipped", 0, false);
       correctRun = 0;
@@ -174,10 +174,11 @@
   });
 
   function route() {
-    const id = decodeURIComponent(location.hash.slice(1));
+    // "practice|mult-tricks" opens a skill directly; bare "practice" is the grid.
+    const raw = decodeURIComponent(location.hash.slice(1));
+    const id = raw.startsWith("practice|") ? raw.slice("practice|".length) : "";
     if (id) openSkill(id, false);
     else { skillId = null; renderGrid(); }
   }
-  window.addEventListener("hashchange", route);
-  route();
+  window.Lattice.register("practice", route);
 })();

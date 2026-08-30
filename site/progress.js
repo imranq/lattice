@@ -134,8 +134,8 @@
       </section>`;
   }
 
-  render().catch((err) => {
+  window.Lattice.register("progress", () => render().catch((err) => {
     el.innerHTML = `<p class="dim">Progress needs the server API (${esc(err.message)}).
       Start it with <code>npm start</code>.</p>`;
-  });
+  }));
 })();

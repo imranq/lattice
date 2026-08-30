@@ -58,13 +58,18 @@ personal use on the machine that owns the book.
 
 ## Pages
 
-| Page | What it does |
+One page, six views (`site/index.html` + `app-shell.js`). Each module registers an
+initialiser and boots the first time its view is opened — the Putnam bank pulls a 4.3 MB
+data bundle, so nothing loads until you look at it.
+
+| View | What it does |
 |---|---|
-| `index.html` | **every exercise in the graph** — filter by domain, book and tier, read the statement, grade it |
-| `putnam.html` | the Putnam bank: search, filter, hints, warm-up ladder per problem |
-| `graph.html` | the concept graph as a partial order, with learning plans |
-| `practice.html` | 16 generated drill skills, 5 levels each |
-| `progress.html` | coverage, mastery, gaps, activity, sources |
+| **Explore** | the concept graph as a partial order, with learning plans — the landing view |
+| **Problems** | every exercise in the graph: filter by domain, book and tier, read it, grade it |
+| **Practice** | 16 generated drill skills, 5 levels, one problem at a time |
+| **Test** | a scored session sampling your weakest concepts, generated + textbook |
+| **Stats** | coverage, mastery, gaps, activity, sources |
+| **Putnam** | the contest bank: search, filter, hints, warm-up ladder per problem |
 
 ## Run
 
