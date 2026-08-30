@@ -519,3 +519,64 @@ input, select {
 .work-steps { margin: 0; padding-left: 20px; font-size: 0.88rem; opacity: 0.85; }
 .work-steps li { margin: 3px 0; font-variant-numeric: tabular-nums; }
 .trick { font-size: 0.82rem; opacity: 0.65; font-style: italic; margin-top: 8px; }
+
+/* ---- concept graph (graph.js) ---- */
+.graph-page { max-width: 1400px; }
+.graph-controls {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+}
+.graph-controls select, .graph-controls input[type="search"] {
+  font: inherit; font-size: 0.85rem; padding: 7px 10px;
+  border-radius: 9px; border: 1px solid var(--line);
+  background: var(--input-bg); color: var(--ink);
+}
+.graph-count { font-size: 0.8rem; opacity: 0.6; margin-left: auto; }
+.graph-stage {
+  position: relative;
+  height: min(72vh, 780px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.graph-stage canvas { width: 100%; height: 100%; display: block; cursor: grab; }
+.graph-legend {
+  position: absolute; left: 14px; bottom: 12px;
+  display: flex; flex-wrap: wrap; gap: 12px;
+  font-size: 0.74rem; opacity: 0.8;
+  pointer-events: none;
+}
+.legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.legend-item i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.legend-note { opacity: 0.55; font-style: italic; }
+
+.inspector {
+  position: absolute; top: 12px; right: 12px; width: min(310px, 44vw);
+  max-height: calc(100% - 24px); overflow: auto;
+  padding: 14px 16px;
+  background: var(--surface-soft);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+.inspector h3 { margin: 0 6px 2px 0; font-family: "Libre Baskerville", serif; font-size: 1rem; }
+.inspector h4 {
+  margin: 12px 0 4px; font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.07em; opacity: 0.55;
+}
+.inspector ul { margin: 0; padding-left: 16px; font-size: 0.84rem; }
+.inspector li { margin: 2px 0; }
+.inspector a { color: var(--accent-2); text-decoration: none; }
+.inspector a:hover { text-decoration: underline; }
+.inspector-meta { font-size: 0.74rem; opacity: 0.6; margin: 0 0 8px; }
+.inspector-mastery { font-size: 0.85rem; margin: 0; }
+.inspector .dim { opacity: 0.5; font-size: 0.75rem; }
+.inspector-close {
+  position: absolute; top: 8px; right: 10px;
+  border: 0; background: transparent; color: var(--ink);
+  font-size: 1.1rem; cursor: pointer; opacity: 0.5;
+}
+.inspector-close:hover { opacity: 1; }
+.inspector-actions { margin-top: 12px; }
+.inspector-actions .ghost-btn { text-decoration: none; display: inline-block; }

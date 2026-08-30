@@ -21,14 +21,18 @@ const db = openDb(DB_PATH);
 
 // The graph is pipeline output: load once, reload only if the file changes.
 let graph = null, ladders = null, graphMtime = 0;
-const GRAPH_PATH = join(ROOT, 'data', 'processed', 'graph', 'probability.json');
+// The unified multi-book graph, falling back to the probability-only one if the
+// math pipeline has not been run yet.
+const GRAPH_PATH = join(ROOT, 'data', 'processed', 'graph', 'math.json');
+const GRAPH_FALLBACK = join(ROOT, 'data', 'processed', 'graph', 'probability.json');
 const LINKED_PATH = join(ROOT, 'data', 'processed', 'graph', 'probability.linked.json');
 
 async function loadGraph() {
   try {
-    const m = (await stat(GRAPH_PATH)).mtimeMs;
+    const path = await stat(GRAPH_PATH).then(() => GRAPH_PATH).catch(() => GRAPH_FALLBACK);
+    const m = (await stat(path)).mtimeMs;
     if (graph && m === graphMtime) return;
-    graph = JSON.parse(await readFile(GRAPH_PATH, 'utf8'));
+    graph = JSON.parse(await readFile(path, 'utf8'));
     graphMtime = m;
     try {
       ladders = JSON.parse(await readFile(LINKED_PATH, 'utf8'));
