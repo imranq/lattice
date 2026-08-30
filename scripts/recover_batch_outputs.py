@@ -29,8 +29,8 @@ def main():
     parser.add_argument("--batch-id", action="append", required=True, help="Batch ID, e.g. batches/abc123 (repeat flag for multiple)")
     parser.add_argument("--input", default="data/processed/problems.json")
     parser.add_argument("--output", default="data/processed/problems.labeled.json")
-    parser.add_argument("--site-data", default="site/problems.js")
-    parser.add_argument("--publish", action="store_true", help="Also write site/problems.js from recovered output")
+    parser.add_argument("--site-data", default="site/putnam-data.js")
+    parser.add_argument("--publish", action="store_true", help="Also write site/putnam-data.js from recovered output")
     parser.add_argument("--strict", action="store_true", help="Exit non-zero if any batch is not succeeded")
     args = parser.parse_args()
 

@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Putnam Problem Browser</title>
+  <title>Lattice</title>
   <script>
     (function () {
       const saved = localStorage.getItem("putnam_theme_v1");
       const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const theme = saved || (prefersDark ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
     })();
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -19,63 +18,129 @@
   <link rel="stylesheet" href="styles.css" />
   <script>
     window.MathJax = {
-      tex: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
-        processEscapes: true,
-        processEnvironments: true
-      }
+      tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+             processEscapes: true },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"] }
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script defer src="problems.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app-shell.js"></script>
+  <script defer src="generators.js"></script>
+  <script defer src="graph.js"></script>
+  <script defer src="study.js"></script>
+  <script defer src="home.js"></script>
+  <script defer src="subject.js"></script>
+  <script defer src="stats.js"></script>
 </head>
 <body>
-  <div class="bg-orb orb-a"></div>
-  <div class="bg-orb orb-b"></div>
-  <button id="themeToggle" class="theme-fab" type="button" title="Toggle theme" aria-label="Toggle theme">☾</button>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Lattice home">
+      <img class="brand-mark" src="favicon.svg" alt="" width="30" height="30" />
+      <span><strong>Lattice</strong><small>Concepts, partially ordered</small></span>
+    </a>
+    <nav aria-label="Primary">
+      <button data-view="home" class="nav-button active">Home</button>
+      <button data-view="study" class="nav-button">Study</button>
+      <button data-view="explore" class="nav-button">Graph</button>
+      <button data-view="stats" class="nav-button">Stats</button>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+  </header>
 
-  <main class="container">
-    <header class="hero">
-      <h1>Putnam Problem Browser</h1>
-      <p>Search by keyword, year, section, and topic. Open any problem with full TeX and solution when available.</p>
-    </header>
-
-    <section class="mobile-nav">
-      <button id="mobileFiltersToggle" class="mobile-filters-btn" type="button" aria-label="Toggle filters">☰ Filters</button>
-      <select id="mobileProblemPicker" aria-label="Select problem"></select>
+  <main>
+    <!-- ============ Home ============ -->
+    <section id="home" class="view active">
+      <section class="stat-row" id="homeStats"></section>
+      <div class="home-grid">
+        <div class="home-main">
+          <section class="panel" id="homePlan"></section>
+          <section class="panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">SUBJECTS</p><h2>Pick a field</h2></div>
+              <a class="link-btn" href="#explore">full graph →</a>
+            </div>
+            <div id="subjectMap" class="subject-map"></div>
+          </section>
+        </div>
+        <aside class="home-side">
+          <section class="panel" id="homeWeak"></section>
+        </aside>
+      </div>
     </section>
 
-    <section class="controls">
-      <input id="search" type="search" placeholder="Search text, symbols, or keywords" />
-      <select id="yearFilter"><option value="">All years</option></select>
-      <select id="sessionFilter">
-        <option value="">All sections</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-      </select>
-      <select id="topicFilter"><option value="">All topics</option></select>
-      <label class="toggle">
-        <input id="hasSolution" type="checkbox" />
-        <span>Has solution</span>
-      </label>
+    <!-- ============ Study ============ -->
+    <section id="study" class="view">
+      <div class="study-grid">
+        <aside class="sidebar">
+          <div id="sideStudy" class="side-section">
+            <div class="seg" role="group" aria-label="Session mode">
+              <button type="button" class="active" data-mode="practice">Practice</button>
+              <button type="button" data-mode="test">Test</button>
+            </div>
+
+            <div id="testSettings" class="test-settings" hidden>
+              <p class="field-label">Questions</p>
+              <div class="seg seg-sm" role="group" aria-label="Test length">
+                <button type="button" data-len="5">5</button>
+                <button type="button" class="active" data-len="10">10</button>
+                <button type="button" data-len="20">20</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <p class="field-label">Fields <button type="button" class="link-btn" data-all="domain">all</button></p>
+              <div id="domainChips" class="chips"></div>
+            </div>
+
+            <div class="field">
+              <p class="field-label">Sources</p>
+              <div id="sourceChips" class="chips">
+                <button type="button" class="chip-toggle on" data-src="textbook">Textbooks</button>
+                <button type="button" class="chip-toggle on" data-src="contest">Putnam</button>
+                <button type="button" class="chip-toggle on" data-src="generated">Drills</button>
+              </div>
+            </div>
+
+            <button id="generateBtn" class="btn-primary btn-block">Generate question</button>
+
+            <div class="session-mini">
+              <span><b id="sessSolved">0</b> solved</span>
+              <span><b id="sessSeen">0</b> attempted</span>
+            </div>
+
+            <div id="abilityBox" class="ability-box"></div>
+            <p class="shortcut-note"><kbd>Enter</kbd> submit · <kbd>G</kbd> new question</p>
+          </div>
+        </aside>
+        <div id="studyRoot"></div>
+      </div>
     </section>
 
-    <section id="recentWrap" class="recent-wrap">
-      <div class="recent-label">Recently viewed</div>
-      <div id="recentRow" class="recent-row"></div>
-    </section>
+    <!-- ============ Subject ============ -->
+    <section id="subject" class="view"><div id="subjectRoot"></div></section>
 
-    <section class="layout">
-      <aside>
-        <p id="stats"></p>
-        <div id="list" class="problem-list"></div>
-      </aside>
-      <article id="detail" class="detail">
-        <h2>Select a problem</h2>
-      </article>
+    <!-- ============ Stats ============ -->
+    <section id="stats" class="view"><div id="statsRoot" class="progress-content"></div></section>
+
+    <!-- ============ Graph ============ -->
+    <section id="explore" class="view">
+      <div class="graph-stage">
+        <canvas id="canvas"></canvas>
+        <div class="graph-overlay graph-controls-overlay">
+          <input id="graphSearch" type="search" placeholder="Find a concept" />
+          <select id="domainFilter" aria-label="Filter by domain"><option value="">All domains</option></select>
+          <label class="toggle"><input type="checkbox" id="showMastery" checked /><span>Mastery</span></label>
+          <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
+          <button id="replay" class="ghost-btn" type="button">Fit</button>
+        </div>
+        <details class="graph-overlay graph-legend-overlay">
+          <summary id="graphCount" class="data-count"></summary>
+          <div id="legend" class="legend-stack"></div>
+        </details>
+        <aside id="inspector" class="inspector" hidden></aside>
+      </div>
     </section>
   </main>
+
 </body>
 </html>

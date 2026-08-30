@@ -1,6 +1,10 @@
-# Putnam Site Next Features
+# Lattice: Next Features
 
 ## Completed
+- Server + SQLite practice memory (`server.mjs`, `lib/db.mjs`, `lib/mastery.mjs`)
+- Attempt logging, SM-2 spaced repetition, concept mastery, weak-edge diagnosis
+- Warm-up ladder panel on the problem view
+- Textbook extraction → concept graph pipeline (probability)
 - Full keyboard navigation:
   - `j`: next problem
   - `k`: previous problem
@@ -75,7 +79,7 @@
 
 ## Data/Infra
 - Precompute and cache embeddings for all problems.
-- Add lightweight local DB (SQLite) for user state/history.
+- ~~Add lightweight local DB (SQLite) for user state/history.~~ done — `data/lattice.db`
 - Add versioned metadata schema migrations.
 - Add nightly refresh pipeline for newly published years.
 

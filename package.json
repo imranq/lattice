@@ -1,0 +1,14 @@
+{
+  "name": "lattice",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Concepts, partially ordered — a prerequisite graph and warm-up ladders over a hard problem bank.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}
