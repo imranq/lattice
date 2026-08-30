@@ -34,7 +34,7 @@
   <div class="shell">
     <aside class="sidebar">
       <a class="brand" href="#study" aria-label="Lattice home">
-        <img class="brand-mark" src="favicon.svg" alt="" width="34" height="34" />
+        <img class="brand-mark" src="favicon.svg" alt="" width="30" height="30" />
         <span><strong>Lattice</strong><small>Concepts, partially ordered</small></span>
       </a>
 
@@ -45,32 +45,34 @@
       </nav>
 
       <div id="sideStudy" class="side-section">
-        <p class="eyebrow">Field</p>
-        <select id="studyDomain" aria-label="Field"><option value="">All fields</option></select>
+        <div class="side-row">
+          <label>Mode
+            <select id="studyMode">
+              <option value="practice" selected>Practice</option>
+              <option value="test">Test</option>
+            </select>
+          </label>
+          <label id="testLenWrap" hidden>Length
+            <select id="testLength">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+            </select>
+          </label>
+        </div>
 
-        <p class="eyebrow">Sources</p>
-        <label class="toggle"><input type="checkbox" id="srcTextbook" checked /><span>Textbooks</span></label>
-        <label class="toggle"><input type="checkbox" id="srcContest" checked /><span>Putnam</span></label>
-        <label class="toggle"><input type="checkbox" id="srcGenerated" checked /><span>Generated drills</span></label>
+        <label class="stack">Field
+          <select id="studyDomain"><option value="">All fields</option></select>
+        </label>
 
-        <p class="eyebrow">Your level</p>
+        <fieldset class="src">
+          <legend>Sources</legend>
+          <label class="toggle"><input type="checkbox" id="srcTextbook" checked /><span>Textbooks</span></label>
+          <label class="toggle"><input type="checkbox" id="srcContest" checked /><span>Putnam</span></label>
+          <label class="toggle"><input type="checkbox" id="srcGenerated" checked /><span>Drills</span></label>
+        </fieldset>
+
         <div id="abilityBox" class="ability-box"></div>
-
-        <p class="eyebrow">Up next</p>
-        <ol id="queuePreview" class="queue-preview"></ol>
-      </div>
-
-      <div id="sideGraph" class="side-section" hidden>
-        <p class="eyebrow">Display</p>
-        <label class="toggle"><input type="checkbox" id="showMastery" checked /><span>Colour by mastery</span></label>
-        <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
-        <p class="eyebrow">Filter</p>
-        <select id="domainFilter" aria-label="Filter by domain"><option value="">All domains</option></select>
-        <input id="graphSearch" type="search" placeholder="Find a concept" />
-        <button id="replay" class="ghost-btn" type="button">Fit to screen</button>
-        <p class="eyebrow">Legend</p>
-        <div id="legend" class="legend-stack"></div>
-        <p id="graphCount" class="data-count"></p>
       </div>
 
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
@@ -82,8 +84,21 @@
       </section>
 
       <section id="explore" class="view">
-        <div class="graph-stage"><canvas id="canvas"></canvas></div>
-        <aside id="inspector" class="inspector" hidden></aside>
+        <div class="graph-stage">
+          <canvas id="canvas"></canvas>
+          <div class="graph-overlay graph-controls-overlay">
+            <input id="graphSearch" type="search" placeholder="Find a concept" />
+            <select id="domainFilter" aria-label="Filter by domain"><option value="">All domains</option></select>
+            <label class="toggle"><input type="checkbox" id="showMastery" checked /><span>Mastery</span></label>
+            <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
+            <button id="replay" class="ghost-btn" type="button">Fit</button>
+          </div>
+          <div class="graph-overlay graph-legend-overlay">
+            <div id="legend" class="legend-stack"></div>
+            <p id="graphCount" class="data-count"></p>
+          </div>
+          <aside id="inspector" class="inspector" hidden></aside>
+        </div>
       </section>
 
       <section id="progress" class="view">

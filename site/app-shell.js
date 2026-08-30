@@ -35,9 +35,9 @@ window.Lattice = (() => {
     }
     const [title] = VIEWS[name];
     document.title = `Lattice — ${title}`;
-    // Sidebar sections follow the active view.
-    document.getElementById("sideStudy").hidden = name !== "study";
-    document.getElementById("sideGraph").hidden = name !== "explore";
+    // The sidebar is Study's control panel; Graph and Stats take the full width
+    // and carry their own controls.
+    document.querySelector(".shell").dataset.view = name;
     boot(name);
     // Views measure themselves on activation (the graph canvas especially), so
     // tell anyone who cares that they are now visible and have real dimensions.

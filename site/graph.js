@@ -229,7 +229,8 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
     // Padding leaves room for the labels, which extend well past the node centres.
     view.k = Math.max(0.1, Math.min(1.3, Math.min(w / (gw + 340), h / (gh + 200))));
     view.x = -((bounds.minX + bounds.maxX) / 2) * view.k;
-    view.y = -((bounds.minY + bounds.maxY) / 2) * view.k;
+    // Nudge down so the top row clears the floating controls overlay.
+    view.y = -((bounds.minY + bounds.maxY) / 2) * view.k + 26;
   }
 
   // ---- drawing ------------------------------------------------------------

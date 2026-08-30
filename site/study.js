@@ -22,6 +22,8 @@
   let ability = [];
   let startedAt = 0;
   let session = { seen: 0, solved: 0 };
+  // Test mode is the same queue with a fixed length and a score at the end.
+  let test = null;   // { length, index, results }
 
   const get = (p) => fetch(`/api${p}`).then((r) => (r.ok ? r.json()
     : Promise.reject(new Error(`${p} → ${r.status}`))));
@@ -75,7 +77,10 @@
   }
 
   function renderQueuePreview() {
-    el("queuePreview").innerHTML = queue.slice(0, 6).map((q) => {
+    // The queue preview is optional chrome; the sidebar does not always carry it.
+    const box = el("queuePreview");
+    if (!box) return;
+    box.innerHTML = queue.slice(0, 6).map((q) => {
       const label = q.kind === "drill" ? q.problem.skillName
         : (q.problem.section_title || q.problem.label || q.problem.cite);
       const meta = q.kind === "drill" ? `L${q.problem.level}`
@@ -107,6 +112,7 @@
   // ---- one problem ---------------------------------------------------------
 
   async function next() {
+    if (test && test.index >= test.length) return renderTestResults();
     if (!queue.length) await refill();
     current = queue.shift();
     renderQueuePreview();
@@ -120,11 +126,46 @@
   }
 
   function sessionBar() {
+    if (test) {
+      const pctDone = (test.index / test.length) * 100;
+      return `<div class="session-bar">
+        <span><b>${test.index + 1}</b> of ${test.length}</span>
+        <span class="test-track"><span style="width:${pctDone}%"></span></span>
+        <button class="ghost-btn" data-act="endtest">End test</button>
+      </div>`;
+    }
     return `<div class="session-bar">
       <span><b>${session.seen}</b> seen</span>
       <span><b>${session.solved}</b> solved</span>
       <span class="dim">aiming at 85% — hard enough to learn from</span>
     </div>`;
+  }
+
+  function renderTestResults() {
+    const solved = test.results.filter((r) => r.outcome === "solved").length;
+    const done = test.results.length;
+    root().innerHTML = `
+      <section class="card">
+        <h2 class="result-title">Test complete</h2>
+        <div class="stat-row">
+          <div class="stat-tile"><b>${done ? Math.round((solved / done) * 100) : 0}%</b>
+            <span>Solved</span></div>
+          <div class="stat-tile"><b>${solved}/${done}</b><span>Correct</span></div>
+        </div>
+        <ol class="test-review">${test.results.map((r) => `
+          <li class="mark-${esc(r.outcome)}">
+            <span class="mark">${r.outcome === "solved" ? "✓"
+              : r.outcome === "partial" ? "~" : r.outcome === "skipped" ? "·" : "✗"}</span>
+            ${esc(r.label)}
+            ${r.expected && r.given && r.outcome !== "solved"
+              ? `<span class="dim">you said ${esc(r.given)}, answer ${esc(r.expected)}</span>` : ""}
+          </li>`).join("")}</ol>
+        <div class="card-actions">
+          <button class="btn-primary" data-act="newtest">New test</button>
+          <button class="ghost-btn" data-act="practice">Back to practice</button>
+        </div>
+      </section>`;
+    test = null;
   }
 
   function renderDrill() {
@@ -165,6 +206,14 @@
             Math.round((p.predicted_success ?? 0) * 100)}%</span>
         </header>
         <div class="statement">${esc(p.text ?? "")}</div>
+        <label class="answer-label" for="freeAnswer">Your answer</label>
+        <textarea id="freeAnswer" class="free-answer" rows="4"
+          placeholder="Write your answer, or the key steps of your argument…"></textarea>
+        <div class="answer-tools">
+          <button class="ghost-btn" data-act="copy">Copy for review</button>
+          <span class="hint-note">copies the problem, your answer and the official
+            solution — paste it into an AI to have it marked</span>
+        </div>
         <div id="extras" class="extras"></div>
         <footer class="card-actions">
           <span class="self-label">How did it go?</span>
@@ -183,10 +232,21 @@
 
   let hintsShown = 0;
 
-  async function record(outcome) {
+  async function record(outcome, given) {
     const seconds = Math.round((performance.now() - startedAt) / 1000);
     session.seen += 1;
     if (outcome === "solved") session.solved += 1;
+    if (test) {
+      test.results.push({
+        label: current.kind === "drill"
+          ? `${current.problem.skillName} — ${current.problem.prompt}`
+          : `${current.problem.cite ?? ""} ${current.problem.section_title ?? ""}`.trim(),
+        outcome,
+        given: given ?? null,
+        expected: current.kind === "drill" ? current.problem.answer : null,
+      });
+      test.index += 1;
+    }
     if (current.kind === "drill") {
       const p = current.problem;
       await post("/attempt", {
@@ -208,8 +268,52 @@
     const grade = ev.target.closest("[data-grade]");
     const act = ev.target.closest("[data-act]")?.dataset.act;
 
-    if (grade) { await record(grade.dataset.grade); return next(); }
+    if (grade) {
+      await record(grade.dataset.grade, document.getElementById("freeAnswer")?.value ?? null);
+      return next();
+    }
     if (act === "skip") { await record("skipped"); return next(); }
+    if (act === "endtest") return renderTestResults();
+    if (act === "newtest") {
+      test = { length: Number(el("testLength").value), index: 0, results: [] };
+      queue = [];
+      return next();
+    }
+    if (act === "practice") {
+      el("studyMode").value = "practice";
+      el("testLenWrap").hidden = true;
+      test = null;
+      queue = [];
+      return next();
+    }
+
+    if (act === "copy") {
+      const p = current.problem;
+      const extras = await get(`/extras/${encodeURIComponent(p.id)}`)
+        .catch(() => ({ hints: [], solution: null }));
+      const mine = document.getElementById("freeAnswer")?.value?.trim() || "(left blank)";
+      const payload = [
+        "Mark this answer. Say whether it is correct, partially correct, or wrong, and why.",
+        "",
+        `PROBLEM (${p.cite ?? p.book_id}${p.section_title ? ` — ${p.section_title}` : ""}):`,
+        p.text ?? "",
+        "",
+        "MY ANSWER:",
+        mine,
+        ...(extras.solution ? ["", "OFFICIAL SOLUTION:", extras.solution] : []),
+      ].join("\n");
+      try {
+        await navigator.clipboard.writeText(payload);
+        ev.target.textContent = "Copied";
+        setTimeout(() => { ev.target.textContent = "Copy for review"; }, 1400);
+      } catch {
+        // Clipboard is blocked outside a secure context; show it to copy by hand.
+        const box = el("extras");
+        box.innerHTML = `<textarea class="free-answer" rows="10" readonly>${
+          esc(payload)}</textarea>`;
+      }
+      return;
+    }
 
     if (act === "show" && current.kind === "drill") {
       hintsShown = 1;
@@ -247,17 +351,24 @@
     const fb = el("drillFeedback");
     fb.textContent = correct ? "Correct" : `Answer: ${p.answer}`;
     fb.className = `feedback ${correct ? "ok" : "no"}`;
-    await record(correct ? (hintsShown ? "partial" : "solved") : "failed");
+    await record(correct ? (hintsShown ? "partial" : "solved") : "failed",
+                 el("drillAnswer").value);
     setTimeout(next, correct ? 550 : 1500);
   });
 
-  for (const id of ["studyDomain", "srcTextbook", "srcContest", "srcGenerated"]) {
-    document.addEventListener("change", (e) => {
-      if (e.target.id !== id) return;
-      queue = [];
-      next();
-    });
-  }
+  document.addEventListener("change", (e) => {
+    if (!["studyDomain", "srcTextbook", "srcContest", "srcGenerated", "studyMode"]
+      .includes(e.target.id)) return;
+    if (e.target.id === "studyMode") {
+      const isTest = e.target.value === "test";
+      el("testLenWrap").hidden = !isTest;
+      test = isTest
+        ? { length: Number(el("testLength").value), index: 0, results: [] }
+        : null;
+    }
+    queue = [];
+    next();
+  });
 
   window.Lattice.register("study", async () => {
     await renderAbility();

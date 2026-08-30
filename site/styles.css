@@ -709,23 +709,28 @@ input, select {
 .test-review .mark-solved .mark { color: var(--accent-2); }
 .test-review .mark-failed .mark { color: var(--accent); }
 
-/* ---- shell: sidebar + one main column ---- */
-.shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+/* Several rules here set `display`, which beats the UA's [hidden] rule. Restore it
+   once, globally, rather than chasing each new component that trips over it. */
+[hidden] { display: none !important; }
+
+/* ---- shell: a sidebar for Study, full width elsewhere ---- */
+.shell { display: grid; grid-template-columns: 244px 1fr; min-height: 100vh; }
+.shell[data-view="explore"], .shell[data-view="progress"] { grid-template-columns: 200px 1fr; }
 .sidebar {
-  position: sticky; top: 0; align-self: start; height: 100vh;
-  display: flex; flex-direction: column; gap: 14px;
-  padding: 18px 16px; overflow-y: auto;
+  position: sticky; top: 0; align-self: start;
+  height: 100vh; overflow: hidden;               /* fits one screen; never scrolls */
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 16px 14px;
   border-right: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 70%, transparent);
-  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
 }
-.sidebar .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-.sidebar .brand strong { display: block; font-family: "Libre Baskerville", serif; font-size: 1rem; }
-.sidebar .brand small { display: block; font-size: 0.68rem; opacity: 0.55; font-style: italic; }
-.sidebar nav { display: grid; gap: 3px; }
+.sidebar .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--ink); }
+.sidebar .brand strong { display: block; font-family: "Libre Baskerville", serif; font-size: 0.95rem; }
+.sidebar .brand small { display: block; font-size: 0.64rem; opacity: 0.55; font-style: italic; }
+.sidebar nav { display: grid; gap: 2px; }
 .nav-button {
-  font: inherit; font-size: 0.9rem; text-align: left; padding: 8px 11px;
-  border: 1px solid transparent; border-radius: 9px;
+  font: inherit; font-size: 0.88rem; text-align: left; padding: 7px 10px;
+  border: 1px solid transparent; border-radius: 8px;
   background: transparent; color: var(--ink); opacity: 0.7; cursor: pointer;
 }
 .nav-button:hover { opacity: 1; background: var(--surface-alt); }
@@ -733,36 +738,90 @@ input, select {
   opacity: 1; background: var(--surface-strong);
   border-color: var(--line); color: var(--accent); font-weight: 500;
 }
-.side-section { display: grid; gap: 7px; }
-.side-section .eyebrow { margin: 10px 0 1px; }
-.side-section select, .side-section input[type="search"] {
-  font: inherit; font-size: 0.83rem; padding: 6px 9px; width: 100%;
-  border-radius: 8px; border: 1px solid var(--line);
+.side-section { display: grid; gap: 10px; align-content: start; min-height: 0; }
+.shell:not([data-view="study"]) .side-section { display: none; }
+.side-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.sidebar label { font-size: 0.72rem; opacity: 0.7; display: grid; gap: 3px; }
+.sidebar label.toggle { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; opacity: 0.9; }
+.sidebar select, .sidebar input[type="search"] {
+  font: inherit; font-size: 0.82rem; padding: 5px 8px; width: 100%;
+  border-radius: 7px; border: 1px solid var(--line);
   background: var(--input-bg); color: var(--ink);
 }
-.side-section .toggle { font-size: 0.83rem; }
-.ability-box { display: grid; gap: 3px; }
-.ability-row { display: flex; justify-content: space-between; font-size: 0.8rem; }
+.src { border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px 9px; display: grid; gap: 4px; }
+.src legend { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.5; padding: 0 4px; }
+.ability-box { display: grid; gap: 2px; font-size: 0.76rem; overflow: hidden; }
+.ability-row { display: flex; justify-content: space-between; }
 .ability-row b { font-variant-numeric: tabular-nums; color: var(--accent); }
 .ability-row b.unsure { opacity: 0.45; font-weight: 400; }
-.queue-preview { margin: 0; padding-left: 16px; display: grid; gap: 3px; font-size: 0.76rem; }
-.queue-preview li { display: flex; justify-content: space-between; gap: 8px; opacity: 0.75; }
-.queue-preview b { font-variant-numeric: tabular-nums; opacity: 0.8; }
-.legend-stack { display: grid; gap: 4px; font-size: 0.72rem; opacity: 0.8; }
 .sidebar .theme-toggle {
-  margin-top: auto; width: 32px; height: 32px; border-radius: 50%;
+  margin-top: auto; width: 30px; height: 30px; border-radius: 50%;
   border: 1px solid var(--line); background: var(--surface-alt);
-  color: var(--ink); cursor: pointer; font: inherit;
+  color: var(--ink); cursor: pointer; font: inherit; flex: none;
 }
-main { padding: 26px 30px 60px; max-width: 1100px; }
-#explore.view.active { max-width: none; }
+main { padding: 24px 28px 56px; }
+.shell[data-view="study"] main { max-width: 900px; }
 .view { display: none; }
 .view.active { display: block; }
 
+/* graph gets the whole pane, with its controls floating over the canvas */
+#explore .graph-stage {
+  position: relative; height: calc(100vh - 48px);
+  border: 1px solid var(--line); border-radius: 14px;
+  background: var(--surface); overflow: hidden;
+}
+.graph-overlay {
+  position: absolute; z-index: 3;
+  padding: 9px 11px; border: 1px solid var(--line); border-radius: 11px;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(6px);
+}
+.graph-controls-overlay {
+  top: 12px; left: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+}
+.graph-controls-overlay input, .graph-controls-overlay select {
+  font: inherit; font-size: 0.8rem; padding: 5px 9px;
+  border-radius: 8px; border: 1px solid var(--line);
+  background: var(--input-bg); color: var(--ink);
+}
+.graph-legend-overlay { left: 12px; bottom: 12px; max-width: 230px; }
+.graph-legend-overlay .data-count { margin: 7px 0 0; font-size: 0.72rem; }
+.legend-stack { display: grid; gap: 3px; font-size: 0.72rem; opacity: 0.85; }
+#explore .inspector { position: absolute; top: 12px; right: 12px; z-index: 4; }
+@media (max-width: 860px) {
+  .shell, .shell[data-view] { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; overflow: visible; border-right: 0;
+             border-bottom: 1px solid var(--line); }
+  main { padding: 16px; }
+}
+
+/* ---- answer entry on every question ---- */
+.answer-label {
+  display: block; margin: 18px 0 6px;
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; opacity: 0.5;
+}
+.free-answer {
+  width: 100%; font: inherit; font-size: 0.92rem; line-height: 1.5;
+  padding: 10px 12px; border-radius: 10px; resize: vertical;
+  border: 1px solid var(--line); background: var(--input-bg); color: var(--ink);
+}
+.free-answer:focus { outline: 2px solid var(--accent-2); outline-offset: 1px; }
+.answer-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; }
+.hint-note { font-size: 0.74rem; opacity: 0.5; }
+.result-title { font-family: "Libre Baskerville", serif; font-size: 1.15rem; margin: 0 0 14px; }
+.session-bar .test-track {
+  flex: 1; max-width: 320px; height: 5px; border-radius: 999px;
+  background: var(--surface-strong); overflow: hidden;
+}
+.session-bar .test-track span {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
 /* ---- study card ---- */
 .session-bar {
-  display: flex; gap: 18px; align-items: baseline;
-  font-size: 0.8rem; opacity: 0.7; margin-bottom: 14px;
+  display: flex; gap: 16px; align-items: center;
+  font-size: 0.8rem; opacity: 0.75; margin-bottom: 16px;
 }
 .session-bar b { color: var(--accent); font-size: 1rem; }
 .card {
@@ -775,8 +834,7 @@ main { padding: 26px 30px 60px; max-width: 1100px; }
   border: 1px solid var(--line); background: var(--surface-alt); opacity: 0.85;
 }
 .chip-link { text-decoration: none; color: var(--accent-2); border-color: var(--accent-2); }
-.chip-drill { color: var(--accent-2); border-color: var(--accent-2); }
-.chip-W1 { color: var(--accent-2); border-color: var(--accent-2); }
+.chip-drill, .chip-W1 { color: var(--accent-2); border-color: var(--accent-2); }
 .chip-W2 { color: var(--accent); border-color: var(--accent); }
 .chip-core { background: var(--accent); color: #fff; border-color: var(--accent); }
 .chip-fit { margin-left: auto; font-variant-numeric: tabular-nums; }
@@ -786,25 +844,32 @@ main { padding: 26px 30px 60px; max-width: 1100px; }
   font-size: clamp(1.5rem, 3.4vw, 2.1rem);
   font-variant-numeric: tabular-nums; margin: 6px 0 20px;
 }
-.card-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 22px; }
+.card-actions {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line);
+}
 .self-label { font-size: 0.82rem; opacity: 0.6; margin-right: 4px; }
 .btn-primary {
   font: inherit; font-size: 0.86rem; padding: 7px 15px; border-radius: 9px;
   border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer;
 }
 .btn-primary:hover { filter: brightness(1.07); }
+.ghost-btn {
+  font: inherit; font-size: 0.82rem; padding: 6px 12px; border-radius: 9px;
+  border: 1px solid var(--line); background: transparent; color: var(--ink);
+  opacity: 0.8; cursor: pointer;
+}
+.ghost-btn:hover { opacity: 1; border-color: var(--accent); }
+.answer-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.answer-row input {
+  flex: 1 1 200px; font: inherit; font-size: 1rem; padding: 9px 12px;
+  border-radius: 10px; border: 1px solid var(--line);
+  background: var(--input-bg); color: var(--ink);
+}
 .extras { margin-top: 16px; }
 .hint-list { margin: 0; padding-left: 20px; font-size: 0.88rem; display: grid; gap: 6px; }
 .solution summary { cursor: pointer; font-size: 0.85rem; opacity: 0.75; margin-bottom: 8px; }
-#explore .graph-stage {
-  height: calc(100vh - 120px); border: 1px solid var(--line);
-  border-radius: 16px; background: var(--surface);
-}
-#explore .inspector { position: fixed; top: 26px; right: 26px; }
-@media (max-width: 860px) {
-  .shell { grid-template-columns: 1fr; }
-  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
-  main { padding: 18px; }
-}
-/* `display: grid` beats the UA's [hidden] rule, so restore it explicitly. */
-.side-section[hidden], .view[hidden], .card[hidden] { display: none !important; }
+.feedback { min-height: 1.4em; margin-top: 12px; font-size: 0.92rem; }
+.feedback.ok { color: var(--accent-2); }
+.feedback.no { color: var(--accent); }
+.work { margin-top: 8px; }

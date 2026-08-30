@@ -62,7 +62,7 @@ One page, a sidebar, three views (`site/index.html` + `app-shell.js`).
 
 | View | What it does |
 |---|---|
-| **Study** | one problem at a time, chosen at the edge of your ability — textbooks, Putnam and generated drills in one queue |
+| **Study** | one problem at a time, chosen at the edge of your ability — textbooks, Putnam and generated drills in one queue. Practice runs endlessly; Test fixes a length and scores it. |
 | **Graph** | the concept graph as a partial order, one card per source, with learning plans |
 | **Stats** | level by field, coverage, mastery, gaps, activity, sources |
 
@@ -81,9 +81,11 @@ On the logistic scale that is a problem rated ~301 points below you, which is wh
 aims at — `fit` ranks candidates by distance from that point, softened by how well you hold
 the concept's prerequisites.
 
-Generated drills are auto-graded. Textbook and contest problems are self-graded: no string
-comparison can mark a proof, and pretending otherwise would feed the ability estimate noise
-it would never shake off.
+Every question takes an answer. Generated drills are checked automatically. Textbook and
+contest problems get a free-text box and a **Copy for review** button that puts the problem,
+your answer and the official solution (where the archive has one) on the clipboard, so an AI
+can mark it — then you record the verdict. No string comparison can mark a proof, and
+pretending otherwise would feed the ability estimate noise it would never shake off.
 
 ## Run
 
