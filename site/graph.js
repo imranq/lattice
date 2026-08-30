@@ -23,6 +23,8 @@
     "linear algebra": "#8a5bb0",
     "number theory": "#b08a2d",
     "unknown": "#8a8a8a",
+    "contest": "#c2571f",
+    "mental math": "#3f8f6d",
   };
   // A chapter can hold 20+ sections; laid out in one line the whole graph becomes
   // a few pixels tall and a mile wide. Wrapping long layers keeps the aspect
@@ -59,6 +61,23 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
     const keep = new Set(["concept", "domain_part"]);
     nodes = g.nodes.filter((n) => keep.has(n.kind))
       .map((n) => ({ ...n, x: 0, y: 0, layer: 0, deg: 0 }));
+
+    // The generators are a source like any other and belong on the map. They are
+    // synthesised here rather than baked into the graph file because the skill
+    // list lives in generators.js — one definition, not two.
+    if (window.MathGen) {
+      const DOMAIN_LAYER = { arithmetic: 0, "number theory": 1, algebra: 2, combinatorics: 3 };
+      for (const sk of MathGen.SKILLS) {
+        nodes.push({
+          id: `skill:${sk.id}`, kind: "concept", label: sk.name,
+          domain: "mental math", book_id: "generated", chapter: 1,
+          layer: DOMAIN_LAYER[sk.domain] ?? 0,
+          generated: true, blurb: sk.blurb, skill_domain: sk.domain,
+          x: 0, y: 0, deg: 0,
+        });
+      }
+      BOOK_TITLES.generated = "Generated drills";
+    }
     byId = new Map(nodes.map((n) => [n.id, n]));
     edges = g.edges.filter((e) => byId.has(e.src) && byId.has(e.dst))
       .map((e) => ({ ...e, s: byId.get(e.src), t: byId.get(e.dst) }));
@@ -112,7 +131,9 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
     //    a concept further down from there.
     const indeg = new Map(nodes.map((n) => [n.id, inferredIn(n.id).length]));
     const queue = nodes.filter((n) => indeg.get(n.id) === 0);
-    for (const n of nodes) n.layer = Math.max(0, (n.chapter ?? 1) - 1);
+    for (const n of nodes) {
+      if (!n.generated) n.layer = Math.max(0, (n.chapter ?? 1) - 1);
+    }
     const seen = new Set();
     while (queue.length) {
       const n = queue.shift();
@@ -177,7 +198,9 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
         }
       }
       const width = Math.min(WRAP, Math.max(...keys.map((k) => layers.get(k).length)));
-      let y = yCursor;
+      // Leave room above the first node row for the card's own top edge and its
+      // title chip; without it each card grows upward into the row above.
+      let y = yCursor + 165;
       for (const k of keys) {
         const row = layers.get(k);
         const lines = Math.ceil(row.length / WRAP);
@@ -194,7 +217,7 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
       xCursor += width * COL + COMPONENT_GAP;
       if (++placedInRow >= perRow) {
         xCursor = 0;
-        yCursor += rowHeight + 190;
+        yCursor += rowHeight + 260;
         rowHeight = 0;
         placedInRow = 0;
       }
@@ -211,14 +234,16 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
         // Extra headroom at the top: the card title sits above the first row of
         // chapter labels, which are themselves drawn above their nodes.
         x0: Math.min(...xs) - 52, x1: Math.max(...xs) + 52,
-        y0: Math.min(...ys) - 96, y1: Math.max(...ys) + 34,
+        y0: Math.min(...ys) - 140, y1: Math.max(...ys) + 34,
         size: group.length,
       };
     }).filter((g) => g.size > 1);
 
-    bounds = nodes.reduce((b, n) => ({
-      minX: Math.min(b.minX, n.x), maxX: Math.max(b.maxX, n.x),
-      minY: Math.min(b.minY, n.y), maxY: Math.max(b.maxY, n.y),
+    // Bounds come from the cards, not the node centres: a card extends well past
+    // its outermost node, and fitting to centres clipped the top and bottom rows.
+    bounds = groups.reduce((b, g) => ({
+      minX: Math.min(b.minX, g.x0), maxX: Math.max(b.maxX, g.x1),
+      minY: Math.min(b.minY, g.y0), maxY: Math.max(b.maxY, g.y1),
     }), { minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity });
   }
 
@@ -226,11 +251,16 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (!w || !h) return;                       // still hidden; refit on activation
     const gw = bounds.maxX - bounds.minX || 1, gh = bounds.maxY - bounds.minY || 1;
-    // Padding leaves room for the labels, which extend well past the node centres.
-    view.k = Math.max(0.1, Math.min(1.3, Math.min(w / (gw + 340), h / (gh + 200))));
-    view.x = -((bounds.minX + bounds.maxX) / 2) * view.k;
-    // Nudge down so the top row clears the floating controls overlay.
-    view.y = -((bounds.minY + bounds.maxY) / 2) * view.k + 26;
+    // Fit inside an inset rect rather than the whole canvas: the controls float
+    // over the top and the legend over a bottom corner, and centring on the full
+    // canvas parks cards underneath them.
+    const insetTop = 78, insetSide = 18, insetBottom = 26;
+    const availW = Math.max(120, w - insetSide * 2);
+    const availH = Math.max(120, h - insetTop - insetBottom);
+    view.k = Math.max(0.1, Math.min(1.3, Math.min(availW / (gw + 80), availH / (gh + 60))));
+    const cx = (bounds.minX + bounds.maxX) / 2, cy = (bounds.minY + bounds.maxY) / 2;
+    view.x = (insetSide + availW / 2) - w / 2 - cx * view.k;
+    view.y = (insetTop + availH / 2) - h / 2 - cy * view.k;
   }
 
   // ---- drawing ------------------------------------------------------------
@@ -377,7 +407,9 @@ const ROW = 128, COL = 78, COMPONENT_GAP = 430, WRAP = 11, SUBROW = 30;
       if (showLabels && !dim) {
         const big = n.kind === "domain_part" || near.has(n.id) || match;
         const size = (big ? 12.5 : 10.5) / view.k;
-        if (big || view.k > 0.5) {
+        // Concept labels only once there is room for them. At a whole-graph zoom
+        // 400 of them is a wall of text; the chapter headings carry the shape.
+        if (big || view.k > 1.05) {
           ctx.font = `${size}px "Space Grotesk", system-ui`;
           const label = n.label.length > 26 ? n.label.slice(0, 24) + "…" : n.label;
           const wid = ctx.measureText(label).width;

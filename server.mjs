@@ -204,9 +204,10 @@ async function api(req, res, url) {
       case p === '/next': {
         // The study queue: problems sitting at the edge of what you can do.
         const picks = suggest(db, graph, {
-          domain: url.searchParams.get('domain') || null,
+          domains: url.searchParams.get('domains')?.split(',').filter(Boolean) || null,
           sources: url.searchParams.get('sources')?.split(',').filter(Boolean) || null,
           limit: Number(url.searchParams.get('limit') ?? 10),
+          hasText: (id) => localText.has(id),
         });
         const byId = new Map(graph.exercises.map((e) => [e.id, e]));
         return json(res, picks.map((s) => {

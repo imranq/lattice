@@ -45,34 +45,43 @@
       </nav>
 
       <div id="sideStudy" class="side-section">
-        <div class="side-row">
-          <label>Mode
-            <select id="studyMode">
-              <option value="practice" selected>Practice</option>
-              <option value="test">Test</option>
-            </select>
-          </label>
-          <label id="testLenWrap" hidden>Length
-            <select id="testLength">
-              <option value="5">5</option>
-              <option value="10" selected>10</option>
-              <option value="20">20</option>
-            </select>
-          </label>
+        <div class="seg" role="group" aria-label="Session mode">
+          <button type="button" class="active" data-mode="practice">Practice</button>
+          <button type="button" data-mode="test">Test</button>
         </div>
 
-        <label class="stack">Field
-          <select id="studyDomain"><option value="">All fields</option></select>
-        </label>
+        <div id="testSettings" class="test-settings" hidden>
+          <p class="field-label">Questions</p>
+          <div class="seg seg-sm" role="group" aria-label="Test length">
+            <button type="button" data-len="5">5</button>
+            <button type="button" class="active" data-len="10">10</button>
+            <button type="button" data-len="20">20</button>
+          </div>
+        </div>
 
-        <fieldset class="src">
-          <legend>Sources</legend>
-          <label class="toggle"><input type="checkbox" id="srcTextbook" checked /><span>Textbooks</span></label>
-          <label class="toggle"><input type="checkbox" id="srcContest" checked /><span>Putnam</span></label>
-          <label class="toggle"><input type="checkbox" id="srcGenerated" checked /><span>Drills</span></label>
-        </fieldset>
+        <div class="field">
+          <p class="field-label">Fields <button type="button" class="link-btn" data-all="domain">all</button></p>
+          <div id="domainChips" class="chips"></div>
+        </div>
+
+        <div class="field">
+          <p class="field-label">Sources</p>
+          <div id="sourceChips" class="chips">
+            <button type="button" class="chip-toggle on" data-src="textbook">Textbooks</button>
+            <button type="button" class="chip-toggle on" data-src="contest">Putnam</button>
+            <button type="button" class="chip-toggle on" data-src="generated">Drills</button>
+          </div>
+        </div>
+
+        <button id="generateBtn" class="btn-primary btn-block">Generate question</button>
+
+        <div class="session-mini">
+          <span><b id="sessSolved">0</b> solved</span>
+          <span><b id="sessSeen">0</b> attempted</span>
+        </div>
 
         <div id="abilityBox" class="ability-box"></div>
+        <p class="shortcut-note"><kbd>Enter</kbd> submit · <kbd>G</kbd> new question</p>
       </div>
 
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
@@ -93,10 +102,10 @@
             <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
             <button id="replay" class="ghost-btn" type="button">Fit</button>
           </div>
-          <div class="graph-overlay graph-legend-overlay">
+          <details class="graph-overlay graph-legend-overlay">
+            <summary id="graphCount" class="data-count"></summary>
             <div id="legend" class="legend-stack"></div>
-            <p id="graphCount" class="data-count"></p>
-          </div>
+          </details>
           <aside id="inspector" class="inspector" hidden></aside>
         </div>
       </section>

@@ -32,19 +32,23 @@
     body: JSON.stringify(body),
   }).catch(() => {});
 
-  const sources = () => ({
-    textbook: el("srcTextbook").checked,
-    contest: el("srcContest").checked,
-    generated: el("srcGenerated").checked,
-  });
+  const chipsOn = (sel) =>
+    [...document.querySelectorAll(`${sel} .chip-toggle.on`)].map((b) => b.dataset);
+
+  const sources = () => {
+    const on = new Set(chipsOn("#sourceChips").map((d) => d.src));
+    return { textbook: on.has("textbook"), contest: on.has("contest"),
+             generated: on.has("generated") };
+  };
+  const selectedDomains = () => chipsOn("#domainChips").map((d) => d.domain);
 
   // ---- queue ---------------------------------------------------------------
 
   async function refill() {
     const s = sources();
-    const domain = el("studyDomain").value;
+    const domains = selectedDomains();
     const params = new URLSearchParams({ limit: "12" });
-    if (domain) params.set("domain", domain);
+    if (domains.length) params.set("domains", domains.join(","));
 
     let picks = [];
     if (s.textbook || s.contest) {
@@ -98,14 +102,13 @@
         <b class="${a.confident ? "" : "unsure"}">${a.rating}</b>
       </div>`).join("") || `<p class="dim">no attempts yet</p>`;
 
-    const sel = el("studyDomain");
-    if (sel.options.length <= 1) {
-      for (const a of ability.filter((x) => x.pool > 0)) {
-        const o = document.createElement("option");
-        o.value = a.domain;
-        o.textContent = `${a.domain} (${a.pool})`;
-        sel.appendChild(o);
-      }
+    const box = el("domainChips");
+    if (box && !box.children.length) {
+      // Multi-select by chips rather than a native <select multiple>: no
+      // cmd-click folklore, and the current selection is visible at a glance.
+      box.innerHTML = ability.filter((a) => a.pool > 0)
+        .map((a) => `<button type="button" class="chip-toggle" data-domain="${
+          esc(a.domain)}" title="${a.pool} problems">${esc(a.domain)}</button>`).join("");
     }
   }
 
@@ -123,6 +126,12 @@
     }
     startedAt = performance.now();
     current.kind === "drill" ? renderDrill() : renderProblem();
+  }
+
+  function paintSession() {
+    const solved = el("sessSolved"), seen = el("sessSeen");
+    if (solved) solved.textContent = session.solved;
+    if (seen) seen.textContent = session.seen;
   }
 
   function sessionBar() {
@@ -236,6 +245,7 @@
     const seconds = Math.round((performance.now() - startedAt) / 1000);
     session.seen += 1;
     if (outcome === "solved") session.solved += 1;
+    paintSession();
     if (test) {
       test.results.push({
         label: current.kind === "drill"
@@ -275,14 +285,14 @@
     if (act === "skip") { await record("skipped"); return next(); }
     if (act === "endtest") return renderTestResults();
     if (act === "newtest") {
-      test = { length: Number(el("testLength").value), index: 0, results: [] };
+      test = { length: testLength, index: 0, results: [] };
+      session = { seen: 0, solved: 0 };
+      paintSession();
       queue = [];
       return next();
     }
     if (act === "practice") {
-      el("studyMode").value = "practice";
-      el("testLenWrap").hidden = true;
-      test = null;
+      setMode("practice");
       queue = [];
       return next();
     }
@@ -356,18 +366,62 @@
     setTimeout(next, correct ? 550 : 1500);
   });
 
-  document.addEventListener("change", (e) => {
-    if (!["studyDomain", "srcTextbook", "srcContest", "srcGenerated", "studyMode"]
-      .includes(e.target.id)) return;
-    if (e.target.id === "studyMode") {
-      const isTest = e.target.value === "test";
-      el("testLenWrap").hidden = !isTest;
-      test = isTest
-        ? { length: Number(el("testLength").value), index: 0, results: [] }
-        : null;
+  let testLength = 10;
+
+  /** Keep the segmented control, the test panel and the session state in step. */
+  function setMode(mode) {
+    for (const b of document.querySelectorAll("[data-mode]")) {
+      b.classList.toggle("active", b.dataset.mode === mode);
     }
-    queue = [];
-    next();
+    el("testSettings").hidden = mode !== "test";
+    test = mode === "test" ? { length: testLength, index: 0, results: [] } : null;
+    session = { seen: 0, solved: 0 };
+    paintSession();
+  }
+
+  document.addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip-toggle");
+    if (chip) {
+      chip.classList.toggle("on");
+      queue = [];
+      return next();
+    }
+
+    const all = e.target.closest("[data-all]");
+    if (all) {
+      const on = document.querySelectorAll("#domainChips .chip-toggle.on").length;
+      for (const c of document.querySelectorAll("#domainChips .chip-toggle")) {
+        c.classList.toggle("on", on === 0);
+      }
+      queue = [];
+      return next();
+    }
+
+    const mode = e.target.closest("[data-mode]");
+    if (mode) {
+      setMode(mode.dataset.mode);
+      queue = [];
+      return next();
+    }
+
+    const len = e.target.closest("[data-len]");
+    if (len) {
+      for (const b of len.parentElement.children) b.classList.toggle("active", b === len);
+      testLength = Number(len.dataset.len);
+      if (test) test.length = testLength;
+      return;
+    }
+
+    if (e.target.closest("#generateBtn")) return next();
+  });
+
+  // G for a new question, matching the sidebar hint.
+  document.addEventListener("keydown", (e) => {
+    if (!window.Lattice.visible("study")) return;
+    if (e.key.toLowerCase() === "g" && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) {
+      e.preventDefault();
+      next();
+    }
   });
 
   window.Lattice.register("study", async () => {
