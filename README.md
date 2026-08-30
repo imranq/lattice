@@ -60,8 +60,8 @@ personal use on the machine that owns the book.
 
 | Page | What it does |
 |---|---|
-| `problems.html` | **every exercise in the graph** — filter by domain, book and tier, read the statement, grade it |
-| `index.html` | the Putnam bank: search, filter, hints, warm-up ladder per problem |
+| `index.html` | **every exercise in the graph** — filter by domain, book and tier, read the statement, grade it |
+| `putnam.html` | the Putnam bank: search, filter, hints, warm-up ladder per problem |
 | `graph.html` | the concept graph as a partial order, with learning plans |
 | `practice.html` | 16 generated drill skills, 5 levels each |
 | `progress.html` | coverage, mastery, gaps, activity, sources |

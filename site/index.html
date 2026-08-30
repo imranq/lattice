@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lattice</title>
+  <title>Lattice — Problems</title>
   <script>
     (function () {
       const saved = localStorage.getItem("putnam_theme_v1");
       const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const theme = saved || (prefersDark ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
     })();
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -19,73 +18,60 @@
   <link rel="stylesheet" href="styles.css" />
   <script>
     window.MathJax = {
-      tex: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
-        processEscapes: true,
-        processEnvironments: true
-      }
+      tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+             processEscapes: true },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"] }
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script defer src="problems.js"></script>
-  <script defer src="app.js"></script>
-  <script defer src="memory.js"></script>
+  <script defer src="problems-page.js"></script>
 </head>
 <body>
   <div class="bg-orb orb-a"></div>
   <div class="bg-orb orb-b"></div>
-  <button id="themeToggle" class="theme-fab" type="button" title="Toggle theme" aria-label="Toggle theme">☾</button>
-
   <main class="container">
     <header class="hero">
       <div class="brand">
         <img class="brand-mark" src="favicon.svg" alt="" width="44" height="44" />
         <div>
-          <h1>Problem bank</h1>
-          <p class="tagline">Concepts, partially ordered.</p>
+          <h1>Problems</h1>
+          <p class="tagline" id="tagline">Every exercise in the graph.</p>
         </div>
       </div>
-      <p><a class="nav-link" href="problems.html">← All problems</a> &nbsp; <a class="nav-link" href="graph.html">The graph →</a> &nbsp; <a class="nav-link" href="practice.html">Practice drills →</a> &nbsp; <a class="nav-link" href="progress.html">Progress →</a></p>
-      <p>492 Putnam problems, 1985–2025. One of eight sources in the graph — the hardest one, which is why every problem here has a warm-up ladder underneath it.</p>
+      <p class="nav-row">
+        <a class="nav-link" href="graph.html">The graph →</a>
+        <a class="nav-link" href="practice.html">Practice drills →</a>
+        <a class="nav-link" href="progress.html">Progress →</a>
+        <a class="nav-link" href="putnam.html">Putnam bank →</a>
+      </p>
     </header>
 
-    <section class="mobile-nav">
-      <button id="mobileFiltersToggle" class="mobile-filters-btn" type="button" aria-label="Toggle filters">☰ Filters</button>
-      <select id="mobileProblemPicker" aria-label="Select problem"></select>
-    </section>
-
-    <section class="controls">
-      <input id="search" type="search" placeholder="Search text, symbols, or keywords" />
-      <select id="yearFilter"><option value="">All years</option></select>
-      <select id="sessionFilter">
-        <option value="">All sections</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
+    <section class="filters">
+      <input id="q" type="search" placeholder="Search problem text…" />
+      <select id="domain"><option value="">All domains</option></select>
+      <select id="book"><option value="">All books</option></select>
+      <select id="tier">
+        <option value="">All tiers</option>
+        <option value="W1">W1 — warm-up</option>
+        <option value="W2">W2 — bridge</option>
+        <option value="core">core</option>
       </select>
-      <select id="topicFilter"><option value="">All topics</option></select>
-      <label class="toggle">
-        <input id="hasSolution" type="checkbox" />
-        <span>Has solution</span>
-      </label>
+      <select id="sort">
+        <option value="">Book order</option>
+        <option value="easy">Easiest first</option>
+        <option value="hard">Hardest first</option>
+      </select>
+      <label class="toggle"><input id="unsolved" type="checkbox" /><span>Unsolved only</span></label>
+      <label class="toggle"><input id="garbled" type="checkbox" /><span>Include unreadable</span></label>
+      <span id="garbledNote" class="dim"></span>
+      <span id="count" class="graph-count"></span>
     </section>
 
-    <section id="recentWrap" class="recent-wrap">
-      <div class="recent-label">Recently viewed</div>
-      <div id="recentRow" class="recent-row"></div>
-    </section>
-
-    <section id="memoryPanel" class="memory-panel" hidden></section>
-
-    <section class="layout">
-      <aside>
-        <p id="stats"></p>
-        <div id="list" class="problem-list"></div>
-      </aside>
-      <article id="detail" class="detail">
-        <h2>Select a problem</h2>
-      </article>
-    </section>
+    <section id="list" class="problem-feed"></section>
+    <div class="feed-foot">
+      <button id="more" class="ghost-btn" type="button" hidden>Load more</button>
+      <span id="footNote" class="dim"></span>
+    </div>
   </main>
 </body>
 </html>

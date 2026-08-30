@@ -7,7 +7,7 @@ from pathlib import Path
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default="putnam_archive/data/processed/problems.json")
-    parser.add_argument("--site-data", default="putnam_archive/site/problems.js")
+    parser.add_argument("--site-data", default="putnam_archive/site/putnam-data.js")
     args = parser.parse_args()
 
     data = json.loads(Path(args.input).read_text(encoding="utf-8"))

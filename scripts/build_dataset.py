@@ -120,7 +120,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--out", default="data/processed/problems.json")
-    parser.add_argument("--site-data", default="site/problems.js")
+    parser.add_argument("--site-data", default="site/putnam-data.js")
     parser.add_argument("--labels-from", default="data/processed/problems.labeled.json")
     parser.add_argument("--no-pandoc", action="store_true")
     args = parser.parse_args()
