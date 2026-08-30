@@ -165,6 +165,14 @@ def norm_title(t):
     t = re.sub(r"\s+", " ", (t or "")).strip()
     for lig, plain in LIGATURES.items():
         t = t.replace(lig, plain)
+    # OCR turns dot leaders into runs like ".....0.cccccceces"; cut the title at the
+    # first leader run and drop whatever trailing punctuation survives.
+    t = re.split(r"\.\s*\.|\.{2,}", t)[0]
+    t = re.sub(r"[\s.,:;_-]+$", "", t).strip()
+    # Scanned books often set chapter titles in full caps; title case reads better
+    # as a graph label and matches how the other books arrive.
+    if t and t.upper() == t and len(t) > 4:
+        t = t.title()
     return t
 
 

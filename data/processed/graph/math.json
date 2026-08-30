@@ -5447,6 +5447,185 @@
    "book_id": "stein",
    "chapter": null,
    "from_group": true
+  },
+  {
+   "id": "book:andrews",
+   "kind": "book",
+   "label": "Number Theory",
+   "authors": "George E. Andrews",
+   "license": "copyrighted - pointers and metadata only, personal use",
+   "domain": "number theory",
+   "extraction": "pdf_text"
+  },
+  {
+   "id": "domain:number theory:andrews:ch1",
+   "kind": "domain_part",
+   "label": "Basis Representation",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 1,
+   "page": 3
+  },
+  {
+   "id": "domain:number theory:andrews:ch2",
+   "kind": "domain_part",
+   "label": "The Fundamental Theorem Of Arithmetic",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 2,
+   "page": 12
+  },
+  {
+   "id": "domain:number theory:andrews:ch3",
+   "kind": "domain_part",
+   "label": "Combinatorial And Computational Number Theorv",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 3,
+   "page": 30
+  },
+  {
+   "id": "domain:number theory:andrews:ch4",
+   "kind": "domain_part",
+   "label": "Fundamentals Of Congruenceg",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 4,
+   "page": 49
+  },
+  {
+   "id": "domain:number theory:andrews:ch5",
+   "kind": "domain_part",
+   "label": "Solving Congruences",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 5,
+   "page": 58
+  },
+  {
+   "id": "domain:number theory:andrews:ch6",
+   "kind": "domain_part",
+   "label": "Arithmetic Functions",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 6,
+   "page": 75
+  },
+  {
+   "id": "domain:number theory:andrews:ch7",
+   "kind": "domain_part",
+   "label": "Primitive Roots",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 7,
+   "page": 93
+  },
+  {
+   "id": "domain:number theory:andrews:ch15",
+   "kind": "domain_part",
+   "label": "1-1 Principle Of Mathematical Induction",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 15,
+   "page": 3
+  },
+  {
+   "id": "concept:andrews:1.1",
+   "kind": "concept",
+   "label": "1-1 Principle of Mathematical Induction",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 1,
+   "order": 1,
+   "page": 3,
+   "source": {
+    "section": "1.1",
+    "page": 3
+   }
+  },
+  {
+   "id": "concept:andrews:1.2",
+   "kind": "concept",
+   "label": "1-2 The Basis Representation Theorem",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 1,
+   "order": 2,
+   "page": 8,
+   "source": {
+    "section": "1.2",
+    "page": 8
+   }
+  },
+  {
+   "id": "concept:andrews:2.1",
+   "kind": "concept",
+   "label": "2-3 The Linear Diophantine Equation",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 2,
+   "order": 3,
+   "page": 23,
+   "source": {
+    "section": "2.1",
+    "page": 23
+   }
+  },
+  {
+   "id": "concept:andrews:2.2",
+   "kind": "concept",
+   "label": "2-4 The Fundamental Theorem of Arithmetic",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 2,
+   "order": 4,
+   "page": 26,
+   "source": {
+    "section": "2.2",
+    "page": 26
+   }
+  },
+  {
+   "id": "concept:andrews:3.1",
+   "kind": "concept",
+   "label": "3-5 The Use of Computers in Number Theory",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 3,
+   "order": 5,
+   "page": 44,
+   "source": {
+    "section": "3.1",
+    "page": 44
+   }
+  },
+  {
+   "id": "concept:andrews:5.1",
+   "kind": "concept",
+   "label": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 5,
+   "order": 6,
+   "page": 61,
+   "source": {
+    "section": "5.1",
+    "page": 61
+   }
+  },
+  {
+   "id": "concept:andrews:7.1",
+   "kind": "concept",
+   "label": "7-1 Properties of Reduced Residue Systems",
+   "domain": "number theory",
+   "book_id": "andrews",
+   "chapter": 7,
+   "order": 7,
+   "page": 93,
+   "source": {
+    "section": "7.1",
+    "page": 93
+   }
   }
  ],
  "edges": [
@@ -66483,6 +66662,1536 @@
    ]
   },
   {
+   "src": "domain:number theory:andrews:ch1",
+   "dst": "concept:andrews:1.1",
+   "type": "contains",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "domain:number theory:andrews:ch1",
+   "dst": "concept:andrews:1.2",
+   "type": "contains",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "domain:number theory:andrews:ch2",
+   "dst": "concept:andrews:2.1",
+   "type": "contains",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "domain:number theory:andrews:ch2",
+   "dst": "concept:andrews:2.2",
+   "type": "contains",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "domain:number theory:andrews:ch3",
+   "dst": "concept:andrews:3.1",
+   "type": "contains",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "domain:number theory:andrews:ch5",
+   "dst": "concept:andrews:5.1",
+   "type": "contains",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "domain:number theory:andrews:ch7",
+   "dst": "concept:andrews:7.1",
+   "type": "contains",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "concept:andrews:1.2",
+   "type": "prerequisite",
+   "evidence": {
+    "textbook_order": {
+     "confidence": 0.4,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": true,
+   "confidence": 0.4,
+   "evidence_types": [
+    "textbook_order"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "concept:andrews:2.1",
+   "type": "prerequisite",
+   "evidence": {
+    "textbook_order": {
+     "confidence": 0.4,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": true,
+   "confidence": 0.4,
+   "evidence_types": [
+    "textbook_order"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "concept:andrews:2.2",
+   "type": "prerequisite",
+   "evidence": {
+    "textbook_order": {
+     "confidence": 0.4,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": true,
+   "confidence": 0.4,
+   "evidence_types": [
+    "textbook_order"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "concept:andrews:3.1",
+   "type": "prerequisite",
+   "evidence": {
+    "textbook_order": {
+     "confidence": 0.4,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": true,
+   "confidence": 0.4,
+   "evidence_types": [
+    "textbook_order"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "concept:andrews:5.1",
+   "type": "prerequisite",
+   "evidence": {
+    "textbook_order": {
+     "confidence": 0.4,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": true,
+   "confidence": 0.4,
+   "evidence_types": [
+    "textbook_order"
+   ]
+  },
+  {
+   "src": "concept:andrews:5.1",
+   "dst": "concept:andrews:7.1",
+   "type": "prerequisite",
+   "evidence": {
+    "textbook_order": {
+     "confidence": 0.4,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": true,
+   "confidence": 0.4,
+   "evidence_types": [
+    "textbook_order"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.1",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.2",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.3",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.4",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.5",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.6",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.7",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.8",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.10",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.11",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.12",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.13",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.14",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.15",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.1",
+   "dst": "andrews:1.1.1.16",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.17",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.18",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.1",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 3,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.2",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.3",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.4",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.6",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:1.2",
+   "dst": "andrews:1.1.2.7",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "andrews:2.2.1.1",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "andrews:2.2.1.2",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "andrews:2.2.1.3",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "andrews:2.2.1.4",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "andrews:2.2.1.5",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "andrews:2.2.1.6",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.1",
+   "dst": "andrews:2.2.1.7",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.8",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.1",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 5,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.2",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 4,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.3",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.4",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.5",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.6",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.7",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.9",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.10",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.11",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.12",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:2.2",
+   "dst": "andrews:2.2.2.13",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.4",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.5",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.6",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.7",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.8",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.1",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 4,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.2",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 3,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.3",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.9",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.10",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.11",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.12",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:3.1",
+   "dst": "andrews:3.3.1.14",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:5.1",
+   "dst": "andrews:5.5.1.1",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 5,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:5.1",
+   "dst": "andrews:5.5.1.2",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 3,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:5.1",
+   "dst": "andrews:5.5.1.3",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 3,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:5.1",
+   "dst": "andrews:5.5.1.4",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:5.1",
+   "dst": "andrews:5.5.1.5",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.1",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 20,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.2",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 15,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.3",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 10,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.4",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 6,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.5",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 7,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.6",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 4,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.7",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 5,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.11",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.12",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.13",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.14",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.15",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.16",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.8",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 2,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.9",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
+   "src": "concept:andrews:7.1",
+   "dst": "andrews:7.7.1.10",
+   "type": "assessed_by",
+   "evidence": {
+    "textbook_structure": {
+     "confidence": 1.0,
+     "count": 1,
+     "via": []
+    }
+   },
+   "cognitive": false,
+   "confidence": 1.0,
+   "evidence_types": [
+    "textbook_structure"
+   ]
+  },
+  {
    "src": "concept:grinstead_snell:sec_2.2",
    "dst": "concept:blitzstein:5.1",
    "type": "aligns_with",
@@ -112836,6 +114545,2456 @@
    "section_title": "5 Problems",
    "page": 351,
    "difficulty_prior": 0.182,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.1",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.1",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 6,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.2",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.2",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 6,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.3",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.3",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 6,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.4",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.4",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 6,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.5",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.5",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 6,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.6",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.6",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 6,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.7",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.7",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 6,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.8",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.8",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.10",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.10",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.11",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.11",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.12",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.12",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.13",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.13",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.14",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.14",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.15",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.15",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.1.16",
+   "concept_id": "concept:andrews:1.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.16",
+   "chapter": 1,
+   "section_title": "1-1 Principle of Mathematical Induction",
+   "page": 7,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.17",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.17",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 8,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.18",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.18",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 8,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.1",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.1",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 10,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.2",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.2",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 10,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.3",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.3",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 10,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.4",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.4",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 10,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.1",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.1",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 14,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.3",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.3",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 14,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.4",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.4",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 14,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.6",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.6",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 15,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.7",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.7",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 15,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:1.1.2.1",
+   "concept_id": "concept:andrews:1.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "1.1",
+   "chapter": 1,
+   "section_title": "1-2 The Basis Representation Theorem",
+   "page": 21,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.1.1",
+   "concept_id": "concept:andrews:2.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.1",
+   "chapter": 2,
+   "section_title": "2-3 The Linear Diophantine Equation",
+   "page": 25,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.1.2",
+   "concept_id": "concept:andrews:2.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.2",
+   "chapter": 2,
+   "section_title": "2-3 The Linear Diophantine Equation",
+   "page": 25,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.1.3",
+   "concept_id": "concept:andrews:2.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.3",
+   "chapter": 2,
+   "section_title": "2-3 The Linear Diophantine Equation",
+   "page": 25,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.1.4",
+   "concept_id": "concept:andrews:2.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.4",
+   "chapter": 2,
+   "section_title": "2-3 The Linear Diophantine Equation",
+   "page": 25,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.1.5",
+   "concept_id": "concept:andrews:2.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.5",
+   "chapter": 2,
+   "section_title": "2-3 The Linear Diophantine Equation",
+   "page": 25,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.1.6",
+   "concept_id": "concept:andrews:2.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.6",
+   "chapter": 2,
+   "section_title": "2-3 The Linear Diophantine Equation",
+   "page": 25,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.1.7",
+   "concept_id": "concept:andrews:2.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.7",
+   "chapter": 2,
+   "section_title": "2-3 The Linear Diophantine Equation",
+   "page": 25,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.8",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.8",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 26,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.1",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.1",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 28,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.1",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.1",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 33,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.2",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.2",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 34,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.3",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.3",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 34,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.4",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.4",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 34,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.5",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.5",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 34,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.6",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.6",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 34,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.7",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.7",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 34,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.8",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.8",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 34,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.9",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.9",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 35,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.10",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.10",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 35,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.11",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.11",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 35,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.12",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.12",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 35,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.13",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.13",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 35,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.1",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.1",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 38,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.2",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.2",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 38,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.3",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.3",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 38,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.4",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.4",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 38,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.5",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.5",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 38,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.6",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.6",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 38,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.1",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.1",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 40,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.2",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.2",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 40,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.1",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.1",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 43,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:2.2.2.2",
+   "concept_id": "concept:andrews:2.2",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "2.2",
+   "chapter": 2,
+   "section_title": "2-4 The Fundamental Theorem of Arithmetic",
+   "page": 43,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.4",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.4",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 44,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.5",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.5",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 44,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.6",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.6",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 44,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.7",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.7",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 44,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.8",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.8",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 44,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.1",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.1",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.2",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.2",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.3",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.3",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.4",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.4",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.5",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.5",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.6",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.6",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.7",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.7",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.8",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.8",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 47,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.9",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.9",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 48,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.10",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.10",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 48,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.11",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.11",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 48,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.12",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.12",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 48,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.14",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.14",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 48,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.1",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.1",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 51,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.2",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.2",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 51,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.1",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.1",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 55,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.2",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.2",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 55,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.3",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.3",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 55,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:3.3.1.1",
+   "concept_id": "concept:andrews:3.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "3.1",
+   "chapter": 3,
+   "section_title": "3-5 The Use of Computers in Number Theory",
+   "page": 57,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.1",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.1",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 61,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.2",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.2",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 61,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.3",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.3",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 61,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.1",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.1",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 63,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.2",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.2",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 63,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.3",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.3",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 63,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.4",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.4",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 63,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.1",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.1",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 70,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.1",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.1",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 73,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.2",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.2",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 73,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.3",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.3",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 73,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.4",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.4",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 73,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.5",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.5",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 74,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:5.5.1.1",
+   "concept_id": "concept:andrews:5.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "5.1",
+   "chapter": 5,
+   "section_title": "5-2 The Theorems of Fermat and Wilson Revisited",
+   "page": 74,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 96,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 96,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 96,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.4",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.4",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 96,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.5",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.5",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 96,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.6",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.6",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 97,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.7",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.7",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 97,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.11",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.11",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 99,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.12",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.12",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 99,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.13",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.13",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 99,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.14",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.14",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 99,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.15",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.15",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 99,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.16",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.16",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 99,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 104,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 104,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 110,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 110,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 110,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.4",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.4",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 111,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.5",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.5",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 111,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.6",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.6",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 111,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.7",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.7",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 111,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 118,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 118,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 118,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 127,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 127,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 127,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.4",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.4",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 127,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.5",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.5",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 127,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 132,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 132,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 132,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.4",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.4",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 132,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.5",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.5",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 132,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.6",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.6",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 132,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.7",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.7",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 133,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 138,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 138,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 138,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.4",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.4",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 141,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 142,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 143,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 143,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 143,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 147,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 147,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 147,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 153,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 155,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 155,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 158,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.5",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.5",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 161,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 166,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 166,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.4",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.4",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 166,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.5",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.5",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 166,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.7",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.7",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 166,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.8",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.8",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 167,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 172,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 172,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 173,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.5",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.5",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 173,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.6",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.6",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 173,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.7",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.7",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 173,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.8",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.8",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 173,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.9",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.9",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 174,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.10",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.10",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 174,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.11",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.11",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 174,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 178,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 178,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.3",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.3",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 178,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 201,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 201,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 206,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.2",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.2",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 207,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 210,
+   "difficulty_prior": 0.25,
+   "tier": "W1",
+   "has_published_solution": false,
+   "has_text": false
+  },
+  {
+   "id": "andrews:7.7.1.1",
+   "concept_id": "concept:andrews:7.1",
+   "book_id": "andrews",
+   "domain": "number theory",
+   "label": "7.1",
+   "chapter": 7,
+   "section_title": "7-1 Properties of Reduced Residue Systems",
+   "page": 210,
+   "difficulty_prior": 0.25,
    "tier": "W1",
    "has_published_solution": false,
    "has_text": false

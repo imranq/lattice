@@ -23,7 +23,7 @@ exercises, ordered by a prerequisite graph rather than by topic label.
 
 ## What's in the graph
 
-**3,235 exercises · 441 nodes · 3,604 edges · 5 domains**
+**3,410 exercises · 457 nodes · 3,694 edges · 6 domains**
 
 | Book | Domain | Extraction | Exercises |
 |---|---|---|---|
@@ -34,10 +34,13 @@ exercises, ordered by a prerequisite graph rather than by topic label.
 | Tao, *Analysis I* | real analysis | pdf, labelled | 320 |
 | Axler, *Linear Algebra Done Right* | linear algebra | pdf, inline | 222 |
 | Stein & Shakarchi, *Complex Analysis* | complex analysis | pdf, inline | 191 |
+| Andrews, *Number Theory* | number theory | **OCR** + pdf, inline | 175 |
 | Putnam archive 1985–2025 | contest | LaTeX source | 492 |
 
-Not yet in: **Andrews, *Number Theory*** is image-only (no text layer) and needs OCR;
-Bertsekas, Lay and Steele parse as text but need their own extraction profiles.
+Andrews had no text layer at all — it is a scan. `ocrmypdf` recovered it cleanly enough
+(noise 3.9/1000 chars) to extract 175 exercises; the OCR'd PDF lives in `data/local/ocr/`.
+
+Not yet in: Bertsekas, Lay and Steele parse as text but need their own extraction profiles.
 
 ## Licensing
 
@@ -152,4 +155,5 @@ State lives in SQLite at `data/lattice.db` (gitignored — personal history).
   alignment, where "Sums of Discrete Random Variables" still aligns to "Random variables".
 - **Coverage is thin.** Most concepts have no attempts, so most mastery numbers are absent
   rather than low. The progress page states this rather than hiding it.
-- Number theory has no textbook backing until Andrews is OCR'd.
+- **OCR'd sources are noisier.** Andrews' chapter titles arrive with dot-leader debris that
+  is cleaned heuristically, and chapters 4, 6 and 8 did not yield exercises.
