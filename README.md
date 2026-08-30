@@ -2,89 +2,65 @@
 
 **Concepts, partially ordered.**
 
-Lattice turns a bank of hard problems into something a person can climb. It builds a
-prerequisite graph from textbook sources, attaches contest problems to concept nodes, and
-generates warm-up ladders that ascend to a target problem instead of dropping you at it.
+Lattice builds a prerequisite graph from mathematics textbooks, attaches problems to the
+concepts they exercise, and uses your own attempt history to work out what you actually know
+— and, more usefully, which missing prerequisite is blocking you.
 
 ```text
-textbook LaTeX source
-→ sections, exercises, index terms, cross-references
-→ concept graph (prerequisite DAG, confidence-scored)
-→ Putnam problems attached to concept nodes
-→ warm-up ladders: W1 → W2 → core
+textbook sources (LaTeX + PDF)
+→ sections, exercises, page references, cross-references
+→ concept graph (prerequisite DAG, confidence-scored, cross-book aligned)
+→ problems attached to concepts, tiered W1 → W2 → core
+→ practice: warm-up ladders, generated drills, spaced repetition
+→ mastery per concept, and the weak *edge* that explains it
 ```
 
-## Why this exists
+## Why
 
-The Putnam bank is 492 problems, of which **344 are `hard` and 24 `very_hard` — and exactly
-one is `easy`**. Every entry point is a cliff. Lattice supplies the missing rungs from real
-textbook exercises, ordered by a prerequisite graph rather than by topic label.
+The Putnam bank this started as held 492 problems, of which 344 are `hard` and exactly one is
+`easy`. Every entry point was a cliff. Lattice supplies the rungs from real textbook
+exercises, ordered by a prerequisite graph rather than by topic label.
 
-See `features/math_mastery_graph.md` for the full design.
+## What's in the graph
 
-## Current state
+**3,235 exercises · 441 nodes · 3,604 edges · 5 domains**
 
-| Domain | Source | Nodes | Exercises | Status |
-|---|---|---|---|---|
-| Probability | Grinstead & Snell (LaTeX, GFDL) | 315 | 705 | graph built, ladders validated |
-| Abstract Algebra | Herstein (scan) | — | — | needs vision extraction |
-| everything else | — | — | — | unbacked |
+| Book | Domain | Extraction | Exercises |
+|---|---|---|---|
+| Herstein, *Abstract Algebra* | abstract algebra | pdf, inline | 765 |
+| Grinstead & Snell, *Introduction to Probability* | probability | **LaTeX source** | 705 |
+| Blitzstein & Hwang, *Introduction to Probability* | probability | pdf, block | 640 |
+| Pugh, *Real Mathematical Analysis* | real analysis | pdf, inline | 392 |
+| Tao, *Analysis I* | real analysis | pdf, labelled | 320 |
+| Axler, *Linear Algebra Done Right* | linear algebra | pdf, inline | 222 |
+| Stein & Shakarchi, *Complex Analysis* | complex analysis | pdf, inline | 191 |
+| Putnam archive 1985–2025 | contest | LaTeX source | 492 |
 
-Probability graph: 315 nodes (12 domain, 35 concept, 184 subconcept, 84 term), 1182 edges,
-**acyclic**. 91 Putnam problems linked, 91/91 ladders monotone in difficulty.
+Not yet in: **Andrews, *Number Theory*** is image-only (no text layer) and needs OCR;
+Bertsekas, Lay and Steele parse as text but need their own extraction profiles.
 
-## Pipelines
+## Licensing
 
-### Putnam archive
+Only Grinstead & Snell (GFDL) and the Putnam archive are redistributable. For every other
+book Lattice commits **pointers and derived metadata only** — chapter, section, page, topic
+group, difficulty tier:
 
-```bash
-bash scripts/download_putnam_tex.sh          # data/raw/{problems,solutions}
-python3 scripts/build_dataset.py             # data/processed/problems.json + site/problems.js
+```json
+{"id":"blitzstein:1.8","chapter":1,"page":34,"group":"Counting",
+ "has_published_solution":true,"has_multipart":true,"n_chars":234}
 ```
 
-Uses `pandoc` when present for `problem_html`/`solution_html`; disable with `--no-pandoc`.
+Verbatim exercise text is written to `data/local/`, which `.gitignore` excludes. It is for
+personal use on the machine that owns the book.
 
-### Textbook → concept graph
+## Pages
 
-```bash
-bash scripts/fetch_books.sh                  # data/raw/books/ (gitignored, re-fetchable)
-
-python3 scripts/extract_book_tex.py \
-  --src data/raw/books/grinstead_snell --book-id grinstead_snell \
-  --title "Introduction to Probability" \
-  --authors "Charles M. Grinstead; J. Laurie Snell" \
-  --license GFDL --source-url "https://math.dartmouth.edu/~prob/prob/"
-
-python3 scripts/build_concept_graph.py --books data/processed/books/grinstead_snell.json
-
-python3 scripts/link_putnam_to_graph.py --topics Probability Combinatorics --primary-topic-only
-```
-
-Prerequisite edges combine three evidence types by noisy-OR:
-
-| Evidence | Confidence | Signal |
-|---|---|---|
-| `cross_reference` | 0.85 | an exercise `\ref{}`s an earlier section |
-| `term_reuse` | 0.55 | an index term introduced earlier is used here |
-| `textbook_order` | 0.40 | adjacent sections (weak prior) |
-
-### Labeling
-
-```bash
-export GEMINI_API_KEY='YOUR_KEY_HERE'
-python3 scripts/label_topics_gemini.py \
-  --input data/processed/problems.json \
-  --output data/processed/problems.labeled.json \
-  --model gemini-3.1-flash-lite-preview --mode batch
-
-python3 scripts/publish_site_data.py \
-  --input data/processed/problems.labeled.json --site-data site/problems.js
-```
-
-Per problem: `topic`, `secondary_topics`, `difficulty`, `problem_type`, `answer_format`,
-`techniques`, `concepts`, `prerequisites`, `theorems`, `keywords`,
-`estimated_solve_time_minutes`, casework/construction/symmetry flags, `difficulty_reason`,
-and progressive `hints`. Run logs land in `logs/label_runs/<RUN_ID>/`.
+| Page | What it does |
+|---|---|
+| `index.html` | the Putnam bank: search, filter, hints, warm-up ladder per problem |
+| `graph.html` | the concept graph as a partial order, with learning plans |
+| `practice.html` | 16 generated drill skills, 5 levels each |
+| `progress.html` | coverage, mastery, gaps, activity, sources |
 
 ## Run
 
@@ -93,58 +69,87 @@ npm start            # http://127.0.0.1:4115 (PORT respected; Switchboard sets i
 npm run dev          # same, with --watch
 ```
 
-Or via Switchboard at http://lattice.localhost.
+Zero dependencies — `node:sqlite` is built into Node ≥22.5. The site also opens as plain
+static files; the memory layer detects an unreachable API and hides itself.
 
-The site still opens as plain static files (`cd site && python3 -m http.server 8080`) — the
-memory layer detects an unreachable API and hides itself rather than breaking the browser.
+## Pipelines
+
+```bash
+bash scripts/fetch_books.sh          # LaTeX sources into data/raw/books/ (gitignored)
+python3 scripts/probe_books.py <pdf>…  # which books can be extracted, and how
+
+# LaTeX-source books
+python3 scripts/extract_book_tex.py --src data/raw/books/grinstead_snell \
+  --book-id grinstead_snell --title "Introduction to Probability" --license GFDL
+
+# PDF books — three item profiles and three TOC profiles, see --help
+python3 scripts/extract_book_pdf.py --pdf ~/papers/blitzstein.pdf --book-id blitzstein \
+  --title "Introduction to Probability" --item-style block
+python3 scripts/extract_book_pdf.py --pdf "~/papers/Algebra - Herstein.pdf" \
+  --book-id herstein --title "Abstract Algebra" --item-style inline --toc-style indent
+python3 scripts/extract_book_pdf.py --pdf ~/papers/tao.pdf --book-id tao \
+  --title "Analysis I" --item-style labelled
+
+python3 scripts/build_math_graph.py --books data/processed/books/*.json
+python3 scripts/link_putnam_to_graph.py --topics Probability Combinatorics --primary-topic-only
+```
+
+### Extraction profiles
+
+Books agree on nothing, so the extractor carries profiles rather than heuristics.
+
+| Item style | Shape | Books |
+|---|---|---|
+| `block` | number alone on a line, TOC-driven regions | Blitzstein |
+| `inline` | numbered items after a Problems/Exercises heading | Herstein, Pugh, Axler, Stein |
+| `labelled` | `Exercise 2.2.1.` carrying its own numbering | Tao |
+
+| TOC style | Shape |
+|---|---|
+| `leaders` | `1.9 Exercises . . . . 33` |
+| `indent` | indentation, sections renumbered per chapter |
+| `chapter-line` | `Chapter 1` with the title on the next line |
+
+When all three fail, chapters are recovered from the running head printed on each page.
+
+### Prerequisite evidence
+
+| Evidence | Confidence | Signal |
+|---|---|---|
+| `cross_reference` | 0.85 | an exercise `\ref{}`s an earlier section |
+| `cross_book_consensus` | 0.75 | two authors give a concept the same name |
+| `term_reuse` | 0.55 | an index term introduced earlier is used here |
+| `textbook_order` | 0.40 | adjacent sections (weak prior) |
+
+Combined by noisy-OR, so independent evidence compounds and a lone weak prior stays weak.
 
 ## Practice memory
 
-State lives in SQLite at `data/lattice.db` (gitignored — it is personal history). Uses
-`node:sqlite`, built into Node ≥22.5, so the server has **zero dependencies**.
+State lives in SQLite at `data/lattice.db` (gitignored — personal history).
 
-- **Attempt log** — every solved/partial/failed, with time spent and hints used.
-- **Spaced repetition** — SM-2 per item; hints reduce the effective grade, so a solve you
-  needed three hints for does not schedule like a clean one.
-- **Concept mastery** — recency-weighted (0.85 decay) success rate per concept node, shrunk
-  toward 0.5 by attempt count so one lucky solve is not mastery.
-- **Weak-edge diagnosis** — the payoff of having a graph. When you fail a concept *and* its
-  prerequisite is also weak, Lattice names the **edge**, not the node: fail Permutations
-  twice and struggle with Combinations, and it reports `Permutations → Combinations` as a
-  confirmed gap and tells you to fix the prerequisite first.
-- **Recommendations** — weak-but-evidenced concepts first, then unseen concepts whose
-  prerequisites you already hold (readiness-weighted).
+- **Attempt log** — outcome, seconds, hints used, per problem/exercise/drill
+- **Spaced repetition** — SM-2; hints lower the effective grade
+- **Concept mastery** — recency-weighted (0.85 decay), shrunk toward 0.5 by attempt count
+- **Weak-edge diagnosis** — when a concept *and* its prerequisite are both weak, Lattice
+  names the edge: "fix Permutations before Combinations"
+- **Learning plans** — topological path to any concept, pruning what you have mastered
 
 ### API
 
 | Method | Route | Purpose |
 |---|---|---|
-| GET | `/api/health` | liveness + node count |
-| GET | `/api/graph?kinds=concept` | nodes and edges (`assessed_by` omitted) |
-| GET | `/api/stats` | attempts, solved, due, minutes |
-| GET | `/api/mastery` | per-concept mastery, weakest first |
-| GET | `/api/weak-edges` | edge-level gap diagnosis |
-| GET | `/api/recommend?limit=8` | what to work on next |
-| GET | `/api/due?n=20` | items due for review |
-| GET | `/api/ladder/:problemId` | warm-up ladder for a problem |
-| GET | `/api/exercises?concept=…` | exercises for a concept |
-| GET | `/api/attempts/:itemId` | attempt history |
-| POST | `/api/attempt` | `{item_id, item_type, concept_id, outcome, seconds, hints_used}` |
-| POST | `/api/star`, `/api/view` | flags and view tracking |
+| GET | `/api/graph` | nodes and edges |
+| GET | `/api/mastery`, `/api/coverage` | per-concept and per-domain |
+| GET | `/api/weak-edges`, `/api/recommend` | diagnosis and next steps |
+| GET | `/api/stats`, `/api/activity`, `/api/books` | progress page data |
+| GET | `/api/due`, `/api/ladder/:id`, `/api/exercises?concept=` | queues and pointers |
+| POST | `/api/attempt`, `/api/star`, `/api/view` | record |
 
 ## Known limitations
 
-- **Putnam↔graph matching is lexical and imprecise.** Label-length bias lets generic nodes
-  ("Counting Problems") absorb too many problems. This wants an LLM tagging pass against the
-  fixed ontology; see the design doc.
-- **`term` nodes are polluted** by index entries for example flavor ("wheaties", "roulette").
-  They are excluded as match targets for that reason.
-- **Only probability is backed.** Other domains have no textbook source attached and are
-  marked unbacked rather than given fabricated warm-ups.
-- Some early Putnam years have no official solution TeX; those stay problem-only.
-
-## Sources
-
-Textbook sources are fetched, not vendored — `data/raw/books/` is gitignored. Only extracted
-structure and derived metadata are committed. Grinstead & Snell's *Introduction to
-Probability* is redistributable under the GNU Free Documentation License.
+- **Putnam↔graph matching is lexical** and imprecise; generic labels absorb too many
+  problems. Wants an embedding or LLM pass — the same ceiling applies to cross-book
+  alignment, where "Sums of Discrete Random Variables" still aligns to "Random variables".
+- **Coverage is thin.** Most concepts have no attempts, so most mastery numbers are absent
+  rather than low. The progress page states this rather than hiding it.
+- Number theory has no textbook backing until Andrews is OCR'd.

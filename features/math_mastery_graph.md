@@ -1,5 +1,9 @@
 # Math Mastery Graph
 
+> Status as of 2026-08-30: seven books are extracted into one graph — 3,235 exercises,
+> 441 nodes, 5 domains — with a layered visualization, learning plans, generated drills and
+> a progress page. See README for the current numbers. Original status note follows.
+>
 > Status as of 2026-08-29: the **probability** slice is built. Grinstead & Snell extracted
 > from LaTeX source (705 exercises), concept graph built (315 nodes, 1182 edges, acyclic),
 > 91 Putnam problems linked with 91/91 monotone ladders. The MVP below was written targeting
