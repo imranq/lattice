@@ -189,6 +189,8 @@ def load_pdf_book(book, nodes, edges, exercises, add_node, add_edge):
             "difficulty_prior": score,
             "tier": e.get("tier_hint") or TIER_FROM_PRIOR(score),
             "has_published_solution": e.get("has_published_solution", False),
+            "garble": e.get("garble"),
+            "ocr": bool(e.get("ocr")),
             "has_text": False,
         })
         add_edge(concept_id, e["id"], "assessed_by", "textbook_structure", 1.0)

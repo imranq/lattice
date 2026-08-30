@@ -3,7 +3,7 @@
 //
 //   npm start            PORT=4115 by default (Switchboard passes PORT)
 import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -26,6 +26,38 @@ let graph = null, ladders = null, graphMtime = 0;
 const GRAPH_PATH = join(ROOT, 'data', 'processed', 'graph', 'math.json');
 const GRAPH_FALLBACK = join(ROOT, 'data', 'processed', 'graph', 'probability.json');
 const LINKED_PATH = join(ROOT, 'data', 'processed', 'graph', 'probability.linked.json');
+
+// Verbatim exercise text for copyrighted books lives in data/local/ and is never
+// committed. Serving it is fine — this is the machine that owns the books — but it
+// stays out of the graph file so the repo carries pointers only.
+let localText = new Map();
+
+async function loadLocalText() {
+  const dir = join(ROOT, 'data', 'local');
+  try {
+    const files = (await readdir(dir)).filter((f) => f.endsWith('.text.json'));
+    const next = new Map();
+    for (const f of files) {
+      const obj = JSON.parse(await readFile(join(dir, f), 'utf8'));
+      for (const [id, text] of Object.entries(obj)) next.set(id, text);
+    }
+    localText = next;
+    if (localText.size) console.log(`local text: ${localText.size} exercises readable`);
+  } catch {
+    // No local text is a normal state: the graph still serves pointers.
+  }
+}
+
+/** Attach text where we have it, and a citation always. */
+function withText(e) {
+  const text = e.text ?? localText.get(e.id) ?? null;
+  return {
+    ...e,
+    text,
+    cite: e.page ? `${e.book_id} p.${e.page}` : `${e.book_id} ${e.label ?? ''}`.trim(),
+    text_available: Boolean(text),
+  };
+}
 
 async function loadGraph() {
   try {
@@ -168,9 +200,69 @@ async function api(req, res, url) {
         return json(res, attemptsFor(db, decodeURIComponent(p.slice('/attempts/'.length))));
 
       case p === '/exercises': {
+        const q = (url.searchParams.get('q') ?? '').toLowerCase();
         const concept = url.searchParams.get('concept');
-        const list = graph.exercises.filter((e) => !concept || e.concept_id === concept);
-        return json(res, list.slice(0, Number(url.searchParams.get('limit') ?? 50)));
+        const domain = url.searchParams.get('domain');
+        const book = url.searchParams.get('book');
+        const tier = url.searchParams.get('tier');
+        const offset = Number(url.searchParams.get('offset') ?? 0);
+        const limit = Math.min(Number(url.searchParams.get('limit') ?? 40), 200);
+        const states = new Map(allStates(db).map((s) => [s.item_id, s]));
+
+        let list = graph.exercises.filter((e) =>
+          (!concept || e.concept_id === concept)
+          && (!domain || e.domain === domain)
+          && (!book || e.book_id === book)
+          && (!tier || e.tier === tier));
+        // Text that came out of OCR as noise is hidden unless asked for: showing
+        // "4+orgge+.. tn2— eters" as a problem statement is worse than showing none.
+        // Only OCR sources produce true garbage. Digital text is often symbol-dense
+        // and scores similarly, so filtering on the score alone would hide correct
+        // mathematics from Tao and Herstein.
+        if (url.searchParams.get('garbled') !== '1') {
+          list = list.filter((e) => !(e.ocr && (e.garble ?? 0) > 0.3));
+        }
+        // Book order otherwise leads with whichever book sorted first; put the
+        // cleanest text in front instead.
+        if (!url.searchParams.get('sort')) {
+          list = [...list].sort((a, b) => (a.ocr ? 1 : 0) - (b.ocr ? 1 : 0)
+            || (a.garble ?? 0) - (b.garble ?? 0));
+        }
+        if (url.searchParams.get('unsolved') === '1') {
+          list = list.filter((e) => states.get(e.id)?.status !== 'solved');
+        }
+        if (q) {
+          list = list.filter((e) => {
+            const text = e.text ?? localText.get(e.id) ?? '';
+            return text.toLowerCase().includes(q)
+              || (e.section_title ?? '').toLowerCase().includes(q);
+          });
+        }
+        const sort = url.searchParams.get('sort');
+        if (sort === 'hard') list = [...list].sort((a, b) => b.difficulty_prior - a.difficulty_prior);
+        else if (sort === 'easy') list = [...list].sort((a, b) => a.difficulty_prior - b.difficulty_prior);
+
+        return json(res, {
+          total: list.length,
+          offset,
+          items: list.slice(offset, offset + limit).map((e) => ({
+            ...withText(e),
+            status: states.get(e.id)?.status ?? 'unseen',
+            starred: Boolean(states.get(e.id)?.starred),
+          })),
+        });
+      }
+
+      case p === '/facets': {
+        const by = (key) => {
+          const m = new Map();
+          for (const e of graph.exercises) m.set(e[key], (m.get(e[key]) ?? 0) + 1);
+          return [...m.entries()].filter(([k]) => k).map(([value, count]) => ({ value, count }))
+            .sort((a, b) => b.count - a.count);
+        };
+        const garbled = graph.exercises.filter((e) => e.ocr && (e.garble ?? 0) > 0.3).length;
+        return json(res, { domains: by('domain'), books: by('book_id'), tiers: by('tier'),
+                           total: graph.exercises.length, garbled });
       }
     }
   }
@@ -232,6 +324,7 @@ const server = createServer(async (req, res) => {
 });
 
 await loadGraph();
+await loadLocalText();
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`Lattice on http://127.0.0.1:${PORT}  (db: ${DB_PATH})`);
 });

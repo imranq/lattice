@@ -1,7 +1,7 @@
 {
  "book_id": "stein",
  "title": "Complex Analysis",
- "authors": "Stein; Shakarchi",
+ "authors": "",
  "source_pdf": "/Users/imranqureshi/papers/complex_analysis_stein_shakarchi.pdf",
  "extraction": "pdf_text",
  "license": "copyrighted - pointers and metadata only, personal use",
@@ -57,7 +57,6 @@
  "sections": [],
  "exercises": [
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -67,10 +66,11 @@
    "page": 24,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 296
+   "n_chars": 296,
+   "garble": 0.231,
+   "id": "stein:p1@p24"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -80,10 +80,11 @@
    "page": 24,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 213
+   "n_chars": 213,
+   "garble": 0.366,
+   "id": "stein:p2@p24"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -93,10 +94,11 @@
    "page": 25,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 875
+   "n_chars": 875,
+   "garble": 0.359,
+   "id": "stein:p4@p25"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -106,10 +108,11 @@
    "page": 25,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 1408
+   "n_chars": 1408,
+   "garble": 0.18,
+   "id": "stein:p5@p25"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -119,10 +122,11 @@
    "page": 26,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 918
+   "n_chars": 918,
+   "garble": 0.169,
+   "id": "stein:p6@p26"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -132,10 +136,11 @@
    "page": 26,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 988
+   "n_chars": 988,
+   "garble": 0.359,
+   "id": "stein:p7@p26"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -145,10 +150,11 @@
    "page": 27,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 351
+   "n_chars": 351,
+   "garble": 0.131,
+   "id": "stein:p8@p27"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -158,10 +164,11 @@
    "page": 27,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 290
+   "n_chars": 290,
+   "garble": 0.119,
+   "id": "stein:p9@p27"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -171,10 +178,11 @@
    "page": 27,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 86
+   "n_chars": 86,
+   "garble": 0.223,
+   "id": "stein:p10@p27"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -184,10 +192,11 @@
    "page": 27,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 155
+   "n_chars": 155,
+   "garble": 0.031,
+   "id": "stein:p11@p27"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -197,10 +206,11 @@
    "page": 27,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 218
+   "n_chars": 218,
+   "garble": 0.149,
+   "id": "stein:p12@p27"
   },
   {
-   "id": "stein:0.0.13",
    "book_id": "stein",
    "chapter": null,
    "number": 13,
@@ -210,10 +220,11 @@
    "page": 28,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 204
+   "n_chars": 204,
+   "garble": 0.071,
+   "id": "stein:p13@p28"
   },
   {
-   "id": "stein:0.0.14",
    "book_id": "stein",
    "chapter": null,
    "number": 14,
@@ -223,10 +234,11 @@
    "page": 28,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 268
+   "n_chars": 268,
+   "garble": 0.104,
+   "id": "stein:p14@p28"
   },
   {
-   "id": "stein:0.0.15",
    "book_id": "stein",
    "chapter": null,
    "number": 15,
@@ -236,10 +248,11 @@
    "page": 28,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 346
+   "n_chars": 346,
+   "garble": 0.162,
+   "id": "stein:p15@p28"
   },
   {
-   "id": "stein:0.0.16",
    "book_id": "stein",
    "chapter": null,
    "number": 16,
@@ -249,10 +262,11 @@
    "page": 28,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 623
+   "n_chars": 623,
+   "garble": 0.557,
+   "id": "stein:p16@p28"
   },
   {
-   "id": "stein:0.0.17",
    "book_id": "stein",
    "chapter": null,
    "number": 17,
@@ -262,10 +276,11 @@
    "page": 29,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 276
+   "n_chars": 276,
+   "garble": 0.203,
+   "id": "stein:p17@p29"
   },
   {
-   "id": "stein:0.0.18",
    "book_id": "stein",
    "chapter": null,
    "number": 18,
@@ -275,10 +290,11 @@
    "page": 29,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 208
+   "n_chars": 208,
+   "garble": 0.092,
+   "id": "stein:p18@p29"
   },
   {
-   "id": "stein:0.0.19",
    "book_id": "stein",
    "chapter": null,
    "number": 19,
@@ -288,10 +304,11 @@
    "page": 29,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 286
+   "n_chars": 286,
+   "garble": 0.103,
+   "id": "stein:p19@p29"
   },
   {
-   "id": "stein:0.0.20",
    "book_id": "stein",
    "chapter": null,
    "number": 20,
@@ -301,10 +318,11 @@
    "page": 29,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 226
+   "n_chars": 226,
+   "garble": 0.28,
+   "id": "stein:p20@p29"
   },
   {
-   "id": "stein:0.0.21",
    "book_id": "stein",
    "chapter": null,
    "number": 21,
@@ -314,10 +332,11 @@
    "page": 29,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 355
+   "n_chars": 355,
+   "garble": 0.354,
+   "id": "stein:p21@p29"
   },
   {
-   "id": "stein:0.0.22",
    "book_id": "stein",
    "chapter": null,
    "number": 22,
@@ -327,10 +346,11 @@
    "page": 30,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 432
+   "n_chars": 432,
+   "garble": 0.254,
+   "id": "stein:p22@p30"
   },
   {
-   "id": "stein:0.0.23",
    "book_id": "stein",
    "chapter": null,
    "number": 23,
@@ -340,10 +360,11 @@
    "page": 30,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 272
+   "n_chars": 272,
+   "garble": 0.088,
+   "id": "stein:p23@p30"
   },
   {
-   "id": "stein:0.0.24",
    "book_id": "stein",
    "chapter": null,
    "number": 24,
@@ -353,10 +374,11 @@
    "page": 30,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 223
+   "n_chars": 223,
+   "garble": 0.065,
+   "id": "stein:p24@p30"
   },
   {
-   "id": "stein:0.0.25",
    "book_id": "stein",
    "chapter": null,
    "number": 25,
@@ -366,10 +388,11 @@
    "page": 30,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 522
+   "n_chars": 522,
+   "garble": 0.142,
+   "id": "stein:p25@p30"
   },
   {
-   "id": "stein:0.0.26",
    "book_id": "stein",
    "chapter": null,
    "number": 26,
@@ -379,10 +402,11 @@
    "page": 31,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 5951
+   "n_chars": 5951,
+   "garble": 0.414,
+   "id": "stein:p26@p31"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -392,10 +416,11 @@
    "page": 64,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 410
+   "n_chars": 410,
+   "garble": 0.381,
+   "id": "stein:p1@p64"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -405,10 +430,11 @@
    "page": 64,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 178
+   "n_chars": 178,
+   "garble": 0.094,
+   "id": "stein:p3@p64"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -418,10 +444,11 @@
    "page": 65,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 822
+   "n_chars": 822,
+   "garble": 0.141,
+   "id": "stein:p6@p65"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -431,10 +458,11 @@
    "page": 65,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 448
+   "n_chars": 448,
+   "garble": 0.366,
+   "id": "stein:p7@p65"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -444,10 +472,11 @@
    "page": 65,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 333
+   "n_chars": 333,
+   "garble": 0.321,
+   "id": "stein:p8@p65"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -457,10 +486,11 @@
    "page": 66,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 559
+   "n_chars": 559,
+   "garble": 0.367,
+   "id": "stein:p9@p66"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -470,10 +500,11 @@
    "page": 66,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 225
+   "n_chars": 225,
+   "garble": 0.028,
+   "id": "stein:p10@p66"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -483,10 +514,11 @@
    "page": 66,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 524
+   "n_chars": 524,
+   "garble": 0.176,
+   "id": "stein:p11@p66"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -496,10 +528,11 @@
    "page": 66,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 940
+   "n_chars": 940,
+   "garble": 0.199,
+   "id": "stein:p12@p66"
   },
   {
-   "id": "stein:0.0.13",
    "book_id": "stein",
    "chapter": null,
    "number": 13,
@@ -509,10 +542,11 @@
    "page": 67,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 287
+   "n_chars": 287,
+   "garble": 0.117,
+   "id": "stein:p13@p67"
   },
   {
-   "id": "stein:0.0.14",
    "book_id": "stein",
    "chapter": null,
    "number": 14,
@@ -522,10 +556,11 @@
    "page": 67,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 246
+   "n_chars": 246,
+   "garble": 0.09,
+   "id": "stein:p14@p67"
   },
   {
-   "id": "stein:0.0.15",
    "book_id": "stein",
    "chapter": null,
    "number": 15,
@@ -535,10 +570,11 @@
    "page": 67,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 263
+   "n_chars": 263,
+   "garble": 0.181,
+   "id": "stein:p15@p67"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -548,10 +584,11 @@
    "page": 67,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 1667
+   "n_chars": 1667,
+   "garble": 0.539,
+   "id": "stein:p1@p67"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -561,10 +598,11 @@
    "page": 68,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 213
+   "n_chars": 213,
+   "garble": 0.038,
+   "id": "stein:p3@p68"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -574,10 +612,11 @@
    "page": 69,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 7527
+   "n_chars": 7527,
+   "garble": 0.551,
+   "id": "stein:p7@p69"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -587,10 +626,11 @@
    "page": 103,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 201
+   "n_chars": 201,
+   "garble": 0.056,
+   "id": "stein:p1@p103"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -600,10 +640,11 @@
    "page": 103,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 78
+   "n_chars": 78,
+   "garble": 0.279,
+   "id": "stein:p2@p103"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -613,10 +654,11 @@
    "page": 103,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 48
+   "n_chars": 48,
+   "garble": 0.192,
+   "id": "stein:p3@p103"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -626,10 +668,11 @@
    "page": 103,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 75
+   "n_chars": 75,
+   "garble": 0.202,
+   "id": "stein:p4@p103"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -639,10 +682,11 @@
    "page": 103,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 160
+   "n_chars": 160,
+   "garble": 0.218,
+   "id": "stein:p5@p103"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -652,10 +696,11 @@
    "page": 104,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 87
+   "n_chars": 87,
+   "garble": 0.382,
+   "id": "stein:p6@p104"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -665,10 +710,11 @@
    "page": 104,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 54
+   "n_chars": 54,
+   "garble": 0.252,
+   "id": "stein:p7@p104"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -678,10 +724,11 @@
    "page": 104,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 92
+   "n_chars": 92,
+   "garble": 0.157,
+   "id": "stein:p8@p104"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -691,10 +738,11 @@
    "page": 104,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 124
+   "n_chars": 124,
+   "garble": 0.158,
+   "id": "stein:p9@p104"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -704,10 +752,11 @@
    "page": 104,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 100
+   "n_chars": 100,
+   "garble": 0.178,
+   "id": "stein:p10@p104"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -717,10 +766,11 @@
    "page": 104,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 204
+   "n_chars": 204,
+   "garble": 0.163,
+   "id": "stein:p11@p104"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -730,10 +780,11 @@
    "page": 105,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 343
+   "n_chars": 343,
+   "garble": 0.186,
+   "id": "stein:p12@p105"
   },
   {
-   "id": "stein:0.0.13",
    "book_id": "stein",
    "chapter": null,
    "number": 13,
@@ -743,10 +794,11 @@
    "page": 105,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 195
+   "n_chars": 195,
+   "garble": 0.29,
+   "id": "stein:p13@p105"
   },
   {
-   "id": "stein:0.0.14",
    "book_id": "stein",
    "chapter": null,
    "number": 14,
@@ -756,10 +808,11 @@
    "page": 105,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 169
+   "n_chars": 169,
+   "garble": 0.132,
+   "id": "stein:p14@p105"
   },
   {
-   "id": "stein:0.0.15",
    "book_id": "stein",
    "chapter": null,
    "number": 15,
@@ -769,10 +822,11 @@
    "page": 105,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 950
+   "n_chars": 950,
+   "garble": 0.139,
+   "id": "stein:p15@p105"
   },
   {
-   "id": "stein:0.0.16",
    "book_id": "stein",
    "chapter": null,
    "number": 16,
@@ -782,10 +836,11 @@
    "page": 106,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 324
+   "n_chars": 324,
+   "garble": 0.14,
+   "id": "stein:p16@p106"
   },
   {
-   "id": "stein:0.0.17",
    "book_id": "stein",
    "chapter": null,
    "number": 17,
@@ -795,10 +850,11 @@
    "page": 106,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 493
+   "n_chars": 493,
+   "garble": 0.304,
+   "id": "stein:p17@p106"
   },
   {
-   "id": "stein:0.0.18",
    "book_id": "stein",
    "chapter": null,
    "number": 18,
@@ -808,10 +864,11 @@
    "page": 106,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 233
+   "n_chars": 233,
+   "garble": 0.169,
+   "id": "stein:p18@p106"
   },
   {
-   "id": "stein:0.0.19",
    "book_id": "stein",
    "chapter": null,
    "number": 19,
@@ -821,10 +878,11 @@
    "page": 106,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 542
+   "n_chars": 542,
+   "garble": 0.229,
+   "id": "stein:p19@p106"
   },
   {
-   "id": "stein:0.0.20",
    "book_id": "stein",
    "chapter": null,
    "number": 20,
@@ -834,10 +892,11 @@
    "page": 107,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 721
+   "n_chars": 721,
+   "garble": 0.339,
+   "id": "stein:p20@p107"
   },
   {
-   "id": "stein:0.0.21",
    "book_id": "stein",
    "chapter": null,
    "number": 21,
@@ -847,10 +906,11 @@
    "page": 107,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 706
+   "n_chars": 706,
+   "garble": 0.126,
+   "id": "stein:p21@p107"
   },
   {
-   "id": "stein:0.0.22",
    "book_id": "stein",
    "chapter": null,
    "number": 22,
@@ -860,10 +920,11 @@
    "page": 108,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 6690
+   "n_chars": 6690,
+   "garble": 0.591,
+   "id": "stein:p22@p108"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -873,10 +934,11 @@
    "page": 127,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 549
+   "n_chars": 549,
+   "garble": 0.184,
+   "id": "stein:p1@p127"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -886,10 +948,11 @@
    "page": 127,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 148
+   "n_chars": 148,
+   "garble": 0.134,
+   "id": "stein:p2@p127"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -899,10 +962,11 @@
    "page": 127,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 200
+   "n_chars": 200,
+   "garble": 0.227,
+   "id": "stein:p3@p127"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -912,10 +976,11 @@
    "page": 128,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 274
+   "n_chars": 274,
+   "garble": 0.165,
+   "id": "stein:p4@p128"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -925,10 +990,11 @@
    "page": 128,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 880
+   "n_chars": 880,
+   "garble": 0.49,
+   "id": "stein:p5@p128"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -938,10 +1004,11 @@
    "page": 128,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 112
+   "n_chars": 112,
+   "garble": 0.248,
+   "id": "stein:p6@p128"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -951,10 +1018,11 @@
    "page": 128,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 655
+   "n_chars": 655,
+   "garble": 0.508,
+   "id": "stein:p7@p128"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -964,10 +1032,11 @@
    "page": 129,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 415
+   "n_chars": 415,
+   "garble": 0.557,
+   "id": "stein:p8@p129"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -977,10 +1046,11 @@
    "page": 129,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 715
+   "n_chars": 715,
+   "garble": 0.338,
+   "id": "stein:p9@p129"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -990,10 +1060,11 @@
    "page": 130,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 599
+   "n_chars": 599,
+   "garble": 0.451,
+   "id": "stein:p10@p130"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -1003,10 +1074,11 @@
    "page": 130,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 371
+   "n_chars": 371,
+   "garble": 0.16,
+   "id": "stein:p11@p130"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -1016,10 +1088,11 @@
    "page": 131,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 1137
+   "n_chars": 1137,
+   "garble": 0.472,
+   "id": "stein:p12@p131"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1029,10 +1102,11 @@
    "page": 131,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 720
+   "n_chars": 720,
+   "garble": 0.302,
+   "id": "stein:p1@p131"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -1042,10 +1116,11 @@
    "page": 132,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 853
+   "n_chars": 853,
+   "garble": 0.385,
+   "id": "stein:p2@p132"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -1055,10 +1130,11 @@
    "page": 133,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 2760
+   "n_chars": 2760,
+   "garble": 0.578,
+   "id": "stein:p5@p133"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1068,10 +1144,11 @@
    "page": 134,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 467
+   "n_chars": 467,
+   "garble": 0.066,
+   "id": "stein:p1@p134"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -1081,10 +1158,11 @@
    "page": 134,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 442
+   "n_chars": 442,
+   "garble": 0.165,
+   "id": "stein:p2@p134"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1094,10 +1172,11 @@
    "page": 135,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 559
+   "n_chars": 559,
+   "garble": 0.067,
+   "id": "stein:p1@p135"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -1107,10 +1186,11 @@
    "page": 135,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 3157
+   "n_chars": 3157,
+   "garble": 0.577,
+   "id": "stein:p3@p135"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1120,10 +1200,11 @@
    "page": 137,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 2891
+   "n_chars": 2891,
+   "garble": 0.601,
+   "id": "stein:p1@p137"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -1133,10 +1214,11 @@
    "page": 139,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 2599
+   "n_chars": 2599,
+   "garble": 0.591,
+   "id": "stein:p2@p139"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -1146,10 +1228,11 @@
    "page": 141,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 6631
+   "n_chars": 6631,
+   "garble": 0.595,
+   "id": "stein:p3@p141"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1159,10 +1242,11 @@
    "page": 153,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 188
+   "n_chars": 188,
+   "garble": 0.173,
+   "id": "stein:p1@p153"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -1172,10 +1256,11 @@
    "page": 153,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 127
+   "n_chars": 127,
+   "garble": 0.088,
+   "id": "stein:p2@p153"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -1185,10 +1270,11 @@
    "page": 153,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 259
+   "n_chars": 259,
+   "garble": 0.258,
+   "id": "stein:p3@p153"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -1198,10 +1284,11 @@
    "page": 153,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 907
+   "n_chars": 907,
+   "garble": 0.571,
+   "id": "stein:p4@p153"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -1211,10 +1298,11 @@
    "page": 154,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 257
+   "n_chars": 257,
+   "garble": 0.508,
+   "id": "stein:p5@p154"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -1224,10 +1312,11 @@
    "page": 154,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 146
+   "n_chars": 146,
+   "garble": 0.366,
+   "id": "stein:p6@p154"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -1237,10 +1326,11 @@
    "page": 154,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 384
+   "n_chars": 384,
+   "garble": 0.079,
+   "id": "stein:p7@p154"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -1250,10 +1340,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 176
+   "n_chars": 176,
+   "garble": 0.196,
+   "id": "stein:p8@p155"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -1263,10 +1354,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 109
+   "n_chars": 109,
+   "garble": 0.433,
+   "id": "stein:p9@p155"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -1276,10 +1368,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 170
+   "n_chars": 170,
+   "garble": 0.425,
+   "id": "stein:p10@p155"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -1289,10 +1382,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 269
+   "n_chars": 269,
+   "garble": 0.083,
+   "id": "stein:p11@p155"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -1302,10 +1396,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 185
+   "n_chars": 185,
+   "garble": 0.035,
+   "id": "stein:p12@p155"
   },
   {
-   "id": "stein:0.0.13",
    "book_id": "stein",
    "chapter": null,
    "number": 13,
@@ -1315,10 +1410,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 103
+   "n_chars": 103,
+   "garble": 0.112,
+   "id": "stein:p13@p155"
   },
   {
-   "id": "stein:0.0.14",
    "book_id": "stein",
    "chapter": null,
    "number": 14,
@@ -1328,10 +1424,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 128
+   "n_chars": 128,
+   "garble": 0.025,
+   "id": "stein:p14@p155"
   },
   {
-   "id": "stein:0.0.15",
    "book_id": "stein",
    "chapter": null,
    "number": 15,
@@ -1341,10 +1438,11 @@
    "page": 155,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 327
+   "n_chars": 327,
+   "garble": 0.076,
+   "id": "stein:p15@p155"
   },
   {
-   "id": "stein:0.0.16",
    "book_id": "stein",
    "chapter": null,
    "number": 16,
@@ -1354,10 +1452,11 @@
    "page": 156,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 468
+   "n_chars": 468,
+   "garble": 0.145,
+   "id": "stein:p16@p156"
   },
   {
-   "id": "stein:0.0.17",
    "book_id": "stein",
    "chapter": null,
    "number": 17,
@@ -1367,10 +1466,11 @@
    "page": 156,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 851
+   "n_chars": 851,
+   "garble": 0.479,
+   "id": "stein:p17@p156"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1380,10 +1480,11 @@
    "page": 156,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 3627
+   "n_chars": 3627,
+   "garble": 0.579,
+   "id": "stein:p1@p156"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1393,10 +1494,11 @@
    "page": 174,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 172
+   "n_chars": 172,
+   "garble": 0.292,
+   "id": "stein:p1@p174"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -1406,10 +1508,11 @@
    "page": 174,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 167
+   "n_chars": 167,
+   "garble": 0.19,
+   "id": "stein:p2@p174"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -1419,10 +1522,11 @@
    "page": 175,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 315
+   "n_chars": 315,
+   "garble": 0.319,
+   "id": "stein:p3@p175"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -1432,10 +1536,11 @@
    "page": 175,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 226
+   "n_chars": 226,
+   "garble": 0.214,
+   "id": "stein:p4@p175"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -1445,10 +1550,11 @@
    "page": 175,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 108
+   "n_chars": 108,
+   "garble": 0.219,
+   "id": "stein:p5@p175"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -1458,10 +1564,11 @@
    "page": 175,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 97
+   "n_chars": 97,
+   "garble": 0.256,
+   "id": "stein:p6@p175"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -1471,10 +1578,11 @@
    "page": 175,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 369
+   "n_chars": 369,
+   "garble": 0.309,
+   "id": "stein:p7@p175"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -1484,10 +1592,11 @@
    "page": 176,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 622
+   "n_chars": 622,
+   "garble": 0.228,
+   "id": "stein:p8@p176"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -1497,10 +1606,11 @@
    "page": 176,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 588
+   "n_chars": 588,
+   "garble": 0.527,
+   "id": "stein:p9@p176"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -1510,10 +1620,11 @@
    "page": 176,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 851
+   "n_chars": 851,
+   "garble": 0.316,
+   "id": "stein:p10@p176"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -1523,10 +1634,11 @@
    "page": 177,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 201
+   "n_chars": 201,
+   "garble": 0.157,
+   "id": "stein:p11@p177"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -1536,10 +1648,11 @@
    "page": 177,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 391
+   "n_chars": 391,
+   "garble": 0.397,
+   "id": "stein:p12@p177"
   },
   {
-   "id": "stein:0.0.13",
    "book_id": "stein",
    "chapter": null,
    "number": 13,
@@ -1549,10 +1662,11 @@
    "page": 178,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 230
+   "n_chars": 230,
+   "garble": 0.205,
+   "id": "stein:p13@p178"
   },
   {
-   "id": "stein:0.0.14",
    "book_id": "stein",
    "chapter": null,
    "number": 14,
@@ -1562,10 +1676,11 @@
    "page": 178,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 461
+   "n_chars": 461,
+   "garble": 0.259,
+   "id": "stein:p14@p178"
   },
   {
-   "id": "stein:0.0.15",
    "book_id": "stein",
    "chapter": null,
    "number": 15,
@@ -1575,10 +1690,11 @@
    "page": 178,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 109
+   "n_chars": 109,
+   "garble": 0.375,
+   "id": "stein:p15@p178"
   },
   {
-   "id": "stein:0.0.16",
    "book_id": "stein",
    "chapter": null,
    "number": 16,
@@ -1588,10 +1704,11 @@
    "page": 178,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 533
+   "n_chars": 533,
+   "garble": 0.34,
+   "id": "stein:p16@p178"
   },
   {
-   "id": "stein:0.0.17",
    "book_id": "stein",
    "chapter": null,
    "number": 17,
@@ -1601,10 +1718,11 @@
    "page": 179,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 569
+   "n_chars": 569,
+   "garble": 0.279,
+   "id": "stein:p17@p179"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1614,10 +1732,11 @@
    "page": 179,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 5334
+   "n_chars": 5334,
+   "garble": 0.567,
+   "id": "stein:p1@p179"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1627,10 +1746,11 @@
    "page": 199,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 664
+   "n_chars": 664,
+   "garble": 0.229,
+   "id": "stein:p1@p199"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -1640,10 +1760,11 @@
    "page": 200,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 630
+   "n_chars": 630,
+   "garble": 0.233,
+   "id": "stein:p2@p200"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -1653,10 +1774,11 @@
    "page": 200,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 452
+   "n_chars": 452,
+   "garble": 0.214,
+   "id": "stein:p3@p200"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -1666,10 +1788,11 @@
    "page": 200,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 771
+   "n_chars": 771,
+   "garble": 0.144,
+   "id": "stein:p4@p200"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -1679,10 +1802,11 @@
    "page": 201,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 439
+   "n_chars": 439,
+   "garble": 0.376,
+   "id": "stein:p5@p201"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -1692,10 +1816,11 @@
    "page": 201,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 184
+   "n_chars": 184,
+   "garble": 0.176,
+   "id": "stein:p6@p201"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -1705,10 +1830,11 @@
    "page": 201,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 92
+   "n_chars": 92,
+   "garble": 0.174,
+   "id": "stein:p7@p201"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -1718,10 +1844,11 @@
    "page": 201,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 774
+   "n_chars": 774,
+   "garble": 0.43,
+   "id": "stein:p8@p201"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -1731,10 +1858,11 @@
    "page": 202,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 210
+   "n_chars": 210,
+   "garble": 0.562,
+   "id": "stein:p9@p202"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -1744,10 +1872,11 @@
    "page": 202,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 685
+   "n_chars": 685,
+   "garble": 0.319,
+   "id": "stein:p10@p202"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -1757,10 +1886,11 @@
    "page": 203,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 193
+   "n_chars": 193,
+   "garble": 0.203,
+   "id": "stein:p11@p203"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -1770,10 +1900,11 @@
    "page": 203,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 252
+   "n_chars": 252,
+   "garble": 0.121,
+   "id": "stein:p12@p203"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1783,10 +1914,11 @@
    "page": 203,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 6056
+   "n_chars": 6056,
+   "garble": 0.552,
+   "id": "stein:p1@p203"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -1796,10 +1928,11 @@
    "page": 248,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 335
+   "n_chars": 335,
+   "garble": 0.15,
+   "id": "stein:p1@p248"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -1809,10 +1942,11 @@
    "page": 248,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 405
+   "n_chars": 405,
+   "garble": 0.228,
+   "id": "stein:p2@p248"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -1822,10 +1956,11 @@
    "page": 248,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 214
+   "n_chars": 214,
+   "garble": 0.015,
+   "id": "stein:p3@p248"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -1835,10 +1970,11 @@
    "page": 248,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 136
+   "n_chars": 136,
+   "garble": 0.089,
+   "id": "stein:p4@p248"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -1848,10 +1984,11 @@
    "page": 248,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 298
+   "n_chars": 298,
+   "garble": 0.165,
+   "id": "stein:p5@p248"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -1861,10 +1998,11 @@
    "page": 248,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 168
+   "n_chars": 168,
+   "garble": 0.089,
+   "id": "stein:p6@p248"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -1874,10 +2012,11 @@
    "page": 248,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 1021
+   "n_chars": 1021,
+   "garble": 0.225,
+   "id": "stein:p7@p248"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -1887,10 +2026,11 @@
    "page": 249,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 493
+   "n_chars": 493,
+   "garble": 0.229,
+   "id": "stein:p8@p249"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -1900,10 +2040,11 @@
    "page": 249,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 173
+   "n_chars": 173,
+   "garble": 0.079,
+   "id": "stein:p9@p249"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -1913,10 +2054,11 @@
    "page": 249,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 364
+   "n_chars": 364,
+   "garble": 0.316,
+   "id": "stein:p10@p249"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -1926,10 +2068,11 @@
    "page": 250,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 174
+   "n_chars": 174,
+   "garble": 0.336,
+   "id": "stein:p11@p250"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -1939,10 +2082,11 @@
    "page": 250,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 328
+   "n_chars": 328,
+   "garble": 0.117,
+   "id": "stein:p12@p250"
   },
   {
-   "id": "stein:0.0.13",
    "book_id": "stein",
    "chapter": null,
    "number": 13,
@@ -1952,10 +2096,11 @@
    "page": 251,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 633
+   "n_chars": 633,
+   "garble": 0.504,
+   "id": "stein:p13@p251"
   },
   {
-   "id": "stein:0.0.14",
    "book_id": "stein",
    "chapter": null,
    "number": 14,
@@ -1965,10 +2110,11 @@
    "page": 251,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 127
+   "n_chars": 127,
+   "garble": 0.044,
+   "id": "stein:p14@p251"
   },
   {
-   "id": "stein:0.0.15",
    "book_id": "stein",
    "chapter": null,
    "number": 15,
@@ -1978,10 +2124,11 @@
    "page": 251,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 511
+   "n_chars": 511,
+   "garble": 0.092,
+   "id": "stein:p15@p251"
   },
   {
-   "id": "stein:0.0.16",
    "book_id": "stein",
    "chapter": null,
    "number": 16,
@@ -1991,10 +2138,11 @@
    "page": 252,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 550
+   "n_chars": 550,
+   "garble": 0.256,
+   "id": "stein:p16@p252"
   },
   {
-   "id": "stein:0.0.17",
    "book_id": "stein",
    "chapter": null,
    "number": 17,
@@ -2004,10 +2152,11 @@
    "page": 252,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 411
+   "n_chars": 411,
+   "garble": 0.194,
+   "id": "stein:p17@p252"
   },
   {
-   "id": "stein:0.0.18",
    "book_id": "stein",
    "chapter": null,
    "number": 18,
@@ -2017,10 +2166,11 @@
    "page": 252,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 284
+   "n_chars": 284,
+   "garble": 0.067,
+   "id": "stein:p18@p252"
   },
   {
-   "id": "stein:0.0.19",
    "book_id": "stein",
    "chapter": null,
    "number": 19,
@@ -2030,10 +2180,11 @@
    "page": 252,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 207
+   "n_chars": 207,
+   "garble": 0.111,
+   "id": "stein:p19@p252"
   },
   {
-   "id": "stein:0.0.20",
    "book_id": "stein",
    "chapter": null,
    "number": 20,
@@ -2043,10 +2194,11 @@
    "page": 252,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 425
+   "n_chars": 425,
+   "garble": 0.123,
+   "id": "stein:p20@p252"
   },
   {
-   "id": "stein:0.0.21",
    "book_id": "stein",
    "chapter": null,
    "number": 21,
@@ -2056,10 +2208,11 @@
    "page": 253,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 462
+   "n_chars": 462,
+   "garble": 0.324,
+   "id": "stein:p21@p253"
   },
   {
-   "id": "stein:0.0.22",
    "book_id": "stein",
    "chapter": null,
    "number": 22,
@@ -2069,10 +2222,11 @@
    "page": 253,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 457
+   "n_chars": 457,
+   "garble": 0.127,
+   "id": "stein:p22@p253"
   },
   {
-   "id": "stein:0.0.23",
    "book_id": "stein",
    "chapter": null,
    "number": 23,
@@ -2082,10 +2236,11 @@
    "page": 253,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 201
+   "n_chars": 201,
+   "garble": 0.133,
+   "id": "stein:p23@p253"
   },
   {
-   "id": "stein:0.0.24",
    "book_id": "stein",
    "chapter": null,
    "number": 24,
@@ -2095,10 +2250,11 @@
    "page": 254,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 710
+   "n_chars": 710,
+   "garble": 0.696,
+   "id": "stein:p24@p254"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2108,10 +2264,11 @@
    "page": 254,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 793
+   "n_chars": 793,
+   "garble": 0.288,
+   "id": "stein:p1@p254"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -2121,10 +2278,11 @@
    "page": 255,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 3577
+   "n_chars": 3577,
+   "garble": 0.589,
+   "id": "stein:p2@p255"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -2134,10 +2292,11 @@
    "page": 257,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 6605
+   "n_chars": 6605,
+   "garble": 0.603,
+   "id": "stein:p6@p257"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2147,10 +2306,11 @@
    "page": 278,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 610
+   "n_chars": 610,
+   "garble": 0.109,
+   "id": "stein:p1@p278"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -2160,10 +2320,11 @@
    "page": 278,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 204
+   "n_chars": 204,
+   "garble": 0.125,
+   "id": "stein:p2@p278"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -2173,10 +2334,11 @@
    "page": 279,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 589
+   "n_chars": 589,
+   "garble": 0.295,
+   "id": "stein:p3@p279"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -2186,10 +2348,11 @@
    "page": 279,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 366
+   "n_chars": 366,
+   "garble": 0.732,
+   "id": "stein:p4@p279"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -2199,10 +2362,11 @@
    "page": 279,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 601
+   "n_chars": 601,
+   "garble": 0.582,
+   "id": "stein:p5@p279"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -2212,10 +2376,11 @@
    "page": 280,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 46
+   "n_chars": 46,
+   "garble": 0.17,
+   "id": "stein:p6@p280"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -2225,10 +2390,11 @@
    "page": 280,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 374
+   "n_chars": 374,
+   "garble": 0.331,
+   "id": "stein:p7@p280"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -2238,10 +2404,11 @@
    "page": 280,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 319
+   "n_chars": 319,
+   "garble": 0.322,
+   "id": "stein:p8@p280"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2251,10 +2418,11 @@
    "page": 281,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 887
+   "n_chars": 887,
+   "garble": 0.67,
+   "id": "stein:p1@p281"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -2264,10 +2432,11 @@
    "page": 281,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 4007
+   "n_chars": 4007,
+   "garble": 0.57,
+   "id": "stein:p2@p281"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2277,10 +2446,11 @@
    "page": 309,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 316
+   "n_chars": 316,
+   "garble": 0.254,
+   "id": "stein:p1@p309"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -2290,10 +2460,11 @@
    "page": 310,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 1301
+   "n_chars": 1301,
+   "garble": 0.571,
+   "id": "stein:p2@p310"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -2303,10 +2474,11 @@
    "page": 310,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 330
+   "n_chars": 330,
+   "garble": 0.185,
+   "id": "stein:p3@p310"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -2316,10 +2488,11 @@
    "page": 311,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 1015
+   "n_chars": 1015,
+   "garble": 0.543,
+   "id": "stein:p4@p311"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -2329,10 +2502,11 @@
    "page": 311,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 368
+   "n_chars": 368,
+   "garble": 0.406,
+   "id": "stein:p5@p311"
   },
   {
-   "id": "stein:0.0.6",
    "book_id": "stein",
    "chapter": null,
    "number": 6,
@@ -2342,10 +2516,11 @@
    "page": 312,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 437
+   "n_chars": 437,
+   "garble": 0.235,
+   "id": "stein:p6@p312"
   },
   {
-   "id": "stein:0.0.7",
    "book_id": "stein",
    "chapter": null,
    "number": 7,
@@ -2355,10 +2530,11 @@
    "page": 312,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 303
+   "n_chars": 303,
+   "garble": 0.571,
+   "id": "stein:p7@p312"
   },
   {
-   "id": "stein:0.0.8",
    "book_id": "stein",
    "chapter": null,
    "number": 8,
@@ -2368,10 +2544,11 @@
    "page": 312,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 556
+   "n_chars": 556,
+   "garble": 0.31,
+   "id": "stein:p8@p312"
   },
   {
-   "id": "stein:0.0.9",
    "book_id": "stein",
    "chapter": null,
    "number": 9,
@@ -2381,10 +2558,11 @@
    "page": 312,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 562
+   "n_chars": 562,
+   "garble": 0.073,
+   "id": "stein:p9@p312"
   },
   {
-   "id": "stein:0.0.10",
    "book_id": "stein",
    "chapter": null,
    "number": 10,
@@ -2394,10 +2572,11 @@
    "page": 313,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 339
+   "n_chars": 339,
+   "garble": 0.38,
+   "id": "stein:p10@p313"
   },
   {
-   "id": "stein:0.0.11",
    "book_id": "stein",
    "chapter": null,
    "number": 11,
@@ -2407,10 +2586,11 @@
    "page": 313,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 283
+   "n_chars": 283,
+   "garble": 0.141,
+   "id": "stein:p11@p313"
   },
   {
-   "id": "stein:0.0.12",
    "book_id": "stein",
    "chapter": null,
    "number": 12,
@@ -2420,10 +2600,11 @@
    "page": 313,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 7081
+   "n_chars": 7081,
+   "garble": 0.622,
+   "id": "stein:p12@p313"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2433,10 +2614,11 @@
    "page": 341,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 613
+   "n_chars": 613,
+   "garble": 0.43,
+   "id": "stein:p1@p341"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -2446,10 +2628,11 @@
    "page": 342,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 321
+   "n_chars": 321,
+   "garble": 0.208,
+   "id": "stein:p2@p342"
   },
   {
-   "id": "stein:0.0.3",
    "book_id": "stein",
    "chapter": null,
    "number": 3,
@@ -2459,10 +2642,11 @@
    "page": 342,
    "tier_hint": null,
    "has_multipart": true,
-   "n_chars": 534
+   "n_chars": 534,
+   "garble": 0.558,
+   "id": "stein:p3@p342"
   },
   {
-   "id": "stein:0.0.4",
    "book_id": "stein",
    "chapter": null,
    "number": 4,
@@ -2472,10 +2656,11 @@
    "page": 342,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 362
+   "n_chars": 362,
+   "garble": 0.262,
+   "id": "stein:p4@p342"
   },
   {
-   "id": "stein:0.0.5",
    "book_id": "stein",
    "chapter": null,
    "number": 5,
@@ -2485,10 +2670,11 @@
    "page": 343,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 2901
+   "n_chars": 2901,
+   "garble": 0.387,
+   "id": "stein:p5@p343"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2498,10 +2684,11 @@
    "page": 345,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 4695
+   "n_chars": 4695,
+   "garble": 0.543,
+   "id": "stein:p1@p345"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2511,10 +2698,11 @@
    "page": 347,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 3607
+   "n_chars": 3607,
+   "garble": 0.538,
+   "id": "stein:p1@p347"
   },
   {
-   "id": "stein:0.0.1",
    "book_id": "stein",
    "chapter": null,
    "number": 1,
@@ -2524,10 +2712,11 @@
    "page": 349,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 3609
+   "n_chars": 3609,
+   "garble": 0.477,
+   "id": "stein:p1@p349"
   },
   {
-   "id": "stein:0.0.2",
    "book_id": "stein",
    "chapter": null,
    "number": 2,
@@ -2537,7 +2726,9 @@
    "page": 351,
    "tier_hint": null,
    "has_multipart": false,
-   "n_chars": 7096
+   "n_chars": 7096,
+   "garble": 0.586,
+   "id": "stein:p2@p351"
   }
  ]
 }

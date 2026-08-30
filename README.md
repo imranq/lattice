@@ -60,6 +60,7 @@ personal use on the machine that owns the book.
 
 | Page | What it does |
 |---|---|
+| `problems.html` | **every exercise in the graph** — filter by domain, book and tier, read the statement, grade it |
 | `index.html` | the Putnam bank: search, filter, hints, warm-up ladder per problem |
 | `graph.html` | the concept graph as a partial order, with learning plans |
 | `practice.html` | 16 generated drill skills, 5 levels each |
@@ -155,5 +156,8 @@ State lives in SQLite at `data/lattice.db` (gitignored — personal history).
   alignment, where "Sums of Discrete Random Variables" still aligns to "Random variables".
 - **Coverage is thin.** Most concepts have no attempts, so most mastery numbers are absent
   rather than low. The progress page states this rather than hiding it.
-- **OCR'd sources are noisier.** Andrews' chapter titles arrive with dot-leader debris that
-  is cleaned heuristically, and chapters 4, 6 and 8 did not yield exercises.
+- **OCR'd sources are noisier.** Andrews' chapter titles arrive with dot-leader debris, and
+  85 of its exercises came out as unreadable glyph soup. Each exercise carries a `garble`
+  score; the filter applies it only to OCR sources, because digital text from Tao or Herstein
+  is legitimately symbol-dense and would otherwise be hidden too. Chapters 4, 6 and 8 yielded
+  no exercises.

@@ -1,7 +1,7 @@
 {
  "book_id": "blitzstein",
  "title": "Introduction to Probability",
- "authors": "Joseph K. Blitzstein; Jessica Hwang",
+ "authors": "",
  "source_pdf": "/Users/imranqureshi/papers/Introduction to Probability by Joseph K. Blitzstein, Jessica Hwang (z-lib.org).pdf",
  "extraction": "pdf_text",
  "license": "copyrighted - pointers and metadata only, personal use",
@@ -467,7 +467,7 @@
   },
   {
    "number": "7.2",
-   "title": "2D LOTUS",
+   "title": "2D Lotus",
    "page": 324,
    "chapter": 7
   },
@@ -776,7 +776,8 @@
    "page": 33,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 71
+   "n_chars": 71,
+   "garble": 0.011
   },
   {
    "id": "blitzstein:1.2",
@@ -787,7 +788,8 @@
    "page": 33,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 373
+   "n_chars": 373,
+   "garble": 0.137
   },
   {
    "id": "blitzstein:1.3",
@@ -798,7 +800,8 @@
    "page": 33,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 556
+   "n_chars": 556,
+   "garble": 0.065
   },
   {
    "id": "blitzstein:1.4",
@@ -809,7 +812,8 @@
    "page": 33,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 301
+   "n_chars": 301,
+   "garble": 0.071
   },
   {
    "id": "blitzstein:1.5",
@@ -820,7 +824,8 @@
    "page": 33,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 887
+   "n_chars": 887,
+   "garble": 0.08
   },
   {
    "id": "blitzstein:1.6",
@@ -831,7 +836,8 @@
    "page": 33,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 324
+   "n_chars": 324,
+   "garble": 0.069
   },
   {
    "id": "blitzstein:1.7",
@@ -842,7 +848,8 @@
    "page": 34,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 955
+   "n_chars": 955,
+   "garble": 0.175
   },
   {
    "id": "blitzstein:1.8",
@@ -853,7 +860,8 @@
    "page": 34,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 234
+   "n_chars": 234,
+   "garble": 0.048
   },
   {
    "id": "blitzstein:1.9",
@@ -864,7 +872,8 @@
    "page": 34,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 341
+   "n_chars": 341,
+   "garble": 0.189
   },
   {
    "id": "blitzstein:1.10",
@@ -875,7 +884,8 @@
    "page": 34,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 378
+   "n_chars": 378,
+   "garble": 0.057
   },
   {
    "id": "blitzstein:1.11",
@@ -886,7 +896,8 @@
    "page": 34,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 310
+   "n_chars": 310,
+   "garble": 0.205
   },
   {
    "id": "blitzstein:1.12",
@@ -897,7 +908,8 @@
    "page": 34,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 590
+   "n_chars": 590,
+   "garble": 0.171
   },
   {
    "id": "blitzstein:1.13",
@@ -908,7 +920,8 @@
    "page": 34,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 433
+   "n_chars": 433,
+   "garble": 0.055
   },
   {
    "id": "blitzstein:1.14",
@@ -919,7 +932,8 @@
    "page": 34,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 264
+   "n_chars": 264,
+   "garble": 0.087
   },
   {
    "id": "blitzstein:1.15",
@@ -930,7 +944,8 @@
    "page": 35,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 23
+   "n_chars": 23,
+   "garble": 0.0
   },
   {
    "id": "blitzstein:1.16",
@@ -941,7 +956,8 @@
    "page": 35,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 367
+   "n_chars": 367,
+   "garble": 0.059
   },
   {
    "id": "blitzstein:1.17",
@@ -952,7 +968,8 @@
    "page": 35,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 81
+   "n_chars": 81,
+   "garble": 0.089
   },
   {
    "id": "blitzstein:1.18",
@@ -963,7 +980,8 @@
    "page": 35,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 258
+   "n_chars": 258,
+   "garble": 0.05
   },
   {
    "id": "blitzstein:1.19",
@@ -974,7 +992,8 @@
    "page": 35,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 170
+   "n_chars": 170,
+   "garble": 0.155
   },
   {
    "id": "blitzstein:1.20",
@@ -985,7 +1004,8 @@
    "page": 35,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 291
+   "n_chars": 291,
+   "garble": 0.124
   },
   {
    "id": "blitzstein:1.21",
@@ -996,7 +1016,8 @@
    "page": 35,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1095
+   "n_chars": 1095,
+   "garble": 0.624
   },
   {
    "id": "blitzstein:1.22",
@@ -1007,7 +1028,8 @@
    "page": 36,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1237
+   "n_chars": 1237,
+   "garble": 0.197
   },
   {
    "id": "blitzstein:1.23",
@@ -1018,7 +1040,8 @@
    "page": 36,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 383
+   "n_chars": 383,
+   "garble": 0.113
   },
   {
    "id": "blitzstein:1.24",
@@ -1029,7 +1052,8 @@
    "page": 37,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 185
+   "n_chars": 185,
+   "garble": 0.039
   },
   {
    "id": "blitzstein:1.25",
@@ -1040,7 +1064,8 @@
    "page": 37,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 244
+   "n_chars": 244,
+   "garble": 0.023
   },
   {
    "id": "blitzstein:1.26",
@@ -1051,7 +1076,8 @@
    "page": 37,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 612
+   "n_chars": 612,
+   "garble": 0.07
   },
   {
    "id": "blitzstein:1.27",
@@ -1062,7 +1088,8 @@
    "page": 37,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1023
+   "n_chars": 1023,
+   "garble": 0.111
   },
   {
    "id": "blitzstein:1.28",
@@ -1073,7 +1100,8 @@
    "page": 37,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 262
+   "n_chars": 262,
+   "garble": 0.027
   },
   {
    "id": "blitzstein:1.29",
@@ -1084,7 +1112,8 @@
    "page": 37,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 357
+   "n_chars": 357,
+   "garble": 0.194
   },
   {
    "id": "blitzstein:1.30",
@@ -1095,7 +1124,8 @@
    "page": 37,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 134
+   "n_chars": 134,
+   "garble": 0.042
   },
   {
    "id": "blitzstein:1.31",
@@ -1106,7 +1136,8 @@
    "page": 37,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 1071
+   "n_chars": 1071,
+   "garble": 0.197
   },
   {
    "id": "blitzstein:1.32",
@@ -1117,7 +1148,8 @@
    "page": 38,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 463
+   "n_chars": 463,
+   "garble": 0.08
   },
   {
    "id": "blitzstein:1.33",
@@ -1128,7 +1160,8 @@
    "page": 38,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 702
+   "n_chars": 702,
+   "garble": 0.111
   },
   {
    "id": "blitzstein:1.34",
@@ -1139,7 +1172,8 @@
    "page": 38,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 349
+   "n_chars": 349,
+   "garble": 0.245
   },
   {
    "id": "blitzstein:1.35",
@@ -1150,7 +1184,8 @@
    "page": 38,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 140
+   "n_chars": 140,
+   "garble": 0.034
   },
   {
    "id": "blitzstein:1.36",
@@ -1161,7 +1196,8 @@
    "page": 38,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 108
+   "n_chars": 108,
+   "garble": 0.119
   },
   {
    "id": "blitzstein:1.37",
@@ -1172,7 +1208,8 @@
    "page": 38,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 320
+   "n_chars": 320,
+   "garble": 0.038
   },
   {
    "id": "blitzstein:1.38",
@@ -1183,7 +1220,8 @@
    "page": 38,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 397
+   "n_chars": 397,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:1.39",
@@ -1194,7 +1232,8 @@
    "page": 38,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 219
+   "n_chars": 219,
+   "garble": 0.018
   },
   {
    "id": "blitzstein:1.40",
@@ -1205,7 +1244,8 @@
    "page": 38,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 384
+   "n_chars": 384,
+   "garble": 0.135
   },
   {
    "id": "blitzstein:1.41",
@@ -1216,7 +1256,8 @@
    "page": 39,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 146
+   "n_chars": 146,
+   "garble": 0.016
   },
   {
    "id": "blitzstein:1.42",
@@ -1227,7 +1268,8 @@
    "page": 39,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 408
+   "n_chars": 408,
+   "garble": 0.196
   },
   {
    "id": "blitzstein:1.43",
@@ -1238,7 +1280,8 @@
    "page": 39,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 302
+   "n_chars": 302,
+   "garble": 0.223
   },
   {
    "id": "blitzstein:1.44",
@@ -1249,7 +1292,8 @@
    "page": 39,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 202
+   "n_chars": 202,
+   "garble": 0.105
   },
   {
    "id": "blitzstein:1.45",
@@ -1260,7 +1304,8 @@
    "page": 39,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 303
+   "n_chars": 303,
+   "garble": 0.102
   },
   {
    "id": "blitzstein:1.46",
@@ -1271,7 +1316,8 @@
    "page": 39,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 222
+   "n_chars": 222,
+   "garble": 0.128
   },
   {
    "id": "blitzstein:1.47",
@@ -1282,7 +1328,8 @@
    "page": 39,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 963
+   "n_chars": 963,
+   "garble": 0.271
   },
   {
    "id": "blitzstein:1.48",
@@ -1293,7 +1340,8 @@
    "page": 40,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 1118
+   "n_chars": 1118,
+   "garble": 0.164
   },
   {
    "id": "blitzstein:1.49",
@@ -1304,7 +1352,8 @@
    "page": 40,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 100
+   "n_chars": 100,
+   "garble": 0.032
   },
   {
    "id": "blitzstein:1.50",
@@ -1315,7 +1364,8 @@
    "page": 40,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 205
+   "n_chars": 205,
+   "garble": 0.126
   },
   {
    "id": "blitzstein:1.51",
@@ -1326,7 +1376,8 @@
    "page": 40,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 189
+   "n_chars": 189,
+   "garble": 0.042
   },
   {
    "id": "blitzstein:1.52",
@@ -1337,7 +1388,8 @@
    "page": 40,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 343
+   "n_chars": 343,
+   "garble": 0.072
   },
   {
    "id": "blitzstein:1.53",
@@ -1348,7 +1400,8 @@
    "page": 40,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 677
+   "n_chars": 677,
+   "garble": 0.048
   },
   {
    "id": "blitzstein:1.54",
@@ -1359,7 +1412,8 @@
    "page": 41,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 559
+   "n_chars": 559,
+   "garble": 0.072
   },
   {
    "id": "blitzstein:1.55",
@@ -1370,7 +1424,8 @@
    "page": 41,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 370
+   "n_chars": 370,
+   "garble": 0.091
   },
   {
    "id": "blitzstein:1.56",
@@ -1381,7 +1436,8 @@
    "page": 41,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 834
+   "n_chars": 834,
+   "garble": 0.318
   },
   {
    "id": "blitzstein:1.57",
@@ -1392,7 +1448,8 @@
    "page": 41,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1617
+   "n_chars": 1617,
+   "garble": 0.24
   },
   {
    "id": "blitzstein:1.58",
@@ -1403,7 +1460,8 @@
    "page": 42,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 391
+   "n_chars": 391,
+   "garble": 0.033
   },
   {
    "id": "blitzstein:1.59",
@@ -1414,7 +1472,8 @@
    "page": 42,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 695
+   "n_chars": 695,
+   "garble": 0.125
   },
   {
    "id": "blitzstein:1.60",
@@ -1425,7 +1484,8 @@
    "page": 42,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1390
+   "n_chars": 1390,
+   "garble": 0.531
   },
   {
    "id": "blitzstein:1.61",
@@ -1436,7 +1496,8 @@
    "page": 42,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 806
+   "n_chars": 806,
+   "garble": 0.195
   },
   {
    "id": "blitzstein:1.62",
@@ -1447,7 +1508,8 @@
    "page": 43,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 2043
+   "n_chars": 2043,
+   "garble": 0.352
   },
   {
    "id": "blitzstein:2.1",
@@ -1458,7 +1520,8 @@
    "page": 84,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 333
+   "n_chars": 333,
+   "garble": 0.092
   },
   {
    "id": "blitzstein:2.2",
@@ -1469,7 +1532,8 @@
    "page": 84,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 431
+   "n_chars": 431,
+   "garble": 0.043
   },
   {
    "id": "blitzstein:2.3",
@@ -1480,7 +1544,8 @@
    "page": 84,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 309
+   "n_chars": 309,
+   "garble": 0.093
   },
   {
    "id": "blitzstein:2.4",
@@ -1491,7 +1556,8 @@
    "page": 84,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 577
+   "n_chars": 577,
+   "garble": 0.176
   },
   {
    "id": "blitzstein:2.5",
@@ -1502,7 +1568,8 @@
    "page": 84,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 335
+   "n_chars": 335,
+   "garble": 0.024
   },
   {
    "id": "blitzstein:2.6",
@@ -1513,7 +1580,8 @@
    "page": 84,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 396
+   "n_chars": 396,
+   "garble": 0.13
   },
   {
    "id": "blitzstein:2.7",
@@ -1524,7 +1592,8 @@
    "page": 84,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 531
+   "n_chars": 531,
+   "garble": 0.096
   },
   {
    "id": "blitzstein:2.8",
@@ -1535,7 +1604,8 @@
    "page": 84,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 378
+   "n_chars": 378,
+   "garble": 0.08
   },
   {
    "id": "blitzstein:2.9",
@@ -1546,7 +1616,8 @@
    "page": 84,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 298
+   "n_chars": 298,
+   "garble": 0.133
   },
   {
    "id": "blitzstein:2.10",
@@ -1557,7 +1628,8 @@
    "page": 85,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1216
+   "n_chars": 1216,
+   "garble": 0.042
   },
   {
    "id": "blitzstein:2.11",
@@ -1568,7 +1640,8 @@
    "page": 85,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1080
+   "n_chars": 1080,
+   "garble": 0.114
   },
   {
    "id": "blitzstein:2.12",
@@ -1579,7 +1652,8 @@
    "page": 85,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 977
+   "n_chars": 977,
+   "garble": 0.132
   },
   {
    "id": "blitzstein:2.13",
@@ -1590,7 +1664,8 @@
    "page": 85,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1593
+   "n_chars": 1593,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:2.14",
@@ -1601,7 +1676,8 @@
    "page": 86,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 906
+   "n_chars": 906,
+   "garble": 0.326
   },
   {
    "id": "blitzstein:2.15",
@@ -1612,7 +1688,8 @@
    "page": 86,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 253
+   "n_chars": 253,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:2.16",
@@ -1623,7 +1700,8 @@
    "page": 86,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 112
+   "n_chars": 112,
+   "garble": 0.142
   },
   {
    "id": "blitzstein:2.17",
@@ -1634,7 +1712,8 @@
    "page": 86,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 592
+   "n_chars": 592,
+   "garble": 0.148
   },
   {
    "id": "blitzstein:2.18",
@@ -1645,7 +1724,8 @@
    "page": 86,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 558
+   "n_chars": 558,
+   "garble": 0.149
   },
   {
    "id": "blitzstein:2.19",
@@ -1656,7 +1736,8 @@
    "page": 87,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 279
+   "n_chars": 279,
+   "garble": 0.065
   },
   {
    "id": "blitzstein:2.20",
@@ -1667,7 +1748,8 @@
    "page": 87,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 603
+   "n_chars": 603,
+   "garble": 0.165
   },
   {
    "id": "blitzstein:2.21",
@@ -1678,7 +1760,8 @@
    "page": 87,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 439
+   "n_chars": 439,
+   "garble": 0.085
   },
   {
    "id": "blitzstein:2.22",
@@ -1689,7 +1772,8 @@
    "page": 87,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 280
+   "n_chars": 280,
+   "garble": 0.067
   },
   {
    "id": "blitzstein:2.23",
@@ -1700,7 +1784,8 @@
    "page": 87,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 425
+   "n_chars": 425,
+   "garble": 0.151
   },
   {
    "id": "blitzstein:2.24",
@@ -1711,7 +1796,8 @@
    "page": 87,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 305
+   "n_chars": 305,
+   "garble": 0.248
   },
   {
    "id": "blitzstein:2.25",
@@ -1722,7 +1808,8 @@
    "page": 87,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 523
+   "n_chars": 523,
+   "garble": 0.031
   },
   {
    "id": "blitzstein:2.26",
@@ -1733,7 +1820,8 @@
    "page": 87,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1124
+   "n_chars": 1124,
+   "garble": 0.278
   },
   {
    "id": "blitzstein:2.27",
@@ -1744,7 +1832,8 @@
    "page": 88,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 725
+   "n_chars": 725,
+   "garble": 0.043
   },
   {
    "id": "blitzstein:2.28",
@@ -1755,7 +1844,8 @@
    "page": 88,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 947
+   "n_chars": 947,
+   "garble": 0.155
   },
   {
    "id": "blitzstein:2.29",
@@ -1766,7 +1856,8 @@
    "page": 88,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 580
+   "n_chars": 580,
+   "garble": 0.109
   },
   {
    "id": "blitzstein:2.30",
@@ -1777,7 +1868,8 @@
    "page": 88,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 258
+   "n_chars": 258,
+   "garble": 0.097
   },
   {
    "id": "blitzstein:2.31",
@@ -1788,7 +1880,8 @@
    "page": 88,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 84
+   "n_chars": 84,
+   "garble": 0.029
   },
   {
    "id": "blitzstein:2.32",
@@ -1799,7 +1892,8 @@
    "page": 88,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 483
+   "n_chars": 483,
+   "garble": 0.392
   },
   {
    "id": "blitzstein:2.33",
@@ -1810,7 +1904,8 @@
    "page": 89,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 468
+   "n_chars": 468,
+   "garble": 0.193
   },
   {
    "id": "blitzstein:2.34",
@@ -1821,7 +1916,8 @@
    "page": 89,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 695
+   "n_chars": 695,
+   "garble": 0.186
   },
   {
    "id": "blitzstein:2.35",
@@ -1832,7 +1928,8 @@
    "page": 89,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 829
+   "n_chars": 829,
+   "garble": 0.247
   },
   {
    "id": "blitzstein:2.36",
@@ -1843,7 +1940,8 @@
    "page": 89,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 922
+   "n_chars": 922,
+   "garble": 0.21
   },
   {
    "id": "blitzstein:2.37",
@@ -1854,7 +1952,8 @@
    "page": 90,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 802
+   "n_chars": 802,
+   "garble": 0.23
   },
   {
    "id": "blitzstein:2.38",
@@ -1865,7 +1964,8 @@
    "page": 90,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1945
+   "n_chars": 1945,
+   "garble": 0.496
   },
   {
    "id": "blitzstein:2.39",
@@ -1876,7 +1976,8 @@
    "page": 91,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 857
+   "n_chars": 857,
+   "garble": 0.121
   },
   {
    "id": "blitzstein:2.40",
@@ -1887,7 +1988,8 @@
    "page": 91,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1244
+   "n_chars": 1244,
+   "garble": 0.205
   },
   {
    "id": "blitzstein:2.41",
@@ -1898,7 +2000,8 @@
    "page": 91,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1170
+   "n_chars": 1170,
+   "garble": 0.065
   },
   {
    "id": "blitzstein:2.42",
@@ -1909,7 +2012,8 @@
    "page": 91,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1518
+   "n_chars": 1518,
+   "garble": 0.073
   },
   {
    "id": "blitzstein:2.43",
@@ -1920,7 +2024,8 @@
    "page": 92,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1357
+   "n_chars": 1357,
+   "garble": 0.239
   },
   {
    "id": "blitzstein:2.44",
@@ -1931,7 +2036,8 @@
    "page": 92,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1948
+   "n_chars": 1948,
+   "garble": 0.42
   },
   {
    "id": "blitzstein:2.45",
@@ -1942,7 +2048,8 @@
    "page": 93,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1268
+   "n_chars": 1268,
+   "garble": 0.072
   },
   {
    "id": "blitzstein:2.46",
@@ -1953,7 +2060,8 @@
    "page": 93,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1406
+   "n_chars": 1406,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:2.47",
@@ -1964,7 +2072,8 @@
    "page": 93,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1780
+   "n_chars": 1780,
+   "garble": 0.244
   },
   {
    "id": "blitzstein:2.48",
@@ -1975,7 +2084,8 @@
    "page": 94,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 691
+   "n_chars": 691,
+   "garble": 0.212
   },
   {
    "id": "blitzstein:2.49",
@@ -1986,7 +2096,8 @@
    "page": 94,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 796
+   "n_chars": 796,
+   "garble": 0.178
   },
   {
    "id": "blitzstein:2.50",
@@ -1997,7 +2108,8 @@
    "page": 94,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 447
+   "n_chars": 447,
+   "garble": 0.119
   },
   {
    "id": "blitzstein:2.51",
@@ -2008,7 +2120,8 @@
    "page": 95,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 302
+   "n_chars": 302,
+   "garble": 0.097
   },
   {
    "id": "blitzstein:2.52",
@@ -2019,7 +2132,8 @@
    "page": 95,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 490
+   "n_chars": 490,
+   "garble": 0.137
   },
   {
    "id": "blitzstein:2.53",
@@ -2030,7 +2144,8 @@
    "page": 95,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 385
+   "n_chars": 385,
+   "garble": 0.039
   },
   {
    "id": "blitzstein:2.54",
@@ -2041,7 +2156,8 @@
    "page": 95,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 735
+   "n_chars": 735,
+   "garble": 0.198
   },
   {
    "id": "blitzstein:2.55",
@@ -2052,7 +2168,8 @@
    "page": 95,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 630
+   "n_chars": 630,
+   "garble": 0.188
   },
   {
    "id": "blitzstein:2.56",
@@ -2063,7 +2180,8 @@
    "page": 95,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1090
+   "n_chars": 1090,
+   "garble": 0.07
   },
   {
    "id": "blitzstein:2.57",
@@ -2074,7 +2192,8 @@
    "page": 96,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 686
+   "n_chars": 686,
+   "garble": 0.086
   },
   {
    "id": "blitzstein:2.58",
@@ -2085,7 +2204,8 @@
    "page": 96,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 709
+   "n_chars": 709,
+   "garble": 0.277
   },
   {
    "id": "blitzstein:2.59",
@@ -2096,7 +2216,8 @@
    "page": 96,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1624
+   "n_chars": 1624,
+   "garble": 0.297
   },
   {
    "id": "blitzstein:2.60",
@@ -2107,7 +2228,8 @@
    "page": 96,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 804
+   "n_chars": 804,
+   "garble": 0.028
   },
   {
    "id": "blitzstein:2.61",
@@ -2118,7 +2240,8 @@
    "page": 97,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1207
+   "n_chars": 1207,
+   "garble": 0.169
   },
   {
    "id": "blitzstein:2.62",
@@ -2129,7 +2252,8 @@
    "page": 97,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 711
+   "n_chars": 711,
+   "garble": 0.034
   },
   {
    "id": "blitzstein:2.63",
@@ -2140,7 +2264,8 @@
    "page": 97,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 291
+   "n_chars": 291,
+   "garble": 0.077
   },
   {
    "id": "blitzstein:2.64",
@@ -2151,7 +2276,8 @@
    "page": 97,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1161
+   "n_chars": 1161,
+   "garble": 0.127
   },
   {
    "id": "blitzstein:2.65",
@@ -2162,7 +2288,8 @@
    "page": 98,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1249
+   "n_chars": 1249,
+   "garble": 0.21
   },
   {
    "id": "blitzstein:2.66",
@@ -2173,7 +2300,8 @@
    "page": 98,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 334
+   "n_chars": 334,
+   "garble": 0.168
   },
   {
    "id": "blitzstein:2.67",
@@ -2184,7 +2312,8 @@
    "page": 98,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 556
+   "n_chars": 556,
+   "garble": 0.024
   },
   {
    "id": "blitzstein:2.68",
@@ -2195,7 +2324,8 @@
    "page": 98,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1887
+   "n_chars": 1887,
+   "garble": 0.297
   },
   {
    "id": "blitzstein:2.69",
@@ -2206,7 +2336,8 @@
    "page": 99,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1484
+   "n_chars": 1484,
+   "garble": 0.282
   },
   {
    "id": "blitzstein:2.70",
@@ -2217,7 +2348,8 @@
    "page": 99,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1936
+   "n_chars": 1936,
+   "garble": 0.29
   },
   {
    "id": "blitzstein:2.71",
@@ -2228,7 +2360,8 @@
    "page": 100,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 598
+   "n_chars": 598,
+   "garble": 0.102
   },
   {
    "id": "blitzstein:2.72",
@@ -2239,7 +2372,8 @@
    "page": 100,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1906
+   "n_chars": 1906,
+   "garble": 0.256
   },
   {
    "id": "blitzstein:2.73",
@@ -2250,7 +2384,8 @@
    "page": 101,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1898
+   "n_chars": 1898,
+   "garble": 0.327
   },
   {
    "id": "blitzstein:2.74",
@@ -2261,7 +2396,8 @@
    "page": 101,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1059
+   "n_chars": 1059,
+   "garble": 0.159
   },
   {
    "id": "blitzstein:3.1",
@@ -2272,7 +2408,8 @@
    "page": 140,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 337
+   "n_chars": 337,
+   "garble": 0.063
   },
   {
    "id": "blitzstein:3.2",
@@ -2283,7 +2420,8 @@
    "page": 140,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 368
+   "n_chars": 368,
+   "garble": 0.039
   },
   {
    "id": "blitzstein:3.3",
@@ -2294,7 +2432,8 @@
    "page": 140,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 248
+   "n_chars": 248,
+   "garble": 0.097
   },
   {
    "id": "blitzstein:3.5",
@@ -2305,7 +2444,8 @@
    "page": 140,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 344
+   "n_chars": 344,
+   "garble": 0.156
   },
   {
    "id": "blitzstein:3.6",
@@ -2316,7 +2456,8 @@
    "page": 140,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 405
+   "n_chars": 405,
+   "garble": 0.17
   },
   {
    "id": "blitzstein:3.7",
@@ -2327,7 +2468,8 @@
    "page": 140,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 316
+   "n_chars": 316,
+   "garble": 0.12
   },
   {
    "id": "blitzstein:3.8",
@@ -2338,7 +2480,8 @@
    "page": 141,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 341
+   "n_chars": 341,
+   "garble": 0.112
   },
   {
    "id": "blitzstein:3.9",
@@ -2349,7 +2492,8 @@
    "page": 141,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 519
+   "n_chars": 519,
+   "garble": 0.126
   },
   {
    "id": "blitzstein:3.10",
@@ -2360,7 +2504,8 @@
    "page": 141,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 324
+   "n_chars": 324,
+   "garble": 0.081
   },
   {
    "id": "blitzstein:3.11",
@@ -2371,7 +2516,8 @@
    "page": 141,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 318
+   "n_chars": 318,
+   "garble": 0.117
   },
   {
    "id": "blitzstein:3.12",
@@ -2382,7 +2528,8 @@
    "page": 141,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 699
+   "n_chars": 699,
+   "garble": 0.084
   },
   {
    "id": "blitzstein:3.13",
@@ -2393,7 +2540,8 @@
    "page": 141,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 247
+   "n_chars": 247,
+   "garble": 0.203
   },
   {
    "id": "blitzstein:3.14",
@@ -2404,7 +2552,8 @@
    "page": 141,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 963
+   "n_chars": 963,
+   "garble": 0.167
   },
   {
    "id": "blitzstein:3.15",
@@ -2415,7 +2564,8 @@
    "page": 142,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 51
+   "n_chars": 51,
+   "garble": 0.261
   },
   {
    "id": "blitzstein:3.16",
@@ -2426,7 +2576,8 @@
    "page": 142,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 112
+   "n_chars": 112,
+   "garble": 0.092
   },
   {
    "id": "blitzstein:3.17",
@@ -2437,7 +2588,8 @@
    "page": 142,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 396
+   "n_chars": 396,
+   "garble": 0.082
   },
   {
    "id": "blitzstein:3.18",
@@ -2448,7 +2600,8 @@
    "page": 142,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 669
+   "n_chars": 669,
+   "garble": 0.112
   },
   {
    "id": "blitzstein:3.19",
@@ -2459,7 +2612,8 @@
    "page": 142,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 280
+   "n_chars": 280,
+   "garble": 0.04
   },
   {
    "id": "blitzstein:3.20",
@@ -2470,7 +2624,8 @@
    "page": 142,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 724
+   "n_chars": 724,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:3.21",
@@ -2481,7 +2636,8 @@
    "page": 142,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 87
+   "n_chars": 87,
+   "garble": 0.152
   },
   {
    "id": "blitzstein:3.22",
@@ -2492,7 +2648,8 @@
    "page": 142,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 578
+   "n_chars": 578,
+   "garble": 0.126
   },
   {
    "id": "blitzstein:3.23",
@@ -2503,7 +2660,8 @@
    "page": 142,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 503
+   "n_chars": 503,
+   "garble": 0.072
   },
   {
    "id": "blitzstein:3.24",
@@ -2514,7 +2672,8 @@
    "page": 143,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 219
+   "n_chars": 219,
+   "garble": 0.051
   },
   {
    "id": "blitzstein:3.25",
@@ -2525,7 +2684,8 @@
    "page": 143,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 277
+   "n_chars": 277,
+   "garble": 0.249
   },
   {
    "id": "blitzstein:3.26",
@@ -2536,7 +2696,8 @@
    "page": 143,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 77
+   "n_chars": 77,
+   "garble": 0.135
   },
   {
    "id": "blitzstein:3.27",
@@ -2547,7 +2708,8 @@
    "page": 143,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 254
+   "n_chars": 254,
+   "garble": 0.031
   },
   {
    "id": "blitzstein:3.28",
@@ -2558,7 +2720,8 @@
    "page": 143,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 367
+   "n_chars": 367,
+   "garble": 0.112
   },
   {
    "id": "blitzstein:3.29",
@@ -2569,7 +2732,8 @@
    "page": 143,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 280
+   "n_chars": 280,
+   "garble": 0.02
   },
   {
    "id": "blitzstein:3.30",
@@ -2580,7 +2744,8 @@
    "page": 143,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 853
+   "n_chars": 853,
+   "garble": 0.113
   },
   {
    "id": "blitzstein:3.31",
@@ -2591,7 +2756,8 @@
    "page": 143,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1032
+   "n_chars": 1032,
+   "garble": 0.034
   },
   {
    "id": "blitzstein:3.32",
@@ -2602,7 +2768,8 @@
    "page": 144,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 678
+   "n_chars": 678,
+   "garble": 0.044
   },
   {
    "id": "blitzstein:3.33",
@@ -2613,7 +2780,8 @@
    "page": 144,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 572
+   "n_chars": 572,
+   "garble": 0.057
   },
   {
    "id": "blitzstein:3.34",
@@ -2624,7 +2792,8 @@
    "page": 144,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 788
+   "n_chars": 788,
+   "garble": 0.196
   },
   {
    "id": "blitzstein:3.35",
@@ -2635,7 +2804,8 @@
    "page": 144,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 732
+   "n_chars": 732,
+   "garble": 0.112
   },
   {
    "id": "blitzstein:3.36",
@@ -2646,7 +2816,8 @@
    "page": 144,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 741
+   "n_chars": 741,
+   "garble": 0.164
   },
   {
    "id": "blitzstein:3.37",
@@ -2657,7 +2828,8 @@
    "page": 145,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1591
+   "n_chars": 1591,
+   "garble": 0.281
   },
   {
    "id": "blitzstein:3.38",
@@ -2668,7 +2840,8 @@
    "page": 145,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 147
+   "n_chars": 147,
+   "garble": 0.109
   },
   {
    "id": "blitzstein:3.40",
@@ -2679,7 +2852,8 @@
    "page": 145,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 473
+   "n_chars": 473,
+   "garble": 0.097
   },
   {
    "id": "blitzstein:3.41",
@@ -2690,7 +2864,8 @@
    "page": 145,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 175
+   "n_chars": 175,
+   "garble": 0.037
   },
   {
    "id": "blitzstein:3.42",
@@ -2701,7 +2876,8 @@
    "page": 146,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 283
+   "n_chars": 283,
+   "garble": 0.207
   },
   {
    "id": "blitzstein:3.43",
@@ -2712,7 +2888,8 @@
    "page": 146,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 402
+   "n_chars": 402,
+   "garble": 0.155
   },
   {
    "id": "blitzstein:3.44",
@@ -2723,7 +2900,8 @@
    "page": 146,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1438
+   "n_chars": 1438,
+   "garble": 0.515
   },
   {
    "id": "blitzstein:3.45",
@@ -2734,7 +2912,8 @@
    "page": 146,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 836
+   "n_chars": 836,
+   "garble": 0.126
   },
   {
    "id": "blitzstein:3.46",
@@ -2745,7 +2924,8 @@
    "page": 147,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1926
+   "n_chars": 1926,
+   "garble": 0.206
   },
   {
    "id": "blitzstein:3.47",
@@ -2756,7 +2936,8 @@
    "page": 147,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1262
+   "n_chars": 1262,
+   "garble": 0.329
   },
   {
    "id": "blitzstein:4.1",
@@ -2767,7 +2948,8 @@
    "page": 194,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 260
+   "n_chars": 260,
+   "garble": 0.028
   },
   {
    "id": "blitzstein:4.2",
@@ -2778,7 +2960,8 @@
    "page": 194,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 269
+   "n_chars": 269,
+   "garble": 0.104
   },
   {
    "id": "blitzstein:4.3",
@@ -2789,7 +2972,8 @@
    "page": 194,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 131
+   "n_chars": 131,
+   "garble": 0.049
   },
   {
    "id": "blitzstein:4.4",
@@ -2800,7 +2984,8 @@
    "page": 194,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 520
+   "n_chars": 520,
+   "garble": 0.071
   },
   {
    "id": "blitzstein:4.5",
@@ -2811,7 +2996,8 @@
    "page": 194,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 135
+   "n_chars": 135,
+   "garble": 0.077
   },
   {
    "id": "blitzstein:4.6",
@@ -2822,7 +3008,8 @@
    "page": 194,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 333
+   "n_chars": 333,
+   "garble": 0.068
   },
   {
    "id": "blitzstein:4.7",
@@ -2833,7 +3020,8 @@
    "page": 194,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 632
+   "n_chars": 632,
+   "garble": 0.181
   },
   {
    "id": "blitzstein:4.8",
@@ -2844,7 +3032,8 @@
    "page": 195,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1157
+   "n_chars": 1157,
+   "garble": 0.162
   },
   {
    "id": "blitzstein:4.9",
@@ -2855,7 +3044,8 @@
    "page": 195,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1150
+   "n_chars": 1150,
+   "garble": 0.145
   },
   {
    "id": "blitzstein:4.10",
@@ -2866,7 +3056,8 @@
    "page": 195,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 193
+   "n_chars": 193,
+   "garble": 0.116
   },
   {
    "id": "blitzstein:4.11",
@@ -2877,7 +3068,8 @@
    "page": 195,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 792
+   "n_chars": 792,
+   "garble": 0.102
   },
   {
    "id": "blitzstein:4.12",
@@ -2888,7 +3080,8 @@
    "page": 196,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 218
+   "n_chars": 218,
+   "garble": 0.166
   },
   {
    "id": "blitzstein:4.13",
@@ -2899,7 +3092,8 @@
    "page": 196,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 125
+   "n_chars": 125,
+   "garble": 0.083
   },
   {
    "id": "blitzstein:4.14",
@@ -2910,7 +3104,8 @@
    "page": 196,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 400
+   "n_chars": 400,
+   "garble": 0.225
   },
   {
    "id": "blitzstein:4.15",
@@ -2921,7 +3116,8 @@
    "page": 196,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 904
+   "n_chars": 904,
+   "garble": 0.253
   },
   {
    "id": "blitzstein:4.16",
@@ -2932,7 +3128,8 @@
    "page": 196,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1204
+   "n_chars": 1204,
+   "garble": 0.118
   },
   {
    "id": "blitzstein:4.17",
@@ -2943,7 +3140,8 @@
    "page": 196,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1386
+   "n_chars": 1386,
+   "garble": 0.202
   },
   {
    "id": "blitzstein:4.18",
@@ -2954,7 +3152,8 @@
    "page": 197,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 145
+   "n_chars": 145,
+   "garble": 0.017
   },
   {
    "id": "blitzstein:4.19",
@@ -2965,7 +3164,8 @@
    "page": 197,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 267
+   "n_chars": 267,
+   "garble": 0.128
   },
   {
    "id": "blitzstein:4.20",
@@ -2976,7 +3176,8 @@
    "page": 197,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 468
+   "n_chars": 468,
+   "garble": 0.158
   },
   {
    "id": "blitzstein:4.21",
@@ -2987,7 +3188,8 @@
    "page": 197,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 409
+   "n_chars": 409,
+   "garble": 0.332
   },
   {
    "id": "blitzstein:4.22",
@@ -2998,7 +3200,8 @@
    "page": 197,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 347
+   "n_chars": 347,
+   "garble": 0.025
   },
   {
    "id": "blitzstein:4.23",
@@ -3009,7 +3212,8 @@
    "page": 197,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 804
+   "n_chars": 804,
+   "garble": 0.178
   },
   {
    "id": "blitzstein:4.24",
@@ -3020,7 +3224,8 @@
    "page": 198,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 127
+   "n_chars": 127,
+   "garble": 0.203
   },
   {
    "id": "blitzstein:4.25",
@@ -3031,7 +3236,8 @@
    "page": 198,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 363
+   "n_chars": 363,
+   "garble": 0.07
   },
   {
    "id": "blitzstein:4.26",
@@ -3042,7 +3248,8 @@
    "page": 198,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 906
+   "n_chars": 906,
+   "garble": 0.178
   },
   {
    "id": "blitzstein:4.27",
@@ -3053,7 +3260,8 @@
    "page": 198,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 171
+   "n_chars": 171,
+   "garble": 0.075
   },
   {
    "id": "blitzstein:4.28",
@@ -3064,7 +3272,8 @@
    "page": 198,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 503
+   "n_chars": 503,
+   "garble": 0.107
   },
   {
    "id": "blitzstein:4.29",
@@ -3075,7 +3284,8 @@
    "page": 198,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 240
+   "n_chars": 240,
+   "garble": 0.287
   },
   {
    "id": "blitzstein:4.30",
@@ -3086,7 +3296,8 @@
    "page": 198,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 349
+   "n_chars": 349,
+   "garble": 0.157
   },
   {
    "id": "blitzstein:4.31",
@@ -3097,7 +3308,8 @@
    "page": 198,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1646
+   "n_chars": 1646,
+   "garble": 0.381
   },
   {
    "id": "blitzstein:4.32",
@@ -3108,7 +3320,8 @@
    "page": 199,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 464
+   "n_chars": 464,
+   "garble": 0.187
   },
   {
    "id": "blitzstein:4.33",
@@ -3119,7 +3332,8 @@
    "page": 199,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 269
+   "n_chars": 269,
+   "garble": 0.095
   },
   {
    "id": "blitzstein:4.34",
@@ -3130,7 +3344,8 @@
    "page": 199,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 154
+   "n_chars": 154,
+   "garble": 0.021
   },
   {
    "id": "blitzstein:4.35",
@@ -3141,7 +3356,8 @@
    "page": 199,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 290
+   "n_chars": 290,
+   "garble": 0.078
   },
   {
    "id": "blitzstein:4.36",
@@ -3152,7 +3368,8 @@
    "page": 199,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 292
+   "n_chars": 292,
+   "garble": 0.16
   },
   {
    "id": "blitzstein:4.37",
@@ -3163,7 +3380,8 @@
    "page": 199,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 336
+   "n_chars": 336,
+   "garble": 0.021
   },
   {
    "id": "blitzstein:4.38",
@@ -3174,7 +3392,8 @@
    "page": 199,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 275
+   "n_chars": 275,
+   "garble": 0.115
   },
   {
    "id": "blitzstein:4.39",
@@ -3185,7 +3404,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 293
+   "n_chars": 293,
+   "garble": 0.061
   },
   {
    "id": "blitzstein:4.40",
@@ -3196,7 +3416,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 225
+   "n_chars": 225,
+   "garble": 0.115
   },
   {
    "id": "blitzstein:4.41",
@@ -3207,7 +3428,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 123
+   "n_chars": 123,
+   "garble": 0.046
   },
   {
    "id": "blitzstein:4.42",
@@ -3218,7 +3440,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 348
+   "n_chars": 348,
+   "garble": 0.062
   },
   {
    "id": "blitzstein:4.43",
@@ -3229,7 +3452,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 606
+   "n_chars": 606,
+   "garble": 0.172
   },
   {
    "id": "blitzstein:4.44",
@@ -3240,7 +3464,8 @@
    "page": 200,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 607
+   "n_chars": 607,
+   "garble": 0.158
   },
   {
    "id": "blitzstein:4.45",
@@ -3251,7 +3476,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 262
+   "n_chars": 262,
+   "garble": 0.162
   },
   {
    "id": "blitzstein:4.46",
@@ -3262,7 +3488,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 242
+   "n_chars": 242,
+   "garble": 0.033
   },
   {
    "id": "blitzstein:4.47",
@@ -3273,7 +3500,8 @@
    "page": 200,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1698
+   "n_chars": 1698,
+   "garble": 0.461
   },
   {
    "id": "blitzstein:4.48",
@@ -3284,7 +3512,8 @@
    "page": 201,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 232
+   "n_chars": 232,
+   "garble": 0.103
   },
   {
    "id": "blitzstein:4.49",
@@ -3295,7 +3524,8 @@
    "page": 201,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 348
+   "n_chars": 348,
+   "garble": 0.15
   },
   {
    "id": "blitzstein:4.50",
@@ -3306,7 +3536,8 @@
    "page": 201,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 578
+   "n_chars": 578,
+   "garble": 0.067
   },
   {
    "id": "blitzstein:4.51",
@@ -3317,7 +3548,8 @@
    "page": 201,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 457
+   "n_chars": 457,
+   "garble": 0.111
   },
   {
    "id": "blitzstein:4.52",
@@ -3328,7 +3560,8 @@
    "page": 201,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 371
+   "n_chars": 371,
+   "garble": 0.12
   },
   {
    "id": "blitzstein:4.53",
@@ -3339,7 +3572,8 @@
    "page": 201,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 183
+   "n_chars": 183,
+   "garble": 0.14
   },
   {
    "id": "blitzstein:4.54",
@@ -3350,7 +3584,8 @@
    "page": 202,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1374
+   "n_chars": 1374,
+   "garble": 0.129
   },
   {
    "id": "blitzstein:4.55",
@@ -3361,7 +3596,8 @@
    "page": 202,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1411
+   "n_chars": 1411,
+   "garble": 0.305
   },
   {
    "id": "blitzstein:4.56",
@@ -3372,7 +3608,8 @@
    "page": 203,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 526
+   "n_chars": 526,
+   "garble": 0.096
   },
   {
    "id": "blitzstein:4.57",
@@ -3383,7 +3620,8 @@
    "page": 203,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 564
+   "n_chars": 564,
+   "garble": 0.129
   },
   {
    "id": "blitzstein:4.58",
@@ -3394,7 +3632,8 @@
    "page": 203,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 1218
+   "n_chars": 1218,
+   "garble": 0.131
   },
   {
    "id": "blitzstein:4.59",
@@ -3405,7 +3644,8 @@
    "page": 203,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1916
+   "n_chars": 1916,
+   "garble": 0.462
   },
   {
    "id": "blitzstein:4.60",
@@ -3416,7 +3656,8 @@
    "page": 204,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1491
+   "n_chars": 1491,
+   "garble": 0.239
   },
   {
    "id": "blitzstein:4.61",
@@ -3427,7 +3668,8 @@
    "page": 204,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 74
+   "n_chars": 74,
+   "garble": 0.244
   },
   {
    "id": "blitzstein:4.62",
@@ -3438,7 +3680,8 @@
    "page": 204,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 46
+   "n_chars": 46,
+   "garble": 0.24
   },
   {
    "id": "blitzstein:4.63",
@@ -3449,7 +3692,8 @@
    "page": 204,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 163
+   "n_chars": 163,
+   "garble": 0.172
   },
   {
    "id": "blitzstein:4.64",
@@ -3460,7 +3704,8 @@
    "page": 204,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 178
+   "n_chars": 178,
+   "garble": 0.137
   },
   {
    "id": "blitzstein:4.65",
@@ -3471,7 +3716,8 @@
    "page": 205,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 270
+   "n_chars": 270,
+   "garble": 0.196
   },
   {
    "id": "blitzstein:4.66",
@@ -3482,7 +3728,8 @@
    "page": 205,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 942
+   "n_chars": 942,
+   "garble": 0.403
   },
   {
    "id": "blitzstein:4.67",
@@ -3493,7 +3740,8 @@
    "page": 205,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 688
+   "n_chars": 688,
+   "garble": 0.115
   },
   {
    "id": "blitzstein:4.68",
@@ -3504,7 +3752,8 @@
    "page": 205,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 762
+   "n_chars": 762,
+   "garble": 0.257
   },
   {
    "id": "blitzstein:4.69",
@@ -3515,7 +3764,8 @@
    "page": 206,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 593
+   "n_chars": 593,
+   "garble": 0.089
   },
   {
    "id": "blitzstein:4.70",
@@ -3526,7 +3776,8 @@
    "page": 206,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 543
+   "n_chars": 543,
+   "garble": 0.12
   },
   {
    "id": "blitzstein:4.71",
@@ -3537,7 +3788,8 @@
    "page": 206,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 652
+   "n_chars": 652,
+   "garble": 0.05
   },
   {
    "id": "blitzstein:4.72",
@@ -3548,7 +3800,8 @@
    "page": 206,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1085
+   "n_chars": 1085,
+   "garble": 0.179
   },
   {
    "id": "blitzstein:4.73",
@@ -3559,7 +3812,8 @@
    "page": 206,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 613
+   "n_chars": 613,
+   "garble": 0.133
   },
   {
    "id": "blitzstein:4.74",
@@ -3570,7 +3824,8 @@
    "page": 207,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 475
+   "n_chars": 475,
+   "garble": 0.054
   },
   {
    "id": "blitzstein:4.75",
@@ -3581,7 +3836,8 @@
    "page": 207,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 306
+   "n_chars": 306,
+   "garble": 0.024
   },
   {
    "id": "blitzstein:4.76",
@@ -3592,7 +3848,8 @@
    "page": 207,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 282
+   "n_chars": 282,
+   "garble": 0.023
   },
   {
    "id": "blitzstein:4.77",
@@ -3603,7 +3860,8 @@
    "page": 207,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 460
+   "n_chars": 460,
+   "garble": 0.116
   },
   {
    "id": "blitzstein:4.78",
@@ -3614,7 +3872,8 @@
    "page": 207,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 544
+   "n_chars": 544,
+   "garble": 0.174
   },
   {
    "id": "blitzstein:4.79",
@@ -3625,7 +3884,8 @@
    "page": 207,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1039
+   "n_chars": 1039,
+   "garble": 0.197
   },
   {
    "id": "blitzstein:4.80",
@@ -3636,7 +3896,8 @@
    "page": 208,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 422
+   "n_chars": 422,
+   "garble": 0.172
   },
   {
    "id": "blitzstein:4.81",
@@ -3647,7 +3908,8 @@
    "page": 208,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 363
+   "n_chars": 363,
+   "garble": 0.095
   },
   {
    "id": "blitzstein:4.82",
@@ -3658,7 +3920,8 @@
    "page": 208,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1126
+   "n_chars": 1126,
+   "garble": 0.316
   },
   {
    "id": "blitzstein:4.83",
@@ -3669,7 +3932,8 @@
    "page": 208,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 684
+   "n_chars": 684,
+   "garble": 0.156
   },
   {
    "id": "blitzstein:4.84",
@@ -3680,7 +3944,8 @@
    "page": 208,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 624
+   "n_chars": 624,
+   "garble": 0.101
   },
   {
    "id": "blitzstein:4.85",
@@ -3691,7 +3956,8 @@
    "page": 209,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 549
+   "n_chars": 549,
+   "garble": 0.09
   },
   {
    "id": "blitzstein:4.86",
@@ -3702,7 +3968,8 @@
    "page": 209,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 876
+   "n_chars": 876,
+   "garble": 0.214
   },
   {
    "id": "blitzstein:4.87",
@@ -3713,7 +3980,8 @@
    "page": 209,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 938
+   "n_chars": 938,
+   "garble": 0.163
   },
   {
    "id": "blitzstein:4.88",
@@ -3724,7 +3992,8 @@
    "page": 209,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 497
+   "n_chars": 497,
+   "garble": 0.075
   },
   {
    "id": "blitzstein:4.89",
@@ -3735,7 +4004,8 @@
    "page": 210,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 643
+   "n_chars": 643,
+   "garble": 0.049
   },
   {
    "id": "blitzstein:4.90",
@@ -3746,7 +4016,8 @@
    "page": 210,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 661
+   "n_chars": 661,
+   "garble": 0.14
   },
   {
    "id": "blitzstein:4.91",
@@ -3757,7 +4028,8 @@
    "page": 210,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1657
+   "n_chars": 1657,
+   "garble": 0.259
   },
   {
    "id": "blitzstein:4.92",
@@ -3768,7 +4040,8 @@
    "page": 210,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 2174
+   "n_chars": 2174,
+   "garble": 0.33
   },
   {
    "id": "blitzstein:5.1",
@@ -3779,7 +4052,8 @@
    "page": 255,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 314
+   "n_chars": 314,
+   "garble": 0.172
   },
   {
    "id": "blitzstein:5.2",
@@ -3790,7 +4064,8 @@
    "page": 255,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 250
+   "n_chars": 250,
+   "garble": 0.058
   },
   {
    "id": "blitzstein:5.3",
@@ -3801,7 +4076,8 @@
    "page": 255,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 205
+   "n_chars": 205,
+   "garble": 0.212
   },
   {
    "id": "blitzstein:5.4",
@@ -3812,7 +4088,8 @@
    "page": 256,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 410
+   "n_chars": 410,
+   "garble": 0.11
   },
   {
    "id": "blitzstein:5.5",
@@ -3823,7 +4100,8 @@
    "page": 256,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 188
+   "n_chars": 188,
+   "garble": 0.064
   },
   {
    "id": "blitzstein:5.6",
@@ -3834,7 +4112,8 @@
    "page": 256,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 412
+   "n_chars": 412,
+   "garble": 0.234
   },
   {
    "id": "blitzstein:5.7",
@@ -3845,7 +4124,8 @@
    "page": 256,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 463
+   "n_chars": 463,
+   "garble": 0.133
   },
   {
    "id": "blitzstein:5.8",
@@ -3856,7 +4136,8 @@
    "page": 256,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 316
+   "n_chars": 316,
+   "garble": 0.281
   },
   {
    "id": "blitzstein:5.9",
@@ -3867,7 +4148,8 @@
    "page": 256,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 286
+   "n_chars": 286,
+   "garble": 0.109
   },
   {
    "id": "blitzstein:5.10",
@@ -3878,7 +4160,8 @@
    "page": 257,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 137
+   "n_chars": 137,
+   "garble": 0.318
   },
   {
    "id": "blitzstein:5.11",
@@ -3889,7 +4172,8 @@
    "page": 257,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 200
+   "n_chars": 200,
+   "garble": 0.386
   },
   {
    "id": "blitzstein:5.12",
@@ -3900,7 +4184,8 @@
    "page": 257,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 128
+   "n_chars": 128,
+   "garble": 0.019
   },
   {
    "id": "blitzstein:5.13",
@@ -3911,7 +4196,8 @@
    "page": 257,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 339
+   "n_chars": 339,
+   "garble": 0.138
   },
   {
    "id": "blitzstein:5.14",
@@ -3922,7 +4208,8 @@
    "page": 257,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 210
+   "n_chars": 210,
+   "garble": 0.224
   },
   {
    "id": "blitzstein:5.15",
@@ -3933,7 +4220,8 @@
    "page": 257,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 52
+   "n_chars": 52,
+   "garble": 0.268
   },
   {
    "id": "blitzstein:5.16",
@@ -3944,7 +4232,8 @@
    "page": 257,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 302
+   "n_chars": 302,
+   "garble": 0.184
   },
   {
    "id": "blitzstein:5.17",
@@ -3955,7 +4244,8 @@
    "page": 257,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 93
+   "n_chars": 93,
+   "garble": 0.205
   },
   {
    "id": "blitzstein:5.18",
@@ -3966,7 +4256,8 @@
    "page": 257,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 471
+   "n_chars": 471,
+   "garble": 0.12
   },
   {
    "id": "blitzstein:5.19",
@@ -3977,7 +4268,8 @@
    "page": 257,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 147
+   "n_chars": 147,
+   "garble": 0.187
   },
   {
    "id": "blitzstein:5.20",
@@ -3988,7 +4280,8 @@
    "page": 258,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 289
+   "n_chars": 289,
+   "garble": 0.241
   },
   {
    "id": "blitzstein:5.21",
@@ -3999,7 +4292,8 @@
    "page": 258,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 313
+   "n_chars": 313,
+   "garble": 0.108
   },
   {
    "id": "blitzstein:5.22",
@@ -4010,7 +4304,8 @@
    "page": 258,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 451
+   "n_chars": 451,
+   "garble": 0.182
   },
   {
    "id": "blitzstein:5.23",
@@ -4021,7 +4316,8 @@
    "page": 258,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 646
+   "n_chars": 646,
+   "garble": 0.177
   },
   {
    "id": "blitzstein:5.24",
@@ -4032,7 +4328,8 @@
    "page": 258,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 468
+   "n_chars": 468,
+   "garble": 0.093
   },
   {
    "id": "blitzstein:5.25",
@@ -4043,7 +4340,8 @@
    "page": 258,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 372
+   "n_chars": 372,
+   "garble": 0.237
   },
   {
    "id": "blitzstein:5.26",
@@ -4054,7 +4352,8 @@
    "page": 258,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1393
+   "n_chars": 1393,
+   "garble": 0.29
   },
   {
    "id": "blitzstein:5.27",
@@ -4065,7 +4364,8 @@
    "page": 259,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 298
+   "n_chars": 298,
+   "garble": 0.371
   },
   {
    "id": "blitzstein:5.28",
@@ -4076,7 +4376,8 @@
    "page": 259,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 386
+   "n_chars": 386,
+   "garble": 0.293
   },
   {
    "id": "blitzstein:5.29",
@@ -4087,7 +4388,8 @@
    "page": 259,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 378
+   "n_chars": 378,
+   "garble": 0.232
   },
   {
    "id": "blitzstein:5.30",
@@ -4098,7 +4400,8 @@
    "page": 259,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 149
+   "n_chars": 149,
+   "garble": 0.228
   },
   {
    "id": "blitzstein:5.31",
@@ -4109,7 +4412,8 @@
    "page": 259,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 77
+   "n_chars": 77,
+   "garble": 0.218
   },
   {
    "id": "blitzstein:5.32",
@@ -4120,7 +4424,8 @@
    "page": 259,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 550
+   "n_chars": 550,
+   "garble": 0.165
   },
   {
    "id": "blitzstein:5.33",
@@ -4131,7 +4436,8 @@
    "page": 259,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 321
+   "n_chars": 321,
+   "garble": 0.2
   },
   {
    "id": "blitzstein:5.34",
@@ -4142,7 +4448,8 @@
    "page": 260,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 290
+   "n_chars": 290,
+   "garble": 0.161
   },
   {
    "id": "blitzstein:5.35",
@@ -4153,7 +4460,8 @@
    "page": 260,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 539
+   "n_chars": 539,
+   "garble": 0.454
   },
   {
    "id": "blitzstein:5.36",
@@ -4164,7 +4472,8 @@
    "page": 260,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 444
+   "n_chars": 444,
+   "garble": 0.036
   },
   {
    "id": "blitzstein:5.37",
@@ -4175,7 +4484,8 @@
    "page": 260,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1031
+   "n_chars": 1031,
+   "garble": 0.443
   },
   {
    "id": "blitzstein:5.38",
@@ -4186,7 +4496,8 @@
    "page": 260,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 485
+   "n_chars": 485,
+   "garble": 0.091
   },
   {
    "id": "blitzstein:5.39",
@@ -4197,7 +4508,8 @@
    "page": 261,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 340
+   "n_chars": 340,
+   "garble": 0.093
   },
   {
    "id": "blitzstein:5.40",
@@ -4208,7 +4520,8 @@
    "page": 261,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 937
+   "n_chars": 937,
+   "garble": 0.025
   },
   {
    "id": "blitzstein:5.41",
@@ -4219,7 +4532,8 @@
    "page": 261,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 876
+   "n_chars": 876,
+   "garble": 0.225
   },
   {
    "id": "blitzstein:5.42",
@@ -4230,7 +4544,8 @@
    "page": 261,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 753
+   "n_chars": 753,
+   "garble": 0.118
   },
   {
    "id": "blitzstein:5.43",
@@ -4241,7 +4556,8 @@
    "page": 261,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1178
+   "n_chars": 1178,
+   "garble": 0.252
   },
   {
    "id": "blitzstein:5.44",
@@ -4252,7 +4568,8 @@
    "page": 262,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 436
+   "n_chars": 436,
+   "garble": 0.184
   },
   {
    "id": "blitzstein:5.45",
@@ -4263,7 +4580,8 @@
    "page": 262,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 268
+   "n_chars": 268,
+   "garble": 0.048
   },
   {
    "id": "blitzstein:5.46",
@@ -4274,7 +4592,8 @@
    "page": 262,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 496
+   "n_chars": 496,
+   "garble": 0.088
   },
   {
    "id": "blitzstein:5.47",
@@ -4285,7 +4604,8 @@
    "page": 262,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 654
+   "n_chars": 654,
+   "garble": 0.2
   },
   {
    "id": "blitzstein:5.48",
@@ -4296,7 +4616,8 @@
    "page": 263,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 193
+   "n_chars": 193,
+   "garble": 0.145
   },
   {
    "id": "blitzstein:5.49",
@@ -4307,7 +4628,8 @@
    "page": 263,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 336
+   "n_chars": 336,
+   "garble": 0.227
   },
   {
    "id": "blitzstein:5.50",
@@ -4318,7 +4640,8 @@
    "page": 263,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 158
+   "n_chars": 158,
+   "garble": 0.102
   },
   {
    "id": "blitzstein:5.51",
@@ -4329,7 +4652,8 @@
    "page": 263,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 295
+   "n_chars": 295,
+   "garble": 0.15
   },
   {
    "id": "blitzstein:5.52",
@@ -4340,7 +4664,8 @@
    "page": 263,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 441
+   "n_chars": 441,
+   "garble": 0.107
   },
   {
    "id": "blitzstein:5.53",
@@ -4351,7 +4676,8 @@
    "page": 263,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 997
+   "n_chars": 997,
+   "garble": 0.128
   },
   {
    "id": "blitzstein:5.54",
@@ -4362,7 +4688,8 @@
    "page": 264,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1775
+   "n_chars": 1775,
+   "garble": 0.443
   },
   {
    "id": "blitzstein:5.55",
@@ -4373,7 +4700,8 @@
    "page": 264,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 689
+   "n_chars": 689,
+   "garble": 0.286
   },
   {
    "id": "blitzstein:5.56",
@@ -4384,7 +4712,8 @@
    "page": 264,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 136
+   "n_chars": 136,
+   "garble": 0.289
   },
   {
    "id": "blitzstein:5.57",
@@ -4395,7 +4724,8 @@
    "page": 265,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 297
+   "n_chars": 297,
+   "garble": 0.246
   },
   {
    "id": "blitzstein:5.58",
@@ -4406,7 +4736,8 @@
    "page": 265,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 465
+   "n_chars": 465,
+   "garble": 0.362
   },
   {
    "id": "blitzstein:5.59",
@@ -4417,7 +4748,8 @@
    "page": 265,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1126
+   "n_chars": 1126,
+   "garble": 0.408
   },
   {
    "id": "blitzstein:5.60",
@@ -4428,7 +4760,8 @@
    "page": 265,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 560
+   "n_chars": 560,
+   "garble": 0.244
   },
   {
    "id": "blitzstein:5.61",
@@ -4439,7 +4772,8 @@
    "page": 265,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 915
+   "n_chars": 915,
+   "garble": 0.204
   },
   {
    "id": "blitzstein:5.62",
@@ -4450,7 +4784,8 @@
    "page": 266,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1054
+   "n_chars": 1054,
+   "garble": 0.286
   },
   {
    "id": "blitzstein:6.1",
@@ -4461,7 +4796,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 51
+   "n_chars": 51,
+   "garble": 0.136
   },
   {
    "id": "blitzstein:6.2",
@@ -4472,7 +4808,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 47
+   "n_chars": 47,
+   "garble": 0.127
   },
   {
    "id": "blitzstein:6.3",
@@ -4483,7 +4820,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 157
+   "n_chars": 157,
+   "garble": 0.123
   },
   {
    "id": "blitzstein:6.4",
@@ -4494,7 +4832,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 206
+   "n_chars": 206,
+   "garble": 0.154
   },
   {
    "id": "blitzstein:6.5",
@@ -4505,7 +4844,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 135
+   "n_chars": 135,
+   "garble": 0.113
   },
   {
    "id": "blitzstein:6.6",
@@ -4516,7 +4856,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 538
+   "n_chars": 538,
+   "garble": 0.065
   },
   {
    "id": "blitzstein:6.7",
@@ -4527,7 +4868,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 401
+   "n_chars": 401,
+   "garble": 0.248
   },
   {
    "id": "blitzstein:6.8",
@@ -4538,7 +4880,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 144
+   "n_chars": 144,
+   "garble": 0.081
   },
   {
    "id": "blitzstein:6.9",
@@ -4549,7 +4892,8 @@
    "page": 298,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 718
+   "n_chars": 718,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:6.10",
@@ -4560,7 +4904,8 @@
    "page": 299,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 304
+   "n_chars": 304,
+   "garble": 0.024
   },
   {
    "id": "blitzstein:6.11",
@@ -4571,7 +4916,8 @@
    "page": 299,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 818
+   "n_chars": 818,
+   "garble": 0.171
   },
   {
    "id": "blitzstein:6.12",
@@ -4582,7 +4928,8 @@
    "page": 299,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1189
+   "n_chars": 1189,
+   "garble": 0.169
   },
   {
    "id": "blitzstein:6.13",
@@ -4593,7 +4940,8 @@
    "page": 299,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 225
+   "n_chars": 225,
+   "garble": 0.074
   },
   {
    "id": "blitzstein:6.14",
@@ -4604,7 +4952,8 @@
    "page": 300,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 97
+   "n_chars": 97,
+   "garble": 0.256
   },
   {
    "id": "blitzstein:6.15",
@@ -4615,7 +4964,8 @@
    "page": 300,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 404
+   "n_chars": 404,
+   "garble": 0.25
   },
   {
    "id": "blitzstein:6.16",
@@ -4626,7 +4976,8 @@
    "page": 300,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 190
+   "n_chars": 190,
+   "garble": 0.117
   },
   {
    "id": "blitzstein:6.17",
@@ -4637,7 +4988,8 @@
    "page": 300,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 239
+   "n_chars": 239,
+   "garble": 0.152
   },
   {
    "id": "blitzstein:6.18",
@@ -4648,7 +5000,8 @@
    "page": 300,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 146
+   "n_chars": 146,
+   "garble": 0.055
   },
   {
    "id": "blitzstein:6.19",
@@ -4659,7 +5012,8 @@
    "page": 300,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 78
+   "n_chars": 78,
+   "garble": 0.124
   },
   {
    "id": "blitzstein:6.20",
@@ -4670,7 +5024,8 @@
    "page": 300,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 315
+   "n_chars": 315,
+   "garble": 0.219
   },
   {
    "id": "blitzstein:6.21",
@@ -4681,7 +5036,8 @@
    "page": 300,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 314
+   "n_chars": 314,
+   "garble": 0.201
   },
   {
    "id": "blitzstein:6.22",
@@ -4692,7 +5048,8 @@
    "page": 300,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 542
+   "n_chars": 542,
+   "garble": 0.107
   },
   {
    "id": "blitzstein:6.23",
@@ -4703,7 +5060,8 @@
    "page": 300,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 389
+   "n_chars": 389,
+   "garble": 0.147
   },
   {
    "id": "blitzstein:6.24",
@@ -4714,7 +5072,8 @@
    "page": 301,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 172
+   "n_chars": 172,
+   "garble": 0.176
   },
   {
    "id": "blitzstein:6.25",
@@ -4725,7 +5084,8 @@
    "page": 301,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 232
+   "n_chars": 232,
+   "garble": 0.156
   },
   {
    "id": "blitzstein:6.26",
@@ -4736,7 +5096,8 @@
    "page": 301,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 158
+   "n_chars": 158,
+   "garble": 0.173
   },
   {
    "id": "blitzstein:7.1",
@@ -4747,7 +5108,8 @@
    "page": 348,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 331
+   "n_chars": 331,
+   "garble": 0.022
   },
   {
    "id": "blitzstein:7.2",
@@ -4758,7 +5120,8 @@
    "page": 348,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 639
+   "n_chars": 639,
+   "garble": 0.041
   },
   {
    "id": "blitzstein:7.3",
@@ -4769,7 +5132,8 @@
    "page": 348,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 577
+   "n_chars": 577,
+   "garble": 0.044
   },
   {
    "id": "blitzstein:7.4",
@@ -4780,7 +5144,8 @@
    "page": 348,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 321
+   "n_chars": 321,
+   "garble": 0.052
   },
   {
    "id": "blitzstein:7.5",
@@ -4791,7 +5156,8 @@
    "page": 349,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 444
+   "n_chars": 444,
+   "garble": 0.081
   },
   {
    "id": "blitzstein:7.6",
@@ -4802,7 +5168,8 @@
    "page": 349,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 433
+   "n_chars": 433,
+   "garble": 0.031
   },
   {
    "id": "blitzstein:7.7",
@@ -4813,7 +5180,8 @@
    "page": 349,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 729
+   "n_chars": 729,
+   "garble": 0.17
   },
   {
    "id": "blitzstein:7.8",
@@ -4824,7 +5192,8 @@
    "page": 349,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 572
+   "n_chars": 572,
+   "garble": 0.088
   },
   {
    "id": "blitzstein:7.9",
@@ -4835,7 +5204,8 @@
    "page": 349,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 229
+   "n_chars": 229,
+   "garble": 0.119
   },
   {
    "id": "blitzstein:7.10",
@@ -4846,7 +5216,8 @@
    "page": 350,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 721
+   "n_chars": 721,
+   "garble": 0.186
   },
   {
    "id": "blitzstein:7.11",
@@ -4857,7 +5228,8 @@
    "page": 350,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 480
+   "n_chars": 480,
+   "garble": 0.103
   },
   {
    "id": "blitzstein:7.12",
@@ -4868,7 +5240,8 @@
    "page": 350,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 512
+   "n_chars": 512,
+   "garble": 0.124
   },
   {
    "id": "blitzstein:7.13",
@@ -4879,7 +5252,8 @@
    "page": 350,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 402
+   "n_chars": 402,
+   "garble": 0.123
   },
   {
    "id": "blitzstein:7.14",
@@ -4890,7 +5264,8 @@
    "page": 350,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 709
+   "n_chars": 709,
+   "garble": 0.072
   },
   {
    "id": "blitzstein:7.15",
@@ -4901,7 +5276,8 @@
    "page": 350,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 208
+   "n_chars": 208,
+   "garble": 0.302
   },
   {
    "id": "blitzstein:7.16",
@@ -4912,7 +5288,8 @@
    "page": 351,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 234
+   "n_chars": 234,
+   "garble": 0.099
   },
   {
    "id": "blitzstein:7.17",
@@ -4923,7 +5300,8 @@
    "page": 351,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 223
+   "n_chars": 223,
+   "garble": 0.09
   },
   {
    "id": "blitzstein:7.18",
@@ -4934,7 +5312,8 @@
    "page": 351,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 200
+   "n_chars": 200,
+   "garble": 0.221
   },
   {
    "id": "blitzstein:7.19",
@@ -4945,7 +5324,8 @@
    "page": 351,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 228
+   "n_chars": 228,
+   "garble": 0.199
   },
   {
    "id": "blitzstein:7.20",
@@ -4956,7 +5336,8 @@
    "page": 351,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 289
+   "n_chars": 289,
+   "garble": 0.3
   },
   {
    "id": "blitzstein:7.21",
@@ -4967,7 +5348,8 @@
    "page": 351,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 290
+   "n_chars": 290,
+   "garble": 0.072
   },
   {
    "id": "blitzstein:7.22",
@@ -4978,7 +5360,8 @@
    "page": 351,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 247
+   "n_chars": 247,
+   "garble": 0.106
   },
   {
    "id": "blitzstein:7.23",
@@ -4989,7 +5372,8 @@
    "page": 352,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1670
+   "n_chars": 1670,
+   "garble": 0.381
   },
   {
    "id": "blitzstein:7.24",
@@ -5000,7 +5384,8 @@
    "page": 352,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 322
+   "n_chars": 322,
+   "garble": 0.065
   },
   {
    "id": "blitzstein:7.25",
@@ -5011,7 +5396,8 @@
    "page": 352,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 812
+   "n_chars": 812,
+   "garble": 0.132
   },
   {
    "id": "blitzstein:7.26",
@@ -5022,7 +5408,8 @@
    "page": 352,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 695
+   "n_chars": 695,
+   "garble": 0.119
   },
   {
    "id": "blitzstein:7.27",
@@ -5033,7 +5420,8 @@
    "page": 353,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1471
+   "n_chars": 1471,
+   "garble": 0.158
   },
   {
    "id": "blitzstein:7.28",
@@ -5044,7 +5432,8 @@
    "page": 353,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 861
+   "n_chars": 861,
+   "garble": 0.208
   },
   {
    "id": "blitzstein:7.29",
@@ -5055,7 +5444,8 @@
    "page": 353,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 358
+   "n_chars": 358,
+   "garble": 0.214
   },
   {
    "id": "blitzstein:7.30",
@@ -5066,7 +5456,8 @@
    "page": 354,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 610
+   "n_chars": 610,
+   "garble": 0.294
   },
   {
    "id": "blitzstein:7.31",
@@ -5077,7 +5468,8 @@
    "page": 354,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 95
+   "n_chars": 95,
+   "garble": 0.126
   },
   {
    "id": "blitzstein:7.32",
@@ -5088,7 +5480,8 @@
    "page": 354,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 143
+   "n_chars": 143,
+   "garble": 0.137
   },
   {
    "id": "blitzstein:7.33",
@@ -5099,7 +5492,8 @@
    "page": 354,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 456
+   "n_chars": 456,
+   "garble": 0.075
   },
   {
    "id": "blitzstein:7.35",
@@ -5110,7 +5504,8 @@
    "page": 354,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 840
+   "n_chars": 840,
+   "garble": 0.407
   },
   {
    "id": "blitzstein:7.36",
@@ -5121,7 +5516,8 @@
    "page": 354,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 233
+   "n_chars": 233,
+   "garble": 0.283
   },
   {
    "id": "blitzstein:7.37",
@@ -5132,7 +5528,8 @@
    "page": 354,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 606
+   "n_chars": 606,
+   "garble": 0.232
   },
   {
    "id": "blitzstein:7.38",
@@ -5143,7 +5540,8 @@
    "page": 355,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 238
+   "n_chars": 238,
+   "garble": 0.278
   },
   {
    "id": "blitzstein:7.39",
@@ -5154,7 +5552,8 @@
    "page": 355,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 185
+   "n_chars": 185,
+   "garble": 0.094
   },
   {
    "id": "blitzstein:7.40",
@@ -5165,7 +5564,8 @@
    "page": 355,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 155
+   "n_chars": 155,
+   "garble": 0.166
   },
   {
    "id": "blitzstein:7.41",
@@ -5176,7 +5576,8 @@
    "page": 355,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 230
+   "n_chars": 230,
+   "garble": 0.219
   },
   {
    "id": "blitzstein:7.42",
@@ -5187,7 +5588,8 @@
    "page": 355,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 532
+   "n_chars": 532,
+   "garble": 0.167
   },
   {
    "id": "blitzstein:7.43",
@@ -5198,7 +5600,8 @@
    "page": 355,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 124
+   "n_chars": 124,
+   "garble": 0.052
   },
   {
    "id": "blitzstein:7.44",
@@ -5209,7 +5612,8 @@
    "page": 355,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 136
+   "n_chars": 136,
+   "garble": 0.1
   },
   {
    "id": "blitzstein:7.45",
@@ -5220,7 +5624,8 @@
    "page": 355,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 209
+   "n_chars": 209,
+   "garble": 0.061
   },
   {
    "id": "blitzstein:7.46",
@@ -5231,7 +5636,8 @@
    "page": 355,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 293
+   "n_chars": 293,
+   "garble": 0.113
   },
   {
    "id": "blitzstein:7.47",
@@ -5242,7 +5648,8 @@
    "page": 355,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1100
+   "n_chars": 1100,
+   "garble": 0.242
   },
   {
    "id": "blitzstein:7.48",
@@ -5253,7 +5660,8 @@
    "page": 356,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 407
+   "n_chars": 407,
+   "garble": 0.219
   },
   {
    "id": "blitzstein:7.49",
@@ -5264,7 +5672,8 @@
    "page": 356,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 348
+   "n_chars": 348,
+   "garble": 0.176
   },
   {
    "id": "blitzstein:7.50",
@@ -5275,7 +5684,8 @@
    "page": 356,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 407
+   "n_chars": 407,
+   "garble": 0.085
   },
   {
    "id": "blitzstein:7.51",
@@ -5286,7 +5696,8 @@
    "page": 356,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 204
+   "n_chars": 204,
+   "garble": 0.175
   },
   {
    "id": "blitzstein:7.52",
@@ -5297,7 +5708,8 @@
    "page": 356,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 827
+   "n_chars": 827,
+   "garble": 0.273
   },
   {
    "id": "blitzstein:7.53",
@@ -5308,7 +5720,8 @@
    "page": 357,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 681
+   "n_chars": 681,
+   "garble": 0.335
   },
   {
    "id": "blitzstein:7.55",
@@ -5319,7 +5732,8 @@
    "page": 357,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 724
+   "n_chars": 724,
+   "garble": 0.192
   },
   {
    "id": "blitzstein:7.56",
@@ -5330,7 +5744,8 @@
    "page": 357,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 434
+   "n_chars": 434,
+   "garble": 0.233
   },
   {
    "id": "blitzstein:7.57",
@@ -5341,7 +5756,8 @@
    "page": 357,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1070
+   "n_chars": 1070,
+   "garble": 0.288
   },
   {
    "id": "blitzstein:7.58",
@@ -5352,7 +5768,8 @@
    "page": 358,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 2778
+   "n_chars": 2778,
+   "garble": 0.571
   },
   {
    "id": "blitzstein:7.59",
@@ -5363,7 +5780,8 @@
    "page": 358,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1786
+   "n_chars": 1786,
+   "garble": 0.468
   },
   {
    "id": "blitzstein:7.60",
@@ -5374,7 +5792,8 @@
    "page": 359,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 322
+   "n_chars": 322,
+   "garble": 0.133
   },
   {
    "id": "blitzstein:7.61",
@@ -5385,7 +5804,8 @@
    "page": 359,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 464
+   "n_chars": 464,
+   "garble": 0.041
   },
   {
    "id": "blitzstein:7.62",
@@ -5396,7 +5816,8 @@
    "page": 359,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 610
+   "n_chars": 610,
+   "garble": 0.164
   },
   {
    "id": "blitzstein:7.63",
@@ -5407,7 +5828,8 @@
    "page": 359,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 483
+   "n_chars": 483,
+   "garble": 0.125
   },
   {
    "id": "blitzstein:7.64",
@@ -5418,7 +5840,8 @@
    "page": 360,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1681
+   "n_chars": 1681,
+   "garble": 0.348
   },
   {
    "id": "blitzstein:7.65",
@@ -5429,7 +5852,8 @@
    "page": 360,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 148
+   "n_chars": 148,
+   "garble": 0.188
   },
   {
    "id": "blitzstein:7.66",
@@ -5440,7 +5864,8 @@
    "page": 360,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 297
+   "n_chars": 297,
+   "garble": 0.046
   },
   {
    "id": "blitzstein:7.67",
@@ -5451,7 +5876,8 @@
    "page": 360,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 535
+   "n_chars": 535,
+   "garble": 0.127
   },
   {
    "id": "blitzstein:7.68",
@@ -5462,7 +5888,8 @@
    "page": 360,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1357
+   "n_chars": 1357,
+   "garble": 0.128
   },
   {
    "id": "blitzstein:7.69",
@@ -5473,7 +5900,8 @@
    "page": 361,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 872
+   "n_chars": 872,
+   "garble": 0.228
   },
   {
    "id": "blitzstein:7.70",
@@ -5484,7 +5912,8 @@
    "page": 361,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1160
+   "n_chars": 1160,
+   "garble": 0.159
   },
   {
    "id": "blitzstein:7.71",
@@ -5495,7 +5924,8 @@
    "page": 361,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1412
+   "n_chars": 1412,
+   "garble": 0.262
   },
   {
    "id": "blitzstein:7.72",
@@ -5506,7 +5936,8 @@
    "page": 362,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 256
+   "n_chars": 256,
+   "garble": 0.139
   },
   {
    "id": "blitzstein:7.73",
@@ -5517,7 +5948,8 @@
    "page": 362,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 263
+   "n_chars": 263,
+   "garble": 0.085
   },
   {
    "id": "blitzstein:7.74",
@@ -5528,7 +5960,8 @@
    "page": 362,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 290
+   "n_chars": 290,
+   "garble": 0.138
   },
   {
    "id": "blitzstein:7.75",
@@ -5539,7 +5972,8 @@
    "page": 362,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 81
+   "n_chars": 81,
+   "garble": 0.32
   },
   {
    "id": "blitzstein:7.76",
@@ -5550,7 +5984,8 @@
    "page": 362,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 319
+   "n_chars": 319,
+   "garble": 0.186
   },
   {
    "id": "blitzstein:7.77",
@@ -5561,7 +5996,8 @@
    "page": 362,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 251
+   "n_chars": 251,
+   "garble": 0.105
   },
   {
    "id": "blitzstein:7.78",
@@ -5572,7 +6008,8 @@
    "page": 362,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 649
+   "n_chars": 649,
+   "garble": 0.129
   },
   {
    "id": "blitzstein:7.79",
@@ -5583,7 +6020,8 @@
    "page": 363,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 851
+   "n_chars": 851,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:7.80",
@@ -5594,7 +6032,8 @@
    "page": 363,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1088
+   "n_chars": 1088,
+   "garble": 0.073
   },
   {
    "id": "blitzstein:7.81",
@@ -5605,7 +6044,8 @@
    "page": 363,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 581
+   "n_chars": 581,
+   "garble": 0.162
   },
   {
    "id": "blitzstein:7.82",
@@ -5616,7 +6056,8 @@
    "page": 363,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 198
+   "n_chars": 198,
+   "garble": 0.102
   },
   {
    "id": "blitzstein:7.83",
@@ -5627,7 +6068,8 @@
    "page": 363,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 763
+   "n_chars": 763,
+   "garble": 0.031
   },
   {
    "id": "blitzstein:7.84",
@@ -5638,7 +6080,8 @@
    "page": 364,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 992
+   "n_chars": 992,
+   "garble": 0.205
   },
   {
    "id": "blitzstein:7.85",
@@ -5649,7 +6092,8 @@
    "page": 364,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 852
+   "n_chars": 852,
+   "garble": 0.055
   },
   {
    "id": "blitzstein:7.86",
@@ -5660,7 +6104,8 @@
    "page": 364,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1594
+   "n_chars": 1594,
+   "garble": 0.127
   },
   {
    "id": "blitzstein:7.87",
@@ -5671,7 +6116,8 @@
    "page": 365,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 875
+   "n_chars": 875,
+   "garble": 0.315
   },
   {
    "id": "blitzstein:7.88",
@@ -5682,7 +6128,8 @@
    "page": 365,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1738
+   "n_chars": 1738,
+   "garble": 0.509
   },
   {
    "id": "blitzstein:7.89",
@@ -5693,7 +6140,8 @@
    "page": 366,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 3178
+   "n_chars": 3178,
+   "garble": 0.299
   },
   {
    "id": "blitzstein:8.1",
@@ -5704,7 +6152,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 36
+   "n_chars": 36,
+   "garble": 0.175
   },
   {
    "id": "blitzstein:8.2",
@@ -5715,7 +6164,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 36
+   "n_chars": 36,
+   "garble": 0.153
   },
   {
    "id": "blitzstein:8.3",
@@ -5726,7 +6176,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 37
+   "n_chars": 37,
+   "garble": 0.215
   },
   {
    "id": "blitzstein:8.4",
@@ -5737,7 +6188,8 @@
    "page": 407,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 37
+   "n_chars": 37,
+   "garble": 0.215
   },
   {
    "id": "blitzstein:8.5",
@@ -5748,7 +6200,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 37
+   "n_chars": 37,
+   "garble": 0.236
   },
   {
    "id": "blitzstein:8.6",
@@ -5759,7 +6212,8 @@
    "page": 407,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 44
+   "n_chars": 44,
+   "garble": 0.187
   },
   {
    "id": "blitzstein:8.7",
@@ -5770,7 +6224,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 46
+   "n_chars": 46,
+   "garble": 0.257
   },
   {
    "id": "blitzstein:8.8",
@@ -5781,7 +6236,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 156
+   "n_chars": 156,
+   "garble": 0.34
   },
   {
    "id": "blitzstein:8.9",
@@ -5792,7 +6248,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 178
+   "n_chars": 178,
+   "garble": 0.045
   },
   {
    "id": "blitzstein:8.10",
@@ -5803,7 +6260,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 225
+   "n_chars": 225,
+   "garble": 0.152
   },
   {
    "id": "blitzstein:8.11",
@@ -5814,7 +6272,8 @@
    "page": 407,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 186
+   "n_chars": 186,
+   "garble": 0.185
   },
   {
    "id": "blitzstein:8.12",
@@ -5825,7 +6284,8 @@
    "page": 408,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 615
+   "n_chars": 615,
+   "garble": 0.134
   },
   {
    "id": "blitzstein:8.13",
@@ -5836,7 +6296,8 @@
    "page": 408,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 77
+   "n_chars": 77,
+   "garble": 0.208
   },
   {
    "id": "blitzstein:8.14",
@@ -5847,7 +6308,8 @@
    "page": 408,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 394
+   "n_chars": 394,
+   "garble": 0.207
   },
   {
    "id": "blitzstein:8.15",
@@ -5858,7 +6320,8 @@
    "page": 408,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 615
+   "n_chars": 615,
+   "garble": 0.353
   },
   {
    "id": "blitzstein:8.16",
@@ -5869,7 +6332,8 @@
    "page": 408,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 272
+   "n_chars": 272,
+   "garble": 0.165
   },
   {
    "id": "blitzstein:8.17",
@@ -5880,7 +6344,8 @@
    "page": 408,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 323
+   "n_chars": 323,
+   "garble": 0.172
   },
   {
    "id": "blitzstein:8.18",
@@ -5891,7 +6356,8 @@
    "page": 408,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 211
+   "n_chars": 211,
+   "garble": 0.057
   },
   {
    "id": "blitzstein:8.19",
@@ -5902,7 +6368,8 @@
    "page": 408,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 176
+   "n_chars": 176,
+   "garble": 0.142
   },
   {
    "id": "blitzstein:8.20",
@@ -5913,7 +6380,8 @@
    "page": 409,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 73
+   "n_chars": 73,
+   "garble": 0.195
   },
   {
    "id": "blitzstein:8.21",
@@ -5924,7 +6392,8 @@
    "page": 409,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 170
+   "n_chars": 170,
+   "garble": 0.173
   },
   {
    "id": "blitzstein:8.22",
@@ -5935,7 +6404,8 @@
    "page": 409,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 362
+   "n_chars": 362,
+   "garble": 0.117
   },
   {
    "id": "blitzstein:8.23",
@@ -5946,7 +6416,8 @@
    "page": 409,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 785
+   "n_chars": 785,
+   "garble": 0.219
   },
   {
    "id": "blitzstein:8.24",
@@ -5957,7 +6428,8 @@
    "page": 409,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 289
+   "n_chars": 289,
+   "garble": 0.18
   },
   {
    "id": "blitzstein:8.25",
@@ -5968,7 +6440,8 @@
    "page": 409,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 496
+   "n_chars": 496,
+   "garble": 0.199
   },
   {
    "id": "blitzstein:8.26",
@@ -5979,7 +6452,8 @@
    "page": 409,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 429
+   "n_chars": 429,
+   "garble": 0.264
   },
   {
    "id": "blitzstein:8.27",
@@ -5990,7 +6464,8 @@
    "page": 409,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 237
+   "n_chars": 237,
+   "garble": 0.116
   },
   {
    "id": "blitzstein:8.28",
@@ -6001,7 +6476,8 @@
    "page": 410,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 225
+   "n_chars": 225,
+   "garble": 0.091
   },
   {
    "id": "blitzstein:8.29",
@@ -6012,7 +6488,8 @@
    "page": 410,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 199
+   "n_chars": 199,
+   "garble": 0.105
   },
   {
    "id": "blitzstein:8.30",
@@ -6023,7 +6500,8 @@
    "page": 410,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 160
+   "n_chars": 160,
+   "garble": 0.152
   },
   {
    "id": "blitzstein:8.31",
@@ -6034,7 +6512,8 @@
    "page": 410,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 196
+   "n_chars": 196,
+   "garble": 0.057
   },
   {
    "id": "blitzstein:8.32",
@@ -6045,7 +6524,8 @@
    "page": 410,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 232
+   "n_chars": 232,
+   "garble": 0.277
   },
   {
    "id": "blitzstein:8.33",
@@ -6056,7 +6536,8 @@
    "page": 410,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 395
+   "n_chars": 395,
+   "garble": 0.072
   },
   {
    "id": "blitzstein:8.34",
@@ -6067,7 +6548,8 @@
    "page": 410,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 465
+   "n_chars": 465,
+   "garble": 0.235
   },
   {
    "id": "blitzstein:8.35",
@@ -6078,7 +6560,8 @@
    "page": 410,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 309
+   "n_chars": 309,
+   "garble": 0.148
   },
   {
    "id": "blitzstein:8.36",
@@ -6089,7 +6572,8 @@
    "page": 410,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 870
+   "n_chars": 870,
+   "garble": 0.386
   },
   {
    "id": "blitzstein:8.37",
@@ -6100,7 +6584,8 @@
    "page": 411,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 139
+   "n_chars": 139,
+   "garble": 0.181
   },
   {
    "id": "blitzstein:8.38",
@@ -6111,7 +6596,8 @@
    "page": 411,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 300
+   "n_chars": 300,
+   "garble": 0.066
   },
   {
    "id": "blitzstein:8.39",
@@ -6122,7 +6608,8 @@
    "page": 411,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1768
+   "n_chars": 1768,
+   "garble": 0.33
   },
   {
    "id": "blitzstein:8.40",
@@ -6133,7 +6620,8 @@
    "page": 411,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 822
+   "n_chars": 822,
+   "garble": 0.086
   },
   {
    "id": "blitzstein:8.41",
@@ -6144,7 +6632,8 @@
    "page": 412,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 345
+   "n_chars": 345,
+   "garble": 0.148
   },
   {
    "id": "blitzstein:8.42",
@@ -6155,7 +6644,8 @@
    "page": 412,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 110
+   "n_chars": 110,
+   "garble": 0.35
   },
   {
    "id": "blitzstein:8.43",
@@ -6166,7 +6656,8 @@
    "page": 412,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 173
+   "n_chars": 173,
+   "garble": 0.254
   },
   {
    "id": "blitzstein:8.44",
@@ -6177,7 +6668,8 @@
    "page": 412,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 390
+   "n_chars": 390,
+   "garble": 0.122
   },
   {
    "id": "blitzstein:8.45",
@@ -6188,7 +6680,8 @@
    "page": 412,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 232
+   "n_chars": 232,
+   "garble": 0.107
   },
   {
    "id": "blitzstein:8.46",
@@ -6199,7 +6692,8 @@
    "page": 412,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 404
+   "n_chars": 404,
+   "garble": 0.472
   },
   {
    "id": "blitzstein:8.47",
@@ -6210,7 +6704,8 @@
    "page": 412,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 150
+   "n_chars": 150,
+   "garble": 0.207
   },
   {
    "id": "blitzstein:8.48",
@@ -6221,7 +6716,8 @@
    "page": 412,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 180
+   "n_chars": 180,
+   "garble": 0.107
   },
   {
    "id": "blitzstein:8.49",
@@ -6232,7 +6728,8 @@
    "page": 412,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 749
+   "n_chars": 749,
+   "garble": 0.212
   },
   {
    "id": "blitzstein:8.50",
@@ -6243,7 +6740,8 @@
    "page": 413,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 859
+   "n_chars": 859,
+   "garble": 0.118
   },
   {
    "id": "blitzstein:8.51",
@@ -6254,7 +6752,8 @@
    "page": 413,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 810
+   "n_chars": 810,
+   "garble": 0.141
   },
   {
    "id": "blitzstein:8.52",
@@ -6265,7 +6764,8 @@
    "page": 413,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 217
+   "n_chars": 217,
+   "garble": 0.174
   },
   {
    "id": "blitzstein:8.53",
@@ -6276,7 +6776,8 @@
    "page": 413,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 856
+   "n_chars": 856,
+   "garble": 0.226
   },
   {
    "id": "blitzstein:8.54",
@@ -6287,7 +6788,8 @@
    "page": 413,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 586
+   "n_chars": 586,
+   "garble": 0.035
   },
   {
    "id": "blitzstein:9.1",
@@ -6298,7 +6800,8 @@
    "page": 443,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 552
+   "n_chars": 552,
+   "garble": 0.275
   },
   {
    "id": "blitzstein:9.2",
@@ -6309,7 +6812,8 @@
    "page": 444,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 325
+   "n_chars": 325,
+   "garble": 0.091
   },
   {
    "id": "blitzstein:9.3",
@@ -6320,7 +6824,8 @@
    "page": 444,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 317
+   "n_chars": 317,
+   "garble": 0.033
   },
   {
    "id": "blitzstein:9.4",
@@ -6331,7 +6836,8 @@
    "page": 444,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1021
+   "n_chars": 1021,
+   "garble": 0.164
   },
   {
    "id": "blitzstein:9.5",
@@ -6342,7 +6848,8 @@
    "page": 444,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 769
+   "n_chars": 769,
+   "garble": 0.182
   },
   {
    "id": "blitzstein:9.6",
@@ -6353,7 +6860,8 @@
    "page": 444,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 199
+   "n_chars": 199,
+   "garble": 0.13
   },
   {
    "id": "blitzstein:9.7",
@@ -6364,7 +6872,8 @@
    "page": 444,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 708
+   "n_chars": 708,
+   "garble": 0.206
   },
   {
    "id": "blitzstein:9.8",
@@ -6375,7 +6884,8 @@
    "page": 445,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 1532
+   "n_chars": 1532,
+   "garble": 0.323
   },
   {
    "id": "blitzstein:9.9",
@@ -6386,7 +6896,8 @@
    "page": 445,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 657
+   "n_chars": 657,
+   "garble": 0.029
   },
   {
    "id": "blitzstein:9.10",
@@ -6397,7 +6908,8 @@
    "page": 445,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1330
+   "n_chars": 1330,
+   "garble": 0.215
   },
   {
    "id": "blitzstein:9.11",
@@ -6408,7 +6920,8 @@
    "page": 446,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 525
+   "n_chars": 525,
+   "garble": 0.135
   },
   {
    "id": "blitzstein:9.12",
@@ -6419,7 +6932,8 @@
    "page": 446,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 449
+   "n_chars": 449,
+   "garble": 0.146
   },
   {
    "id": "blitzstein:9.14",
@@ -6430,7 +6944,8 @@
    "page": 446,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 903
+   "n_chars": 903,
+   "garble": 0.17
   },
   {
    "id": "blitzstein:9.15",
@@ -6441,7 +6956,8 @@
    "page": 446,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 266
+   "n_chars": 266,
+   "garble": 0.245
   },
   {
    "id": "blitzstein:9.16",
@@ -6452,7 +6968,8 @@
    "page": 446,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 283
+   "n_chars": 283,
+   "garble": 0.107
   },
   {
    "id": "blitzstein:9.17",
@@ -6463,7 +6980,8 @@
    "page": 446,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 432
+   "n_chars": 432,
+   "garble": 0.162
   },
   {
    "id": "blitzstein:9.18",
@@ -6474,7 +6992,8 @@
    "page": 447,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 206
+   "n_chars": 206,
+   "garble": 0.245
   },
   {
    "id": "blitzstein:9.19",
@@ -6485,7 +7004,8 @@
    "page": 447,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1208
+   "n_chars": 1208,
+   "garble": 0.229
   },
   {
    "id": "blitzstein:9.20",
@@ -6496,7 +7016,8 @@
    "page": 447,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 85
+   "n_chars": 85,
+   "garble": 0.398
   },
   {
    "id": "blitzstein:9.21",
@@ -6507,7 +7028,8 @@
    "page": 447,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 367
+   "n_chars": 367,
+   "garble": 0.263
   },
   {
    "id": "blitzstein:9.22",
@@ -6518,7 +7040,8 @@
    "page": 447,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 325
+   "n_chars": 325,
+   "garble": 0.29
   },
   {
    "id": "blitzstein:9.23",
@@ -6529,7 +7052,8 @@
    "page": 447,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 292
+   "n_chars": 292,
+   "garble": 0.265
   },
   {
    "id": "blitzstein:9.24",
@@ -6540,7 +7064,8 @@
    "page": 448,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 253
+   "n_chars": 253,
+   "garble": 0.022
   },
   {
    "id": "blitzstein:9.25",
@@ -6551,7 +7076,8 @@
    "page": 448,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 627
+   "n_chars": 627,
+   "garble": 0.243
   },
   {
    "id": "blitzstein:9.27",
@@ -6562,7 +7088,8 @@
    "page": 448,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 970
+   "n_chars": 970,
+   "garble": 0.214
   },
   {
    "id": "blitzstein:9.28",
@@ -6573,7 +7100,8 @@
    "page": 448,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 867
+   "n_chars": 867,
+   "garble": 0.269
   },
   {
    "id": "blitzstein:9.29",
@@ -6584,7 +7112,8 @@
    "page": 448,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 70
+   "n_chars": 70,
+   "garble": 0.069
   },
   {
    "id": "blitzstein:9.30",
@@ -6595,7 +7124,8 @@
    "page": 448,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 199
+   "n_chars": 199,
+   "garble": 0.094
   },
   {
    "id": "blitzstein:9.31",
@@ -6606,7 +7136,8 @@
    "page": 448,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 923
+   "n_chars": 923,
+   "garble": 0.443
   },
   {
    "id": "blitzstein:9.32",
@@ -6617,7 +7148,8 @@
    "page": 449,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 641
+   "n_chars": 641,
+   "garble": 0.077
   },
   {
    "id": "blitzstein:9.33",
@@ -6628,7 +7160,8 @@
    "page": 449,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 655
+   "n_chars": 655,
+   "garble": 0.113
   },
   {
    "id": "blitzstein:9.34",
@@ -6639,7 +7172,8 @@
    "page": 449,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1543
+   "n_chars": 1543,
+   "garble": 0.485
   },
   {
    "id": "blitzstein:9.35",
@@ -6650,7 +7184,8 @@
    "page": 450,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 348
+   "n_chars": 348,
+   "garble": 0.078
   },
   {
    "id": "blitzstein:9.36",
@@ -6661,7 +7196,8 @@
    "page": 450,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 248
+   "n_chars": 248,
+   "garble": 0.241
   },
   {
    "id": "blitzstein:9.37",
@@ -6672,7 +7208,8 @@
    "page": 450,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 764
+   "n_chars": 764,
+   "garble": 0.307
   },
   {
    "id": "blitzstein:9.38",
@@ -6683,7 +7220,8 @@
    "page": 450,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 530
+   "n_chars": 530,
+   "garble": 0.265
   },
   {
    "id": "blitzstein:9.39",
@@ -6694,7 +7232,8 @@
    "page": 450,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1188
+   "n_chars": 1188,
+   "garble": 0.279
   },
   {
    "id": "blitzstein:9.40",
@@ -6705,7 +7244,8 @@
    "page": 451,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 293
+   "n_chars": 293,
+   "garble": 0.179
   },
   {
    "id": "blitzstein:9.41",
@@ -6716,7 +7256,8 @@
    "page": 451,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 570
+   "n_chars": 570,
+   "garble": 0.23
   },
   {
    "id": "blitzstein:9.42",
@@ -6727,7 +7268,8 @@
    "page": 451,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1826
+   "n_chars": 1826,
+   "garble": 0.144
   },
   {
    "id": "blitzstein:9.43",
@@ -6738,7 +7280,8 @@
    "page": 451,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1313
+   "n_chars": 1313,
+   "garble": 0.409
   },
   {
    "id": "blitzstein:9.44",
@@ -6749,7 +7292,8 @@
    "page": 452,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 761
+   "n_chars": 761,
+   "garble": 0.154
   },
   {
    "id": "blitzstein:9.45",
@@ -6760,7 +7304,8 @@
    "page": 452,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 430
+   "n_chars": 430,
+   "garble": 0.048
   },
   {
    "id": "blitzstein:9.46",
@@ -6771,7 +7316,8 @@
    "page": 452,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 533
+   "n_chars": 533,
+   "garble": 0.035
   },
   {
    "id": "blitzstein:9.47",
@@ -6782,7 +7328,8 @@
    "page": 452,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 755
+   "n_chars": 755,
+   "garble": 0.165
   },
   {
    "id": "blitzstein:9.48",
@@ -6793,7 +7340,8 @@
    "page": 453,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 806
+   "n_chars": 806,
+   "garble": 0.224
   },
   {
    "id": "blitzstein:9.49",
@@ -6804,7 +7352,8 @@
    "page": 453,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 887
+   "n_chars": 887,
+   "garble": 0.029
   },
   {
    "id": "blitzstein:9.50",
@@ -6815,7 +7364,8 @@
    "page": 453,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1139
+   "n_chars": 1139,
+   "garble": 0.207
   },
   {
    "id": "blitzstein:9.51",
@@ -6826,7 +7376,8 @@
    "page": 454,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 516
+   "n_chars": 516,
+   "garble": 0.309
   },
   {
    "id": "blitzstein:9.52",
@@ -6837,7 +7388,8 @@
    "page": 454,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 750
+   "n_chars": 750,
+   "garble": 0.205
   },
   {
    "id": "blitzstein:9.53",
@@ -6848,7 +7400,8 @@
    "page": 454,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 677
+   "n_chars": 677,
+   "garble": 0.145
   },
   {
    "id": "blitzstein:9.54",
@@ -6859,7 +7412,8 @@
    "page": 454,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 426
+   "n_chars": 426,
+   "garble": 0.062
   },
   {
    "id": "blitzstein:9.55",
@@ -6870,7 +7424,8 @@
    "page": 454,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 432
+   "n_chars": 432,
+   "garble": 0.133
   },
   {
    "id": "blitzstein:9.56",
@@ -6881,7 +7436,8 @@
    "page": 454,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 848
+   "n_chars": 848,
+   "garble": 0.219
   },
   {
    "id": "blitzstein:9.57",
@@ -6892,7 +7448,8 @@
    "page": 455,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1142
+   "n_chars": 1142,
+   "garble": 0.245
   },
   {
    "id": "blitzstein:9.58",
@@ -6903,7 +7460,8 @@
    "page": 455,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1472
+   "n_chars": 1472,
+   "garble": 0.441
   },
   {
    "id": "blitzstein:9.59",
@@ -6914,7 +7472,8 @@
    "page": 456,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 149
+   "n_chars": 149,
+   "garble": 0.281
   },
   {
    "id": "blitzstein:9.60",
@@ -6925,7 +7484,8 @@
    "page": 456,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 850
+   "n_chars": 850,
+   "garble": 0.259
   },
   {
    "id": "blitzstein:10.1",
@@ -6936,7 +7496,8 @@
    "page": 487,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 614
+   "n_chars": 614,
+   "garble": 0.117
   },
   {
    "id": "blitzstein:10.2",
@@ -6947,7 +7508,8 @@
    "page": 487,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 235
+   "n_chars": 235,
+   "garble": 0.068
   },
   {
    "id": "blitzstein:10.3",
@@ -6958,7 +7520,8 @@
    "page": 487,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 111
+   "n_chars": 111,
+   "garble": 0.086
   },
   {
    "id": "blitzstein:10.4",
@@ -6969,7 +7532,8 @@
    "page": 487,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 446
+   "n_chars": 446,
+   "garble": 0.171
   },
   {
    "id": "blitzstein:10.5",
@@ -6980,7 +7544,8 @@
    "page": 487,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 428
+   "n_chars": 428,
+   "garble": 0.288
   },
   {
    "id": "blitzstein:10.6",
@@ -6991,7 +7556,8 @@
    "page": 487,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 145
+   "n_chars": 145,
+   "garble": 0.066
   },
   {
    "id": "blitzstein:10.7",
@@ -7002,7 +7568,8 @@
    "page": 487,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 692
+   "n_chars": 692,
+   "garble": 0.676
   },
   {
    "id": "blitzstein:10.8",
@@ -7013,7 +7580,8 @@
    "page": 488,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 576
+   "n_chars": 576,
+   "garble": 0.36
   },
   {
    "id": "blitzstein:10.9",
@@ -7024,7 +7592,8 @@
    "page": 488,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 409
+   "n_chars": 409,
+   "garble": 0.523
   },
   {
    "id": "blitzstein:10.10",
@@ -7035,7 +7604,8 @@
    "page": 488,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 489
+   "n_chars": 489,
+   "garble": 0.675
   },
   {
    "id": "blitzstein:10.11",
@@ -7046,7 +7616,8 @@
    "page": 489,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 376
+   "n_chars": 376,
+   "garble": 0.522
   },
   {
    "id": "blitzstein:10.12",
@@ -7057,7 +7628,8 @@
    "page": 489,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 448
+   "n_chars": 448,
+   "garble": 0.501
   },
   {
    "id": "blitzstein:10.13",
@@ -7068,7 +7640,8 @@
    "page": 489,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 389
+   "n_chars": 389,
+   "garble": 0.45
   },
   {
    "id": "blitzstein:10.14",
@@ -7079,7 +7652,8 @@
    "page": 489,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 461
+   "n_chars": 461,
+   "garble": 0.719
   },
   {
    "id": "blitzstein:10.15",
@@ -7090,7 +7664,8 @@
    "page": 490,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 307
+   "n_chars": 307,
+   "garble": 0.529
   },
   {
    "id": "blitzstein:10.16",
@@ -7101,7 +7676,8 @@
    "page": 490,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 337
+   "n_chars": 337,
+   "garble": 0.503
   },
   {
    "id": "blitzstein:10.17",
@@ -7112,7 +7688,8 @@
    "page": 490,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 345
+   "n_chars": 345,
+   "garble": 0.385
   },
   {
    "id": "blitzstein:10.18",
@@ -7123,7 +7700,8 @@
    "page": 490,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 427
+   "n_chars": 427,
+   "garble": 0.458
   },
   {
    "id": "blitzstein:10.19",
@@ -7134,7 +7712,8 @@
    "page": 491,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 302
+   "n_chars": 302,
+   "garble": 0.493
   },
   {
    "id": "blitzstein:10.20",
@@ -7145,7 +7724,8 @@
    "page": 491,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 300
+   "n_chars": 300,
+   "garble": 0.502
   },
   {
    "id": "blitzstein:10.21",
@@ -7156,7 +7736,8 @@
    "page": 491,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 273
+   "n_chars": 273,
+   "garble": 0.135
   },
   {
    "id": "blitzstein:10.22",
@@ -7167,7 +7748,8 @@
    "page": 491,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 308
+   "n_chars": 308,
+   "garble": 0.156
   },
   {
    "id": "blitzstein:10.23",
@@ -7178,7 +7760,8 @@
    "page": 491,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 223
+   "n_chars": 223,
+   "garble": 0.218
   },
   {
    "id": "blitzstein:10.24",
@@ -7189,7 +7772,8 @@
    "page": 491,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 213
+   "n_chars": 213,
+   "garble": 0.181
   },
   {
    "id": "blitzstein:10.25",
@@ -7200,7 +7784,8 @@
    "page": 491,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 234
+   "n_chars": 234,
+   "garble": 0.186
   },
   {
    "id": "blitzstein:10.26",
@@ -7211,7 +7796,8 @@
    "page": 492,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 558
+   "n_chars": 558,
+   "garble": 0.194
   },
   {
    "id": "blitzstein:10.27",
@@ -7222,7 +7808,8 @@
    "page": 492,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 331
+   "n_chars": 331,
+   "garble": 0.202
   },
   {
    "id": "blitzstein:10.28",
@@ -7233,7 +7820,8 @@
    "page": 492,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 189
+   "n_chars": 189,
+   "garble": 0.076
   },
   {
    "id": "blitzstein:10.29",
@@ -7244,7 +7832,8 @@
    "page": 492,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1051
+   "n_chars": 1051,
+   "garble": 0.308
   },
   {
    "id": "blitzstein:10.30",
@@ -7255,7 +7844,8 @@
    "page": 492,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 737
+   "n_chars": 737,
+   "garble": 0.276
   },
   {
    "id": "blitzstein:10.31",
@@ -7266,7 +7856,8 @@
    "page": 493,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 596
+   "n_chars": 596,
+   "garble": 0.083
   },
   {
    "id": "blitzstein:10.32",
@@ -7277,7 +7868,8 @@
    "page": 493,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 628
+   "n_chars": 628,
+   "garble": 0.289
   },
   {
    "id": "blitzstein:10.33",
@@ -7288,7 +7880,8 @@
    "page": 493,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1699
+   "n_chars": 1699,
+   "garble": 0.369
   },
   {
    "id": "blitzstein:10.34",
@@ -7299,7 +7892,8 @@
    "page": 494,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 920
+   "n_chars": 920,
+   "garble": 0.493
   },
   {
    "id": "blitzstein:10.35",
@@ -7310,7 +7904,8 @@
    "page": 494,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1188
+   "n_chars": 1188,
+   "garble": 0.255
   },
   {
    "id": "blitzstein:10.36",
@@ -7321,7 +7916,8 @@
    "page": 494,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 501
+   "n_chars": 501,
+   "garble": 0.162
   },
   {
    "id": "blitzstein:10.37",
@@ -7332,7 +7928,8 @@
    "page": 494,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 392
+   "n_chars": 392,
+   "garble": 0.268
   },
   {
    "id": "blitzstein:10.38",
@@ -7343,7 +7940,8 @@
    "page": 495,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 493
+   "n_chars": 493,
+   "garble": 0.465
   },
   {
    "id": "blitzstein:10.39",
@@ -7354,7 +7952,8 @@
    "page": 495,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 634
+   "n_chars": 634,
+   "garble": 0.441
   },
   {
    "id": "blitzstein:11.1",
@@ -7365,7 +7964,8 @@
    "page": 525,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 149
+   "n_chars": 149,
+   "garble": 0.123
   },
   {
    "id": "blitzstein:11.2",
@@ -7376,7 +7976,8 @@
    "page": 525,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 705
+   "n_chars": 705,
+   "garble": 0.416
   },
   {
    "id": "blitzstein:11.3",
@@ -7387,7 +7988,8 @@
    "page": 525,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 877
+   "n_chars": 877,
+   "garble": 0.16
   },
   {
    "id": "blitzstein:11.4",
@@ -7398,7 +8000,8 @@
    "page": 525,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 722
+   "n_chars": 722,
+   "garble": 0.142
   },
   {
    "id": "blitzstein:11.5",
@@ -7409,7 +8012,8 @@
    "page": 526,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 283
+   "n_chars": 283,
+   "garble": 0.107
   },
   {
    "id": "blitzstein:11.6",
@@ -7420,7 +8024,8 @@
    "page": 526,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 402
+   "n_chars": 402,
+   "garble": 0.117
   },
   {
    "id": "blitzstein:11.7",
@@ -7431,7 +8036,8 @@
    "page": 526,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1419
+   "n_chars": 1419,
+   "garble": 0.465
   },
   {
    "id": "blitzstein:11.8",
@@ -7442,7 +8048,8 @@
    "page": 527,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 297
+   "n_chars": 297,
+   "garble": 0.059
   },
   {
    "id": "blitzstein:11.9",
@@ -7453,7 +8060,8 @@
    "page": 527,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1038
+   "n_chars": 1038,
+   "garble": 0.626
   },
   {
    "id": "blitzstein:11.10",
@@ -7464,7 +8072,8 @@
    "page": 527,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 634
+   "n_chars": 634,
+   "garble": 0.136
   },
   {
    "id": "blitzstein:11.11",
@@ -7475,7 +8084,8 @@
    "page": 527,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 724
+   "n_chars": 724,
+   "garble": 0.106
   },
   {
    "id": "blitzstein:11.12",
@@ -7486,7 +8096,8 @@
    "page": 528,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 674
+   "n_chars": 674,
+   "garble": 0.17
   },
   {
    "id": "blitzstein:11.13",
@@ -7497,7 +8108,8 @@
    "page": 528,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 1195
+   "n_chars": 1195,
+   "garble": 0.323
   },
   {
    "id": "blitzstein:11.14",
@@ -7508,7 +8120,8 @@
    "page": 528,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1822
+   "n_chars": 1822,
+   "garble": 0.077
   },
   {
    "id": "blitzstein:11.15",
@@ -7519,7 +8132,8 @@
    "page": 529,
    "has_published_solution": true,
    "has_multipart": false,
-   "n_chars": 169
+   "n_chars": 169,
+   "garble": 0.038
   },
   {
    "id": "blitzstein:11.16",
@@ -7530,7 +8144,8 @@
    "page": 529,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 594
+   "n_chars": 594,
+   "garble": 0.137
   },
   {
    "id": "blitzstein:11.17",
@@ -7541,7 +8156,8 @@
    "page": 529,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 404
+   "n_chars": 404,
+   "garble": 0.281
   },
   {
    "id": "blitzstein:11.18",
@@ -7552,7 +8168,8 @@
    "page": 530,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 249
+   "n_chars": 249,
+   "garble": 0.116
   },
   {
    "id": "blitzstein:11.19",
@@ -7563,7 +8180,8 @@
    "page": 530,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1870
+   "n_chars": 1870,
+   "garble": 0.341
   },
   {
    "id": "blitzstein:11.20",
@@ -7574,7 +8192,8 @@
    "page": 530,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1455
+   "n_chars": 1455,
+   "garble": 0.082
   },
   {
    "id": "blitzstein:11.21",
@@ -7585,7 +8204,8 @@
    "page": 531,
    "has_published_solution": true,
    "has_multipart": true,
-   "n_chars": 1120
+   "n_chars": 1120,
+   "garble": 0.139
   },
   {
    "id": "blitzstein:11.22",
@@ -7596,7 +8216,8 @@
    "page": 531,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 973
+   "n_chars": 973,
+   "garble": 0.306
   },
   {
    "id": "blitzstein:11.23",
@@ -7607,7 +8228,8 @@
    "page": 531,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 276
+   "n_chars": 276,
+   "garble": 0.273
   },
   {
    "id": "blitzstein:11.24",
@@ -7618,7 +8240,8 @@
    "page": 532,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 369
+   "n_chars": 369,
+   "garble": 0.196
   },
   {
    "id": "blitzstein:11.25",
@@ -7629,7 +8252,8 @@
    "page": 532,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1261
+   "n_chars": 1261,
+   "garble": 0.509
   },
   {
    "id": "blitzstein:11.26",
@@ -7640,7 +8264,8 @@
    "page": 533,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 3090
+   "n_chars": 3090,
+   "garble": 0.563
   },
   {
    "id": "blitzstein:12.1",
@@ -7651,7 +8276,8 @@
    "page": 557,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 724
+   "n_chars": 724,
+   "garble": 0.245
   },
   {
    "id": "blitzstein:12.2",
@@ -7662,7 +8288,8 @@
    "page": 557,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 582
+   "n_chars": 582,
+   "garble": 0.012
   },
   {
    "id": "blitzstein:12.3",
@@ -7673,7 +8300,8 @@
    "page": 557,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1207
+   "n_chars": 1207,
+   "garble": 0.214
   },
   {
    "id": "blitzstein:13.1",
@@ -7684,7 +8312,8 @@
    "page": 577,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 223
+   "n_chars": 223,
+   "garble": 0.025
   },
   {
    "id": "blitzstein:13.2",
@@ -7695,7 +8324,8 @@
    "page": 577,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 256
+   "n_chars": 256,
+   "garble": 0.025
   },
   {
    "id": "blitzstein:13.3",
@@ -7706,7 +8336,8 @@
    "page": 577,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 331
+   "n_chars": 331,
+   "garble": 0.183
   },
   {
    "id": "blitzstein:13.4",
@@ -7717,7 +8348,8 @@
    "page": 577,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 580
+   "n_chars": 580,
+   "garble": 0.022
   },
   {
    "id": "blitzstein:13.5",
@@ -7728,7 +8360,8 @@
    "page": 577,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 518
+   "n_chars": 518,
+   "garble": 0.051
   },
   {
    "id": "blitzstein:13.6",
@@ -7739,7 +8372,8 @@
    "page": 578,
    "has_published_solution": false,
    "has_multipart": false,
-   "n_chars": 285
+   "n_chars": 285,
+   "garble": 0.237
   },
   {
    "id": "blitzstein:13.7",
@@ -7750,7 +8384,8 @@
    "page": 578,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 715
+   "n_chars": 715,
+   "garble": 0.074
   },
   {
    "id": "blitzstein:13.8",
@@ -7761,7 +8396,8 @@
    "page": 578,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 661
+   "n_chars": 661,
+   "garble": 0.08
   },
   {
    "id": "blitzstein:13.9",
@@ -7772,7 +8408,8 @@
    "page": 578,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1598
+   "n_chars": 1598,
+   "garble": 0.324
   },
   {
    "id": "blitzstein:13.10",
@@ -7783,7 +8420,8 @@
    "page": 579,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 499
+   "n_chars": 499,
+   "garble": 0.18
   },
   {
    "id": "blitzstein:13.11",
@@ -7794,7 +8432,8 @@
    "page": 579,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 898
+   "n_chars": 898,
+   "garble": 0.322
   },
   {
    "id": "blitzstein:13.12",
@@ -7805,7 +8444,8 @@
    "page": 579,
    "has_published_solution": false,
    "has_multipart": true,
-   "n_chars": 1222
+   "n_chars": 1222,
+   "garble": 0.403
   }
  ]
 }

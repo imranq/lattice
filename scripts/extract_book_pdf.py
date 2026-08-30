@@ -161,6 +161,38 @@ LIGATURES = {"\ufb00": "ff", "\ufb01": "fi", "\ufb02": "fl", "\ufb03": "ffi",
              "\ufb04": "ffl", "\ufb05": "st", "\ufb06": "st"}
 
 
+# OCR reproduces prose tolerably and mathematics badly: "4+orgge+.. tn2— eters"
+# was a displayed formula. Rather than trust or discard a whole book, score each
+# exercise so the UI can warn on the ones that came out as noise.
+def garble_score(text):
+    if not text:
+        return 1.0
+    letters = sum(c.isalpha() or c.isspace() for c in text)
+    ratio = letters / max(len(text), 1)
+    # Real mathematics is symbol-dense, so a low letter ratio alone proves nothing.
+    # Runs of consonants and stray glyph soup are the giveaway.
+    soup = len(re.findall(r"[a-zA-Z]*[^\w\s]{2,}[a-zA-Z]*|\b[bcdfghjklmnpqrstvwxz]{4,}\b",
+                          text))
+    return round(min(1.0, (1 - ratio) * 0.8 + min(soup / 12, 1) * 0.5), 3)
+
+
+def assign_ids(book_id, items):
+    """Exercise ids must be unique: they key the graph, the attempt log and the
+    local text store. Chapter/section are often unknown in PDF books and problem
+    numbering restarts in every block, so the page number - which is the citation
+    anyway - carries the uniqueness, with a suffix for the rare true collision.
+    """
+    seen = {}
+    for e in items:
+        chapter = e.get("chapter")
+        base = f"{book_id}:{'ch' + str(chapter) if chapter else 'p'}{'.' if chapter else ''}"
+        base = f"{base}{e['number']}@p{e['page']}"
+        n = seen.get(base, 0) + 1
+        seen[base] = n
+        e["id"] = base if n == 1 else f"{base}#{n}"
+    return items
+
+
 def norm_title(t):
     t = re.sub(r"\s+", " ", (t or "")).strip()
     for lig, plain in LIGATURES.items():
@@ -282,6 +314,7 @@ def extract(pdf, book_id):
             "has_published_solution": has_solution,
             "has_multipart": bool(re.search(r"\(a\)", text)),
             "n_chars": len(text),
+            "garble": garble_score(text),
             "text": text,
         })
     return chapters, sections, out
@@ -312,6 +345,9 @@ def main():
                     default=r"^\d{0,2}\s*(Easier Problems|Middle-Level Problems|"
                             r"Harder Problems|Very Hard Problems|Supplementary Problems|"
                             r"Problems|Exercises)$")
+    ap.add_argument("--ocr", action="store_true",
+                    help="source came from OCR: mark it, so garbled text can be "
+                         "filtered without penalising symbol-dense digital text")
     ap.add_argument("--toc-style", choices=["leaders", "indent", "chapter-line"],
                     default="leaders")
     ap.add_argument("--text-out", default=None,
@@ -335,8 +371,11 @@ def main():
 
     # Pointers + derived metadata: safe to commit.
     meta = [{k: v for k, v in e.items() if k != "text"} for e in exercises]
+    for e in meta:
+        e["ocr"] = args.ocr
     meta_path.write_text(json.dumps({
         "book_id": args.book_id, "title": args.title, "authors": args.authors,
+        "ocr": args.ocr,
         "source_pdf": str(pdf), "extraction": "pdf_text",
         "license": "copyrighted - pointers and metadata only, personal use",
         "n_chapters": len(chapters), "n_exercises": len(exercises),
@@ -497,15 +536,14 @@ def extract_inline(pdf, book_id, head_re, max_gap_pages=2, toc_style="leaders"):
             continue
         head = (e["group"] or "").strip().lower()
         out.append({
-            "id": f"{book_id}:{e['chapter'] or 0}.{e['section'] or '0'}.{e['number']}",
             "book_id": book_id, "chapter": e["chapter"], "number": e["number"],
             "section": e["section"], "section_title": e["section_title"],
             "group": e["group"], "page": e["page"],
             "tier_hint": TIER_BY_HEAD.get(head),
             "has_multipart": bool(re.search(r"\(a\)", text)),
-            "n_chars": len(text), "text": text,
+            "n_chars": len(text), "garble": garble_score(text), "text": text,
         })
-    return chapters, sections, out
+    return chapters, sections, assign_ids(book_id, out)
 
 
 
@@ -554,14 +592,13 @@ def extract_labelled(pdf, book_id, toc_style="leaders"):
         if len(text) < 12:
             continue
         out.append({
-            "id": f"{book_id}:{e['section']}.{e['number']}",
             "book_id": book_id, "chapter": e["chapter"], "number": e["number"],
             "section": e["section"], "section_title": sec_titles.get(e["section"]),
             "group": None, "page": e["page"], "tier_hint": None,
             "has_multipart": bool(re.search(r"\(a\)", text)),
-            "n_chars": len(text), "text": text,
+            "n_chars": len(text), "garble": garble_score(text), "text": text,
         })
-    return chapters, sections, out
+    return chapters, sections, assign_ids(book_id, out)
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@
  "book_id": "andrews",
  "title": "Number Theory",
  "authors": "George E. Andrews",
+ "ocr": true,
  "source_pdf": "data/local/ocr/andrews.pdf",
  "extraction": "pdf_text",
  "license": "copyrighted - pointers and metadata only, personal use",
@@ -95,7 +96,6 @@
  ],
  "exercises": [
   {
-   "id": "andrews:1.1.1.1",
    "book_id": "andrews",
    "chapter": 1,
    "number": 1,
@@ -105,10 +105,12 @@
    "page": 6,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 37
+   "n_chars": 37,
+   "garble": 0.236,
+   "id": "andrews:ch1.1@p6",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.2",
    "book_id": "andrews",
    "chapter": 1,
    "number": 2,
@@ -118,10 +120,12 @@
    "page": 6,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 68
+   "n_chars": 68,
+   "garble": 0.513,
+   "id": "andrews:ch1.2@p6",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.3",
    "book_id": "andrews",
    "chapter": 1,
    "number": 3,
@@ -131,10 +135,12 @@
    "page": 6,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 64
+   "n_chars": 64,
+   "garble": 0.417,
+   "id": "andrews:ch1.3@p6",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.4",
    "book_id": "andrews",
    "chapter": 1,
    "number": 4,
@@ -144,10 +150,12 @@
    "page": 6,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 60
+   "n_chars": 60,
+   "garble": 0.673,
+   "id": "andrews:ch1.4@p6",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.5",
    "book_id": "andrews",
    "chapter": 1,
    "number": 5,
@@ -157,10 +165,12 @@
    "page": 6,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 38
+   "n_chars": 38,
+   "garble": 0.609,
+   "id": "andrews:ch1.5@p6",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.6",
    "book_id": "andrews",
    "chapter": 1,
    "number": 6,
@@ -170,10 +180,12 @@
    "page": 6,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 54
+   "n_chars": 54,
+   "garble": 0.394,
+   "id": "andrews:ch1.6@p6",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.7",
    "book_id": "andrews",
    "chapter": 1,
    "number": 7,
@@ -183,10 +195,12 @@
    "page": 6,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 305
+   "n_chars": 305,
+   "garble": 0.493,
+   "id": "andrews:ch1.7@p6",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.8",
    "book_id": "andrews",
    "chapter": 1,
    "number": 8,
@@ -196,10 +210,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 84
+   "n_chars": 84,
+   "garble": 0.363,
+   "id": "andrews:ch1.8@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.10",
    "book_id": "andrews",
    "chapter": 1,
    "number": 10,
@@ -209,10 +225,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 31
+   "n_chars": 31,
+   "garble": 0.29,
+   "id": "andrews:ch1.10@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.11",
    "book_id": "andrews",
    "chapter": 1,
    "number": 11,
@@ -222,10 +240,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 53
+   "n_chars": 53,
+   "garble": 0.268,
+   "id": "andrews:ch1.11@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.12",
    "book_id": "andrews",
    "chapter": 1,
    "number": 12,
@@ -235,10 +255,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 55
+   "n_chars": 55,
+   "garble": 0.303,
+   "id": "andrews:ch1.12@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.13",
    "book_id": "andrews",
    "chapter": 1,
    "number": 13,
@@ -248,10 +270,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 128
+   "n_chars": 128,
+   "garble": 0.335,
+   "id": "andrews:ch1.13@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.14",
    "book_id": "andrews",
    "chapter": 1,
    "number": 14,
@@ -261,10 +285,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 271
+   "n_chars": 271,
+   "garble": 0.335,
+   "id": "andrews:ch1.14@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.15",
    "book_id": "andrews",
    "chapter": 1,
    "number": 15,
@@ -274,10 +300,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 23
+   "n_chars": 23,
+   "garble": 0.292,
+   "id": "andrews:ch1.15@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.1.16",
    "book_id": "andrews",
    "chapter": 1,
    "number": 16,
@@ -287,10 +315,12 @@
    "page": 7,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 44
+   "n_chars": 44,
+   "garble": 0.018,
+   "id": "andrews:ch1.16@p7",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.17",
    "book_id": "andrews",
    "chapter": 1,
    "number": 17,
@@ -300,10 +330,12 @@
    "page": 8,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 74
+   "n_chars": 74,
+   "garble": 0.182,
+   "id": "andrews:ch1.17@p8",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.18",
    "book_id": "andrews",
    "chapter": 1,
    "number": 18,
@@ -313,10 +345,12 @@
    "page": 8,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4281
+   "n_chars": 4281,
+   "garble": 0.611,
+   "id": "andrews:ch1.18@p8",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.1",
    "book_id": "andrews",
    "chapter": 1,
    "number": 1,
@@ -326,10 +360,12 @@
    "page": 10,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 74
+   "n_chars": 74,
+   "garble": 0.065,
+   "id": "andrews:ch1.1@p10",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.2",
    "book_id": "andrews",
    "chapter": 1,
    "number": 2,
@@ -339,10 +375,12 @@
    "page": 10,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 87
+   "n_chars": 87,
+   "garble": 0.064,
+   "id": "andrews:ch1.2@p10",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.3",
    "book_id": "andrews",
    "chapter": 1,
    "number": 3,
@@ -352,10 +390,12 @@
    "page": 10,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 162
+   "n_chars": 162,
+   "garble": 0.015,
+   "id": "andrews:ch1.3@p10",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.4",
    "book_id": "andrews",
    "chapter": 1,
    "number": 4,
@@ -365,10 +405,12 @@
    "page": 10,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3610
+   "n_chars": 3610,
+   "garble": 0.581,
+   "id": "andrews:ch1.4@p10",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.1",
    "book_id": "andrews",
    "chapter": 1,
    "number": 1,
@@ -378,10 +420,12 @@
    "page": 14,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 453
+   "n_chars": 453,
+   "garble": 0.129,
+   "id": "andrews:ch1.1@p14",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.3",
    "book_id": "andrews",
    "chapter": 1,
    "number": 3,
@@ -391,10 +435,12 @@
    "page": 14,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 50
+   "n_chars": 50,
+   "garble": 0.08,
+   "id": "andrews:ch1.3@p14",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.4",
    "book_id": "andrews",
    "chapter": 1,
    "number": 4,
@@ -404,10 +450,12 @@
    "page": 14,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 622
+   "n_chars": 622,
+   "garble": 0.313,
+   "id": "andrews:ch1.4@p14",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.6",
    "book_id": "andrews",
    "chapter": 1,
    "number": 6,
@@ -417,10 +465,12 @@
    "page": 15,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 71
+   "n_chars": 71,
+   "garble": 0.068,
+   "id": "andrews:ch1.6@p15",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.7",
    "book_id": "andrews",
    "chapter": 1,
    "number": 7,
@@ -430,10 +480,12 @@
    "page": 15,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 5960
+   "n_chars": 5960,
+   "garble": 0.638,
+   "id": "andrews:ch1.7@p15",
+   "ocr": true
   },
   {
-   "id": "andrews:1.1.2.1",
    "book_id": "andrews",
    "chapter": 1,
    "number": 1,
@@ -443,10 +495,12 @@
    "page": 21,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 4236
+   "n_chars": 4236,
+   "garble": 0.63,
+   "id": "andrews:ch1.1@p21",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.1.1",
    "book_id": "andrews",
    "chapter": 2,
    "number": 1,
@@ -456,10 +510,12 @@
    "page": 25,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 209
+   "n_chars": 209,
+   "garble": 0.233,
+   "id": "andrews:ch2.1@p25",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.1.2",
    "book_id": "andrews",
    "chapter": 2,
    "number": 2,
@@ -469,10 +525,12 @@
    "page": 25,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 119
+   "n_chars": 119,
+   "garble": 0.108,
+   "id": "andrews:ch2.2@p25",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.1.3",
    "book_id": "andrews",
    "chapter": 2,
    "number": 3,
@@ -482,10 +540,12 @@
    "page": 25,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 104
+   "n_chars": 104,
+   "garble": 0.16,
+   "id": "andrews:ch2.3@p25",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.1.4",
    "book_id": "andrews",
    "chapter": 2,
    "number": 4,
@@ -495,10 +555,12 @@
    "page": 25,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 97
+   "n_chars": 97,
+   "garble": 0.282,
+   "id": "andrews:ch2.4@p25",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.1.5",
    "book_id": "andrews",
    "chapter": 2,
    "number": 5,
@@ -508,10 +570,12 @@
    "page": 25,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 166
+   "n_chars": 166,
+   "garble": 0.209,
+   "id": "andrews:ch2.5@p25",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.1.6",
    "book_id": "andrews",
    "chapter": 2,
    "number": 6,
@@ -521,10 +585,12 @@
    "page": 25,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 163
+   "n_chars": 163,
+   "garble": 0.289,
+   "id": "andrews:ch2.6@p25",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.1.7",
    "book_id": "andrews",
    "chapter": 2,
    "number": 7,
@@ -534,10 +600,12 @@
    "page": 25,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 143
+   "n_chars": 143,
+   "garble": 0.05,
+   "id": "andrews:ch2.7@p25",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.8",
    "book_id": "andrews",
    "chapter": 2,
    "number": 8,
@@ -547,10 +615,12 @@
    "page": 26,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 2856
+   "n_chars": 2856,
+   "garble": 0.599,
+   "id": "andrews:ch2.8@p26",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.1",
    "book_id": "andrews",
    "chapter": 2,
    "number": 1,
@@ -560,10 +630,12 @@
    "page": 28,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 5259
+   "n_chars": 5259,
+   "garble": 0.609,
+   "id": "andrews:ch2.1@p28",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.1",
    "book_id": "andrews",
    "chapter": 2,
    "number": 1,
@@ -573,10 +645,12 @@
    "page": 33,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 158
+   "n_chars": 158,
+   "garble": 0.067,
+   "id": "andrews:ch2.1@p33",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.2",
    "book_id": "andrews",
    "chapter": 2,
    "number": 2,
@@ -586,10 +660,12 @@
    "page": 34,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 59
+   "n_chars": 59,
+   "garble": 0.014,
+   "id": "andrews:ch2.2@p34",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.3",
    "book_id": "andrews",
    "chapter": 2,
    "number": 3,
@@ -599,10 +675,12 @@
    "page": 34,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 134
+   "n_chars": 134,
+   "garble": 0.197,
+   "id": "andrews:ch2.3@p34",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.4",
    "book_id": "andrews",
    "chapter": 2,
    "number": 4,
@@ -612,10 +690,12 @@
    "page": 34,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 110
+   "n_chars": 110,
+   "garble": 0.044,
+   "id": "andrews:ch2.4@p34",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.5",
    "book_id": "andrews",
    "chapter": 2,
    "number": 5,
@@ -625,10 +705,12 @@
    "page": 34,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 160
+   "n_chars": 160,
+   "garble": 0.535,
+   "id": "andrews:ch2.5@p34",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.6",
    "book_id": "andrews",
    "chapter": 2,
    "number": 6,
@@ -638,10 +720,12 @@
    "page": 34,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 117
+   "n_chars": 117,
+   "garble": 0.152,
+   "id": "andrews:ch2.6@p34",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.7",
    "book_id": "andrews",
    "chapter": 2,
    "number": 7,
@@ -651,10 +735,12 @@
    "page": 34,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 68
+   "n_chars": 68,
+   "garble": 0.71,
+   "id": "andrews:ch2.7@p34",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.8",
    "book_id": "andrews",
    "chapter": 2,
    "number": 8,
@@ -664,10 +750,12 @@
    "page": 34,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 15
+   "n_chars": 15,
+   "garble": 0.16,
+   "id": "andrews:ch2.8@p34",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.9",
    "book_id": "andrews",
    "chapter": 2,
    "number": 9,
@@ -677,10 +765,12 @@
    "page": 35,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 89
+   "n_chars": 89,
+   "garble": 0.141,
+   "id": "andrews:ch2.9@p35",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.10",
    "book_id": "andrews",
    "chapter": 2,
    "number": 10,
@@ -690,10 +780,12 @@
    "page": 35,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 189
+   "n_chars": 189,
+   "garble": 0.26,
+   "id": "andrews:ch2.10@p35",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.11",
    "book_id": "andrews",
    "chapter": 2,
    "number": 11,
@@ -703,10 +795,12 @@
    "page": 35,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 172
+   "n_chars": 172,
+   "garble": 0.158,
+   "id": "andrews:ch2.11@p35",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.12",
    "book_id": "andrews",
    "chapter": 2,
    "number": 12,
@@ -716,10 +810,12 @@
    "page": 35,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 214
+   "n_chars": 214,
+   "garble": 0.604,
+   "id": "andrews:ch2.12@p35",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.13",
    "book_id": "andrews",
    "chapter": 2,
    "number": 13,
@@ -729,10 +825,12 @@
    "page": 35,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3183
+   "n_chars": 3183,
+   "garble": 0.554,
+   "id": "andrews:ch2.13@p35",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.1",
    "book_id": "andrews",
    "chapter": 2,
    "number": 1,
@@ -742,10 +840,12 @@
    "page": 38,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 46
+   "n_chars": 46,
+   "garble": 0.362,
+   "id": "andrews:ch2.1@p38",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.2",
    "book_id": "andrews",
    "chapter": 2,
    "number": 2,
@@ -755,10 +855,12 @@
    "page": 38,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 40
+   "n_chars": 40,
+   "garble": 0.383,
+   "id": "andrews:ch2.2@p38",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.3",
    "book_id": "andrews",
    "chapter": 2,
    "number": 3,
@@ -768,10 +870,12 @@
    "page": 38,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 50
+   "n_chars": 50,
+   "garble": 0.032,
+   "id": "andrews:ch2.3@p38",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.4",
    "book_id": "andrews",
    "chapter": 2,
    "number": 4,
@@ -781,10 +885,12 @@
    "page": 38,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 126
+   "n_chars": 126,
+   "garble": 0.153,
+   "id": "andrews:ch2.4@p38",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.5",
    "book_id": "andrews",
    "chapter": 2,
    "number": 5,
@@ -794,10 +900,12 @@
    "page": 38,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 35
+   "n_chars": 35,
+   "garble": 0.183,
+   "id": "andrews:ch2.5@p38",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.6",
    "book_id": "andrews",
    "chapter": 2,
    "number": 6,
@@ -807,10 +915,12 @@
    "page": 38,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 2500
+   "n_chars": 2500,
+   "garble": 0.59,
+   "id": "andrews:ch2.6@p38",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.1",
    "book_id": "andrews",
    "chapter": 2,
    "number": 1,
@@ -820,10 +930,12 @@
    "page": 40,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 58
+   "n_chars": 58,
+   "garble": 0.152,
+   "id": "andrews:ch2.1@p40",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.2",
    "book_id": "andrews",
    "chapter": 2,
    "number": 2,
@@ -833,10 +945,12 @@
    "page": 40,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3869
+   "n_chars": 3869,
+   "garble": 0.626,
+   "id": "andrews:ch2.2@p40",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.1",
    "book_id": "andrews",
    "chapter": 2,
    "number": 1,
@@ -846,10 +960,12 @@
    "page": 43,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 87
+   "n_chars": 87,
+   "garble": 0.471,
+   "id": "andrews:ch2.1@p43",
+   "ocr": true
   },
   {
-   "id": "andrews:2.2.2.2",
    "book_id": "andrews",
    "chapter": 2,
    "number": 2,
@@ -859,10 +975,12 @@
    "page": 43,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 295
+   "n_chars": 295,
+   "garble": 0.671,
+   "id": "andrews:ch2.2@p43",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.4",
    "book_id": "andrews",
    "chapter": 3,
    "number": 4,
@@ -872,10 +990,12 @@
    "page": 44,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 117
+   "n_chars": 117,
+   "garble": 0.289,
+   "id": "andrews:ch3.4@p44",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.5",
    "book_id": "andrews",
    "chapter": 3,
    "number": 5,
@@ -885,10 +1005,12 @@
    "page": 44,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 192
+   "n_chars": 192,
+   "garble": 0.637,
+   "id": "andrews:ch3.5@p44",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.6",
    "book_id": "andrews",
    "chapter": 3,
    "number": 6,
@@ -898,10 +1020,12 @@
    "page": 44,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 94
+   "n_chars": 94,
+   "garble": 0.355,
+   "id": "andrews:ch3.6@p44",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.7",
    "book_id": "andrews",
    "chapter": 3,
    "number": 7,
@@ -911,10 +1035,12 @@
    "page": 44,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 112
+   "n_chars": 112,
+   "garble": 0.451,
+   "id": "andrews:ch3.7@p44",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.8",
    "book_id": "andrews",
    "chapter": 3,
    "number": 8,
@@ -924,10 +1050,12 @@
    "page": 44,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3822
+   "n_chars": 3822,
+   "garble": 0.568,
+   "id": "andrews:ch3.8@p44",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.1",
    "book_id": "andrews",
    "chapter": 3,
    "number": 1,
@@ -937,10 +1065,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 79
+   "n_chars": 79,
+   "garble": 0.162,
+   "id": "andrews:ch3.1@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.2",
    "book_id": "andrews",
    "chapter": 3,
    "number": 2,
@@ -950,10 +1080,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 57
+   "n_chars": 57,
+   "garble": 0.126,
+   "id": "andrews:ch3.2@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.3",
    "book_id": "andrews",
    "chapter": 3,
    "number": 3,
@@ -963,10 +1095,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 112
+   "n_chars": 112,
+   "garble": 0.064,
+   "id": "andrews:ch3.3@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.4",
    "book_id": "andrews",
    "chapter": 3,
    "number": 4,
@@ -976,10 +1110,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 122
+   "n_chars": 122,
+   "garble": 0.059,
+   "id": "andrews:ch3.4@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.5",
    "book_id": "andrews",
    "chapter": 3,
    "number": 5,
@@ -989,10 +1125,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 129
+   "n_chars": 129,
+   "garble": 0.068,
+   "id": "andrews:ch3.5@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.6",
    "book_id": "andrews",
    "chapter": 3,
    "number": 6,
@@ -1002,10 +1140,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 273
+   "n_chars": 273,
+   "garble": 0.162,
+   "id": "andrews:ch3.6@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.7",
    "book_id": "andrews",
    "chapter": 3,
    "number": 7,
@@ -1015,10 +1155,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 194
+   "n_chars": 194,
+   "garble": 0.115,
+   "id": "andrews:ch3.7@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.8",
    "book_id": "andrews",
    "chapter": 3,
    "number": 8,
@@ -1028,10 +1170,12 @@
    "page": 47,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 236
+   "n_chars": 236,
+   "garble": 0.116,
+   "id": "andrews:ch3.8@p47",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.9",
    "book_id": "andrews",
    "chapter": 3,
    "number": 9,
@@ -1041,10 +1185,12 @@
    "page": 48,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 243
+   "n_chars": 243,
+   "garble": 0.154,
+   "id": "andrews:ch3.9@p48",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.10",
    "book_id": "andrews",
    "chapter": 3,
    "number": 10,
@@ -1054,10 +1200,12 @@
    "page": 48,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 68
+   "n_chars": 68,
+   "garble": 0.141,
+   "id": "andrews:ch3.10@p48",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.11",
    "book_id": "andrews",
    "chapter": 3,
    "number": 11,
@@ -1067,10 +1215,12 @@
    "page": 48,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 133
+   "n_chars": 133,
+   "garble": 0.186,
+   "id": "andrews:ch3.11@p48",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.12",
    "book_id": "andrews",
    "chapter": 3,
    "number": 12,
@@ -1080,10 +1230,12 @@
    "page": 48,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 292
+   "n_chars": 292,
+   "garble": 0.381,
+   "id": "andrews:ch3.12@p48",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.14",
    "book_id": "andrews",
    "chapter": 3,
    "number": 14,
@@ -1093,10 +1245,12 @@
    "page": 48,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4380
+   "n_chars": 4380,
+   "garble": 0.637,
+   "id": "andrews:ch3.14@p48",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.1",
    "book_id": "andrews",
    "chapter": 3,
    "number": 1,
@@ -1106,10 +1260,12 @@
    "page": 51,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 85
+   "n_chars": 85,
+   "garble": 0.277,
+   "id": "andrews:ch3.1@p51",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.2",
    "book_id": "andrews",
    "chapter": 3,
    "number": 2,
@@ -1119,10 +1275,12 @@
    "page": 51,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 5100
+   "n_chars": 5100,
+   "garble": 0.626,
+   "id": "andrews:ch3.2@p51",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.1",
    "book_id": "andrews",
    "chapter": 3,
    "number": 1,
@@ -1132,10 +1290,12 @@
    "page": 55,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 237
+   "n_chars": 237,
+   "garble": 0.415,
+   "id": "andrews:ch3.1@p55",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.2",
    "book_id": "andrews",
    "chapter": 3,
    "number": 2,
@@ -1145,10 +1305,12 @@
    "page": 55,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 174
+   "n_chars": 174,
+   "garble": 0.368,
+   "id": "andrews:ch3.2@p55",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.3",
    "book_id": "andrews",
    "chapter": 3,
    "number": 3,
@@ -1158,10 +1320,12 @@
    "page": 55,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 2087
+   "n_chars": 2087,
+   "garble": 0.6,
+   "id": "andrews:ch3.3@p55",
+   "ocr": true
   },
   {
-   "id": "andrews:3.3.1.1",
    "book_id": "andrews",
    "chapter": 3,
    "number": 1,
@@ -1171,10 +1335,12 @@
    "page": 57,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 5343
+   "n_chars": 5343,
+   "garble": 0.596,
+   "id": "andrews:ch3.1@p57",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.1",
    "book_id": "andrews",
    "chapter": 5,
    "number": 1,
@@ -1184,10 +1350,12 @@
    "page": 61,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 144
+   "n_chars": 144,
+   "garble": 0.214,
+   "id": "andrews:ch5.1@p61",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.2",
    "book_id": "andrews",
    "chapter": 5,
    "number": 2,
@@ -1197,10 +1365,12 @@
    "page": 61,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 197
+   "n_chars": 197,
+   "garble": 0.367,
+   "id": "andrews:ch5.2@p61",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.3",
    "book_id": "andrews",
    "chapter": 5,
    "number": 3,
@@ -1210,10 +1380,12 @@
    "page": 61,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 2824
+   "n_chars": 2824,
+   "garble": 0.634,
+   "id": "andrews:ch5.3@p61",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.1",
    "book_id": "andrews",
    "chapter": 5,
    "number": 1,
@@ -1223,10 +1395,12 @@
    "page": 63,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 275
+   "n_chars": 275,
+   "garble": 0.212,
+   "id": "andrews:ch5.1@p63",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.2",
    "book_id": "andrews",
    "chapter": 5,
    "number": 2,
@@ -1236,10 +1410,12 @@
    "page": 63,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 194
+   "n_chars": 194,
+   "garble": 0.12,
+   "id": "andrews:ch5.2@p63",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.3",
    "book_id": "andrews",
    "chapter": 5,
    "number": 3,
@@ -1249,10 +1425,12 @@
    "page": 63,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 87
+   "n_chars": 87,
+   "garble": 0.539,
+   "id": "andrews:ch5.3@p63",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.4",
    "book_id": "andrews",
    "chapter": 5,
    "number": 4,
@@ -1262,10 +1440,12 @@
    "page": 63,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 3660
+   "n_chars": 3660,
+   "garble": 0.648,
+   "id": "andrews:ch5.4@p63",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.1",
    "book_id": "andrews",
    "chapter": 5,
    "number": 1,
@@ -1275,10 +1455,12 @@
    "page": 70,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 4082
+   "n_chars": 4082,
+   "garble": 0.611,
+   "id": "andrews:ch5.1@p70",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.1",
    "book_id": "andrews",
    "chapter": 5,
    "number": 1,
@@ -1288,10 +1470,12 @@
    "page": 73,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 139
+   "n_chars": 139,
+   "garble": 0.355,
+   "id": "andrews:ch5.1@p73",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.2",
    "book_id": "andrews",
    "chapter": 5,
    "number": 2,
@@ -1301,10 +1485,12 @@
    "page": 73,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 116
+   "n_chars": 116,
+   "garble": 0.325,
+   "id": "andrews:ch5.2@p73",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.3",
    "book_id": "andrews",
    "chapter": 5,
    "number": 3,
@@ -1314,10 +1500,12 @@
    "page": 73,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 244
+   "n_chars": 244,
+   "garble": 0.549,
+   "id": "andrews:ch5.3@p73",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.4",
    "book_id": "andrews",
    "chapter": 5,
    "number": 4,
@@ -1327,10 +1515,12 @@
    "page": 73,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 191
+   "n_chars": 191,
+   "garble": 0.326,
+   "id": "andrews:ch5.4@p73",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.5",
    "book_id": "andrews",
    "chapter": 5,
    "number": 5,
@@ -1340,10 +1530,12 @@
    "page": 74,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 157
+   "n_chars": 157,
+   "garble": 0.113,
+   "id": "andrews:ch5.5@p74",
+   "ocr": true
   },
   {
-   "id": "andrews:5.5.1.1",
    "book_id": "andrews",
    "chapter": 5,
    "number": 1,
@@ -1353,10 +1545,12 @@
    "page": 74,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4597
+   "n_chars": 4597,
+   "garble": 0.634,
+   "id": "andrews:ch5.1@p74",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1366,10 +1560,12 @@
    "page": 96,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 323
+   "n_chars": 323,
+   "garble": 0.416,
+   "id": "andrews:ch7.1@p96",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1379,10 +1575,12 @@
    "page": 96,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 64
+   "n_chars": 64,
+   "garble": 0.075,
+   "id": "andrews:ch7.2@p96",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1392,10 +1590,12 @@
    "page": 96,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 81
+   "n_chars": 81,
+   "garble": 0.15,
+   "id": "andrews:ch7.3@p96",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.4",
    "book_id": "andrews",
    "chapter": 7,
    "number": 4,
@@ -1405,10 +1605,12 @@
    "page": 96,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 81
+   "n_chars": 81,
+   "garble": 0.15,
+   "id": "andrews:ch7.4@p96",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.5",
    "book_id": "andrews",
    "chapter": 7,
    "number": 5,
@@ -1418,10 +1620,12 @@
    "page": 96,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 118
+   "n_chars": 118,
+   "garble": 0.164,
+   "id": "andrews:ch7.5@p96",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.6",
    "book_id": "andrews",
    "chapter": 7,
    "number": 6,
@@ -1431,10 +1635,12 @@
    "page": 97,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 81
+   "n_chars": 81,
+   "garble": 0.128,
+   "id": "andrews:ch7.6@p97",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.7",
    "book_id": "andrews",
    "chapter": 7,
    "number": 7,
@@ -1444,10 +1650,12 @@
    "page": 97,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3737
+   "n_chars": 3737,
+   "garble": 0.625,
+   "id": "andrews:ch7.7@p97",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.11",
    "book_id": "andrews",
    "chapter": 7,
    "number": 11,
@@ -1457,10 +1665,12 @@
    "page": 99,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 126
+   "n_chars": 126,
+   "garble": 0.16,
+   "id": "andrews:ch7.11@p99",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.12",
    "book_id": "andrews",
    "chapter": 7,
    "number": 12,
@@ -1470,10 +1680,12 @@
    "page": 99,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 150
+   "n_chars": 150,
+   "garble": 0.216,
+   "id": "andrews:ch7.12@p99",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.13",
    "book_id": "andrews",
    "chapter": 7,
    "number": 13,
@@ -1483,10 +1695,12 @@
    "page": 99,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 109
+   "n_chars": 109,
+   "garble": 0.007,
+   "id": "andrews:ch7.13@p99",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.14",
    "book_id": "andrews",
    "chapter": 7,
    "number": 14,
@@ -1496,10 +1710,12 @@
    "page": 99,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 93
+   "n_chars": 93,
+   "garble": 0.093,
+   "id": "andrews:ch7.14@p99",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.15",
    "book_id": "andrews",
    "chapter": 7,
    "number": 15,
@@ -1509,10 +1725,12 @@
    "page": 99,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 66
+   "n_chars": 66,
+   "garble": 0.133,
+   "id": "andrews:ch7.15@p99",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.16",
    "book_id": "andrews",
    "chapter": 7,
    "number": 16,
@@ -1522,10 +1740,12 @@
    "page": 99,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4250
+   "n_chars": 4250,
+   "garble": 0.585,
+   "id": "andrews:ch7.16@p99",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1535,10 +1755,12 @@
    "page": 104,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 95
+   "n_chars": 95,
+   "garble": 0.302,
+   "id": "andrews:ch7.1@p104",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1548,10 +1770,12 @@
    "page": 104,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 3660
+   "n_chars": 3660,
+   "garble": 0.624,
+   "id": "andrews:ch7.2@p104",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1561,10 +1785,12 @@
    "page": 110,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 97
+   "n_chars": 97,
+   "garble": 0.066,
+   "id": "andrews:ch7.1@p110",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1574,10 +1800,12 @@
    "page": 110,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 48
+   "n_chars": 48,
+   "garble": 0.317,
+   "id": "andrews:ch7.2@p110",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1587,10 +1815,12 @@
    "page": 110,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 268
+   "n_chars": 268,
+   "garble": 0.119,
+   "id": "andrews:ch7.3@p110",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.4",
    "book_id": "andrews",
    "chapter": 7,
    "number": 4,
@@ -1600,10 +1830,12 @@
    "page": 111,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 98
+   "n_chars": 98,
+   "garble": 0.272,
+   "id": "andrews:ch7.4@p111",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.5",
    "book_id": "andrews",
    "chapter": 7,
    "number": 5,
@@ -1613,10 +1845,12 @@
    "page": 111,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 134
+   "n_chars": 134,
+   "garble": 0.09,
+   "id": "andrews:ch7.5@p111",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.6",
    "book_id": "andrews",
    "chapter": 7,
    "number": 6,
@@ -1626,10 +1860,12 @@
    "page": 111,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 129
+   "n_chars": 129,
+   "garble": 0.097,
+   "id": "andrews:ch7.6@p111",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.7",
    "book_id": "andrews",
    "chapter": 7,
    "number": 7,
@@ -1639,10 +1875,12 @@
    "page": 111,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3219
+   "n_chars": 3219,
+   "garble": 0.261,
+   "id": "andrews:ch7.7@p111",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1652,10 +1890,12 @@
    "page": 118,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 51
+   "n_chars": 51,
+   "garble": 0.345,
+   "id": "andrews:ch7.1@p118",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1665,10 +1905,12 @@
    "page": 118,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 58
+   "n_chars": 58,
+   "garble": 0.318,
+   "id": "andrews:ch7.2@p118",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1678,10 +1920,12 @@
    "page": 118,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4315
+   "n_chars": 4315,
+   "garble": 0.635,
+   "id": "andrews:ch7.3@p118",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1691,10 +1935,12 @@
    "page": 127,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 38
+   "n_chars": 38,
+   "garble": 0.189,
+   "id": "andrews:ch7.1@p127",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1704,10 +1950,12 @@
    "page": 127,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 39
+   "n_chars": 39,
+   "garble": 0.205,
+   "id": "andrews:ch7.2@p127",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1717,10 +1965,12 @@
    "page": 127,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 39
+   "n_chars": 39,
+   "garble": 0.205,
+   "id": "andrews:ch7.3@p127",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.4",
    "book_id": "andrews",
    "chapter": 7,
    "number": 4,
@@ -1730,10 +1980,12 @@
    "page": 127,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 75
+   "n_chars": 75,
+   "garble": 0.212,
+   "id": "andrews:ch7.4@p127",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.5",
    "book_id": "andrews",
    "chapter": 7,
    "number": 5,
@@ -1743,10 +1995,12 @@
    "page": 127,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3225
+   "n_chars": 3225,
+   "garble": 0.644,
+   "id": "andrews:ch7.5@p127",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1756,10 +2010,12 @@
    "page": 132,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 187
+   "n_chars": 187,
+   "garble": 0.228,
+   "id": "andrews:ch7.1@p132",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1769,10 +2025,12 @@
    "page": 132,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 188
+   "n_chars": 188,
+   "garble": 0.231,
+   "id": "andrews:ch7.2@p132",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1782,10 +2040,12 @@
    "page": 132,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 197
+   "n_chars": 197,
+   "garble": 0.239,
+   "id": "andrews:ch7.3@p132",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.4",
    "book_id": "andrews",
    "chapter": 7,
    "number": 4,
@@ -1795,10 +2055,12 @@
    "page": 132,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 342
+   "n_chars": 342,
+   "garble": 0.365,
+   "id": "andrews:ch7.4@p132",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.5",
    "book_id": "andrews",
    "chapter": 7,
    "number": 5,
@@ -1808,10 +2070,12 @@
    "page": 132,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 122
+   "n_chars": 122,
+   "garble": 0.133,
+   "id": "andrews:ch7.5@p132",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.6",
    "book_id": "andrews",
    "chapter": 7,
    "number": 6,
@@ -1821,10 +2085,12 @@
    "page": 132,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 264
+   "n_chars": 264,
+   "garble": 0.288,
+   "id": "andrews:ch7.6@p132",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.7",
    "book_id": "andrews",
    "chapter": 7,
    "number": 7,
@@ -1834,10 +2100,12 @@
    "page": 133,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 2795
+   "n_chars": 2795,
+   "garble": 0.662,
+   "id": "andrews:ch7.7@p133",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1847,10 +2115,12 @@
    "page": 138,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 90
+   "n_chars": 90,
+   "garble": 0.133,
+   "id": "andrews:ch7.1@p138",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1860,10 +2130,12 @@
    "page": 138,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 226
+   "n_chars": 226,
+   "garble": 0.148,
+   "id": "andrews:ch7.2@p138",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1873,10 +2145,12 @@
    "page": 138,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 1922
+   "n_chars": 1922,
+   "garble": 0.341,
+   "id": "andrews:ch7.3@p138",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.4",
    "book_id": "andrews",
    "chapter": 7,
    "number": 4,
@@ -1886,10 +2160,12 @@
    "page": 141,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 519
+   "n_chars": 519,
+   "garble": 0.679,
+   "id": "andrews:ch7.4@p141",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1899,10 +2175,12 @@
    "page": 142,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 1718
+   "n_chars": 1718,
+   "garble": 0.663,
+   "id": "andrews:ch7.1@p142",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1912,10 +2190,12 @@
    "page": 143,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 64
+   "n_chars": 64,
+   "garble": 0.242,
+   "id": "andrews:ch7.1@p143",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1925,10 +2205,12 @@
    "page": 143,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 49
+   "n_chars": 49,
+   "garble": 0.065,
+   "id": "andrews:ch7.2@p143",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1938,10 +2220,12 @@
    "page": 143,
    "tier_hint": "W1",
    "has_multipart": true,
-   "n_chars": 4808
+   "n_chars": 4808,
+   "garble": 0.629,
+   "id": "andrews:ch7.3@p143",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1951,10 +2235,12 @@
    "page": 147,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 212
+   "n_chars": 212,
+   "garble": 0.212,
+   "id": "andrews:ch7.1@p147",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -1964,10 +2250,12 @@
    "page": 147,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 175
+   "n_chars": 175,
+   "garble": 0.17,
+   "id": "andrews:ch7.2@p147",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -1977,10 +2265,12 @@
    "page": 147,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3771
+   "n_chars": 3771,
+   "garble": 0.601,
+   "id": "andrews:ch7.3@p147",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -1990,10 +2280,12 @@
    "page": 153,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3262
+   "n_chars": 3262,
+   "garble": 0.637,
+   "id": "andrews:ch7.1@p153",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2003,10 +2295,12 @@
    "page": 155,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 91
+   "n_chars": 91,
+   "garble": 0.07,
+   "id": "andrews:ch7.1@p155",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -2016,10 +2310,12 @@
    "page": 155,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4546
+   "n_chars": 4546,
+   "garble": 0.612,
+   "id": "andrews:ch7.2@p155",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2029,10 +2325,12 @@
    "page": 158,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3248
+   "n_chars": 3248,
+   "garble": 0.554,
+   "id": "andrews:ch7.1@p158",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.5",
    "book_id": "andrews",
    "chapter": 7,
    "number": 5,
@@ -2042,10 +2340,12 @@
    "page": 161,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3983
+   "n_chars": 3983,
+   "garble": 0.668,
+   "id": "andrews:ch7.5@p161",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2055,10 +2355,12 @@
    "page": 166,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 147
+   "n_chars": 147,
+   "garble": 0.263,
+   "id": "andrews:ch7.1@p166",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -2068,10 +2370,12 @@
    "page": 166,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 141
+   "n_chars": 141,
+   "garble": 0.206,
+   "id": "andrews:ch7.2@p166",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.4",
    "book_id": "andrews",
    "chapter": 7,
    "number": 4,
@@ -2081,10 +2385,12 @@
    "page": 166,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 139
+   "n_chars": 139,
+   "garble": 0.309,
+   "id": "andrews:ch7.4@p166",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.5",
    "book_id": "andrews",
    "chapter": 7,
    "number": 5,
@@ -2094,10 +2400,12 @@
    "page": 166,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 146
+   "n_chars": 146,
+   "garble": 0.259,
+   "id": "andrews:ch7.5@p166",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.7",
    "book_id": "andrews",
    "chapter": 7,
    "number": 7,
@@ -2107,10 +2415,12 @@
    "page": 166,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 234
+   "n_chars": 234,
+   "garble": 0.131,
+   "id": "andrews:ch7.7@p166",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.8",
    "book_id": "andrews",
    "chapter": 7,
    "number": 8,
@@ -2120,10 +2430,12 @@
    "page": 167,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 3634
+   "n_chars": 3634,
+   "garble": 0.683,
+   "id": "andrews:ch7.8@p167",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2133,10 +2445,12 @@
    "page": 172,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 77
+   "n_chars": 77,
+   "garble": 0.541,
+   "id": "andrews:ch7.1@p172",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -2146,10 +2460,12 @@
    "page": 172,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 168
+   "n_chars": 168,
+   "garble": 0.296,
+   "id": "andrews:ch7.2@p172",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -2159,10 +2475,12 @@
    "page": 173,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 424
+   "n_chars": 424,
+   "garble": 0.802,
+   "id": "andrews:ch7.3@p173",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.5",
    "book_id": "andrews",
    "chapter": 7,
    "number": 5,
@@ -2172,10 +2490,12 @@
    "page": 173,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 137
+   "n_chars": 137,
+   "garble": 0.134,
+   "id": "andrews:ch7.5@p173",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.6",
    "book_id": "andrews",
    "chapter": 7,
    "number": 6,
@@ -2185,10 +2505,12 @@
    "page": 173,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 46
+   "n_chars": 46,
+   "garble": 0.104,
+   "id": "andrews:ch7.6@p173",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.7",
    "book_id": "andrews",
    "chapter": 7,
    "number": 7,
@@ -2198,10 +2520,12 @@
    "page": 173,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 55
+   "n_chars": 55,
+   "garble": 0.329,
+   "id": "andrews:ch7.7@p173",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.8",
    "book_id": "andrews",
    "chapter": 7,
    "number": 8,
@@ -2211,10 +2535,12 @@
    "page": 173,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 169
+   "n_chars": 169,
+   "garble": 0.505,
+   "id": "andrews:ch7.8@p173",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.9",
    "book_id": "andrews",
    "chapter": 7,
    "number": 9,
@@ -2224,10 +2550,12 @@
    "page": 174,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 126
+   "n_chars": 126,
+   "garble": 0.673,
+   "id": "andrews:ch7.9@p174",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.10",
    "book_id": "andrews",
    "chapter": 7,
    "number": 10,
@@ -2237,10 +2565,12 @@
    "page": 174,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 173
+   "n_chars": 173,
+   "garble": 0.402,
+   "id": "andrews:ch7.10@p174",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.11",
    "book_id": "andrews",
    "chapter": 7,
    "number": 11,
@@ -2250,10 +2580,12 @@
    "page": 174,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4219
+   "n_chars": 4219,
+   "garble": 0.608,
+   "id": "andrews:ch7.11@p174",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2263,10 +2595,12 @@
    "page": 178,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 100
+   "n_chars": 100,
+   "garble": 0.54,
+   "id": "andrews:ch7.1@p178",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -2276,10 +2610,12 @@
    "page": 178,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 63
+   "n_chars": 63,
+   "garble": 0.354,
+   "id": "andrews:ch7.2@p178",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.3",
    "book_id": "andrews",
    "chapter": 7,
    "number": 3,
@@ -2289,10 +2625,12 @@
    "page": 178,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 4845
+   "n_chars": 4845,
+   "garble": 0.663,
+   "id": "andrews:ch7.3@p178",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2302,10 +2640,12 @@
    "page": 201,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 79
+   "n_chars": 79,
+   "garble": 0.134,
+   "id": "andrews:ch7.1@p201",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -2315,10 +2655,12 @@
    "page": 201,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 2899
+   "n_chars": 2899,
+   "garble": 0.663,
+   "id": "andrews:ch7.2@p201",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2328,10 +2670,12 @@
    "page": 206,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 243
+   "n_chars": 243,
+   "garble": 0.166,
+   "id": "andrews:ch7.1@p206",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.2",
    "book_id": "andrews",
    "chapter": 7,
    "number": 2,
@@ -2341,10 +2685,12 @@
    "page": 207,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 1912
+   "n_chars": 1912,
+   "garble": 0.618,
+   "id": "andrews:ch7.2@p207",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2354,10 +2700,12 @@
    "page": 210,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 311
+   "n_chars": 311,
+   "garble": 0.721,
+   "id": "andrews:ch7.1@p210",
+   "ocr": true
   },
   {
-   "id": "andrews:7.7.1.1",
    "book_id": "andrews",
    "chapter": 7,
    "number": 1,
@@ -2367,7 +2715,10 @@
    "page": 210,
    "tier_hint": "W1",
    "has_multipart": false,
-   "n_chars": 1746
+   "n_chars": 1746,
+   "garble": 0.597,
+   "id": "andrews:ch7.1@p210#2",
+   "ocr": true
   }
  ]
 }
