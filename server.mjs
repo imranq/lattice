@@ -8,7 +8,7 @@ import { join, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   openDb, recordAttempt, setStar, recordView, recentViews,
-  dueItems, allStates, attemptsFor, stats,
+  dueItems, allStates, attemptsFor, stats, activity, streak,
 } from './lib/db.mjs';
 import { conceptMastery, weakEdges, recommend } from './lib/mastery.mjs';
 
@@ -95,7 +95,47 @@ async function api(req, res, url) {
       }
 
       case p === '/stats':
-        return json(res, stats(db));
+        return json(res, { ...stats(db), streak: streak(db) });
+
+      case p === '/activity':
+        return json(res, activity(db, Number(url.searchParams.get('days') ?? 120)));
+
+      case p === '/coverage': {
+        // How much of each domain has any evidence at all - the honest denominator
+        // behind every mastery number on the progress page.
+        const m = conceptMastery(db);
+        const byDomain = new Map();
+        for (const n of graph.nodes) {
+          if (n.kind !== 'concept') continue;
+          const d = byDomain.get(n.domain) ?? { domain: n.domain, concepts: 0,
+                                                assessed: 0, mastery_sum: 0, exercises: 0 };
+          d.concepts += 1;
+          const mm = m.get(n.id);
+          if (mm) { d.assessed += 1; d.mastery_sum += mm.mastery; }
+          byDomain.set(n.domain, d);
+        }
+        for (const e of graph.exercises) {
+          const d = byDomain.get(e.domain);
+          if (d) d.exercises += 1;
+        }
+        return json(res, [...byDomain.values()].map((d) => ({
+          domain: d.domain, concepts: d.concepts, assessed: d.assessed,
+          exercises: d.exercises,
+          mastery: d.assessed ? +(d.mastery_sum / d.assessed).toFixed(3) : null,
+          coverage: +(d.assessed / d.concepts).toFixed(3),
+        })).sort((a, b) => b.exercises - a.exercises));
+      }
+
+      case p === '/books': {
+        const books = graph.nodes.filter((n) => n.kind === 'book');
+        const counts = new Map();
+        for (const e of graph.exercises) counts.set(e.book_id, (counts.get(e.book_id) ?? 0) + 1);
+        return json(res, books.map((b) => ({
+          id: b.id.replace(/^book:/, ''), title: b.label, authors: b.authors,
+          domain: b.domain, extraction: b.extraction,
+          exercises: counts.get(b.id.replace(/^book:/, '')) ?? 0,
+        })).sort((a, b) => b.exercises - a.exercises));
+      }
 
       case p === '/mastery': {
         const m = conceptMastery(db);
