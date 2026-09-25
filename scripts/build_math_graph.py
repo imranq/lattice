@@ -28,6 +28,9 @@ from pathlib import Path
 
 # Which domain each book teaches. Set here rather than guessed from titles.
 DOMAINS = {
+    # A dataset, not a book: its own domain assignment is per problem, so this
+    # entry only names the source.
+    "math_dataset": "mixed",
     "grinstead_snell": "probability",
     "blitzstein": "probability",
     "herstein": "abstract algebra",
@@ -37,6 +40,14 @@ DOMAINS = {
     "stein": "complex analysis",
     "steele": "inequalities",
     "andrews": "number theory",
+    # Street-Fighting Mathematics is not about a branch of maths, it is about a
+    # way of attacking one: dimensions, easy cases, lumping, analogy. Its own
+    # field, because filing it under any existing one would be a lie.
+    "mahajan": "estimation",
+    "d2l": "machine learning",
+    "pml_book1": "machine learning",
+    "pml_book2": "machine learning",
+    "deep_learning_bishop": "machine learning",
 }
 
 STOP = set("the a an of and or to for in on with by is are as from that this it its "
@@ -44,6 +55,9 @@ STOP = set("the a an of and or to for in on with by is are as from that this it 
            "further other first second".split())
 
 CONF = {"putnam_link": 0.60, "textbook_order": 0.40, "cross_reference": 0.85, "term_reuse": 0.55,
+        # A level assigned as difficulty is a real ordering, unlike mere adjacency
+        # in a book's table of contents.
+        "dataset_level": 0.75,
         "cross_book_consensus": 0.75}
 
 TIER_FROM_PRIOR = lambda s: "W1" if s < 0.35 else ("W2" if s < 0.62 else "core")
@@ -152,30 +166,39 @@ def load_pdf_book(book, nodes, edges, exercises, add_node, add_edge):
     # Topic groups ("Counting", "Harder Problems") are concepts in their own right.
     group_sizes = Counter(e.get("group") for e in book["exercises"])
     for e in book["exercises"]:
+        # D2L's PDF extractor sees headings such as "2.3.13 Exercises" as the
+        # exercise group and loses the chapter field. Recover the chapter from
+        # that stable prefix, but do not promote the heading itself to a concept.
+        group = e.get("group")
+        inferred_chapter = e.get("chapter")
+        if inferred_chapter is None and group:
+            m = re.match(r"\s*(\d+)(?:\.\d+){1,2}\s+Exercises\s*$", group, re.I)
+            if m:
+                inferred_chapter = int(m.group(1))
         concept_id = None
         if e.get("section") and e["section"] in sec_ids:
             concept_id = sec_ids[e["section"]][1]
-        group = e.get("group")
         if group and group.lower() not in ("problems", "exercises", "easier problems",
-                                           "middle-level problems", "harder problems"):
+                                           "middle-level problems", "harder problems") \
+                and not re.match(r"\s*\d+(?:\.\d+){1,2}\s+Exercises\s*$", group, re.I):
             gid = f"concept:{bid}:group:{re.sub(r'[^a-z0-9]+', '_', group.lower()).strip('_')}"
             if gid not in nodes:
                 add_node(gid, kind="concept", label=group, domain=domain, book_id=bid,
-                         chapter=e.get("chapter"), from_group=True)
-                parent = f"domain:{domain}:{bid}:ch{e.get('chapter')}"
+                         chapter=inferred_chapter, from_group=True)
+                parent = f"domain:{domain}:{bid}:ch{inferred_chapter}"
                 if parent in nodes:
                     add_edge(parent, gid, "contains", "textbook_structure", 0.9)
             concept_id = gid
-        if not concept_id and e.get("chapter") is not None:
+        if not concept_id and inferred_chapter is not None:
             # No section and no topic group: attach to the chapter itself rather
             # than dropping the exercise out of the graph entirely.
-            cid = f"concept:{bid}:ch{e['chapter']}"
+            cid = f"concept:{bid}:ch{inferred_chapter}"
             if cid not in nodes:
-                ch = chapters.get(e["chapter"], {})
+                ch = chapters.get(inferred_chapter, {})
                 add_node(cid, kind="concept", label=ch.get("title", f"Chapter {e['chapter']}"),
-                         domain=domain, book_id=bid, chapter=e["chapter"],
+                         domain=domain, book_id=bid, chapter=inferred_chapter,
                          page=ch.get("page"), whole_chapter=True)
-                parent = f"domain:{domain}:{bid}:ch{e['chapter']}"
+                parent = f"domain:{domain}:{bid}:ch{inferred_chapter}"
                 if parent in nodes:
                     add_edge(parent, cid, "contains", "textbook_structure", 1.0)
             concept_id = cid
@@ -184,16 +207,89 @@ def load_pdf_book(book, nodes, edges, exercises, add_node, add_edge):
         score = difficulty_prior(e, group_sizes.get(group, 20))
         exercises.append({
             "id": e["id"], "concept_id": concept_id, "book_id": bid, "domain": domain,
-            "label": f"{e.get('chapter')}.{e['number']}", "chapter": e.get("chapter"),
+            "label": f"{inferred_chapter or e.get('chapter')}.{e['number']}", "chapter": inferred_chapter,
             "section_title": e.get("section_title") or group, "page": e.get("page"),
             "difficulty_prior": score,
             "tier": e.get("tier_hint") or TIER_FROM_PRIOR(score),
             "has_published_solution": e.get("has_published_solution", False),
             "garble": e.get("garble"),
             "ocr": bool(e.get("ocr")),
+            "text_format": e.get("text_format"),
+            "canonical_source": e.get("canonical_source"),
+            "canonical_source_ref": e.get("canonical_source_ref"),
+            "canonical_source_url": e.get("canonical_source_url"),
             "has_text": False,
         })
         add_edge(concept_id, e["id"], "assessed_by", "textbook_structure", 1.0)
+
+
+
+# ---- datasets ---------------------------------------------------------------
+
+def load_dataset_book(book, nodes, edges, exercises, add_node, add_edge):
+    """A labelled problem set: MATH and anything else shaped like it.
+
+    The structure a textbook gives for free — chapters, sections, an order to
+    read them in — does not exist here. What does exist is better for our
+    purpose: every problem carries a subject and a difficulty level the dataset
+    assigned, so the natural concept is the pair.
+
+    That makes the ladder explicit. `Counting & Probability - Level 1` is a
+    prerequisite for `Level 2`, and so on up, which is exactly the structure
+    Lattice was missing: the README complains that every entry point is a cliff,
+    and a chain of five rungs per subject is the thing that fixes it. The
+    textbook corpus could never express this because its difficulty was a
+    character count.
+    """
+    bid = book["book_id"]
+    by_subject = defaultdict(list)
+    for e in book["exercises"]:
+        by_subject[e["subject"]].append(e)
+
+    for subject, items in sorted(by_subject.items()):
+        domain = items[0]["domain"]
+        pretty = subject.replace("_", " ").title()
+        did = f"domain:{domain}:{bid}:{subject}"
+        add_node(did, kind="domain_part", label=pretty, domain=domain, book_id=bid)
+
+        levels = sorted({e["level"] for e in items})
+        level_ids = {}
+        for level in levels:
+            cid = f"concept:{bid}:{subject}:L{level}"
+            level_ids[level] = cid
+            add_node(cid, kind="concept", label=f"{pretty} - Level {level}",
+                     domain=domain, book_id=bid, order=level, level=level,
+                     subject=subject)
+            add_edge(did, cid, "contains", "dataset_structure", 1.0)
+
+        # The ladder. `dataset_level` is a stronger claim than `textbook_order`:
+        # consecutive sections of a book are merely adjacent, whereas these
+        # levels were assigned as difficulty and genuinely do stack.
+        for a, b in zip(levels, levels[1:]):
+            add_edge(level_ids[a], level_ids[b], "prerequisite", "dataset_level",
+                     CONF["dataset_level"], cognitive=True)
+
+        for e in items:
+            exercises.append({
+                "id": e["id"], "concept_id": level_ids[e["level"]], "book_id": bid,
+                "domain": domain, "label": e["label"],
+                "section_title": f"{pretty} - Level {e['level']}",
+                "level": e["level"],
+                "difficulty_prior": e["difficulty_prior"],
+                "semantic_difficulty": e["semantic_difficulty"],
+                "tier": e["tier"],
+                "has_published_solution": True,
+                # MIT licensed, so unlike the textbooks the text travels with the
+                # graph instead of living in gitignored data/local/.
+                "text": e["text"],
+                "has_text": True,
+                # A boxed answer means this can be marked by string comparison,
+                # with no model in the loop at all.
+                "answer": e.get("answer"),
+                "auto_gradable": e.get("auto_gradable", False),
+                "n_chars": e.get("n_chars"),
+            })
+            add_edge(level_ids[e["level"]], e["id"], "assessed_by", "dataset_structure", 1.0)
 
 
 # Putnam topics map onto the domains the textbooks cover. Contest problems are not
@@ -208,6 +304,89 @@ PUTNAM_DOMAIN = {
     "Other": "unknown",
 }
 DIFFICULTY_PRIOR = {"easy": 0.45, "medium": 0.65, "hard": 0.85, "very_hard": 0.97}
+
+# These are deliberately conservative bootstrap topics for the ML corpus. They
+# are not a replacement for Jev's semantic tags: they give the graph and the
+# study queue a useful address for the most common mathematical prerequisites
+# before the more expensive tagging pass runs. Text stays local; this script
+# never sends it anywhere.
+ML_TOPIC_RULES = {
+    "linear_algebra": (
+        "Linear algebra for ML",
+        (r"\bmatrix\b", r"\bmatrices\b", r"\bvector\b", r"\bvectors\b",
+         r"\beigen", r"\bdeterminant", r"linear transformation", r"affine",
+         r"jacobian", r"covariance matrix", r"dot product", r"inner product"),
+    ),
+    "calculus": (
+        "Calculus for ML",
+        (r"\bderivative\b", r"\bderivatives\b", r"\bdifferenti", r"\bgradient\b",
+         r"\bgradients\b", r"chain rule", r"partial derivative", r"integral"),
+    ),
+    "probability": (
+        "Probability for ML",
+        (r"\bprobability\b", r"\bprobabilities\b", r"random variable",
+         r"distribution", r"bayesian", r"\bbayes\b", r"expectation", r"likelihood"),
+    ),
+    "optimization": (
+        "Optimization for ML",
+        (r"optimization", r"optimize", r"convex", r"gradient descent",
+         r"loss function", r"regulari[sz]ation", r"learning rate"),
+    ),
+    "neural_networks": (
+        "Neural networks",
+        (r"neural network", r"perceptron", r"activation function", r"backprop",
+         r"convolution", r"transformer", r"attention mechanism", r"softmax"),
+    ),
+}
+
+
+def local_exercise_text():
+    """Read optional local text so the ML graph has useful topic edges.
+
+    PDF text is intentionally gitignored and may be copyrighted. This is a
+    local heuristic pass over files already present on the machine; it only
+    emits topic ids and never copies the text into the graph.
+    """
+    out = {}
+    root = Path("data/local")
+    for path in root.glob("*.text.json"):
+        try:
+            out.update(json.loads(path.read_text()))
+        except (OSError, json.JSONDecodeError):
+            continue
+    return out
+
+
+def enrich_ml_topics(nodes, edges, exercises, add_node, add_edge):
+    texts = local_exercise_text()
+    topic_ids = {}
+    for key, (label, _) in ML_TOPIC_RULES.items():
+        cid = f"concept:machine_learning:{key}"
+        topic_ids[key] = cid
+        add_node(cid, kind="concept", label=label, domain="machine learning",
+                 book_id="ml_foundations", generated=True, blurb=
+                 f"A mathematical foundation used throughout machine learning.")
+
+    assigned = Counter()
+    for e in exercises:
+        if e.get("domain") != "machine learning":
+            continue
+        text = (e.get("text") or texts.get(e["id"]) or "").lower()
+        if not text:
+            continue
+        topics = []
+        for key, (_, patterns) in ML_TOPIC_RULES.items():
+            if any(re.search(pattern, text) for pattern in patterns):
+                topics.append(topic_ids[key])
+        if not topics:
+            continue
+        e["topic_concepts"] = topics
+        for cid in topics:
+            add_edge(cid, e["id"], "assessed_by", "local_topic_heuristic", 0.72)
+            assigned[cid] += 1
+
+    print("ML topic coverage:", ", ".join(
+        f"{nodes[cid]['label']}={assigned[cid]}" for cid in topic_ids.values()))
 
 
 def load_putnam(path, linked_path, nodes, edges, exercises, add_node, add_edge):
@@ -317,10 +496,14 @@ def main():
         book = json.loads(Path(path).read_text())
         bid = book["book_id"]
         add_node(f"book:{bid}", kind="book", label=book["title"],
-                 authors=book.get("authors", ""), license=book.get("license", ""),
+                 authors=book.get("authors", ""),
+                 license=book.get("source_license") or book.get("license", ""),
+                 source_repo=book.get("source_repo"),
                  domain=DOMAINS.get(bid, "unknown"), extraction=book.get("extraction"))
         before = len(exercises)
-        if book.get("extraction") == "latex_source":
+        if book.get("extraction") == "dataset":
+            load_dataset_book(book, nodes, raw_edges, exercises, add_node, add_edge)
+        elif book.get("extraction") == "latex_source":
             load_latex_book(book, nodes, raw_edges, exercises, add_node, add_edge)
         else:
             load_pdf_book(book, nodes, raw_edges, exercises, add_node, add_edge)
@@ -332,6 +515,11 @@ def main():
                         add_node, add_edge)
         print(f"  {'putnam':<18} {'latex_source':<14} {n:>4} problems  (contest)")
 
+    # Give the ML corpus stable cross-book topic addresses such as "Linear
+    # algebra for ML". This is what lets a graph node and a natural-language
+    # request find matrix/vector exercises even when their source chapters use
+    # different names.
+    enrich_ml_topics(nodes, raw_edges, exercises, add_node, add_edge)
     aligned = align_across_books(nodes, add_edge)
 
     merged = {}

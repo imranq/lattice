@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .DS_Store
 logs/*
+.env
 
 # Raw textbook sources: large, and redistributable only under their own licenses.
 # Re-fetch with scripts/fetch_books.sh; extracted structure lives in data/processed/books/.
@@ -15,3 +16,6 @@ data/lattice.db-shm
 # Verbatim exercise text from copyrighted books — personal use only.
 # Committed data is pointers + derived metadata (chapter, page, group, difficulty).
 data/local/
+
+# MATH dataset parquet: re-fetch with scripts/fetch_math_dataset.py.
+data/raw/math_dataset/

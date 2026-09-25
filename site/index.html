@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>Lattice</title>
   <script>
     (function () {
@@ -14,22 +15,39 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260922-mental-drill" />
   <script>
+    // Maths is the content here, so the delimiters are generous: books and the
+    // Putnam archive both ship \( \) and $ $, and a statement that fails to
+    // typeset is worse than useless — it shows the reader raw TeX.
     window.MathJax = {
-      tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]],
-             processEscapes: true },
-      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"] }
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: { "[+]": ["ams", "boldsymbol", "mathtools"] },
+      },
+      loader: { load: ["[tex]/ams", "[tex]/boldsymbol", "[tex]/mathtools"] },
+      chtml: { scale: 1.0, displayAlign: "left", displayIndent: "0" },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+        // A statement that MathJax cannot parse should degrade to its source,
+        // not to a red error string in the middle of a problem.
+        renderActions: { addMenu: [] },
+      },
+      startup: { typeset: false },
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script defer src="app-shell.js"></script>
   <script defer src="generators.js"></script>
   <script defer src="graph.js"></script>
-  <script defer src="study.js"></script>
+  <script defer src="study.js?v=20260923-feedback-solution"></script>
   <script defer src="home.js"></script>
   <script defer src="subject.js"></script>
+  <script defer src="course.js"></script>
   <script defer src="stats.js"></script>
 </head>
 <body>
@@ -41,75 +59,150 @@
     <nav aria-label="Primary">
       <button data-view="home" class="nav-button active">Home</button>
       <button data-view="study" class="nav-button">Study</button>
+      <button data-view="course" class="nav-button">Courses</button>
       <button data-view="explore" class="nav-button">Graph</button>
       <button data-view="stats" class="nav-button">Stats</button>
     </nav>
+    <button id="searchOpen" class="topsearch" type="button" aria-label="Search">
+      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+        <circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10.5 10.5 L14 14" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round"/>
+      </svg>
+      <span class="topsearch-label">Search or jump…</span>
+      <kbd class="topsearch-key">⌘K</kbd>
+    </button>
     <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
   </header>
 
+  <!-- The jump palette. Lives in the shell because every view can be a
+       destination, and it has to work before any of them have booted. -->
+  <div id="palette" class="palette" hidden role="dialog" aria-modal="true"
+       aria-label="Search Lattice">
+    <div class="palette-box">
+      <input id="paletteInput" class="palette-input" type="text" autocomplete="off"
+             placeholder="Search concepts, fields, books, techniques…"
+             aria-label="Search" />
+      <ul id="paletteResults" class="palette-results" role="listbox"></ul>
+      <div class="palette-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> move</span>
+        <span><kbd>↵</kbd> open</span>
+        <span><kbd>esc</kbd> close</span>
+      </div>
+    </div>
+  </div>
+
   <main>
     <!-- ============ Home ============ -->
-    <section id="home" class="view active">
+    <section id="v-home" class="view active">
+      <section id="homeHero" class="hero"></section>
       <section class="stat-row" id="homeStats"></section>
       <div class="home-grid">
         <div class="home-main">
           <section class="panel" id="homePlan"></section>
+          <section class="panel" id="homeFrontier"></section>
+          <section class="panel" id="homeActivity"></section>
           <section class="panel">
             <div class="panel-heading">
-              <div><p class="eyebrow">SUBJECTS</p><h2>Pick a field</h2></div>
+              <div><p class="eyebrow">Subjects</p><h2>Pick a field</h2></div>
               <a class="link-btn" href="#explore">full graph →</a>
             </div>
             <div id="subjectMap" class="subject-map"></div>
           </section>
         </div>
         <aside class="home-side">
+          <section class="panel" id="homeLevels"></section>
           <section class="panel" id="homeWeak"></section>
         </aside>
       </div>
     </section>
 
     <!-- ============ Study ============ -->
-    <section id="study" class="view">
+    <section id="v-study" class="view">
       <div class="study-grid">
         <aside class="sidebar">
           <div id="sideStudy" class="side-section">
-            <div class="seg" role="group" aria-label="Session mode">
-              <button type="button" class="active" data-mode="practice">Practice</button>
-              <button type="button" data-mode="test">Test</button>
+
+            <div class="side-block">
+              <div class="seg" role="group" aria-label="Session mode">
+                <button type="button" class="active" data-mode="practice">Practice</button>
+                <button type="button" data-mode="test">Test</button>
+              </div>
+              <button id="generateBtn" class="btn-primary btn-block">New question</button>
+              <p class="shortcut-note"><kbd>Enter</kbd> submit <kbd>G</kbd> next</p>
             </div>
 
-            <div id="testSettings" class="test-settings" hidden>
-              <p class="field-label">Questions</p>
-              <div class="seg seg-sm" role="group" aria-label="Test length">
-                <button type="button" data-len="5">5</button>
-                <button type="button" class="active" data-len="10">10</button>
-                <button type="button" data-len="20">20</button>
+            <div class="side-block set-session-block set-only">
+              <p class="field-label"><span>Set progress</span><b id="sideProgressMeta" class="pick-count"></b></p>
+              <div class="session-mini">
+                <span><b id="sessSolved">0</b> solved</span>
+                <span><b id="sessSeen">0</b> attempted</span>
+              </div>
+              <span class="test-track"><span id="sideProgressTrack" style="width:0%"></span></span>
+            </div>
+
+            <div class="side-block set-only">
+              <p class="field-label">Stay with the set</p>
+              <p class="side-coach">Solve one problem at a time. Submit for feedback, use a hint when you need one, then continue.</p>
+              <p class="shortcut-note"><kbd>⌘↵</kbd> submit <kbd>H</kbd> hint <kbd>G</kbd> next</p>
+            </div>
+
+            <div class="side-block free-only">
+              <p class="field-label">Build a practice set</p>
+              <p class="side-coach">Choose a field, source, or drill. Lattice will assemble the next useful problems for you.</p>
+            </div>
+
+            <!-- Difficulty is not a filter over a fixed pool: it moves where the
+                 recommender aims. Adaptive is the default; the learner only
+                 needs a clear easier / adaptive / harder choice. -->
+            <div class="side-block set-filter set-explore">
+              <p class="field-label">Difficulty</p>
+              <div class="seg seg-sm" id="diffSeg" role="group" aria-label="Difficulty">
+                <button type="button" data-diff="easier">Easier</button>
+                <button type="button" class="active" data-diff="adaptive">Adaptive</button>
+                <button type="button" data-diff="harder">Harder</button>
+              </div>
+              <p class="shortcut-note" id="diffNote">aiming at 85% success</p>
+            </div>
+
+            <!-- Three independent multi-selects. A field filters; a book or a
+                 drill *is* a source, so clearing one removes that content. -->
+            <div class="side-block set-filter set-explore">
+              <div class="field">
+                <p class="field-label">
+                  <span>Fields <b id="domainCount" class="pick-count"></b></span>
+                  <button type="button" class="link-btn" data-all="domainChips">all</button></p>
+                <div id="domainChips" class="chips"></div>
               </div>
             </div>
 
-            <div class="field">
-              <p class="field-label">Fields <button type="button" class="link-btn" data-all="domain">all</button></p>
-              <div id="domainChips" class="chips"></div>
-            </div>
-
-            <div class="field">
-              <p class="field-label">Sources</p>
-              <div id="sourceChips" class="chips">
-                <button type="button" class="chip-toggle on" data-src="textbook">Textbooks</button>
-                <button type="button" class="chip-toggle on" data-src="contest">Putnam</button>
-                <button type="button" class="chip-toggle on" data-src="generated">Drills</button>
+            <div class="side-block set-filter set-explore">
+              <div class="field">
+                <p class="field-label">
+                  <span>Books <b id="bookCount" class="pick-count"></b></span>
+                  <button type="button" class="link-btn" data-all="bookChips">all</button></p>
+                <div id="bookChips" class="chips"></div>
               </div>
             </div>
 
-            <button id="generateBtn" class="btn-primary btn-block">Generate question</button>
-
-            <div class="session-mini">
-              <span><b id="sessSolved">0</b> solved</span>
-              <span><b id="sessSeen">0</b> attempted</span>
+            <div class="side-block set-explore">
+              <div class="field">
+                <p class="field-label">
+                  <span>Drills <b id="skillCount" class="pick-count"></b></span>
+                  <button type="button" class="link-btn" data-all="skillChips">all</button></p>
+                <div id="skillChips" class="chips"></div>
+              </div>
             </div>
 
-            <div id="abilityBox" class="ability-box"></div>
-            <p class="shortcut-note"><kbd>Enter</kbd> submit · <kbd>G</kbd> new question</p>
+            <div class="side-block set-explore">
+              <div id="currentContext"></div>
+            </div>
+
+            <div class="side-block set-global">
+              <p class="field-label">Rating by field</p>
+              <div id="abilityBox" class="ability-box"></div>
+            </div>
+
           </div>
         </aside>
         <div id="studyRoot"></div>
@@ -117,21 +210,24 @@
     </section>
 
     <!-- ============ Subject ============ -->
-    <section id="subject" class="view"><div id="subjectRoot"></div></section>
+    <section id="v-subject" class="view"><div id="subjectRoot"></div></section>
+
+    <!-- ============ Course ============ -->
+    <section id="v-course" class="view"><div id="courseRoot"></div></section>
 
     <!-- ============ Stats ============ -->
-    <section id="stats" class="view"><div id="statsRoot" class="progress-content"></div></section>
+    <section id="v-stats" class="view"><div id="statsRoot" class="progress-content"></div></section>
 
     <!-- ============ Graph ============ -->
-    <section id="explore" class="view">
+    <section id="v-explore" class="view">
       <div class="graph-stage">
         <canvas id="canvas"></canvas>
         <div class="graph-overlay graph-controls-overlay">
-          <input id="graphSearch" type="search" placeholder="Find a concept" />
+          <input id="graphSearch" type="search" placeholder="Find a concept…" />
           <select id="domainFilter" aria-label="Filter by domain"><option value="">All domains</option></select>
           <label class="toggle"><input type="checkbox" id="showMastery" checked /><span>Mastery</span></label>
           <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
-          <button id="replay" class="ghost-btn" type="button">Fit</button>
+          <button id="replay" class="ghost-btn" type="button">Fit to view</button>
         </div>
         <details class="graph-overlay graph-legend-overlay">
           <summary id="graphCount" class="data-count"></summary>

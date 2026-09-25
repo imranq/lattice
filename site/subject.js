@@ -12,6 +12,19 @@
   const get = (p) => fetch(`/api${p}`).then((r) => (r.ok ? r.json()
     : Promise.reject(new Error(`${p} → ${r.status}`))));
 
+  /** A set link: study exactly this scope, and nothing else. */
+  function studyHref({ domains = [], books = [], concepts = [], count = 0, label = "" }) {
+    const q = new URLSearchParams({ kind: "study" });
+    if (domains.length) q.set("domains", domains.join(","));
+    if (books.length) q.set("books", books.join(","));
+    if (concepts.length) q.set("concepts", concepts.join(","));
+    if (count) q.set("count", String(count));
+    if (label) q.set("label", label);
+    return `#study|${q}`;
+  }
+
+  let DOMAIN = null;
+
   function topicRow(t) {
     const bar = t.mastery === null
       ? `<span class="topic-unseen">not assessed</span>`
@@ -25,6 +38,13 @@
         <span class="topic-meta">${t.exercises} problem${t.exercises === 1 ? "" : "s"}${
           t.page ? ` · p.${t.page}` : ""}</span>
         <span class="topic-bar">${bar}</span>
+        <span class="topic-actions">
+          <a class="ghost-btn" href="${studyHref({ domains: [DOMAIN], concepts: [t.id],
+             count: Math.min(t.exercises, 8), label: t.label })}"
+             title="Practise only this topic">Practise</a>
+          <a class="ghost-btn" href="#explore|${encodeURIComponent(t.id)}"
+             title="Open this topic on the graph">Graph</a>
+        </span>
       </li>`;
   }
 
@@ -33,6 +53,7 @@
       root().innerHTML = `<p class="dim">No field selected. <a href="#home">Back to Home</a>.</p>`;
       return;
     }
+    DOMAIN = domain;
     root().innerHTML = `<p class="dim">Loading ${esc(domain)}…</p>`;
     const data = await get(`/subject?domain=${encodeURIComponent(domain)}`);
     const a = data.ability;
@@ -54,16 +75,33 @@
           ${a ? `<div class="stat-tile"><b>${a.rating}</b>
             <span>${a.attempts ? (a.confident ? "rating" : "provisional") : "unrated"}</span>
           </div>` : ""}
-          <a class="btn-primary" href="#study" data-study="${esc(domain)}">Study this field</a>
+          <a class="btn-primary" href="${studyHref({ domains: [domain], count: 10,
+             label: domain })}">Study this field</a>
+          <a class="ghost-btn" href="#explore|${encodeURIComponent(domain)}"
+             data-graph-domain="${esc(domain)}">Show on the graph</a>
         </div>
       </div>
 
       ${data.books.map((b) => `
         <section class="panel">
           <div class="panel-heading">
-            <div><p class="eyebrow">${esc(b.book_id)}</p><h2>${esc(b.title)}</h2></div>
+            <div>
+              <p class="eyebrow">Source</p>
+              <h2>${b.local_url || b.url
+                ? `<a class="book-title book-out" href="${esc(b.local_url ?? b.url)}"
+                     target="_blank" rel="noopener">${esc(b.title)}</a>`
+                : esc(b.title)}</h2>
+              <p class="book-meta">${b.authors ? `<span>${esc(b.authors)}</span>` : ""}
+                ${b.local_url ? `<a class="tag tag-local" href="${esc(b.local_url)}"
+                  target="_blank" rel="noopener">local PDF</a>` : ""}
+                <span>${esc(b.book_id)}</span></p>
+            </div>
             <span class="data-count">${b.exercises.toLocaleString()} problems ·
-              ${b.topics.length} topics</span>
+              ${b.topics.length} topics
+              <a class="ghost-btn" href="#course|${encodeURIComponent(b.book_id)}"
+                >Open as a course</a>
+              <a class="ghost-btn" href="${studyHref({ domains: [domain], books: [b.book_id],
+                 count: 10, label: b.title })}">Practise this book</a></span>
           </div>
           ${(() => {
             // Group by chapter where the book has them; a flat list otherwise.
@@ -78,18 +116,10 @@
               <ul class="topic-list">${topics.map(topicRow).join("")}</ul>`).join("");
           })()}
         </section>`).join("")}`;
-  }
 
-  // "Study this field" preselects the field chips before switching view.
-  document.addEventListener("click", (ev) => {
-    const link = ev.target.closest("[data-study]");
-    if (!link) return;
-    const want = link.dataset.study;
-    for (const c of document.querySelectorAll("#domainChips .chip-toggle")) {
-      c.classList.toggle("on", c.dataset.domain === want);
-    }
-    window.dispatchEvent(new CustomEvent("lattice:refilter"));
-  });
+    // Section titles come out of the books verbatim, TeX and all.
+    window.Lattice.typeset(root());
+  }
 
   let lastArg = null;
   window.addEventListener("lattice:route", (e) => {

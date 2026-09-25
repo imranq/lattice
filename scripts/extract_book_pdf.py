@@ -337,7 +337,8 @@ def main():
     ap.add_argument("--title", required=True)
     ap.add_argument("--authors", default="")
     ap.add_argument("--out", default=None)
-    ap.add_argument("--item-style", choices=["block", "inline", "labelled"], default="block",
+    ap.add_argument("--item-style", choices=["block", "inline", "labelled", "problem", "exercise2"],
+                    default="block",
                     help="block: item number alone on a line (Blitzstein). "
                          "inline: '12. text' after a Problems/Exercises heading.")
     ap.add_argument("--heads",
@@ -355,8 +356,12 @@ def main():
     args = ap.parse_args()
 
     pdf = Path(args.pdf).expanduser()
-    if args.item_style == "labelled":
+    if args.item_style == "exercise2":
+        chapters, sections, exercises = extract_exercise_two_level(
+            pdf, args.book_id, toc_style=args.toc_style)
+    elif args.item_style in ("labelled", "problem"):
         chapters, sections, exercises = extract_labelled(pdf, args.book_id,
+                                                         head=args.item_style,
                                                          toc_style=args.toc_style)
     elif args.item_style == "inline":
         chapters, sections, exercises = extract_inline(
@@ -546,6 +551,49 @@ def extract_inline(pdf, book_id, head_re, max_gap_pages=2, toc_style="leaders"):
     return chapters, sections, assign_ids(book_id, out)
 
 
+def extract_exercise_two_level(pdf, book_id, toc_style="leaders"):
+    """Extract books whose exercises are labelled ``Exercise 2.1``.
+
+    Murphy's PML books use chapter.exercise numbering rather than the
+    three-level labels used by Tao and Axler. The chapter and printed page are
+    enough to attach these to a useful graph concept while preserving the label
+    for citation.
+    """
+    pages = pdf_pages(pdf)
+    layout = pdf_pages(pdf, layout=True)
+    chapters, sections = (parse_toc_indent(layout) if toc_style == "indent"
+                          else parse_toc(layout))
+    offset = page_offset(pages)
+    cur, found = None, []
+    for idx, pg in enumerate(pages):
+        printed = idx - offset
+        for line in pg.split("\n"):
+            m = RE_EXERCISE_TWO.match(line)
+            if m:
+                if cur:
+                    found.append(cur)
+                cur = {"chapter": int(m.group(1)), "number": int(m.group(2)),
+                       "page": printed, "lines": [m.group(3)]}
+            elif cur is not None:
+                cur["lines"].append(line)
+    if cur:
+        found.append(cur)
+
+    out = []
+    for e in found:
+        text = clean("\n".join(e["lines"]))
+        if len(text) < 15:
+            continue
+        out.append({
+            "book_id": book_id, "chapter": e["chapter"], "number": e["number"],
+            "section": None, "section_title": None, "group": "Exercises",
+            "page": e["page"], "tier_hint": None,
+            "has_multipart": bool(re.search(r"\(a\)", text)),
+            "n_chars": len(text), "garble": garble_score(text), "text": text,
+        })
+    return chapters, sections, assign_ids(book_id, out)
+
+
 
 
 # ---------------------------------------------------------------------------
@@ -557,8 +605,15 @@ def extract_inline(pdf, book_id, head_re, max_gap_pages=2, toc_style="leaders"):
 
 RE_LABELLED = re.compile(r"^\s*Exercise\s+(\d+)\.(\d+)(?:\.(\d+))?\.?\s*(.*)$")
 
+# Street-Fighting Mathematics numbers its exercises "Problem 3.4 A title", two
+# levels deep and headed by the word Problem rather than Exercise. Same shape as
+# the labelled style otherwise, so it shares that extractor rather than getting
+# one of its own.
+RE_PROBLEM = re.compile(r"^\s*Problem\s+(\d+)\.(\d+)\.?\s*(.*)$")
+RE_EXERCISE_TWO = re.compile(r"^\s*Exercise\s+(\d+)\.(\d+)\s*(?:\[[^\]]+\])?\s*(.*)$")
 
-def extract_labelled(pdf, book_id, toc_style="leaders"):
+
+def extract_labelled(pdf, book_id, toc_style="leaders", head="exercise"):
     pages = pdf_pages(pdf)
     layout = pdf_pages(pdf, layout=True)
     chapters, sections = (parse_toc_indent(layout) if toc_style == "indent"
@@ -572,15 +627,26 @@ def extract_labelled(pdf, book_id, toc_style="leaders"):
         lines = pg.split("\n")
         body = lines[1:] if RE_PAGENO.match(lines[0] or "") else lines
         for line in body:
-            m = RE_LABELLED.match(line)
-            # A cross-reference ("see Exercise 6.2.4 for an answer") appears
-            # mid-sentence; a real exercise starts the line.
-            if m and m.group(3):
+            if head == "problem":
+                m = RE_PROBLEM.match(line)
+                # Two-level numbering: the chapter is the section.
+                hit = bool(m)
+                if hit:
+                    ch, sec, num = int(m.group(1)), int(m.group(1)), int(m.group(2))
+                    rest = m.group(3)
+            else:
+                m = RE_LABELLED.match(line)
+                # A cross-reference ("see Exercise 6.2.4 for an answer") appears
+                # mid-sentence; a real exercise starts the line.
+                hit = bool(m and m.group(3))
+                if hit:
+                    ch, sec, num = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                    rest = m.group(4)
+            if hit:
                 if cur:
                     found.append(cur)
-                ch, sec, num = int(m.group(1)), int(m.group(2)), int(m.group(3))
                 cur = {"chapter": ch, "section": f"{ch}.{sec}", "number": num,
-                       "page": printed, "lines": [m.group(4)]}
+                       "page": printed, "lines": [rest]}
             elif cur is not None:
                 cur["lines"].append(line)
     if cur:

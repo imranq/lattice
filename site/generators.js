@@ -99,6 +99,130 @@
   });
 
   def({
+    id: "multiply-2x2", name: "Two-digit multiplication", domain: "arithmetic",
+    blurb: "Multiply two two-digit numbers using friendly decomposition.",
+    gen(level, r) {
+      const ranges = [[10, 19], [10, 29], [20, 49], [25, 75], [50, 99]];
+      const [lo, hi] = band(level, ranges);
+      const a = r.int(lo, hi), b = r.int(lo, hi);
+      const bt = Math.floor(b / 10) * 10, bo = b % 10;
+      const product = a * b;
+      return {
+        prompt: `${a} × ${b}`, answer: String(product),
+        steps: [`${a} × ${bt} = ${a * bt}`, `${a} × ${bo} = ${a * bo}`,
+                `${a * bt} + ${a * bo} = ${product}`],
+        trick: "Split one factor into tens and ones; keep the partial products visible.",
+      };
+    },
+  });
+
+  def({
+    id: "divide-friendly", name: "Division", domain: "arithmetic",
+    blurb: "Build the dividend from a clean quotient and divisor.",
+    gen(level, r) {
+      const divisors = band(level, [[2, 5], [2, 9], [3, 12], [4, 20], [5, 30]]);
+      const quotients = band(level, [[2, 12], [3, 25], [4, 50], [5, 100], [10, 250]]);
+      const divisor = r.int(divisors[0], divisors[1]);
+      const quotient = r.int(quotients[0], quotients[1]);
+      const dividend = divisor * quotient;
+      return {
+        prompt: `${dividend} ÷ ${divisor}`, answer: String(quotient),
+        steps: [`${divisor} × ${quotient} = ${dividend}`, `so ${dividend} ÷ ${divisor} = ${quotient}`],
+        trick: "Think of division as the inverse of multiplication.",
+      };
+    },
+  });
+
+  def({
+    id: "order-of-operations", name: "Parentheses and order", domain: "arithmetic",
+    blurb: "Evaluate compact expressions without losing the grouping.",
+    gen(level, r) {
+      const a = r.int(2, band(level, [9, 15, 30, 60, 100]));
+      const b = r.int(2, band(level, [6, 10, 15, 25, 50]));
+      const c = r.int(2, band(level, [5, 8, 12, 20, 30]));
+      if (r() < 0.5) {
+        const answer = a + b * c;
+        return { prompt: `${a} + (${b} × ${c})`, answer: String(answer),
+          steps: [`${b} × ${c} = ${b * c}`, `${a} + ${b * c} = ${answer}`],
+          trick: "Parentheses first, then multiplication, then addition." };
+      }
+      const answer = (a + b) * c;
+      return { prompt: `(${a} + ${b}) × ${c}`, answer: String(answer),
+        steps: [`${a} + ${b} = ${a + b}`, `${a + b} × ${c} = ${answer}`],
+        trick: "Do the grouped sum before multiplying." };
+    },
+  });
+
+  def({
+    id: "powers", name: "Powers", domain: "arithmetic",
+    blurb: "Build small powers by repeated multiplication and useful anchors.",
+    gen(level, r) {
+      const base = r.int(2, band(level, [3, 4, 5, 8, 12]));
+      const exponent = r.int(2, band(level, [3, 4, 5, 6, 7]));
+      const answer = base ** exponent;
+      return { prompt: `${base}^${exponent}`, answer: String(answer),
+        steps: [`${base} × `.repeat(Math.max(0, exponent - 1)) + `${base} = ${answer}`],
+        trick: "Use a known square or cube, then multiply by the remaining factor." };
+    },
+  });
+
+  // ---- machine learning ---------------------------------------------------
+
+  def({
+    id: "softmax-2", name: "Softmax", domain: "machine learning",
+    blurb: "Build intuition for logits, normalization, and probabilities.",
+    gen(level, r) {
+      const cases = [
+        { logits: "[0, 0]", answer: "1/2", step: "e^0/(e^0+e^0) = 1/2" },
+        { logits: "[1, 1]", answer: "1/2", step: "equal logits receive equal probability" },
+        { logits: "[2, 2]", answer: "1/2", step: "subtracting the shared offset leaves [0, 0]" },
+      ];
+      const c = r.pick(cases);
+      return {
+        prompt: `For logits ${c.logits}, what is the softmax probability of class 1?`,
+        answer: c.answer,
+        steps: [c.step, `p(class 1) = ${c.answer}`],
+        trick: "Softmax is unchanged when the same constant is added to every logit.",
+      };
+    },
+  });
+
+  def({
+    id: "cross-entropy", name: "Cross-entropy", domain: "machine learning",
+    blurb: "Compute the negative log-likelihood of the correct class.",
+    tolerance: 0.001,
+    gen(level, r) {
+      const p = r.pick([0.5, 0.25, 0.8, 0.9]);
+      const loss = -Math.log(p);
+      return {
+        prompt: `The correct class has predicted probability ${p}. What is its cross-entropy loss? (natural log)`,
+        answer: loss.toFixed(4),
+        tolerance: 0.001,
+        steps: [`−ln(${p}) = ${loss.toFixed(4)}`],
+        trick: "Cross-entropy for a one-hot target is −ln of the probability assigned to the correct class.",
+      };
+    },
+  });
+
+  def({
+    id: "gradient-step", name: "Gradient descent", domain: "machine learning",
+    blurb: "Update a parameter with a gradient and learning rate.",
+    tolerance: 0.001,
+    gen(level, r) {
+      const w = r.int(-5, 9), gradient = r.int(-8, 8) || 3;
+      const eta = r.pick([0.1, 0.2, 0.5]);
+      const next = w - eta * gradient;
+      return {
+        prompt: `Update w = ${w} with gradient ${gradient} and learning rate ${eta}. What is w′?`,
+        answer: next.toFixed(2),
+        tolerance: 0.001,
+        steps: [`w′ = w − ηg = ${w} − (${eta})(${gradient})`, `w′ = ${next.toFixed(2)}`],
+        trick: "Gradient descent moves opposite the gradient.",
+      };
+    },
+  });
+
+  def({
     id: "mult-tricks", name: "Multiplication tricks", domain: "arithmetic",
     blurb: "×11, ×5, ×9, near-100, and difference of squares.",
     gen(level, r) {
@@ -410,15 +534,23 @@
     const want = normalize(problem.answer);
     if (!given) return false;
     if (given === want) return true;
-    const gn = Number(given), wn = Number(want);
+    const numericValue = (s) => {
+      if (/^-?\d+(?:\.\d+)?$/.test(s)) return Number(s);
+      const f = /^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/.exec(s);
+      if (f && Number(f[2]) !== 0) return Number(f[1]) / Number(f[2]);
+      return Number.NaN;
+    };
+    const gn = numericValue(given), wn = numericValue(want);
     if (Number.isFinite(gn) && Number.isFinite(wn)) {
       // Estimation problems accept a band; everything else is exact.
       const tol = problem.tolerance ?? 0;
-      return tol ? Math.abs(gn - wn) <= Math.abs(wn) * tol : gn === wn;
+      if (tol) return Math.abs(gn - wn) <= Math.max(1e-3, Math.abs(wn) * tol);
+      // Generated decimal answers encode the intended precision. Accept a
+      // normally rounded entry, but keep integer drills exact.
+      const decimals = (want.split('.')[1] ?? '').length;
+      const rounding = decimals ? Math.max(5e-4, 0.5 * 10 ** -decimals) : 0;
+      return Math.abs(gn - wn) <= rounding;
     }
-    // a/b entered as a decimal, or unreduced
-    const f = /^(-?\d+)\/(\d+)$/.exec(given);
-    if (f) return normalize(fmtFrac(Number(f[1]), Number(f[2]))) === want;
     return false;
   }
 

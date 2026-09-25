@@ -1,0 +1,195 @@
+{
+ "book_id": "pml_book2",
+ "title": "Probabilistic Machine Learning: Advanced Topics",
+ "authors": "Kevin P. Murphy",
+ "ocr": false,
+ "source_pdf": "/Users/imranqureshi/papers/pml-book2.pdf",
+ "extraction": "pdf_text",
+ "license": "copyrighted - pointers and metadata only, personal use",
+ "n_chapters": 36,
+ "n_exercises": 0,
+ "chapters": [
+  {
+   "chapter": 1,
+   "title": "Introduction",
+   "page": 1
+  },
+  {
+   "chapter": 2,
+   "title": "Probability",
+   "page": 5
+  },
+  {
+   "chapter": 3,
+   "title": "Statistics",
+   "page": 63
+  },
+  {
+   "chapter": 4,
+   "title": "Graphical models",
+   "page": 143
+  },
+  {
+   "chapter": 5,
+   "title": "Information theory",
+   "page": 219
+  },
+  {
+   "chapter": 6,
+   "title": "Optimization",
+   "page": 261
+  },
+  {
+   "chapter": 7,
+   "title": "Inference algorithms: an overview",
+   "page": 345
+  },
+  {
+   "chapter": 8,
+   "title": "Gaussian filtering and smoothing",
+   "page": 359
+  },
+  {
+   "chapter": 9,
+   "title": "Message passing algorithms",
+   "page": 401
+  },
+  {
+   "chapter": 10,
+   "title": "Variational inference",
+   "page": 439
+  },
+  {
+   "chapter": 11,
+   "title": "Monte Carlo methods",
+   "page": 483
+  },
+  {
+   "chapter": 12,
+   "title": "Markov chain Monte Carlo",
+   "page": 499
+  },
+  {
+   "chapter": 13,
+   "title": "Sequential Monte Carlo",
+   "page": 543
+  },
+  {
+   "chapter": 14,
+   "title": "Predictive models: an overview",
+   "page": 575
+  },
+  {
+   "chapter": 15,
+   "title": "Generalized linear models",
+   "page": 591
+  },
+  {
+   "chapter": 16,
+   "title": "Deep neural networks",
+   "page": 631
+  },
+  {
+   "chapter": 17,
+   "title": "Bayesian neural networks",
+   "page": 647
+  },
+  {
+   "chapter": 18,
+   "title": "Gaussian processes",
+   "page": 681
+  },
+  {
+   "chapter": 19,
+   "title": "Beyond the iid assumption",
+   "page": 735
+  },
+  {
+   "chapter": 20,
+   "title": "Generative models: an overview",
+   "page": 773
+  },
+  {
+   "chapter": 21,
+   "title": "Variational autoencoders",
+   "page": 791
+  },
+  {
+   "chapter": 22,
+   "title": "Autoregressive models",
+   "page": 821
+  },
+  {
+   "chapter": 23,
+   "title": "Normalizing flows",
+   "page": 829
+  },
+  {
+   "chapter": 24,
+   "title": "Energy-based models",
+   "page": 849
+  },
+  {
+   "chapter": 25,
+   "title": "Diffusion models",
+   "page": 867
+  },
+  {
+   "chapter": 26,
+   "title": "Generative adversarial networks",
+   "page": 893
+  },
+  {
+   "chapter": 27,
+   "title": "Discovery methods: an overview",
+   "page": 927
+  },
+  {
+   "chapter": 28,
+   "title": "Latent factor models",
+   "page": 929
+  },
+  {
+   "chapter": 29,
+   "title": "State-space models",
+   "page": 979
+  },
+  {
+   "chapter": 30,
+   "title": "Graph learning",
+   "page": 1043
+  },
+  {
+   "chapter": 31,
+   "title": "Nonparametric Bayesian models",
+   "page": 1047
+  },
+  {
+   "chapter": 32,
+   "title": "Representation learning",
+   "page": 1049
+  },
+  {
+   "chapter": 33,
+   "title": "Interpretability",
+   "page": 1073
+  },
+  {
+   "chapter": 34,
+   "title": "Decision making under uncertainty",
+   "page": 1105
+  },
+  {
+   "chapter": 35,
+   "title": "Reinforcement learning",
+   "page": 1145
+  },
+  {
+   "chapter": 36,
+   "title": "Causality",
+   "page": 1185
+  }
+ ],
+ "sections": [],
+ "exercises": []
+}

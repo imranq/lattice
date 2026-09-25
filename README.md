@@ -2,6 +2,79 @@
 
 **Concepts, partially ordered.**
 
+## Current direction
+
+Lattice is a knowledge map for becoming better at hard mathematics. It turns
+books, exercises, generated drills, and personal attempts into one learning
+loop:
+
+```text
+sources → concepts + prerequisite evidence → problems → attempts
+       → mastery, weak prerequisites, and the next useful problem
+```
+
+The product should answer five questions: where am I, what can I learn next,
+what prerequisite is blocking me, what will this unlock, and what should I do
+about it now? Study is the main loop; Graph is the map; Home chooses a useful
+session; Stats explains progress.
+
+### Vision
+
+The raw DAG is an implementation detail. The learner should see a semantic map:
+domains and topology when zoomed out, prioritized concept labels at mid zoom,
+and a selected concept’s local neighborhood at close zoom. Text belongs in the
+persistent inspector, which should make prerequisites, next concepts, sources,
+mastery, and **Practice this** immediately available. A search for a destination
+such as “transformers” should eventually show the shortest actionable path from
+the learner’s current mathematics.
+
+### What we are building now
+
+- One graph spanning textbook sources, Putnam, and the MIT-licensed MATH dataset.
+- Canonical-source-first extraction: official TeX/Markdown/HTML is preferred over
+  PDF text; Mathpix and targeted vision repair are fallbacks for books without a
+  reliable machine-readable source.
+- Difficulty ladders and semantic tags, so “basic probability” selects genuinely
+  accessible material instead of ranking by statement length.
+- Adaptive Study, warm-up ladders, spaced repetition, assessments, mastery, and
+  weak-edge diagnosis.
+- Deterministic search, exact-answer grading, and generated mental-math drills;
+  “2x2 multiplication mental math” routes to `multiply-2x2`.
+- A graph with semantic zoom, a persistent inspector, selected-neighborhood
+  emphasis, frontier/mastery states, and graph-to-Study actions.
+
+### Jev contract
+
+Jev is a typed routing and reasoning service, not the corpus and not the grader
+of everything. It parses practice requests into generated skills, tags, domains,
+difficulty, length, and intent; it shadow-grades proofs and written solutions;
+and it targets extraction repair and semantic tagging. Jev does not rescrape
+pages: vision-capable extraction repairs flattened notation, while Jev identifies
+what needs attention.
+
+Exact answers bypass Jev. Code normalizes fractions, decimals, percentages, and
+boxed answers because that is faster, cheaper, auditable, and more reliable than
+asking a model to compare `30%` with `3/10`. Free-form reasoning remains the
+place where Jev can add value, with confidence and an audit trail, without
+silently overriding the learner’s own mark.
+
+### Roadmap
+
+**Now:** finish MATH ingestion/tagging; broaden deterministic checking; make
+mental-math routing and generators excellent; complete the graph inspector and
+semantic zoom; visually verify the Study UI.
+
+**Next:** per-technique mastery and focus areas; Jev calibration from shadow-log
+evidence; solution-aware feedback; frontier and “show me why” paths; stronger
+cross-book alignment and repaired text.
+
+**Later:** computation/ML destinations; aggregated overview edges; mobile graph
+bottom-sheet inspection; shareable concept URLs and paths; stronger test-out.
+
+The governing rule is: understand the learner → choose the right rung → ask for
+an answer → grade with the least powerful reliable method → update the next step.
+When neither code nor Jev is trustworthy, abstain and ask a better question.
+
 Lattice builds a prerequisite graph from mathematics textbooks, attaches problems to the
 concepts they exercise, and uses your own attempt history to work out what you actually know
 — and, more usefully, which missing prerequisite is blocking you.
@@ -23,7 +96,7 @@ exercises, ordered by a prerequisite graph rather than by topic label.
 
 ## What's in the graph
 
-**3,410 exercises · 457 nodes · 3,694 edges · 6 domains**
+**16,509 exercises · 698 nodes · 18,816 edges · 14 domains**
 
 | Book | Domain | Extraction | Exercises |
 |---|---|---|---|
@@ -35,6 +108,9 @@ exercises, ordered by a prerequisite graph rather than by topic label.
 | Axler, *Linear Algebra Done Right* | linear algebra | pdf, inline | 222 |
 | Stein & Shakarchi, *Complex Analysis* | complex analysis | pdf, inline | 191 |
 | Andrews, *Number Theory* | number theory | **OCR** + pdf, inline | 175 |
+| Zhang et al., *Dive into Deep Learning* | machine learning | official Markdown + LaTeX, stable PDF ids | 740 |
+| Murphy, *Probabilistic Machine Learning* | machine learning | local PDF, exercise labels | 66 |
+| Bishop, *Deep Learning: Foundations and Concepts* | machine learning | local PDF, exercise labels | 227 |
 | Putnam archive 1985–2025 | contest | LaTeX source | 492 |
 
 Andrews had no text layer at all — it is a scan. `ocrmypdf` recovered it cleanly enough
@@ -44,8 +120,8 @@ Not yet in: Bertsekas, Lay and Steele parse as text but need their own extractio
 
 ## Licensing
 
-Only Grinstead & Snell (GFDL) and the Putnam archive are redistributable. For every other
-book Lattice commits **pointers and derived metadata only** — chapter, section, page, topic
+Only sources whose terms permit redistribution are copied into the repository. For every
+other book Lattice commits **pointers and derived metadata only** — chapter, section, page, topic
 group, difficulty tier:
 
 ```json
@@ -146,7 +222,18 @@ python3 scripts/extract_book_pdf.py --pdf ~/papers/tao.pdf --book-id tao \
 
 python3 scripts/build_math_graph.py --books data/processed/books/*.json
 python3 scripts/link_putnam_to_graph.py --topics Probability Combinatorics --primary-topic-only
+
+# Canonical D2L Markdown/LaTeX source; existing exercise ids and attempts stay stable
+git clone --depth 1 --filter blob:none https://github.com/d2l-ai/d2l-en.git /tmp/d2l-en
+python3 scripts/import_d2l_source.py --source /tmp/d2l-en --allow-partial
+python3 scripts/build_math_graph.py --books data/processed/books/*.json
 ```
+
+`import_d2l_source.py` matches official exercises within their legacy chapter,
+replaces only confidently matched local text, and records the canonical source
+path and URL. Unmatched exercises retain their prior text when the upstream
+book edition has changed. This is the preferred path for mathematical notation:
+the source preserves LaTeX instead of flattening it into PDF glyphs.
 
 ### Extraction profiles
 

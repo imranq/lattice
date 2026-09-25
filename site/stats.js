@@ -21,7 +21,10 @@
       const level = rec ? Math.min(4, 1 + Math.floor((rec.n / max) * 3)) : 0;
       cells.push(`<i class="cell l${level}" title="${key}: ${rec ? rec.n : 0} attempts"></i>`);
     }
-    return `<div class="heatmap">${cells.join("")}</div>`;
+    return `<div class="heatmap-wrap"><div class="heatmap">${cells.join("")}</div></div>
+      <div class="heatmap-key"><span>less</span>
+        ${[0, 1, 2, 3, 4].map((l) => `<i class="cell l${l}"></i>`).join("")}
+        <span>more</span></div>`;
   }
 
   async function render() {
@@ -36,19 +39,24 @@
 
     root().innerHTML = `
       <section class="stat-row">
-        ${[["Attempts", stats.attempts], ["Solved", stats.solved],
-           ["Day streak", stats.streak], ["Minutes", stats.minutes],
-           ["Due now", stats.due]].map(([k, v]) =>
-          `<div class="stat-tile"><b>${v}</b><span>${k}</span></div>`).join("")}
+        ${[["Attempts", stats.attempts, `${books.length} sources`, ""],
+           ["Solved", stats.solved, stats.attempts
+             ? `${Math.round((stats.solved / stats.attempts) * 100)}% of attempts`
+             : "no attempts yet", "accent"],
+           ["Day streak", stats.streak, "days running", "amber"],
+           ["Minutes", stats.minutes, "time on problems", ""],
+           ["Due now", stats.due, "scheduled reviews", ""]].map(([k, v, foot, tone]) =>
+          `<div class="stat-tile ${tone}"><b>${v}</b><span>${k}</span>
+             <span class="stat-foot">${esc(foot)}</span></div>`).join("")}
       </section>
 
       <section class="panel">
-        <h2>Activity</h2>
+        <div class="panel-heading"><div><p class="eyebrow">Activity</p><h2>The last 18 weeks</h2></div></div>
         ${activity.length ? heatmap(activity) : `<p class="dim">No attempts recorded yet.</p>`}
       </section>
 
       <section class="panel">
-        <h2>Level by field</h2>
+        <div class="panel-heading"><div><p class="eyebrow">Ability</p><h2>Level by field</h2></div></div>
         <p class="panel-note">An Elo rating per field: each attempt is scored as a match
           between you and the problem, which estimates both at once. Study aims one notch
           below your rating, where the predicted success rate is 85% — the point at which
@@ -68,7 +76,7 @@
       </section>
 
       <section class="panel">
-        <h2>Coverage</h2>
+        <div class="panel-heading"><div><p class="eyebrow">Evidence</p><h2>Coverage</h2></div></div>
         <p class="panel-note">${assessed} of ${concepts} concepts have any evidence
           (${pct(assessed / concepts)}). Mastery is averaged over the assessed ones only —
           a high number on thin coverage means little.</p>
@@ -86,7 +94,7 @@
       </section>
 
       <section class="panel">
-        <h2>Weakest concepts</h2>
+        <div class="panel-heading"><div><p class="eyebrow">Diagnosis</p><h2>Weakest concepts</h2></div></div>
         ${mastery.length ? `<ol class="ranked">${mastery.slice(0, 10).map((m) => `
           <li><a href="#explore|${encodeURIComponent(m.concept_id)}">${esc(m.label)}</a>
             <span class="dim">${pct(m.mastery)} over ${m.attempts} attempt${
@@ -95,27 +103,36 @@
       </section>
 
       ${due.length ? `<section class="panel">
-        <h2>Due for review</h2>
+        <div class="panel-heading"><div><p class="eyebrow">Schedule</p><h2>Due for review</h2></div></div>
         <ul class="ranked">${due.map((d) => `<li>${esc(d.item_id)}
           <span class="dim">${d.reps} rep${d.reps === 1 ? "" : "s"} ·
             ease ${d.ease.toFixed(2)}</span></li>`).join("")}</ul>
       </section>` : ""}
 
       <section class="panel">
-        <h2>Sources</h2>
-        <table class="book-table">
-          <thead><tr><th>Book</th><th>Domain</th><th>Extraction</th>
+        <div class="panel-heading"><div><p class="eyebrow">Library</p><h2>Sources</h2></div>
+          <span class="data-count">every book behind the bank</span></div>
+        <div class="table-scroll"><table class="book-table">
+          <thead><tr><th>Book</th><th>Field</th><th>Extraction</th>
             <th class="num">Problems</th></tr></thead>
           <tbody>${books.map((b) => `<tr>
-            <td>${esc(b.title)}<span class="dim"> ${esc(b.authors ?? "")}</span></td>
+            <td>${b.local_url || b.url
+                  ? `<a class="book-title book-out" href="${esc(b.local_url ?? b.url)}"
+                       target="_blank" rel="noopener">${esc(b.title)}</a>`
+                  : `<span class="book-title">${esc(b.title)}</span>`}
+              ${b.authors ? `<span class="dim"> ${esc(b.authors)}</span>` : ""}
+              ${b.local_url ? `<a class="tag tag-local" href="${esc(b.local_url)}"
+                target="_blank" rel="noopener">local PDF</a>` : ""}</td>
             <td><a href="#subject|${encodeURIComponent(b.domain)}">${esc(b.domain)}</a></td>
             <td><span class="tag">${esc(b.extraction ?? "?")}</span></td>
             <td class="num">${b.exercises.toLocaleString()}</td></tr>`).join("")}
             <tr class="total"><td colspan="3">Total</td>
               <td class="num">${total.toLocaleString()}</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </section>`;
+
+    window.Lattice.typeset(root());
   }
 
   window.Lattice.register("stats", () => render().catch((err) => {
