@@ -1,9 +1,9 @@
 // Home: ask for something, or pick up a problem.
 //
-// Three things and nothing else. A search box that answers as you type (and,
-// on Enter, turns a sentence into a practice set); a handful of problems the
-// ranker thinks you should try next; and the problems you worked most recently.
-// Ratings, plans and the graph live on their own pages.
+// A search box that answers as you type (and, on Enter, turns a sentence into a
+// practice set); the guided path, for when you would rather be told; a handful
+// of problems the ranker thinks you should try next; and the problems you worked
+// most recently. Ratings, plans and the graph live on their own pages.
 (() => {
   const el = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
@@ -45,19 +45,77 @@
   let asking = false;
   let searchTimer = null;
   let due = 0;
+  let greeting = "";
+  let path = null;
+
+  // Real topics from the corpus, each of which the search box finds.
+  const PLACEHOLDERS = [
+    "eigenvalues", "conditional probability", "15 minutes of number theory",
+    "Bayes rule", "induction", "two-digit multiplication", "determinants",
+  ];
+  let placeholderAt = 0;
+  let placeholderTimer = null;
+
+  function rotatePlaceholder() {
+    clearInterval(placeholderTimer);
+    placeholderTimer = setInterval(() => {
+      const input = el("askInput");
+      if (!input) return clearInterval(placeholderTimer);
+      if (input.value || document.activeElement === input) return;
+      placeholderAt = (placeholderAt + 1) % PLACEHOLDERS.length;
+      input.placeholder = `try “${PLACEHOLDERS[placeholderAt]}”`;
+    }, 3200);
+  }
+
+  const ROUTE_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="19" r="2.2"/>
+    <circle cx="18" cy="5" r="2.2"/><path d="M8.2 19H15a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h6.8"/></svg>`;
+
+  /** The guided path, as one button and a list you can open. */
+  function pathPanel() {
+    if (!path?.steps?.length) return "";
+    const step = path.steps[path.current];
+    const dot = (st) => ({ passed: "✓", weak: "!", started: "·", new: "" }[st] ?? "");
+    let stage = "";
+    const list = path.steps.map((st) => {
+      const head = st.stage !== stage ? `<li class="path-stage">${esc(stage = st.stage)}</li>` : "";
+      const stats = st.attempts
+        ? `${st.attempts} tried · ${Math.round((st.accuracy ?? 0) * 100)}% lately` : "";
+      return `${head}<li class="path-step s-${st.status}${st.index === path.current ? " is-current" : ""}">
+        <span class="path-dot">${dot(st.status)}</span>
+        <a href="#study|${esc(st.spec)}">${esc(st.title)}</a>
+        <span class="path-stat">${esc(stats)}</span></li>`;
+    }).join("");
+    return `
+      <div class="path-card">
+        <a class="path-go" href="#study|${esc(step.spec)}">
+          <span class="path-icon">${ROUTE_ICON}</span>
+          <span class="path-text">
+            <span class="path-kicker">Guided path · step ${path.current + 1} of ${path.total}</span>
+            <b>${esc(step.title)}</b>
+            <span class="path-reason">${esc(path.reason)}</span>
+          </span>
+          <span class="path-arrow">→</span>
+        </a>
+        <details class="path-all">
+          <summary>See the whole path · ${path.passed} of ${path.total} done</summary>
+          <ol class="path-list">${list}</ol>
+        </details>
+      </div>`;
+  }
 
   function heroPanel() {
     const chips = [
-      due ? [`Review · ${due} due`, "#study|kind=review&count=12"] : null,
-      ["Quick 5", "#study|kind=study&count=5&difficulty=target"],
+      due ? [`Reviews (${due})`, "#study|kind=review&count=12"] : null,
+      ["5 quick ones", "#study|kind=study&count=5&difficulty=target"],
       ["Mental math", "#study|kind=drill&count=10&label=Mental+math"],
     ].filter(Boolean);
     return `
-      <h1 class="hero-title">What do you want to practice?</h1>
+      ${greeting ? `<p class="home-greeting">${esc(greeting)}</p>` : ""}
+      <h1 class="hero-title">What are you working on?</h1>
       <div class="ask-wrap">
         <form class="ask" id="askForm" autocomplete="off">
           <input id="askInput" class="ask-input" type="text"
-                 placeholder="A topic, a technique, or “20 minutes of probability”"
+                 placeholder="try “${esc(PLACEHOLDERS[placeholderAt])}”"
                  aria-label="Search or describe what you want to practice"
                  aria-controls="askSuggest" aria-autocomplete="list" />
           <button class="ask-go" type="submit" aria-label="Start">→</button>
@@ -66,7 +124,8 @@
       </div>
       <div id="askStatus" class="ask-status" hidden></div>
       <div class="home-chips">${chips.map(([label, href]) =>
-        `<a class="ask-eg" href="${href}">${esc(label)}</a>`).join("")}</div>`;
+        `<a class="ask-eg" href="${href}">${esc(label)}</a>`).join("")}</div>
+      ${pathPanel()}`;
   }
 
   function askStatus(html, tone = "") {
@@ -193,7 +252,7 @@
   function fitLabel(p) {
     const s = p.predicted_success;
     if (s == null) return "";
-    return s >= 0.8 ? "warm-up" : s >= 0.55 ? "your level" : "a stretch";
+    return s >= 0.8 ? "easy start" : s >= 0.55 ? "your level" : "reach";
   }
 
   function suggestCard(p) {
@@ -255,20 +314,36 @@
       </li>`;
   }
 
-  async function paintHistory() {
+  /** One line that knows whether you have been here before. "Last time" is the
+   *  run of attempts within half a day of the most recent one. */
+  function greet(rows) {
+    if (!rows.length) return "Pick anything. It adapts as you go.";
+    const last = rows[0].ts;
+    const missed = rows.filter((r) => last - r.ts < 12 * 3600e3
+      && (r.outcome === "failed" || r.outcome === "partial")).length;
+    return missed ? `Welcome back. ${missed} missed last time.` : "Welcome back.";
+  }
+
+  async function paintHistory(rows) {
     const box = el("homeHistory");
-    const rows = await get("/history?limit=8").catch(() => []);
     box.innerHTML = rows.length ? rows.map(historyRow).join("")
-      : `<li class="history-empty dim">Problems you try will show up here.</li>`;
+      : `<li class="history-empty dim">Nothing yet. The first problem you try shows up here.</li>`;
     window.Lattice.typeset(box);
   }
 
   async function render() {
-    const stats = await get("/stats").catch(() => null);
+    const [stats, history, p] = await Promise.all([
+      get("/stats").catch(() => null),
+      get("/history?limit=8").catch(() => []),
+      get("/path").catch(() => null),
+    ]);
     due = stats?.due ?? 0;
+    greeting = greet(history);
+    path = p;
     el("homeHero").innerHTML = heroPanel();
+    rotatePlaceholder();
     results = [];
-    await Promise.all([paintSuggestions(), paintHistory()]);
+    await Promise.all([paintSuggestions(), paintHistory(history)]);
   }
 
   window.Lattice.register("home", () => render().catch((err) => {

@@ -251,7 +251,9 @@
                ? q.get("assess") : "unit_test",
              difficulty: q.get("difficulty") || "",
              maxDifficulty: q.get("max_difficulty") || "",
-             count: Number(q.get("count")) || 0, label: q.get("label") || "" };
+             count: Number(q.get("count")) || 0, label: q.get("label") || "",
+             // Set when the set is a step on the guided path (lib/path.mjs).
+             path: q.get("path") || "" };
   }
 
   const chipsOn = (sel) =>
@@ -574,7 +576,10 @@
         <p class="dim">${session.solved} of ${session.seen} solved in
           <b>${esc(spec.label || spec.kind)}</b>.</p>
         <div class="card-actions">
-          <button class="btn-primary" data-act="againset">Run it again</button>
+          ${spec.path
+            ? `<button class="btn-primary" data-act="pathnext">Next step</button>
+               <button class="ghost-btn" data-act="againset">Run it again</button>`
+            : `<button class="btn-primary" data-act="againset">Run it again</button>`}
           <a class="ghost-btn" href="#home">Back to today</a>
           <a class="ghost-btn" href="#study">Free practice</a>
         </div>
@@ -1082,10 +1087,11 @@
   root() && document.addEventListener("click", async (ev) => {
     if (!window.Lattice.visible("study")) return;
     const grade = ev.target.closest("[data-grade]");
-    const act = ev.target.closest("[data-act]")?.dataset.act;
+    let act = ev.target.closest("[data-act]")?.dataset.act;
     // Most actions are about the problem on screen. These are not: they run from
     // the setup and results cards, when there is no current problem at all.
-    const CARD_ACTS = new Set(["starttest", "newtest", "practice", "againset", "endtest"]);
+    const CARD_ACTS = new Set(["starttest", "newtest", "practice", "againset", "endtest",
+                               "pathnext"]);
     if (!current && !CARD_ACTS.has(act)) return;
 
     if (act === "next") return next();
@@ -1184,6 +1190,15 @@
       served.clear();
       queue = [];
       return next();
+    }
+    if (act === "pathnext") {
+      // The path decides from the attempt log, so a step that was not passed
+      // comes back as the same step: run it again rather than going nowhere.
+      const path = await get("/path").catch(() => null);
+      const step = path?.steps?.[path.current];
+      if (!step) return;
+      if (JSON.stringify(parseSpec(step.spec)) === JSON.stringify(spec)) act = "againset";
+      else { location.hash = `#study|${step.spec}`; return; }
     }
     if (act === "againset") {
       itemsServed = false;
