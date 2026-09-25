@@ -192,6 +192,9 @@
   // ladder recognises, which is the only way a concept reaches `mastered` —
   // so this must never be set from anything but a real assessment set.
   let assessment = null;   // { kind, book, chapter, before: Map, meta }
+  // An `items` set opens with the problems it names, then carries on as
+  // ordinary practice in their field. This records that the opening is done.
+  let itemsServed = false;
 
   // Adaptive difficulty: a weighted up-down staircase over the Elo target.
   //
@@ -241,7 +244,7 @@
     const kind = q.get("kind");
     if (!kind) return null;
     return { kind, domains: list("domains"), books: list("books"), skills: list("skills"),
-             concepts: list("concepts"),
+             concepts: list("concepts"), items: list("items"),
              // An assessment names its own scope: one book, optionally one unit.
              book: q.get("book") || "", chapter: q.get("chapter"),
              assessKind: ["challenge", "mastery"].includes(q.get("assess"))
@@ -264,7 +267,7 @@
     ? (spec.kind === "drill" ? [] : (spec.books.length ? spec.books : allIds("books")))
     : picks.books);
   const selectedSkills = () => (spec
-    ? (spec.kind === "study" || spec.kind === "review" ? []
+    ? (spec.kind === "study" || spec.kind === "review" || spec.kind === "items" ? []
        : (spec.skills.length ? spec.skills : allIds("skills")))
     : picks.skills);
 
@@ -297,6 +300,17 @@
       queue = shuffle(items.map((p) => ({ kind: "problem", problem: p })));
       test = { length: items.length, index: 0, results: [] };
       return;
+    }
+    if (spec?.kind === "items" && !itemsServed) {
+      itemsServed = true;
+      const picked = spec.items.length
+        ? await get(`/items?ids=${encodeURIComponent(spec.items.join(","))}`).catch(() => [])
+        : [];
+      if (picked.length) {
+        picked.forEach((p) => served.add(p.id));
+        queue = picked.map((p) => ({ kind: "problem", problem: p }));
+        return;
+      }
     }
     const domains = selectedDomains();
     const books = selectedBooks();
@@ -1172,6 +1186,7 @@
       return next();
     }
     if (act === "againset") {
+      itemsServed = false;
       session = { seen: 0, solved: 0 };
       reshuffle();
       paintSession();
@@ -1463,6 +1478,7 @@
     reshuffle();
     served.clear();
     queue = [];
+    itemsServed = false;
     // Leaving or changing a set abandons any paper in progress; an assessment
     // must never outlive the route that started it.
     assessment = null;

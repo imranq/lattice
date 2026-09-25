@@ -2429,3 +2429,147 @@ body { overflow-x: hidden; }
   font-size: 0.8rem;
 }
 .test-domain-name { text-transform: capitalize; }
+
+/* ---------------------------------------------------------------------------
+   Home: search, suggestions, recent
+   ------------------------------------------------------------------------- */
+.home-simple {
+  max-width: 880px;
+  margin: 0 auto;
+  padding-bottom: var(--gap-6, 48px);
+}
+.home-simple .hero { padding-top: clamp(24px, 6vh, 64px); }
+
+.ask-wrap {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.ask-suggest {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-3);
+  max-height: 360px;
+  overflow-y: auto;
+}
+.ask-suggest[hidden] { display: none; }
+.palette-kind.k-practice { color: var(--primary); border-color: var(--primary-line); background: var(--primary-soft); }
+
+.home-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap-2);
+  margin-top: var(--gap-4);
+}
+.home-chips .ask-eg { text-decoration: none; }
+
+.home-block { margin-top: clamp(32px, 6vh, 56px); }
+.home-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap-3);
+  margin-bottom: var(--gap-3);
+}
+.home-head h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.suggest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--gap-3);
+}
+.suggest-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+.suggest-card:hover {
+  text-decoration: none;
+  border-color: var(--primary-line);
+  box-shadow: var(--shadow-2);
+  transform: translateY(-1px);
+}
+.suggest-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-2);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+}
+.suggest-fit { color: var(--accent); }
+.suggest-title { font-size: 0.95rem; font-weight: 600; line-height: 1.35; }
+.suggest-text,
+.history-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--text-2);
+  font-family: var(--serif);
+  line-height: 1.5;
+}
+.suggest-text { -webkit-line-clamp: 4; line-clamp: 4; font-size: 0.98rem; }
+.suggest-cite { margin-top: auto; font-size: 0.72rem; color: var(--text-3); }
+
+.history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.history-row {
+  display: grid;
+  grid-template-columns: 76px 1fr auto;
+  align-items: start;
+  gap: var(--gap-3);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.history-outcome {
+  justify-self: start;
+  margin-top: 2px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--text-3);
+}
+.history-outcome.o-ok { color: var(--ok); border-color: var(--accent-line); background: var(--accent-soft); }
+.history-outcome.o-part { color: var(--amber); border-color: var(--amber-soft); background: var(--amber-soft); }
+.history-outcome.o-bad { color: var(--danger); border-color: var(--danger-soft); background: var(--danger-soft); }
+.history-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.history-body b { font-size: 0.92rem; font-weight: 600; }
+.history-text { -webkit-line-clamp: 2; line-clamp: 2; font-size: 0.92rem; }
+.history-meta { font-size: 0.74rem; color: var(--text-3); }
+.history-empty { padding: 18px 0; }
+
+@media (max-width: 560px) {
+  .history-row { grid-template-columns: 1fr auto; }
+  .history-outcome { grid-column: 1 / -1; }
+}

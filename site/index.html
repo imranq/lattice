@@ -95,25 +95,22 @@
   <main>
     <!-- ============ Home ============ -->
     <section id="v-home" class="view active">
-      <section id="homeHero" class="hero"></section>
-      <section class="stat-row" id="homeStats"></section>
-      <div class="home-grid">
-        <div class="home-main">
-          <section class="panel" id="homePlan"></section>
-          <section class="panel" id="homeFrontier"></section>
-          <section class="panel" id="homeActivity"></section>
-          <section class="panel">
-            <div class="panel-heading">
-              <div><p class="eyebrow">Subjects</p><h2>Pick a field</h2></div>
-              <a class="link-btn" href="#explore">full graph →</a>
-            </div>
-            <div id="subjectMap" class="subject-map"></div>
-          </section>
-        </div>
-        <aside class="home-side">
-          <section class="panel" id="homeLevels"></section>
-          <section class="panel" id="homeWeak"></section>
-        </aside>
+      <div class="home-simple">
+        <section id="homeHero" class="hero"></section>
+        <section class="home-block">
+          <div class="home-head">
+            <h2>Try one of these</h2>
+            <button id="homeShuffle" class="link-btn" type="button">Show others</button>
+          </div>
+          <div id="homeSuggest" class="suggest-grid"></div>
+        </section>
+        <section class="home-block">
+          <div class="home-head">
+            <h2>Recent</h2>
+            <a class="link-btn" href="#stats">All stats →</a>
+          </div>
+          <ol id="homeHistory" class="history"></ol>
+        </section>
       </div>
     </section>
 
