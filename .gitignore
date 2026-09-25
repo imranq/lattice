@@ -19,3 +19,8 @@ data/local/
 
 # MATH dataset parquet: re-fetch with scripts/fetch_math_dataset.py.
 data/raw/math_dataset/
+
+# Cloud build output: node cloud/build.mjs
+cloud/pages/dist/
+cloud/api/assets/
+.wrangler/

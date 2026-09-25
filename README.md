@@ -298,3 +298,26 @@ State lives in SQLite at `data/lattice.db` (gitignored — personal history).
   score; the filter applies it only to OCR sources, because digital text from Tao or Herstein
   is legitimately symbol-dense and would otherwise be hidden too. Chapters 4, 6 and 8 yielded
   no exercises.
+
+## Cloud deploy
+
+The public app runs at https://lattice-app.pages.dev on Cloudflare:
+
+- `cloud/pages/`: the `lattice-app` Pages project. It serves `site/`, gives each
+  visitor an anonymous `lattice_uid` cookie, and forwards `/api/*` to the Worker.
+- `cloud/api/`: the `lattice-api` Worker. Each learner is a Durable Object with
+  its own SQLite database. The DO's SQL API is synchronous, so it runs
+  `lib/api.mjs` and everything under it unchanged, just as `server.mjs` does
+  locally.
+
+`npm run cloud:deploy` builds both halves and deploys them. Only committed
+pipeline output is published: `data/local/` (textbook text and the tags derived
+from it) stays on this machine, so the cloud serves the MATH dataset, Putnam,
+and Grinstead–Snell problems, with pointers to everything else. Cadence export
+and local PDFs are local-only.
+
+Jev is off in the cloud until the key is set:
+
+```bash
+cd cloud/api && npx wrangler secret put TYPESAFE_API_KEY
+```
