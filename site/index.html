@@ -28,6 +28,8 @@
         processEscapes: true,
         processEnvironments: true,
         packages: { "[+]": ["ams", "boldsymbol", "mathtools"] },
+        // The Putnam archive's solutions use \mymod{p} for a parenthesised mod.
+        macros: { mymod: ["\\pmod{#1}", 1] },
       },
       loader: { load: ["[tex]/ams", "[tex]/boldsymbol", "[tex]/mathtools"] },
       chtml: { scale: 1.0, displayAlign: "left", displayIndent: "0" },
@@ -37,12 +39,23 @@
         // not to a red error string in the middle of a problem.
         renderActions: { addMenu: [] },
       },
-      startup: { typeset: false },
+      startup: {
+        typeset: false,
+        // MathJax loads async so a slow CDN never holds up the app. Anything
+        // the views rendered before it arrived is still raw TeX; typeset it now.
+        pageReady: () => MathJax.startup.defaultPageReady()
+          .then(() => MathJax.typesetPromise([document.body]))
+          .catch(() => {}),
+      },
     };
   </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script defer src="app-shell.js"></script>
   <script defer src="generators.js"></script>
+  <script defer src="generators-ml.js"></script>
+  <script defer src="generators-einsum.js"></script>
+  <script defer src="generators-books.js"></script>
+  <script defer src="generators-putnam.js"></script>
   <script defer src="graph.js"></script>
   <script defer src="study.js?v=20260923-feedback-solution"></script>
   <script defer src="home.js"></script>
@@ -104,6 +117,15 @@
           </div>
           <div id="homeSuggest" class="suggest-grid"></div>
         </section>
+        <!-- Progress sits under the suggestions: the search box and what to do
+             next come first, how it's going second. Hidden until there's history. -->
+        <section class="home-block" id="homeProgressBlock" hidden>
+          <div class="home-head">
+            <h2>Your progress</h2>
+            <a class="link-btn" href="#stats">All stats →</a>
+          </div>
+          <div id="homeProgress" class="progress-grid"></div>
+        </section>
         <section class="home-block">
           <div class="home-head">
             <h2>Where you left off</h2>
@@ -140,8 +162,8 @@
 
             <div class="side-block set-only">
               <p class="field-label">Stay with the set</p>
-              <p class="side-coach">Solve one problem at a time. Submit for feedback, use a hint when you need one, then continue.</p>
-              <p class="shortcut-note"><kbd>⌘↵</kbd> submit <kbd>H</kbd> hint <kbd>G</kbd> next</p>
+              <p class="side-coach">Solve one problem at a time. Submit for feedback, use a hint if the problem has one, then continue.</p>
+              <p class="shortcut-note"><kbd>⌘↵</kbd> submit <kbd>G</kbd> next</p>
             </div>
 
             <div class="side-block free-only">
@@ -159,7 +181,7 @@
                 <button type="button" class="active" data-diff="adaptive">Adaptive</button>
                 <button type="button" data-diff="harder">Harder</button>
               </div>
-              <p class="shortcut-note" id="diffNote">aiming at 85% success</p>
+              <p class="shortcut-note" id="diffNote">Aiming at about 85% success.</p>
             </div>
 
             <!-- Three independent multi-selects. A field filters; a book or a
@@ -218,10 +240,17 @@
     <!-- ============ Graph ============ -->
     <section id="v-explore" class="view">
       <div class="graph-stage">
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" tabindex="0" role="application" aria-roledescription="concept graph"
+                aria-label="Concept graph. Arrow keys move between concepts, Enter opens one, plus and minus zoom, 0 fits the view, Escape closes."
+                aria-describedby="graphAnnounce"></canvas>
+        <p id="graphAnnounce" class="sr-only" aria-live="polite"></p>
         <div class="graph-overlay graph-controls-overlay">
-          <input id="graphSearch" type="search" placeholder="Find a concept…" />
-          <select id="domainFilter" aria-label="Filter by domain"><option value="">All domains</option></select>
+          <span class="graph-search">
+            <input id="graphSearch" type="search" placeholder="Find a concept…"
+                   aria-label="Find a concept" aria-describedby="graphSearchCount" />
+            <span id="graphSearchCount" class="graph-search-count" aria-live="polite"></span>
+          </span>
+          <select id="domainFilter" aria-label="Filter by field"><option value="">All fields</option></select>
           <label class="toggle"><input type="checkbox" id="showMastery" checked /><span>Mastery</span></label>
           <label class="toggle"><input type="checkbox" id="showLabels" checked /><span>Labels</span></label>
           <button id="replay" class="ghost-btn" type="button">Fit to view</button>

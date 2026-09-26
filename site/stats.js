@@ -38,8 +38,11 @@
     const total = books.reduce((a, b) => a + b.exercises, 0);
 
     root().innerHTML = `
+      <p class="saved-note">${stats.saved_in === "browser"
+        ? "Your progress is saved in this browser. There are no accounts, so a different browser or device starts fresh."
+        : "Your progress is saved on this machine."}</p>
       <section class="stat-row">
-        ${[["Attempts", stats.attempts, `${books.length} sources`, ""],
+        ${[["Attempts", stats.attempts, "problems answered", ""],
            ["Solved", stats.solved, stats.attempts
              ? `${Math.round((stats.solved / stats.attempts) * 100)}% of attempts`
              : "no attempts yet", "accent"],
@@ -58,9 +61,9 @@
       <section class="panel">
         <div class="panel-heading"><div><p class="eyebrow">Ability</p><h2>Level by field</h2></div></div>
         <p class="panel-note">An Elo rating per field: each attempt is scored as a match
-          between you and the problem, which estimates both at once. Study aims one notch
-          below your rating, where the predicted success rate is 85% — the point at which
-          learning is fastest.</p>
+          between you and the problem, which estimates both at once. Everyone starts at
+          1200. Study picks problems about 300 points below your rating, where you should
+          get about 85% right — the point at which learning is fastest.</p>
         ${(ability.domains ?? []).filter((d) => d.pool).map((d) => `
           <div class="cov-row">
             <span class="cov-label"><a href="#subject|${encodeURIComponent(d.domain)}">${
@@ -71,15 +74,16 @@
             <span class="cov-sub">${d.attempts
               ? `${d.attempts} attempt${d.attempts === 1 ? "" : "s"}${
                   d.confident ? "" : " · provisional"}`
-              : "not started"} · aims at ${d.target_rating}</span>
+              : "not started"} · next problems rated about ${d.target_rating}</span>
           </div>`).join("")}
       </section>
 
       <section class="panel">
         <div class="panel-heading"><div><p class="eyebrow">Evidence</p><h2>Coverage</h2></div></div>
-        <p class="panel-note">${assessed} of ${concepts} concepts have any evidence
-          (${pct(assessed / concepts)}). Mastery is averaged over the assessed ones only —
-          a high number on thin coverage means little.</p>
+        <p class="panel-note">You have answered problems on ${assessed} of the
+          ${window.Lattice.count(concepts, "concept")} you can practice here
+          (${pct(concepts ? assessed / concepts : 0)}). Mastery is averaged over those only,
+          so a high number on thin coverage means little.</p>
         ${coverage.map((c) => `
           <div class="cov-row">
             <span class="cov-label"><a href="#subject|${encodeURIComponent(c.domain)}">${
@@ -87,8 +91,8 @@
             <span class="cov-track"><span class="cov-fill" style="width:${
               pct(c.coverage)}"></span></span>
             <span class="cov-num">${pct(c.coverage)}</span>
-            <span class="cov-sub">${c.assessed}/${c.concepts} concepts · ${
-              c.exercises} exercises${c.mastery !== null
+            <span class="cov-sub">${c.assessed}/${window.Lattice.count(c.concepts, "concept")} · ${
+              window.Lattice.count(c.exercises, "problem")}${c.mastery !== null
                 ? ` · mastery ${pct(c.mastery)}` : ""}</span>
           </div>`).join("")}
       </section>
@@ -104,17 +108,21 @@
 
       ${due.length ? `<section class="panel">
         <div class="panel-heading"><div><p class="eyebrow">Schedule</p><h2>Due for review</h2></div></div>
-        <ul class="ranked">${due.map((d) => `<li>${esc(d.item_id)}
-          <span class="dim">${d.reps} rep${d.reps === 1 ? "" : "s"} ·
-            ease ${d.ease.toFixed(2)}</span></li>`).join("")}</ul>
+        <ul class="ranked">${due.map((d) => `<li><a href="#study|${new URLSearchParams({
+            kind: "items", items: d.item_id })}">${esc(d.label ?? "A problem")}</a>
+          <span class="dim">${esc(d.book_title ?? "")} · reviewed ${
+            window.Lattice.count(d.reps, "time")}</span></li>`).join("")}</ul>
       </section>` : ""}
 
       <section class="panel">
         <div class="panel-heading"><div><p class="eyebrow">Library</p><h2>Sources</h2></div>
           <span class="data-count">every book behind the bank</span></div>
+        ${books.some((b) => b.reference_only) ? `<p class="panel-note">Books marked
+          <span class="tag">reference</span> are copyrighted, so their problems aren't
+          hosted on this site. Each title links to the book.</p>` : ""}
         <div class="table-scroll"><table class="book-table">
-          <thead><tr><th>Book</th><th>Field</th><th>Extraction</th>
-            <th class="num">Problems</th></tr></thead>
+          <thead><tr><th>Book</th><th>Field</th>
+            <th class="num">Problems here</th></tr></thead>
           <tbody>${books.map((b) => `<tr>
             <td>${b.local_url || b.url
                   ? `<a class="book-title book-out" href="${esc(b.local_url ?? b.url)}"
@@ -123,10 +131,10 @@
               ${b.authors ? `<span class="dim"> ${esc(b.authors)}</span>` : ""}
               ${b.local_url ? `<a class="tag tag-local" href="${esc(b.local_url)}"
                 target="_blank" rel="noopener">local PDF</a>` : ""}</td>
-            <td><a href="#subject|${encodeURIComponent(b.domain)}">${esc(b.domain)}</a></td>
-            <td><span class="tag">${esc(b.extraction ?? "?")}</span></td>
-            <td class="num">${b.exercises.toLocaleString()}</td></tr>`).join("")}
-            <tr class="total"><td colspan="3">Total</td>
+            <td>${esc(b.domain)}</td>
+            <td class="num">${b.reference_only ? `<span class="tag">reference</span>`
+              : b.exercises.toLocaleString()}</td></tr>`).join("")}
+            <tr class="total"><td colspan="2">Total</td>
               <td class="num">${total.toLocaleString()}</td></tr>
           </tbody>
         </table></div>

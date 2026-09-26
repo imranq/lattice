@@ -350,7 +350,10 @@
         13: "add 4× the last digit to the rest",
       }[d];
       return { prompt: `Is ${n} divisible by ${d}?`, answer: yes ? "yes" : "no",
-               choices: ["yes", "no"], steps: [`${how}`, `${n} mod ${d} = ${n % d}`],
+               format: "choice",
+               mistakes: [{ answer: yes ? "no" : "yes",
+                            why: `${n} = ${d} × ${Math.floor(n / d)} + ${n % d}: the remainder is ${n % d}.` }],
+               steps: [`${how}`, `${n} mod ${d} = ${n % d}`],
                trick: `Test for ${d}: ${how}.` };
     },
   });
@@ -529,7 +532,135 @@
     String(s ?? "").trim().toLowerCase().replace(/\s+/g, "")
       .replace(/^\+/, "").replace(/,/g, "");
 
+  // ---- einsum by meaning ----------------------------------------------------
+  //
+  // An einsum answer is right if it computes the right thing, however it is
+  // spelled: "ij,jk->ik" and "ab,bc->ac" are the same answer. So instead of
+  // comparing strings, run both specs on the same fixed random integer operands
+  // and compare the results. Small sizes keep this to a few thousand multiplies.
+
+  /** Pull "ij,jk->ik" out of whatever was typed: a bare spec, einops-style
+   *  "i j, j k -> i k", or a whole `torch.einsum("…", A, B)` call. */
+  function einsumSpec(raw) {
+    let s = String(raw ?? "").trim();
+    const quoted = /["']([^"']+)["']/.exec(s);
+    if (quoted) s = quoted[1];
+    s = s.replace(/\s+/g, "").replace(/→/g, "->");
+    return /^[a-zA-Z]*(,[a-zA-Z]*)*(->[a-zA-Z]*)?$/.test(s) ? s : null;
+  }
+
+  /** Evaluate `spec` on operands [{ shape, data }]; null if it does not apply. */
+  function einsumEval(spec, ops) {
+    let [lhs, out] = spec.split("->");
+    const ins = lhs.split(",");
+    if (ins.length !== ops.length) return null;
+    const size = {};
+    for (let k = 0; k < ins.length; k++) {
+      if (ins[k].length !== ops[k].shape.length) return null;
+      for (let a = 0; a < ins[k].length; a++) {
+        const c = ins[k][a], n = ops[k].shape[a];
+        if (size[c] !== undefined && size[c] !== n) return null;
+        size[c] = n;
+      }
+    }
+    if (out === undefined) {                      // numpy's implicit mode
+      const once = Object.keys(size).filter((c) => lhs.split(c).length === 2);
+      out = once.sort().join("");
+    }
+    if (new Set(out).size !== out.length || [...out].some((c) => size[c] === undefined)) return null;
+    const axes = Object.keys(size);
+    const outShape = [...out].map((c) => size[c]);
+    const result = new Array(outShape.reduce((a, b) => a * b, 1)).fill(0);
+    const at = {};
+    const flat = (letters, shape) => {
+      let i = 0;
+      for (let a = 0; a < letters.length; a++) i = i * shape[a] + at[letters[a]];
+      return i;
+    };
+    (function loop(d) {
+      if (d === axes.length) {
+        let prod = 1;
+        for (let k = 0; k < ops.length; k++) prod *= ops[k].data[flat(ins[k], ops[k].shape)];
+        result[flat(out, outShape)] += prod;
+        return;
+      }
+      for (let v = 0; v < size[axes[d]]; v++) { at[axes[d]] = v; loop(d + 1); }
+    })(0);
+    return { shape: outShape, data: result };
+  }
+
+  /** Fixed pseudo-random integer operands for the shapes a problem declares. */
+  function einsumOperands(shapes) {
+    const r = rngFrom(0x5eed);
+    return shapes.map((shape) => ({
+      shape, data: Array.from({ length: shape.reduce((a, b) => a * b, 1) }, () => r.int(-4, 5) || 1),
+    }));
+  }
+
+  // ---- proofs as ordered lines ----------------------------------------------
+  //
+  // An "order" problem gives a proof's lines shuffled together with plausible
+  // wrong ones. The answer is a sequence of line ids. Each step may say which
+  // steps it needs (`after`, default: the one before it), so steps that commute
+  // can come in either order and still be right.
+
+  const orderIds = (input) => (Array.isArray(input) ? input : String(input ?? "").split(","))
+    .map((x) => String(x).trim()).filter(Boolean);
+
+  function orderProblemOK(problem, input) {
+    const ids = orderIds(input);
+    const want = problem.steps.map((st) => st.id);
+    if (ids.length !== want.length || new Set(ids).size !== ids.length) return false;
+    if (!ids.every((id) => want.includes(id))) return false;
+    const pos = new Map(ids.map((id, i) => [id, i]));
+    return problem.steps.every((st, i) => (st.after ?? (i ? [want[i - 1]] : []))
+      .every((dep) => pos.get(dep) < pos.get(st.id)));
+  }
+
+  /** Why an ordering is wrong, in words: a planted line, a gap, or an order slip. */
+  function orderDiagnosis(problem, input) {
+    const ids = orderIds(input);
+    const extra = problem.extras.find((x) => ids.includes(x.id));
+    if (extra) return { answer: null, why: `“${extra.text}” doesn't belong: ${extra.why}` };
+    const missing = problem.steps.find((st) => !ids.includes(st.id));
+    if (missing) return { answer: null, why: `A step is missing. The proof needs every link; one of the unused lines is essential.` };
+    const pos = new Map(ids.map((id, i) => [id, i]));
+    const text = new Map(problem.steps.map((st) => [st.id, st.text]));
+    for (const [i, st] of problem.steps.entries()) {
+      const deps = st.after ?? (i ? [problem.steps[i - 1].id] : []);
+      const late = deps.find((d) => pos.get(d) > pos.get(st.id));
+      if (late) return { answer: null, why: `“${st.text}” relies on “${text.get(late)}”, which comes after it.` };
+    }
+    return null;
+  }
+
+  /** Two integers from "3, -2", "(3,-2)", "x=3 y=-2". */
+  function pairOf(input) {
+    const m = String(input ?? "").match(/-?\d+/g);
+    return m && m.length === 2 ? m.map(Number) : null;
+  }
+
   function check(problem, input) {
+    if (problem.kind === "order") return orderProblemOK(problem, input);
+    if (problem.kind === "pair") {
+      // Any solution is right: check it by substitution, not against one answer.
+      const xy = pairOf(input);
+      return Boolean(xy) && problem.pair.a * xy[0] + problem.pair.b * xy[1] === problem.pair.c;
+    }
+    if (problem.kind === "einsum") {
+      const mine = einsumSpec(input), want = einsumSpec(problem.answer);
+      if (!mine || !want) return false;
+      const ops = einsumOperands(problem.shapes);
+      const a = einsumEval(mine, ops), b = einsumEval(want, ops);
+      return Boolean(a && b) && a.shape.join() === b.shape.join()
+        && a.data.every((x, i) => x === b.data[i]);
+    }
+    // Shapes are compared as lists of sizes, however they are written:
+    // "(2, 8, 10)", "2x8x10" and "[2,8,10]" are the same answer.
+    if (problem.kind === "shape") {
+      const dims = (s) => (String(s ?? "").match(/\d+/g) ?? []).join(",");
+      return dims(input) !== "" && dims(input) === dims(problem.answer);
+    }
     const given = normalize(input);
     const want = normalize(problem.answer);
     if (!given) return false;
@@ -544,7 +675,11 @@
     if (Number.isFinite(gn) && Number.isFinite(wn)) {
       // Estimation problems accept a band; everything else is exact.
       const tol = problem.tolerance ?? 0;
-      if (tol) return Math.abs(gn - wn) <= Math.max(1e-3, Math.abs(wn) * tol);
+      // Estimates: right if within a factor of `factor` either way.
+      if (problem.factor && wn > 0) return gn > 0 && gn / wn <= problem.factor && wn / gn <= problem.factor;
+      // Relative, with a floor only for answers at zero: an absolute floor of
+      // 1e-3 accepted 0.000001 for a variance of 0.000225.
+      if (tol) return Math.abs(gn - wn) <= Math.max(1e-9, Math.abs(wn) * tol);
       // Generated decimal answers encode the intended precision. Accept a
       // normally rounded entry, but keep integer drills exact.
       const decimals = (want.split('.')[1] ?? '').length;
@@ -554,18 +689,126 @@
     return false;
   }
 
-  const SKILLS = Object.values(G).map((g) => ({
+  // ---- misconceptions and multiple choice ----------------------------------
+  //
+  // A generator may return `mistakes`: [{ answer, why }], each the value a
+  // specific error produces ("forgot the bias", "padded one side only"). They
+  // do two jobs. Typed answers that match one get its explanation instead of a
+  // bare "wrong". And they are the distractors of the multiple-choice form, so a
+  // wrong pick is always a real error with a reason, never a random number.
+  //
+  // Conceptual generators return `format: "choice"` with `answer` as the correct
+  // statement and `mistakes` as wrong statements: they are only ever multiple choice.
+
+  /** The misconception a typed answer matches, if any. */
+  function diagnose(problem, input) {
+    if (problem.kind === "order") return orderProblemOK(problem, input) ? null : orderDiagnosis(problem, input);
+    if (problem.kind === "pair") {
+      const xy = pairOf(input);
+      if (!xy) return { answer: null, why: "Give two integers, x and y, like “3, -2”." };
+      const { a, b, c } = problem.pair;
+      const got = a * xy[0] + b * xy[1];
+      return got === c ? null : { answer: null,
+        why: `With x = ${xy[0]}, y = ${xy[1]}: ${a}·(${xy[0]}) + ${b}·(${xy[1]}) = ${got}, not ${c}.` };
+    }
+    if (!problem.mistakes?.length) return null;
+    const probe = { ...problem, tolerance: problem.tolerance };
+    for (const m of problem.mistakes) {
+      if (check({ ...probe, answer: m.answer }, input)) return m;
+    }
+    return null;
+  }
+
+  /** Near-miss numbers for when a generator names fewer than three mistakes. */
+  function fillerValues(answer, r) {
+    const frac = /^(-?\d+)\/(\d+)$/.exec(String(answer));
+    if (frac) {
+      const a = Number(frac[1]), b = Number(frac[2]);
+      return [fmtFrac(-a, b), fmtFrac(b, a || 1), fmtFrac(a + b, b), fmtFrac(a, 2 * b), fmtFrac(2 * a, b)]
+        .filter((x) => x !== answer && !x.includes("NaN")).sort(() => r() - 0.5);
+    }
+    const n = Number(answer);
+    if (!Number.isFinite(n)) return [];
+    const isInt = Number.isInteger(n);
+    const out = isInt
+      ? [n + 1, n - 1, n * 2, Math.round(n / 2), n + 10, n * 10]
+      : [n * 2, n / 2, n + 0.1, n - 0.1, 1 - n].map((x) => +x.toFixed(4));
+    return out.filter((x) => x !== n && Number.isFinite(x) && !(n > 0 && x < 0))
+      .sort(() => r() - 0.5);
+  }
+
+  /** Answer plus up to three distinct distractors, in a seeded order. */
+  function buildChoices(p, r) {
+    const seen = [];
+    const same = (a, b) => check({ ...p, answer: String(a) }, String(b));
+    const take = (text, why, correct) => {
+      if (seen.length >= 4 || seen.some((c) => same(c.text, text) || same(text, c.text))) return;
+      seen.push({ text: String(text), why: why ?? null, correct });
+    };
+    take(p.answer, null, true);
+    for (const m of p.mistakes ?? []) take(m.answer, m.why, false);
+    if (p.kind === "shape") {
+      // Near-miss shapes: two axes swapped, the last axis dropped, a stray axis of 1.
+      const dims = (String(p.answer).match(/\d+/g) ?? []).map(Number);
+      const alt = [];
+      if (dims.length > 1) alt.push([dims[1], dims[0], ...dims.slice(2)], dims.slice(0, -1));
+      alt.push([...dims, 1], [1, ...dims]);
+      for (const d of alt.sort(() => r() - 0.5)) {
+        if (seen.length >= 4) break;
+        take(`(${d.join(", ")})`, "That shape doesn't follow from the pattern: track each axis from input to output.", false);
+      }
+    } else if (p.format !== "choice") {
+      for (const x of fillerValues(p.answer, r)) {
+        if (seen.length >= 4) break;
+        take(x, "Not a value any step of the method produces: recheck the working.", false);
+      }
+    }
+    if (seen.length < 2) return null;
+    // Fisher–Yates on the seeded stream, so a (skill, level, seed) replays exactly.
+    for (let i = seen.length - 1; i > 0; i--) {
+      const j = Math.floor(r() * (i + 1));
+      [seen[i], seen[j]] = [seen[j], seen[i]];
+    }
+    return seen;
+  }
+
+  const skillInfo = (g) => ({
     id: g.id, name: g.name, domain: g.domain, blurb: g.blurb, levels: 5,
-  }));
+    source: g.source ?? null, concepts: g.concepts ?? [],
+  });
+  const SKILLS = Object.values(G).map(skillInfo);
+
+  /** Register a generator from another file (generators-ml.js). */
+  function define(g) {
+    if (G[g.id]) throw new Error(`duplicate skill: ${g.id}`);
+    def(g);
+    SKILLS.push(skillInfo(g));
+  }
 
   function generate(skillId, level = 1, seed = Math.floor(Math.random() * 2 ** 31)) {
     const g = G[skillId];
     if (!g) throw new Error(`unknown skill: ${skillId}`);
     const lvl = Math.max(1, Math.min(5, level | 0));
-    const p = g.gen(lvl, rngFrom(seed));
-    return { ...p, skill: g.id, skillName: g.name, domain: g.domain,
-             level: lvl, seed, tolerance: g.tolerance };
+    const r = rngFrom(seed);
+    const made = g.gen(lvl, r);
+    const p = { ...made, factor: made.factor ?? g.factor, skill: g.id, skillName: g.name, domain: g.domain,
+                level: lvl, seed, tolerance: made.tolerance ?? g.tolerance,
+                source: g.source ?? null, prose: made.prose ?? g.prose ?? false };
+    // A mistake that lands within grading tolerance of the answer is not a
+    // distractor, whatever it was meant to show: picking it would be marked
+    // right. Some parameter draws make that happen (log-sum-exp of (3, −3, 1)
+    // is 3.002, next to the "max only" mistake), so drop them per draw.
+    if (p.mistakes && p.format !== "choice") p.mistakes = p.mistakes.filter((m) => !check(p, m.answer));
+    // Multiple choice: always for conceptual items; as the first rung (level 1)
+    // for computed ones, where recognising the answer comes before producing it.
+    const choices = p.mistakes?.length || p.format === "choice" ? buildChoices(p, r) : null;
+    // `typed` problems (writing an einsum) are never turned into a pick-one.
+    if (choices && !p.typed && (p.format === "choice" || lvl === 1)) p.choices = choices;
+    return p;
   }
 
-  return { SKILLS, generate, check, rngFrom, _generators: G };
+  // Shared helpers for generator files, so each one formats numbers the same way.
+  const util = { gcd, fmtFrac, band, einsumEval, einsumSpec, einsumOperands };
+
+  return { SKILLS, generate, check, diagnose, define, util, rngFrom, _generators: G };
 });

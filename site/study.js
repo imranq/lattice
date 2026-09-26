@@ -55,13 +55,37 @@
   // Generated drills are short expressions, not prose. Give MathJax an
   // explicit inline-math boundary so powers, fractions, and symbols render as
   // mathematics instead of looking like a tiny text sentence.
-  function formatDrillPrompt(text, domain = "arithmetic") {
+  function formatDrillPrompt(text, domain = "arithmetic", prose = false) {
     const raw = String(text ?? "").trim();
-    if (domain === "machine learning") {
-      return `<div class="drill-prompt-copy">${esc(raw)}</div>`;
+    if (prose || domain === "machine learning") {
+      // Prose with inline code and TeX: paragraphs on blank lines, `code` as code.
+      // Fenced blocks first: a loop nest must keep its line breaks and indentation.
+      const blocks = [];
+      const text = raw.replace(/```\w*\n([\s\S]*?)```/g, (_, code) => {
+        blocks.push(`<pre class="drill-code"><code>${esc(code.replace(/\n$/, ""))}</code></pre>`);
+        return `\n\n\u0000${blocks.length - 1}\u0000\n\n`;
+      });
+      const html = text.split(/\n\s*\n/).filter((para) => para.trim()).map((para) => {
+        const block = /^\u0000(\d+)\u0000$/.exec(para.trim());
+        return block ? blocks[Number(block[1])]
+          : `<p>${esc(para).replace(/`([^`]+)`/g, "<code>$1</code>")}</p>`;
+      }).join("");
+      return `<div class="drill-prompt-copy">${html}</div>`;
     }
-    const tex = raw.replace(/(\d|\))\^(-?\d+)/g, "$1^{$2}");
-    return `<div class="drill-math" aria-label="${esc(raw)}">\\(${esc(tex)}\\)</div>`;
+    return `<div class="drill-math" aria-label="${esc(raw)}">\\(${esc(drillTeX(raw))}\\)</div>`;
+  }
+
+  /** A drill prompt as TeX. Two things break a naive \( … \) wrap: `%` starts a
+   *  TeX comment (so "12% of 50" rendered as "12"), and words in math mode run
+   *  together in italics. Escape the one and set the other as text. */
+  function drillTeX(raw) {
+    return raw
+      .replace(/(\d|\))\^(-?\d+)/g, "$1^{$2}")
+      .replace(/[%#&]/g, (c) => `\\${c}`)
+      .replace(/(\s*)\b((?!log\b|mod\b)[A-Za-z]{2,}(?:[\s,]+(?!log\b|mod\b)[A-Za-z]{2,})*)\b(\s*)/g,
+        (_, pre, words, post) => `\\text{${pre ? " " : ""}${words}${post ? " " : ""}}`)
+      .replace(/\blog_(\w+)/g, "\\log_{$1}")
+      .replace(/\bmod\b/g, "\\bmod");
   }
 
   // A lot of OCR and older dataset exports contain useful mathematics without
@@ -113,7 +137,7 @@
     const book = BOOKS.get(p.book_id);
     const crumbs = [];
     if (p.domain) crumbs.push({ text: p.domain, cls: "crumb" });
-    crumbs.push({ text: book?.title ?? p.book_id, cls: "crumb crumb-book",
+    crumbs.push({ text: book?.title ?? p.book_title ?? "Source", cls: "crumb crumb-book",
                   href: pdfHref(book, p) ?? book?.url,
                   title: book?.authors || undefined });
     const chapter = book?.chapterTitles.get(p.chapter);
@@ -122,7 +146,11 @@
     if (p.section_title && p.section_title !== chapter) {
       crumbs.push({ text: p.section_title, cls: "crumb" });
     }
-    const last = [p.label ? `Exercise ${p.label}` : null, p.page ? `p. ${p.page}` : null]
+    // MATH and Putnam name the problem in their section title ("Putnam 1988 A4");
+    // a textbook's own number reads as "Exercise 1.1.1", not "Exercise exer 1.1.1".
+    const number = ["math_dataset", "putnam"].includes(p.book_id) ? null
+      : (p.label ?? "").replace(/^exer\s+/i, "") || null;
+    const last = [number ? `Exercise ${number}` : null, p.page ? `p. ${p.page}` : null]
       .filter(Boolean).join(", ");
     if (last) crumbs.push({ text: last, cls: "crumb crumb-last" });
     return crumbs;
@@ -243,7 +271,10 @@
     const list = (k) => (q.get(k) || "").split(",").map((x) => x.trim()).filter(Boolean);
     const kind = q.get("kind");
     if (!kind) return null;
-    return { kind, domains: list("domains"), books: list("books"), skills: list("skills"),
+    // The graph links a skill by its node id ("skill:ml-pooling"); the queue
+    // matches bare skill ids, so strip the prefix or the set comes up empty.
+    return { kind, domains: list("domains"), books: list("books"),
+             skills: list("skills").map((x) => x.replace(/^skill:/, "")),
              concepts: list("concepts"), items: list("items"),
              // An assessment names its own scope: one book, optionally one unit.
              book: q.get("book") || "", chapter: q.get("chapter"),
@@ -451,24 +482,20 @@
   async function renderPickers() {
     await loadBooks();
     pickSets.domains = ability.filter((a) => a.pool > 0)
-      .map((a) => ({ id: a.domain, label: a.domain, hint: `${a.pool} problems` }));
+      .map((a) => ({ id: a.domain, label: a.domain, hint: window.Lattice.count(a.pool, "problem") }));
     const books = [...BOOKS.values()].filter((b) => b.exercises > 0)
       .sort((a, b) => b.exercises - a.exercises);
-    // Two of these really are both called "Introduction to Probability", so a
-    // clashing title gets its first author's surname to tell them apart.
-    const titleCount = new Map();
-    for (const b of books) titleCount.set(b.title, (titleCount.get(b.title) ?? 0) + 1);
-    const surname = (a) => (a ?? "").split(";")[0].trim().split(/\s+/).pop() || "";
+    // Two books really are both called "Introduction to Probability"; the API
+    // titles them "(Grinstead & Snell)" and "(Blitzstein & Hwang)". Truncate the
+    // title, never that tag — it is the only part that tells them apart.
     pickSets.books = books.map((b) => {
-      const tag = titleCount.get(b.title) > 1 ? surname(b.authors) : "";
-      // Truncate the title, never the surname — the surname is the only part
-      // that tells two identically titled books apart.
+      const [, title, tag] = b.title.match(/^(.*?)(?:\s+\(([^)]+)\))?$/);
       const room = tag ? 20 : 26;
-      const short = b.title.length > room ? `${b.title.slice(0, room - 1)}…` : b.title;
+      const short = title.length > room ? `${title.slice(0, room - 1)}…` : title;
       return {
         id: b.id,
         label: tag ? `${short} (${tag})` : short,
-        hint: `${b.authors || b.id} — ${b.exercises} problems`,
+        hint: `${b.title}${b.authors ? ` — ${b.authors}` : ""} — ${window.Lattice.count(b.exercises, "problem")}`,
       };
     });
     pickSets.skills = (window.MathGen?.SKILLS ?? [])
@@ -504,14 +531,11 @@
           <h2 class="result-title">Not unlocked yet</h2>
           <p class="dim">A mastery challenge needs ${esc(assessment.blocked)}.</p>
           <div class="card-actions"><a class="btn-primary" href="#home">Back to today</a>
-            <button class="ghost-btn" data-act="practice">Free practice</button></div>
+            <a class="ghost-btn" href="#study">Free practice</a></div>
         </section>`;
         return;
       }
-      root().innerHTML = `${setBar()}<section class="card"><p class="dim">${spec
-        ? `Nothing left in this set${spec.kind === "review"
-            ? " — nothing is due right now." : "."}`
-        : "Nothing matches those sources. Turn one back on in the sidebar."}</p></section>`;
+      root().innerHTML = `${setBar()}${emptySetCard()}`;
       return;
     }
     startedAt = performance.now();
@@ -522,6 +546,38 @@
       post("/view", { item_id: current.problem.id });
     }
     current.kind === "drill" ? renderDrill() : renderProblem();
+  }
+
+  /** An empty set is never a dead end: say why, and offer the next thing to do. */
+  function emptySetCard() {
+    const done = session.seen > 0;
+    const course = assessment?.book ?? spec?.book ?? (spec?.books?.length === 1 ? spec.books[0] : null);
+    let title, why;
+    if (!spec) {
+      title = "Nothing matches those sources";
+      why = "Every source is switched off, or the ones that are on have nothing left at this level. Turn one back on in the sidebar.";
+    } else if (spec.kind === "review") {
+      title = "Nothing is due";
+      why = "Reviews come back on a schedule, spaced out as you get them right. Check back tomorrow, or practice something new now.";
+    } else if (done) {
+      title = "You've finished this set";
+      why = `That was everything in it: ${session.solved} solved out of ${session.seen}.`;
+    } else if (assessment) {
+      title = "No questions for this test yet";
+      why = "A test needs one problem per topic that can be shown here, and this part of the book doesn't have them: either its problems aren't hosted on this site, or you've already cleared them.";
+    } else {
+      title = "No problems here yet";
+      why = "This selection has no problems that can be shown on this site, or you have solved them all. Try a broader set.";
+    }
+    return `<section class="card empty-set">
+      <h2 class="result-title">${esc(title)}</h2>
+      <p class="dim">${esc(why)}</p>
+      <div class="card-actions">
+        ${spec ? `<a class="btn-primary" href="#study">Practice anything</a>` : ""}
+        ${course ? `<a class="ghost-btn" href="#course|${encodeURIComponent(course)}">Back to the course</a>` : ""}
+        <a class="ghost-btn" href="#home">Home</a>
+      </div>
+    </section>`;
   }
 
   function paintSession() {
@@ -662,7 +718,7 @@
             ? `<a class="btn-primary" href="${paper.book
                  ? `#course|${encodeURIComponent(paper.book)}` : "#home"}"
                  >${paper.book ? "Back to the course" : "Back to today"}</a>
-               <button class="ghost-btn" data-act="practice">Free practice</button>`
+               <a class="ghost-btn" href="#study">Free practice</a>`
             : `<button class="btn-primary" data-act="newtest">New test</button>
                <button class="ghost-btn" data-act="practice">Back to practice</button>`}
         </div>
@@ -747,30 +803,141 @@
           <span class="chip">${esc(p.skillName)}</span>
           <span class="chip">level ${p.level}</span>
         </header>
-        <p class="drill-kicker">Solve this one thing</p>
-        <div class="statement statement-drill">${formatDrillPrompt(p.prompt, p.domain)}</div>
+        <p class="drill-kicker">${p.choices ? "Pick one" : "Solve this one thing"}</p>
+        <div class="statement statement-drill">${formatDrillPrompt(p.prompt, p.domain, p.prose)}</div>
+        ${sourceLine(p)}
+        ${p.choices ? `
+        <div class="choice-list" role="group" aria-label="Answer choices">
+          ${p.choices.map((c, i) => `<button type="button" class="choice" data-choice="${i}">
+            <span class="choice-key">${"ABCD"[i]}</span><span class="choice-text">${p.choiceStyle === "code" ? `<code>${esc(c.text)}</code>` : esc(c.text)}</span>
+          </button>`).join("")}
+        </div>
+        <div class="answer-row drill-answer-row">
+          <button type="button" class="ghost-btn" data-act="show">Show me</button>
+          <button type="button" class="ghost-btn" data-act="skip">Skip</button>
+        </div>` : `
+        ${p.kind === "order" ? proofBuilder(p) : `
         <div class="answer-head drill-answer-head">
           <label class="answer-label" for="drillAnswer">Your answer</label>
-          <span class="answer-hint">Exact answer · checked instantly</span>
+          <span class="answer-hint">${p.kind === "einsum"
+            ? "Checked by what it computes · any letters work" : "Exact answer · checked instantly"}</span>
         </div>
         <form id="drillForm" class="answer-row drill-answer-row" autocomplete="off">
-          <input id="drillAnswer" type="text" placeholder="Answer" aria-label="Answer" />
+          <input id="drillAnswer" type="text" placeholder="${p.kind === "einsum" ? "ij,jk->ik" : "Answer"}"
+            aria-label="Answer" autocapitalize="off" spellcheck="false"
+            class="${p.kind === "einsum" ? "code-input" : ""}" />
           <button type="submit" class="btn-primary">Submit answer</button>
           <button type="button" class="ghost-btn" data-act="show">Show me</button>
           <button type="button" class="ghost-btn" data-act="skip">Skip</button>
-        </form>
-        <div id="drillFeedback" class="feedback"></div>
+        </form>`}`}
+        <div id="drillFeedback" class="feedback" aria-live="polite"></div>
         <div id="drillWork" class="work" hidden></div>
-        <p class="drill-shortcuts"><kbd>Enter</kbd> submit · <kbd>G</kbd> next</p>
+        <p class="drill-shortcuts">${p.choices ? "<kbd>A</kbd>–<kbd>D</kbd> choose" : "<kbd>Enter</kbd> submit"} · <kbd>G</kbd> next</p>
       </section>
       </div>`;
     paintCurrentContext(p);
-    const answer = el("drillAnswer");
-    answer.value = "";
-    answer.defaultValue = "";
     window.Lattice.typeset(root());
-    answer.focus();
+    const answer = el("drillAnswer");
+    if (answer) {
+      answer.value = "";
+      answer.defaultValue = "";
+      answer.focus();
+    }
   }
+
+  /** The field a drill's rating moves: ML generators rate machine learning. */
+  const drillDomain = (p) => (p.source ? p.domain : "mental math");
+
+  /** Where a generated problem comes from, and a link to go and learn it. */
+  function sourceLine(p) {
+    const s = p.source;
+    if (!s?.url) return "";
+    const link = `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}${
+      s.exercise ? `, §${esc(s.section)}` : ` — ${esc(s.section)}`}</a>`;
+    const lead = s.fidelity === "inspired" ? "Learn more:"
+      : !s.exercise ? "From"
+      : `Adapted from ${s.fidelity === "concept" ? `the idea behind exercise ${s.exercise}` : `exercise ${s.exercise}`} in`;
+    return `<p class="drill-source">${lead} ${link}${s.license ? ` <span class="dim">· ${esc(s.license)}</span>` : ""}</p>`;
+  }
+
+  /** Build-a-proof: every line is a button; clicking moves it into your proof
+   *  (in order) and clicking it there puts it back. Submit checks the order. */
+  function proofBuilder(p) {
+    const line = (l) => `<button type="button" class="proof-line" data-line="${esc(l.id)}">${esc(l.text)}</button>`;
+    return `
+      <div class="proof-builder">
+        <div><p class="field-label">Lines</p><div id="proofPool" class="proof-pool">${p.lines.map(line).join("")}</div></div>
+        <div><p class="field-label">Your proof</p><ol id="proofBuilt" class="proof-built"
+          data-empty="Click lines on the left, in order."></ol></div>
+      </div>
+      <div class="answer-row drill-answer-row">
+        <button type="button" class="btn-primary" data-act="submitproof">Check proof</button>
+        <button type="button" class="ghost-btn" data-act="show">Show me</button>
+        <button type="button" class="ghost-btn" data-act="skip">Skip</button>
+      </div>`;
+  }
+
+  document.addEventListener("click", async (ev) => {
+    const lineBtn = ev.target.closest("[data-line]");
+    if (lineBtn && current?.problem?.kind === "order" && !answerSubmitted) {
+      const built = el("proofBuilt"), pool = el("proofPool");
+      if (lineBtn.closest("#proofPool")) {
+        const li = document.createElement("li");
+        li.appendChild(lineBtn);
+        built.appendChild(li);
+      } else {
+        const li = lineBtn.closest("li");
+        pool.appendChild(lineBtn);
+        li?.remove();
+      }
+      return;
+    }
+    if (ev.target.closest('[data-act="submitproof"]') && current?.problem?.kind === "order" && !answerSubmitted) {
+      const p = current.problem;
+      const ids = [...el("proofBuilt").querySelectorAll("[data-line]")].map((b) => b.dataset.line);
+      if (!ids.length) return;
+      answerSubmitted = true;
+      const correct = MathGen.check(p, ids.join(","));
+      const why = correct ? null : MathGen.diagnose(p, ids.join(","))?.why;
+      for (const b of document.querySelectorAll("[data-line]")) b.disabled = true;
+      const fb = el("drillFeedback");
+      fb.innerHTML = correct
+        ? `<div class="feedback-head">Correct: that proof holds together.</div>`
+        : `<div class="feedback-head">Not quite.</div>
+           ${why ? `<p class="feedback-summary">${esc(why)}</p>` : ""}
+           <p class="field-label">A correct proof</p>
+           <ol class="proof-built proof-answer">${p.steps.map((st) => `<li>${esc(st.text)}</li>`).join("")}</ol>
+           <div class="card-actions"><button class="btn-primary" data-act="next">Next →</button></div>`;
+      fb.className = `feedback ${correct ? "ok" : "no"}`;
+      window.Lattice.typeset(fb);
+      await record(correct ? (hintsShown ? "partial" : "solved") : "failed", ids.join(","));
+      if (correct) setTimeout(next, 1200);
+    }
+  });
+
+  /** Feedback after a drill answer. A wrong answer that matches a known
+   *  mistake gets that mistake's explanation, not just the right number. */
+  function drillVerdict(p, correct, why) {
+    const fb = el("drillFeedback");
+    const learn = p.source?.url
+      ? ` <a href="${esc(p.source.url)}" target="_blank" rel="noopener">Read about it →</a>` : "";
+    fb.innerHTML = correct
+      ? `<div class="feedback-head">Correct</div>`
+      : `<div class="feedback-head">${p.choices ? "Not quite: the right option is marked above."
+          : `Not quite. The answer is ${p.choiceStyle === "code" || p.kind === "einsum"
+            ? `<code>${esc(p.answer)}</code>` : esc(p.answer)}.`}</div>
+         ${why ? `<p class="feedback-summary">${esc(why)}</p>` : ""}
+         <p class="feedback-line">${p.trick ? esc(p.trick) : ""}${learn}</p>
+         <div class="card-actions"><button class="btn-primary" data-act="next">Next →</button>
+           <button class="ghost-btn" data-act="show">Show the working</button></div>`;
+    fb.className = `feedback ${correct ? "ok" : "no"}`;
+    window.Lattice.typeset(fb);
+  }
+
+  /** The drill's attempt id. Multiple choice carries its option count, so the
+   *  rating can discount a correct pick for the chance of guessing it. */
+  const drillItemId = (p) =>
+    `drill:${p.skill}:L${p.level}:${p.seed}${p.choices ? `:mc${p.choices.length}` : ""}`;
 
   function paintCurrentContext(p) {
     const box = el("currentContext");
@@ -819,14 +986,14 @@
 
       ${p.tags?.length ? `<section class="rail-card">
         <p class="rail-head">This problem</p>
-        <p class="rail-note">Concepts you are practising.</p>
+        <p class="rail-note">Concepts you are practicing.</p>
         <div class="rail-tags">${p.tags.map((t) => `
           <a class="rail-tag" href="#study|kind=study&count=8&label=${
             encodeURIComponent(t.name)}&concepts=${encodeURIComponent(p.concept_id ?? "")}"
             title="${Math.round(t.p * 100)}% confident">${esc(t.name)}</a>`).join("")}</div>
       </section>` : ""}
 
-      <p class="rail-shortcuts"><kbd>Enter</kbd> submit · <kbd>G</kbd> next · <kbd>H</kbd> hint</p>
+      <p class="rail-shortcuts"><kbd>Enter</kbd> submit · <kbd>G</kbd> next${p.has_hints ? ` · <kbd>H</kbd> hint` : ""}</p>
     </aside>`;
   }
 
@@ -866,15 +1033,15 @@
           <button class="btn-primary" data-grade="solved">Submit answer</button>
           <button class="ghost-btn" data-grade="partial">Partial</button>
           <button class="ghost-btn" data-grade="failed">Failed</button>
-          <button class="ghost-btn" data-act="hint">Hint</button>
-          <button class="ghost-btn" data-act="solution">Show solution</button>
+          ${p.has_hints ? `<button class="ghost-btn" data-act="hint">Hint</button>` : ""}
+          ${p.has_solution ? `<button class="ghost-btn" data-act="solution">Show solution</button>` : ""}
           <button class="ghost-btn" data-act="skip">Skip</button>
           <button class="ghost-btn" data-act="copy">Copy for review</button>
       <span class="key-note"><kbd>⌘↵</kbd> submit · <kbd>G</kbd> next</span>
         </footer>
+        <div id="extras" class="extras" aria-live="polite"></div>
         <div id="ladder" class="ladder-slot"></div>
         <div id="whereami" class="where-slot"></div>
-        <div id="extras" class="extras"></div>
       </section>
       </div>`;
     window.Lattice.typeset(root());
@@ -1022,7 +1189,7 @@
 
   async function record(outcome, given, machineGrade = null) {
     const seconds = Math.round((performance.now() - startedAt) / 1000);
-    const movedDomain = current.kind === "drill" ? "mental math" : current.problem.domain;
+    const movedDomain = current.kind === "drill" ? drillDomain(current.problem) : current.problem.domain;
     const before = ability.find((a) => a.domain === movedDomain)?.rating ?? null;
     session.seen += 1;
     if (outcome === "solved") session.solved += 1;
@@ -1037,7 +1204,7 @@
         expected: current.kind === "drill" ? current.problem.answer : null,
         // Kept per answer so the results screen can say what you were actually
         // asked, not just how you did: a 60% on stretch is not a 60% on easier.
-        domain: current.kind === "drill" ? "mental math" : current.problem.domain,
+        domain: current.kind === "drill" ? drillDomain(current.problem) : current.problem.domain,
         rating: current.problem.rating ?? null,
         predicted: current.problem.predicted_success ?? null,
         seconds, hints: hintsShown,
@@ -1047,7 +1214,7 @@
     if (current.kind === "drill") {
       const p = current.problem;
       await post("/attempt", {
-        item_id: `drill:${p.skill}:L${p.level}:${p.seed}`, item_type: "drill",
+        item_id: drillItemId(p), item_type: "drill",
         concept_id: `skill:${p.skill}`, outcome, seconds, hints_used: hintsShown,
       });
     } else {
@@ -1247,8 +1414,9 @@
       const w = el("drillWork");
       w.hidden = false;
       w.innerHTML = `<ol class="work-steps">${current.problem.steps
-        .map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
+        .map((s) => `<li>${esc(s.text ?? s)}</li>`).join("")}</ol>
         <p class="trick">${esc(current.problem.trick ?? "")}</p>`;
+      window.Lattice.typeset(w);
     }
 
     if (act === "hint" || act === "solution") {
@@ -1258,9 +1426,20 @@
           .catch(() => ({ hints: [], solution: null }));
       const box = el("extras");
       if (act === "hint") {
+        // Never a silent click: a problem with no hints says so.
+        if (!extras.hints.length) {
+          box.innerHTML = `<p class="dim hint-none">This problem has no hints.${
+            extras.solution ? " You can show the solution instead." : ""}</p>`;
+          return;
+        }
         hintsShown = Math.min(hintsShown + 1, extras.hints.length);
         box.innerHTML = `<ol class="hint-list">${extras.hints.slice(0, hintsShown)
-          .map((h) => `<li>${esc(h)}</li>`).join("")}</ol>`;
+          .map((h) => `<li>${esc(h)}</li>`).join("")}</ol>
+          <p class="dim hint-count">Hint ${hintsShown} of ${extras.hints.length}${
+            hintsShown < extras.hints.length ? " · press Next hint for another" : ""}</p>`;
+        const btn = document.querySelector('[data-act="hint"]');
+        if (btn) btn.textContent = hintsShown < extras.hints.length ? "Next hint" : "Hint";
+        box.scrollIntoView({ behavior: "smooth", block: "nearest" });
         } else {
           hintsShown = 3;
           box.innerHTML = extras.solution
@@ -1269,6 +1448,7 @@
           : `<div class="solution-empty"><b>No worked solution is available yet.</b>
              <p class="dim">${esc(extras.message ?? "This source does not include a published solution.")}</p>
              <p class="dim">Try a hint, or copy your attempt for review.</p></div>`;
+          box.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
       window.Lattice.typeset(box);
     }
@@ -1278,13 +1458,31 @@
     if (ev.target.id !== "drillForm") return;
     ev.preventDefault();
     const p = current.problem;
-    const correct = MathGen.check(p, el("drillAnswer").value);
-    const fb = el("drillFeedback");
-    fb.textContent = correct ? "Correct" : `Answer: ${p.answer}`;
-    fb.className = `feedback ${correct ? "ok" : "no"}`;
-    await record(correct ? (hintsShown ? "partial" : "solved") : "failed",
-                 el("drillAnswer").value);
-    setTimeout(next, correct ? 550 : 1500);
+    if (answerSubmitted) return;
+    const given = el("drillAnswer").value;
+    if (!given.trim()) return;
+    answerSubmitted = true;
+    const correct = MathGen.check(p, given);
+    drillVerdict(p, correct, correct ? null : MathGen.diagnose(p, given)?.why);
+    await record(correct ? (hintsShown ? "partial" : "solved") : "failed", given);
+    // A right answer moves on; a wrong one waits, so the explanation can be read.
+    if (correct) setTimeout(next, 650);
+  });
+
+  document.addEventListener("click", async (ev) => {
+    const btn = ev.target.closest("[data-choice]");
+    if (!btn || current?.kind !== "drill" || !current.problem.choices || answerSubmitted) return;
+    answerSubmitted = true;
+    const p = current.problem;
+    const pick = p.choices[Number(btn.dataset.choice)];
+    for (const [i, b] of document.querySelectorAll("[data-choice]").entries()) {
+      b.disabled = true;
+      b.classList.toggle("is-right", p.choices[i].correct);
+      b.classList.toggle("is-wrong", b === btn && !pick.correct);
+    }
+    drillVerdict(p, pick.correct, pick.why);
+    await record(pick.correct ? (hintsShown ? "partial" : "solved") : "failed", pick.text);
+    if (pick.correct) setTimeout(next, 650);
   });
 
   let testLength = 10;
@@ -1338,15 +1536,15 @@
                 d[0].toUpperCase() + d.slice(1)}</button>`).join("")}
           </div>
           <p class="shortcut-note">${esc(testDifficulty === "adaptive"
-            ? "starts on target, then follows your answers — harder when you are right, easier when you are not"
+            ? "Starts at your level, then follows your answers: harder when you're right, easier when you're not."
             : DIFF_NOTE[testDifficulty] ?? DIFF_NOTE.adaptive)}</p>
         </div>
 
         <div class="field">
           <p class="field-label">Drawn from</p>
-          <p class="dim">${sources} book${sources === 1 ? "" : "s"}${
-            skills ? ` and ${skills} drill skill${skills === 1 ? "" : "s"}` : ""},
-            filtered by the fields you have on. Change them in the sidebar.</p>
+          <p class="dim">${window.Lattice.count(sources, "book")}${
+            skills ? ` and ${window.Lattice.count(skills, "drill skill")}` : ""}, limited to
+            the fields selected in the sidebar. Change them there.</p>
         </div>
 
         <div class="card-actions">
@@ -1357,9 +1555,9 @@
   }
 
   const DIFF_NOTE = {
-    easier: "aiming below your level — consolidation",
-    adaptive: "follows your answers — easier when you need support, harder when you are ready",
-    harder: "aiming at about 60% — expect to be stretched",
+    easier: "Problems a little below your level, to consolidate what you know.",
+    adaptive: "Follows your answers: easier when you need support, harder when you're ready.",
+    harder: "Problems you should get about 60% right. Expect to be stretched.",
   };
 
   /** Paint the difficulty segment from `picks`, and say what it means. */
@@ -1462,6 +1660,13 @@
     if (e.key.toLowerCase() === "h" && current && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) {
       e.preventDefault();
       document.querySelector('[data-act="hint"]')?.click();
+      return;
+    }
+    const choice = "abcd".indexOf(e.key.toLowerCase());
+    if (choice >= 0 && !e.metaKey && !e.ctrlKey && current?.problem?.choices
+        && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) {
+      e.preventDefault();
+      document.querySelector(`[data-choice="${choice}"]`)?.click();
       return;
     }
     if (e.key.toLowerCase() === "g" && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) {

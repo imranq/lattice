@@ -60,6 +60,18 @@ async function loadPutnamExtras() {
   }
 }
 
+// MATH ships a worked solution with every problem, but they would double the
+// graph, so they stay in the source file and load the first time one is asked for.
+let mathSolutions = null;
+function solutionFor(id) {
+  if (!id.startsWith('math:')) return null;
+  mathSolutions ??= readFile(join(ROOT, 'data', 'processed', 'books', 'math_dataset.json'), 'utf8')
+    .then((raw) => new Map(JSON.parse(raw).exercises.map((e) => [e.id, e.solution])))
+    .catch(() => new Map());
+  return mathSolutions.then((m) => m.get(id) ?? null);
+}
+setData({ solutionFor });
+
 // Semantic labels for the corpus, written by scripts/tag_exercises_jev.py. They
 // live under data/local/ with the verbatim text they were derived from, so a
 // machine without the books has no tags either — and the natural-language box
@@ -110,10 +122,14 @@ let bookFiles = new Map();   // book_id -> { path, pageOffset }
 async function loadBookProfiles() {
   const dir = join(ROOT, 'data', 'processed', 'books');
   const next = new Map();
+  const chapterTitles = {};
   try {
     for (const name of await readdir(dir)) {
       if (!name.endsWith('.json')) continue;
       const b = JSON.parse(await readFile(join(dir, name), 'utf8'));
+      if (b.chapters?.length) {
+        chapterTitles[b.book_id] = Object.fromEntries(b.chapters.map((c) => [c.chapter, c.title]));
+      }
       if (!b.source_pdf || b.source_pdf_missing) continue;
       // Confirm at boot rather than trusting the profile: a book that has been
       // moved should fall back to its web link, not offer a dead button.
@@ -123,7 +139,7 @@ async function loadBookProfiles() {
     }
   } catch { /* no profiles yet: the app runs without local copies */ }
   bookFiles = next;
-  setData({ bookFiles });
+  setData({ bookFiles, chapterTitles });
   if (next.size) console.log(`local PDFs: ${[...next.keys()].join(', ')}`);
 }
 

@@ -191,19 +191,25 @@ window.Lattice = (() => {
   else document.addEventListener("DOMContentLoaded", route);
 
   // ---- maths ---------------------------------------------------------------
-  // Every view renders TeX, and MathJax may still be downloading when the first
-  // one paints. Queue against its startup promise so a render that lands early
-  // is typeset rather than silently left as raw source.
+  // Every view renders TeX, and MathJax loads async, so it may still be
+  // downloading when the first one paints. Until it arrives window.MathJax is
+  // just the config object; the pageReady hook in index.html typesets the whole
+  // body on arrival, which covers anything rendered early.
   function typeset(target) {
     const el = target ?? document.body;
     const run = () => window.MathJax.typesetPromise([el]).catch(() => {});
-    if (!window.MathJax) return;
+    if (!window.MathJax?.typesetPromise) return;
     if (window.MathJax.startup?.promise) return window.MathJax.startup.promise.then(run);
-    if (window.MathJax.typesetPromise) return run();
+    return run();
   }
+
+  /** "1 concept", "3 concepts", "1,204 problems". */
+  const count = (n, word, many = `${word}s`) =>
+    `${Number(n ?? 0).toLocaleString()} ${Number(n) === 1 ? word : many}`;
 
   return {
     register: (name, init) => inits.set(name, init),
+    count,
     typeset,
     show,
     /** True when a view is on screen — modules skip work while hidden. */

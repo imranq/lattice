@@ -45,15 +45,36 @@
   let asking = false;
   let searchTimer = null;
   let due = 0;
-  let greeting = "";
+  let firstRun = false;
+  let savedIn = "machine";
   let path = null;
 
-  // Real topics from the corpus, each of which the search box finds.
+  // Each of these resolves without a model: a topic the search box finds, a
+  // generator named by its alias, or a request about your own history.
   const PLACEHOLDERS = [
-    "eigenvalues", "conditional probability", "15 minutes of number theory",
-    "Bayes rule", "induction", "two-digit multiplication", "determinants",
+    "practice my weakest topic", "convert loop to einsum", "einsum shapes", "attention memory in bf16",
+    "conditional probability", "surprise me", "training compute for a 7B model",
+    "gradient clipping", "two-digit multiplication", "challenge me", "positional encoding",
+    "Bayes rule", "einops rearrange", "review what's due", "log-sum-exp",
+    "counting", "early stopping", "number theory", "FLOPs of a matmul",
+    "epsilon-delta", "proof practice", "permutations", "residues", "rank-nullity",
   ];
   let placeholderAt = 0;
+  // The search box is the product: find the problem worth doing next. One
+  // headline per visit, drawn at random so Home doesn't read the same every time.
+  const HEADLINES = [
+    "What do you want to get better at?",
+    "Find the problem worth doing next.",
+    "What skill are you building today?",
+    "Name a skill. Get the right problems.",
+    "What should you practice next?",
+    "Search for your next hard problem.",
+    "Where do you want to improve?",
+  ];
+  const HEADLINE = HEADLINES[Math.floor(Math.random() * HEADLINES.length)];
+  // Every machine-learning generator, for the "ML from d2l" chip.
+  const ML_SKILLS = (window.MathGen?.SKILLS ?? [])
+    .filter((sk) => sk.id.startsWith("ml-")).map((sk) => sk.id).join(",");
   let placeholderTimer = null;
 
   function rotatePlaceholder() {
@@ -81,7 +102,8 @@
       const stats = st.attempts
         ? `${st.attempts} tried · ${Math.round((st.accuracy ?? 0) * 100)}% lately` : "";
       return `${head}<li class="path-step s-${st.status}${st.index === path.current ? " is-current" : ""}">
-        <span class="path-dot">${dot(st.status)}</span>
+        <span class="path-dot" aria-hidden="true">${dot(st.status)}</span>
+        <span class="sr-only">${{ passed: "Passed:", weak: "Needs work:", started: "Started:", new: "Not started:" }[st.status] ?? ""}</span>
         <a href="#study|${esc(st.spec)}">${esc(st.title)}</a>
         <span class="path-stat">${esc(stats)}</span></li>`;
     }).join("");
@@ -103,15 +125,49 @@
       </div>`;
   }
 
+  /** What Lattice is, and the ways into it. Open until the first attempt. */
+  function introPanel() {
+    const pathHref = path?.steps?.length ? `#study|${path.steps[path.current].spec}` : "#study";
+    const ways = [
+      ["Guided path", "Not sure where to begin? One step at a time, from mental math up to the Putnam.", pathHref],
+      ["Study", "Choose fields and books, and get problems matched to your level.", "#study"],
+      ["Courses", "Work through one book in order, with unit tests to lock in each chapter.", "#course"],
+      ["Graph", "See every concept and what it depends on, then practice any of them.", "#explore"],
+    ];
+    return `
+      <details class="intro"${firstRun ? " open" : ""}>
+        <summary>${firstRun ? "New here? How Lattice works" : "How Lattice works"}</summary>
+        <div class="intro-body">
+          <p>Lattice is a practice tool for university-level math. Its problems come
+            from open textbooks, the MATH competition dataset and the Putnam archive.
+            Each one is tied to a concept in a graph that records which ideas build on which.</p>
+          <p>As you answer, Lattice keeps a rating for each field and a mastery level for
+            each concept. It picks your next problem where you should get about 85% right:
+            hard enough to learn from.</p>
+          <p class="intro-lead">Four ways to start:</p>
+          <ul class="intro-ways">${ways.map(([t, d, href]) => `
+            <li><a href="${esc(href)}"><b>${esc(t)}</b><span>${esc(d)}</span></a></li>`).join("")}
+          </ul>
+          <p class="dim">Or type a topic above to jump straight to it.${savedIn === "browser"
+            ? " Progress is saved in this browser; there are no accounts." : ""}</p>
+        </div>
+      </details>`;
+  }
+
   function heroPanel() {
     const chips = [
       due ? [`Reviews (${due})`, "#study|kind=review&count=12"] : null,
       ["5 quick ones", "#study|kind=study&count=5&difficulty=target"],
       ["Mental math", "#study|kind=drill&count=10&label=Mental+math"],
+      ["Einsum and shapes", "#study|kind=drill&count=8&skills=es-loop,es-shape,es-which,es-rearrange,es-flops&label=Einsum+and+shapes"],
+      ["ML from d2l", `#study|kind=drill&count=8&skills=${ML_SKILLS}&label=Machine+learning`],
+      ["Proofs", "#study|kind=drill&count=5&skills=ra-proof-sqrt,ra-proof-induction,ra-proof-continuity,ra-proof-unique-limit,aa-proof-fermat&label=Proofs"],
     ].filter(Boolean);
     return `
-      ${greeting ? `<p class="home-greeting">${esc(greeting)}</p>` : ""}
-      <h1 class="hero-title">What are you working on?</h1>
+      <h1 class="hero-title">${esc(HEADLINE)}</h1>
+      ${firstRun ? `<p class="hero-sub">Lattice searches thousands of problems for the ones
+        that will improve your skills most right now, and tracks your progress concept by
+        concept.</p>` : ""}
       <div class="ask-wrap">
         <form class="ask" id="askForm" autocomplete="off">
           <input id="askInput" class="ask-input" type="text"
@@ -125,7 +181,7 @@
       <div id="askStatus" class="ask-status" hidden></div>
       <div class="home-chips">${chips.map(([label, href]) =>
         `<a class="ask-eg" href="${href}">${esc(label)}</a>`).join("")}</div>
-      ${pathPanel()}`;
+      ${firstRun ? introPanel() + pathPanel() : pathPanel() + introPanel()}`;
   }
 
   function askStatus(html, tone = "") {
@@ -316,19 +372,95 @@
 
   /** One line that knows whether you have been here before. "Last time" is the
    *  run of attempts within half a day of the most recent one. */
-  function greet(rows) {
-    if (!rows.length) return "Pick anything. It adapts as you go.";
-    const last = rows[0].ts;
-    const missed = rows.filter((r) => last - r.ts < 12 * 3600e3
-      && (r.outcome === "failed" || r.outcome === "partial")).length;
-    return missed ? `Welcome back. ${missed} missed last time.` : "Welcome back.";
-  }
 
   async function paintHistory(rows) {
     const box = el("homeHistory");
     box.innerHTML = rows.length ? rows.map(historyRow).join("")
       : `<li class="history-empty dim">Nothing yet. The first problem you try shows up here.</li>`;
     window.Lattice.typeset(box);
+  }
+
+  // ---- progress -----------------------------------------------------------------
+  // Everything about how it's going lives here, under the suggestions: ratings
+  // by field, the topics you are working on, the last two weeks, and your part
+  // of the map. Feedback ("2 missed last time") belongs here, not in the header.
+
+  const pctOf = (x) => `${Math.round((x ?? 0) * 100)}%`;
+  const skillName = (id) => (window.MathGen?.SKILLS ?? []).find((sk) => `skill:${sk.id}` === id)?.name;
+
+  async function paintProgress(stats, history) {
+    const block = el("homeProgressBlock"), box = el("homeProgress");
+    if (!block || !box) return;
+    if (!stats?.attempts) { block.hidden = true; return; }
+    const [ability, mastery, days] = await Promise.all([
+      get("/ability").then((d) => d.domains ?? []).catch(() => []),
+      get("/mastery").catch(() => []),
+      get("/activity?days=14").catch(() => []),
+    ]);
+
+    // Fields you have actually practised, most practised first.
+    const fields = ability.filter((a) => a.attempts).sort((a, b) => b.attempts - a.attempts).slice(0, 5);
+    const fieldRows = fields.map((a) => {
+      const delta = a.rating - 1200;
+      return `<li><a href="#subject|${encodeURIComponent(a.domain)}">${esc(a.domain)}</a>
+        <b>${a.rating}</b>
+        <span class="dim">${delta === 0 ? "±0" : delta > 0 ? `▲ ${delta}` : `▼ ${-delta}`} · ${
+          window.Lattice.count(a.attempts, "attempt")}${a.confident ? "" : " · provisional"}</span></li>`;
+    }).join("");
+
+    // Topics touched most recently, with where their mastery stands.
+    const recent = [...mastery].sort((a, b) => (b.last_ts ?? 0) - (a.last_ts ?? 0)).slice(0, 5);
+    const topicRows = recent.map((m) => {
+      const name = skillName(m.concept_id) ?? m.label ?? m.concept_id;
+      const href = m.concept_id.startsWith("skill:")
+        ? `#study|${new URLSearchParams({ kind: "drill", skills: m.concept_id.slice(6), count: "6", label: name })}`
+        : `#explore|${encodeURIComponent(m.concept_id)}`;
+      return `<li><a href="${href}">${esc(name)}</a>
+        <span class="cov-track" aria-hidden="true"><span class="cov-fill" style="width:${pctOf(m.mastery)}"></span></span>
+        <span class="dim">${pctOf(m.mastery)} mastery</span></li>`;
+    }).join("");
+
+    // The last session's misses, as something to do rather than a greeting.
+    const last = history[0]?.ts ?? 0;
+    const missed = history.filter((h) => last - h.ts < 12 * 3600e3
+      && (h.outcome === "failed" || h.outcome === "partial") && h.openable);
+    const retry = missed.length
+      ? `<a class="progress-retry" href="${itemsHash(missed.map((h) => h.item_id), missed[0].domain, "Retry last session's misses")}">
+          ${window.Lattice.count(missed.length, "problem")} missed last session · retry →</a>` : "";
+
+    // Two weeks of activity, oldest first.
+    const byDay = new Map(days.map((d) => [d.day, d.n]));
+    const today = new Date();
+    const strip = Array.from({ length: 14 }, (_, i) => {
+      const d = new Date(today); d.setDate(today.getDate() - 13 + i);
+      const key = d.toISOString().slice(0, 10);
+      return { key, n: byDay.get(key) ?? 0 };
+    });
+    const peak = Math.max(1, ...strip.map((d) => d.n));
+    const total14 = strip.reduce((s, d) => s + d.n, 0);
+
+    box.innerHTML = `
+      ${fields.length ? `<div class="progress-card"><p class="field-label">Fields</p><ul class="progress-list">${fieldRows}</ul></div>` : ""}
+      ${recent.length ? `<div class="progress-card"><p class="field-label">Working on</p><ul class="progress-list">${topicRows}</ul></div>` : ""}
+      <div class="progress-card">
+        <p class="field-label">Last 14 days · ${window.Lattice.count(total14, "attempt")} · ${stats.streak ?? 0}-day streak</p>
+        <div class="progress-strip" role="img" aria-label="${total14} attempts in the last 14 days">
+          ${strip.map((d) => `<i title="${d.key}: ${d.n}" style="height:${Math.max(4, (d.n / peak) * 100)}%"
+            class="${d.n ? "" : "is-zero"}"></i>`).join("")}
+        </div>
+        ${retry}
+        ${stats.due ? `<a class="progress-retry" href="#study|kind=review&count=12">${
+          window.Lattice.count(stats.due, "review")} due →</a>` : ""}
+      </div>
+      <a class="progress-card progress-map" href="#explore" title="Open the full graph">
+        <p class="field-label">Your map</p>
+        <canvas id="homeMiniMap" aria-label="Miniature of the concept graph, coloured by mastery"></canvas>
+      </a>`;
+    block.hidden = false;
+    window.Lattice.typeset(box);
+    // The miniature needs the graph module's layout; it loads the graph once.
+    const mini = el("homeMiniMap");
+    if (mini && window.LatticeGraph?.drawMini) window.LatticeGraph.drawMini(mini).catch?.(() => {});
   }
 
   async function render() {
@@ -338,12 +470,14 @@
       get("/path").catch(() => null),
     ]);
     due = stats?.due ?? 0;
-    greeting = greet(history);
+    firstRun = !stats?.attempts;
+    savedIn = stats?.saved_in ?? "machine";
     path = p;
     el("homeHero").innerHTML = heroPanel();
     rotatePlaceholder();
     results = [];
     await Promise.all([paintSuggestions(), paintHistory(history)]);
+    paintProgress(stats, history).catch(() => {});
   }
 
   window.Lattice.register("home", () => render().catch((err) => {

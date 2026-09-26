@@ -33,17 +33,18 @@
          <span class="cov-num">${pct(t.mastery)}</span>`;
     return `
       <li class="topic-row">
-        <a class="topic-name" href="#explore|${encodeURIComponent(t.id)}"
-           title="Open in the graph">${esc(t.label)}</a>
-        <span class="topic-meta">${t.exercises} problem${t.exercises === 1 ? "" : "s"}${
-          t.page ? ` · p.${t.page}` : ""}</span>
+        ${t.exercises ? `<a class="topic-name" href="#explore|${encodeURIComponent(t.id)}"
+           title="Open in the graph">${esc(t.label)}</a>`
+          : `<span class="topic-name">${esc(t.label)}</span>`}
+        <span class="topic-meta">${t.exercises ? window.Lattice.count(t.exercises, "problem")
+          : "no problems here"}${t.page ? ` · p. ${t.page}` : ""}</span>
         <span class="topic-bar">${bar}</span>
         <span class="topic-actions">
-          <a class="ghost-btn" href="${studyHref({ domains: [DOMAIN], concepts: [t.id],
+          ${t.exercises ? `<a class="ghost-btn" href="${studyHref({ domains: [DOMAIN], concepts: [t.id],
              count: Math.min(t.exercises, 8), label: t.label })}"
-             title="Practise only this topic">Practise</a>
-          <a class="ghost-btn" href="#explore|${encodeURIComponent(t.id)}"
-             title="Open this topic on the graph">Graph</a>
+             title="Practice only this topic">Practice</a>` : ""}
+          ${t.exercises ? `<a class="ghost-btn" href="#explore|${encodeURIComponent(t.id)}"
+             title="Open this topic on the graph">Graph</a>` : ""}
         </span>
       </li>`;
   }
@@ -56,6 +57,7 @@
     DOMAIN = domain;
     root().innerHTML = `<p class="dim">Loading ${esc(domain)}…</p>`;
     const data = await get(`/subject?domain=${encodeURIComponent(domain)}`);
+    if (!data.books.length) throw new Error("no such field");
     const a = data.ability;
     const totalTopics = data.books.reduce((n, b) => n + b.topics.length, 0);
     const totalEx = data.books.reduce((n, b) => n + b.exercises, 0);
@@ -67,16 +69,16 @@
         <div>
           <p class="eyebrow"><a href="#home">← all fields</a></p>
           <h1 class="subject-title">${esc(domain)}</h1>
-          <p class="dim">${data.books.length} source${data.books.length === 1 ? "" : "s"} ·
-            ${totalTopics} topics · ${totalEx.toLocaleString()} problems ·
+          <p class="dim">${window.Lattice.count(data.books.length, "book")} ·
+            ${window.Lattice.count(totalTopics, "topic")} · ${window.Lattice.count(totalEx, "problem")} ·
             ${assessed} assessed</p>
         </div>
         <div class="subject-actions">
           ${a ? `<div class="stat-tile"><b>${a.rating}</b>
             <span>${a.attempts ? (a.confident ? "rating" : "provisional") : "unrated"}</span>
           </div>` : ""}
-          <a class="btn-primary" href="${studyHref({ domains: [domain], count: 10,
-             label: domain })}">Study this field</a>
+          ${totalEx ? `<a class="btn-primary" href="${studyHref({ domains: [domain], count: 10,
+             label: domain })}">Study this field</a>` : ""}
           <a class="ghost-btn" href="#explore|${encodeURIComponent(domain)}"
              data-graph-domain="${esc(domain)}">Show on the graph</a>
         </div>
@@ -93,16 +95,19 @@
                 : esc(b.title)}</h2>
               <p class="book-meta">${b.authors ? `<span>${esc(b.authors)}</span>` : ""}
                 ${b.local_url ? `<a class="tag tag-local" href="${esc(b.local_url)}"
-                  target="_blank" rel="noopener">local PDF</a>` : ""}
-                <span>${esc(b.book_id)}</span></p>
+                  target="_blank" rel="noopener">local PDF</a>` : ""}</p>
             </div>
-            <span class="data-count">${b.exercises.toLocaleString()} problems ·
-              ${b.topics.length} topics
+            <span class="data-count">${b.reference_only ? "reference only"
+              : window.Lattice.count(b.exercises, "problem")} ·
+              ${window.Lattice.count(b.topics.length, "topic")}
               <a class="ghost-btn" href="#course|${encodeURIComponent(b.book_id)}"
                 >Open as a course</a>
-              <a class="ghost-btn" href="${studyHref({ domains: [domain], books: [b.book_id],
-                 count: 10, label: b.title })}">Practise this book</a></span>
+              ${b.reference_only ? "" : `<a class="ghost-btn" href="${studyHref({
+                 domains: [domain], books: [b.book_id], count: 10, label: b.title })}"
+                 >Practice this book</a>`}</span>
           </div>
+          ${b.reference_only ? `<p class="panel-note reference-note">Copyrighted, so its
+            problems aren't hosted on this site. Its topics are listed for reference.</p>` : ""}
           ${(() => {
             // Group by chapter where the book has them; a flat list otherwise.
             const groups = new Map();
@@ -127,7 +132,11 @@
     if (e.detail.arg === lastArg && root().children.length) return;
     lastArg = e.detail.arg;
     render(e.detail.arg).catch((err) => {
-      root().innerHTML = `<p class="dim">Could not load that field (${esc(err.message)}).</p>`;
+      root().innerHTML = `<section class="card empty-set">
+        <h2 class="result-title">That field isn't here</h2>
+        <p class="dim">The link may be out of date.</p>
+        <div class="card-actions"><a class="btn-primary" href="#course">All courses</a>
+          <a class="ghost-btn" href="#home">Home</a></div></section>`;
     });
   });
 

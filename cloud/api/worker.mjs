@@ -6,7 +6,7 @@
 // Requests arrive from the Pages project (cloud/pages) through a service
 // binding; this Worker has no public route of its own.
 import { DurableObject } from 'cloudflare:workers';
-import { api, setData } from '../../lib/api.mjs';
+import { api, setData, setHooks } from '../../lib/api.mjs';
 import { migrate } from '../../lib/db.mjs';
 
 const COOKIE = 'lattice_uid';
@@ -46,6 +46,9 @@ function sqlDb(sql) {
   };
 }
 
+// A learner is a cookie: history belongs to one browser, and the UI says so.
+setHooks({ savedIn: 'browser' });
+
 // The corpus is ~15 MB of JSON: load it once per isolate, not once per learner.
 let corpus = null;
 
@@ -56,10 +59,25 @@ function loadCorpus(env) {
       if (!res.ok) throw new Error(`${name}: ${res.status}`);
       return res.json();
     };
-    const [graph, ladders, extras] = await Promise.all([
+    const [graph, ladders, extras, chapterTitles] = await Promise.all([
       asset('graph.json'), asset('ladders.json'), asset('extras.json'),
+      asset('chapter-titles.json').catch(() => ({})),
     ]);
-    setData({ graph, ladders, putnamExtras: new Map(Object.entries(extras)) });
+    // MATH solutions load one subject at a time, on first request.
+    const shards = new Map();
+    const solutionFor = (id) => {
+      const subject = id.startsWith('math:') ? id.split(':')[1] : null;
+      if (!subject || !/^[a-z_]+$/.test(subject)) return null;
+      if (!shards.has(subject)) {
+        shards.set(subject, asset(`solutions/${subject}.json`).catch(() => {
+          shards.delete(subject);
+          return {};
+        }));
+      }
+      return shards.get(subject).then((rows) => rows[id] ?? null);
+    };
+    setData({ graph, ladders, chapterTitles, solutionFor,
+              putnamExtras: new Map(Object.entries(extras)) });
   })().catch((err) => {
     corpus = null;   // let the next request retry rather than caching a failure
     throw err;

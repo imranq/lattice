@@ -54,33 +54,69 @@
   async function renderIndex() {
     root().innerHTML = `<p class="dim">Loading courses…</p>`;
     const rows = await get("/courses");
+    const live = rows.filter((c) => !c.reference_only);
+    const reference = rows.filter((c) => c.reference_only);
+    const card = (c) => `
+          <a class="course-card${c.reference_only ? " is-reference" : ""}"
+             href="#course|${encodeURIComponent(c.id)}">
+            <p class="eyebrow">${esc(c.domain ?? "")}</p>
+            <h3>${esc(c.title)}</h3>
+            ${c.authors ? `<p class="book-meta">${esc(c.authors)}</p>` : ""}
+            ${c.reference_only
+              ? `<p class="course-card-meta">${window.Lattice.count(c.topics, "topic")} · ${
+                   (window.MathGen?.SKILLS ?? []).some((sk) => sk.concepts?.some((x) => x.startsWith(`concept:${c.id}:`)))
+                     ? "generated practice" : "table of contents only"}</p>`
+              : `<span class="cov-track"><span class="cov-fill"
+                   style="width:${pct(c.progress)}"></span></span>
+                 <p class="course-card-meta">${pct(c.mastery_pct)} mastery ·
+                   ${c.points.toLocaleString()}/${c.points_max.toLocaleString()} points ·
+                   ${c.ready} ready · ${window.Lattice.count(c.exercises, "problem")}</p>`}
+          </a>`;
     root().innerHTML = `
       <div class="subject-head">
         <div>
           <h1 class="subject-title">Courses</h1>
-          <p class="dim">${rows.length} books · each one a tree of topics you unlock
-            by finishing what they rest on</p>
+          <p class="dim">Each book is a tree of topics you unlock by finishing what
+            they rest on.</p>
         </div>
       </div>
-      <div class="course-shelf">
-        ${rows.map((c) => `
-          <a class="course-card" href="#course|${encodeURIComponent(c.id)}">
-            <p class="eyebrow">${esc(c.domain ?? "")}</p>
-            <h3>${esc(c.title)}</h3>
-            ${c.authors ? `<p class="book-meta">${esc(c.authors)}</p>` : ""}
-            <span class="cov-track"><span class="cov-fill"
-              style="width:${pct(c.progress)}"></span></span>
-            <p class="course-card-meta">${pct(c.mastery_pct)} mastery ·
-              ${c.points.toLocaleString()}/${c.points_max.toLocaleString()} points ·
-              ${c.ready} ready · ${c.exercises.toLocaleString()} problems</p>
-          </a>`).join("")}
-      </div>`;
+      <div class="course-shelf">${live.map(card).join("")}</div>
+      ${reference.length ? `
+        <h2 class="shelf-head">Reference books</h2>
+        <p class="panel-note">These books are copyrighted, so their problems aren't
+          hosted on this site. You can still browse each one's table of contents, and many of
+          their topics have original problems and proofs generated for this site.</p>
+        <div class="course-shelf">${reference.map(card).join("")}</div>` : ""}`;
     window.Lattice.typeset(root());
   }
 
   // ---- one course ---------------------------------------------------------
 
-  function topicRow(t, bookId) {
+  /** Generators written on a topic (site/generators-books.js), by concept id. */
+  const generatorsFor = (ids) => (window.MathGen?.SKILLS ?? [])
+    .filter((sk) => sk.concepts?.some((c) => ids.includes(c)));
+  const drillHref = (skills, label) => `#study|${new URLSearchParams({
+    kind: "drill", skills: skills.map((sk) => sk.id).join(","), count: "6", label })}`;
+
+  /** A reference book's topic: its table-of-contents line, plus generated
+   *  practice where some has been written for it. */
+  function referenceRow(t) {
+    const gens = generatorsFor([t.id]);
+    return `
+      <li class="course-topic is-reference">
+        <span class="course-topic-main">
+          <span class="topic-name">${esc(t.label)}</span>
+          <span class="topic-meta">${t.page ? `p. ${t.page}` : ""}${gens.length
+            ? `${t.page ? " · " : ""}${gens.map((g) => esc(g.name)).join(", ")}` : ""}</span>
+        </span>
+        <span class="topic-actions">${gens.length
+          ? `<a class="ghost-btn" href="${drillHref(gens, t.label)}"
+               title="Original problems on this topic, generated fresh each time">Practice</a>` : ""}</span>
+      </li>`;
+  }
+
+  function topicRow(t, bookId, reference = false) {
+    if (reference) return referenceRow(t);
     const bar = t.mastery === null ? ""
       : `<span class="cov-track"><span class="cov-fill"
            style="width:${pct(t.mastery)}"></span></span>
@@ -97,10 +133,11 @@
       : t.next_step ? `<p class="topic-blocked">${esc(t.next_step)}</p>` : "";
     return `
       <li class="course-topic is-${t.state} lvl-${t.level ?? "none"}">
-        <span class="state-dot" title="${STATE_LABEL[t.state]}"></span>
+        <span class="state-dot" title="${STATE_LABEL[t.state]}" aria-hidden="true"></span>
         <span class="course-topic-main">
-          <a class="topic-name" href="#explore|${encodeURIComponent(t.id)}"
-             title="Open on the graph">${esc(t.label)}</a>
+          ${t.exercises ? `<a class="topic-name" href="#explore|${encodeURIComponent(t.id)}"
+             title="Open on the graph">${esc(t.label)}</a>`
+            : `<span class="topic-name">${esc(t.label)}</span>`}
           <span class="topic-meta">
             <span class="level-pill lvl-${t.level ?? "none"}">${esc(
               t.level_label ?? LEVEL_LABEL[t.level] ?? "not started")}</span>
@@ -112,12 +149,12 @@
         <span class="topic-actions">
           ${t.exercises ? `<a class="ghost-btn" href="${studyHref({ book: bookId,
              concepts: [t.id], count: Math.min(t.exercises, 8), label: t.label })}"
-             >${t.state === "learned" ? "Review" : "Practise"}</a>` : ""}
+             >${t.state === "learned" ? "Review" : "Practice"}</a>` : ""}
         </span>
       </li>`;
   }
 
-  function chapterBlock(c, bookId) {
+  function chapterBlock(c, bookId, reference = false) {
     const key = `${bookId}:${c.chapter}`;
     // A chapter with something to do opens by default; finished ones stay shut.
     const open = openSet.has(key) || (!openSet.size && Boolean(c.ready || c.started));
@@ -129,10 +166,11 @@
             <span class="course-chapter-title">${esc(c.title)}</span>
             <span class="cov-track"><span class="cov-fill"
               style="width:${pct(c.progress)}"></span></span>
-            <span class="course-chapter-meta">${c.counts.mastered + c.counts.proficient}/${
-              c.topics.length} mastered · ${c.exercises} problems</span>
+            <span class="course-chapter-meta">${reference ? window.Lattice.count(c.topics.length, "topic")
+              : `${c.counts.mastered + c.counts.proficient}/${c.topics.length} mastered · ${
+                window.Lattice.count(c.exercises, "problem")}`}</span>
           </button>
-          ${c.unit_test
+          ${c.exercises === 0 ? "" : c.unit_test
             ? `<a class="ghost-btn is-ok" href="${assessHref({ book: bookId, chapter: c.chapter })}"
                  title="One question per topic. A clean answer promotes a proficient topic to mastered."
                  >Unit test</a>`
@@ -140,7 +178,7 @@
                  title="A unit test opens once a topic in this chapter reaches familiar"
                  >Unit test</span>`}
         </div>
-        <ul class="course-topics">${c.topics.map((t) => topicRow(t, bookId)).join("")}</ul>
+        <ul class="course-topics">${c.topics.map((t) => topicRow(t, bookId, reference)).join("")}</ul>
       </section>`;
   }
 
@@ -148,6 +186,7 @@
     root().innerHTML = `<p class="dim">Loading course…</p>`;
     const d = await get(`/course?book=${encodeURIComponent(bookId)}`);
     const b = d.book, tt = d.totals;
+    const bookGens = generatorsFor(d.chapters.flatMap((c) => c.topics.map((t) => t.id)));
 
     root().innerHTML = `
       <div class="subject-head">
@@ -157,10 +196,14 @@
           <h1 class="subject-title">${b.local_url || b.url
             ? `<a class="book-out" href="${esc(b.local_url ?? b.url)}" target="_blank"
                  rel="noopener">${esc(b.title)}</a>` : esc(b.title)}</h1>
-          <p class="dim">${b.authors ? `${esc(b.authors)} · ` : ""}${tt.topics} topics ·
-            ${tt.exercises.toLocaleString()} problems</p>
+          <p class="dim">${b.authors ? `${esc(b.authors)} · ` : ""}${window.Lattice.count(tt.topics, "topic")}${
+            b.reference_only ? "" : ` · ${window.Lattice.count(tt.exercises, "problem")}`}</p>
         </div>
-        <div class="subject-actions">
+        ${b.reference_only ? `<div class="subject-actions">
+          ${bookGens.length ? `<a class="btn-primary" href="${drillHref(bookGens, b.title)}"
+            >Practice these topics</a>` : ""}
+          <a class="${bookGens.length ? "ghost-btn" : "btn-primary"}" href="${esc(b.url)}" target="_blank" rel="noopener"
+            >Find the book</a></div>` : `<div class="subject-actions">
           <div class="stat-tile"><b>${pct(tt.mastery_pct)}</b><span>mastery</span>
             <span class="stat-foot">proficient or better</span></div>
           <div class="stat-tile accent"><b>${tt.points.toLocaleString()}</b><span>points</span>
@@ -171,10 +214,14 @@
              title="Up to 20 questions across the whole book. Answer one right and you
                     never have to grind that topic."
             >Course challenge</a>
-        </div>
+        </div>`}
       </div>
+      ${b.reference_only ? `<p class="panel-note reference-note">This book is copyrighted,
+        so its problems aren't hosted on this site. The topics below are its table of
+        contents.${bookGens.length ? ` ${window.Lattice.count(bookGens.length, "topic family", "topic families")}
+        have original generated problems, with proofs to assemble, written for this site.` : ""}</p>` : ""}
 
-      <div class="course-legend">
+      ${b.reference_only ? "" : `<div class="course-legend">
         ${["mastered", "proficient", "familiar", "attempted", "none"].map((l) =>
           `<span class="lvl-${l}"><i class="state-dot"></i>${
             tt.counts[l]} ${esc(LEVEL_LABEL[l])}</span>`).join("")}
@@ -184,21 +231,21 @@
       <p class="panel-note course-rule">Mastered is the one rung practice cannot
         reach: it needs a clean, unaided answer on a
         <b>unit test</b> or <b>course challenge</b>. That is also how you test out
-        of a topic you already know — one right answer, no grinding.</p>
+        of a topic you already know — one right answer, no grinding.</p>`}
 
-      ${d.next.length ? `
+      ${d.next.length && !b.reference_only ? `
         <section class="panel">
           <div class="panel-heading">
             <div><p class="eyebrow">Next up</p><h2>What is open to you now</h2></div>
             <a class="ghost-btn" href="${studyHref({ book: b.id,
                concepts: d.next.map((t) => t.id), count: 10,
-               label: `${b.title} — next up` })}">Practise these</a>
+               label: `${b.title} — next up` })}">Practice these</a>
           </div>
           <ul class="course-topics">${d.next.map((t) => topicRow(t, b.id)).join("")}</ul>
         </section>` : ""}
 
       <div class="course-tree">
-        ${d.chapters.map((c) => chapterBlock(c, b.id)).join("")}
+        ${d.chapters.map((c) => chapterBlock(c, b.id, b.reference_only)).join("")}
       </div>`;
     window.Lattice.typeset(root());
   }
@@ -220,8 +267,13 @@
     if (e.detail.arg === lastArg && root().children.length) return;
     lastArg = e.detail.arg;
     const p = e.detail.arg ? renderCourse(e.detail.arg) : renderIndex();
-    p.catch((err) => {
-      root().innerHTML = `<p class="dim">Could not load that course (${esc(err.message)}).</p>`;
+    p.catch(() => {
+      root().innerHTML = `<section class="card empty-set">
+        <h2 class="result-title">That course isn't here</h2>
+        <p class="dim">The link may be out of date, or the book may have been removed.</p>
+        <div class="card-actions"><a class="btn-primary" href="#course">All courses</a>
+          <a class="ghost-btn" href="#home">Home</a></div>
+      </section>`;
     });
   });
 

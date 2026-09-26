@@ -7,7 +7,7 @@
 // openly licensed problems and pointers to everything else.
 //
 //   node cloud/build.mjs
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 
@@ -39,6 +39,32 @@ const extras = Object.fromEntries(labeled.problems.map((p) => [p.id, {
 }]));
 await writeFile(join(ASSETS, 'extras.json'), JSON.stringify(extras));
 
+// Chapter titles from the book profiles: the graph has none for some books.
+// MATH's worked solutions, sharded by subject so the Worker loads one shard
+// when a solution is asked for rather than all of them at startup.
+const chapterTitles = {};
+let solutions = 0;
+await mkdir(join(ASSETS, 'solutions'), { recursive: true });
+for (const name of await readdir(join(ROOT, 'data', 'processed', 'books'))) {
+  if (!name.endsWith('.json')) continue;
+  const b = await readJson('data', 'processed', 'books', name);
+  if (b.chapters?.length) {
+    chapterTitles[b.book_id] = Object.fromEntries(b.chapters.map((c) => [c.chapter, c.title]));
+  }
+  if (b.book_id !== 'math_dataset') continue;
+  const shards = {};
+  for (const e of b.exercises) {
+    if (!e.solution) continue;
+    const subject = e.id.split(':')[1];
+    (shards[subject] ??= {})[e.id] = e.solution;
+    solutions += 1;
+  }
+  for (const [subject, rows] of Object.entries(shards)) {
+    await writeFile(join(ASSETS, 'solutions', `${subject}.json`), JSON.stringify(rows));
+  }
+}
+await writeFile(join(ASSETS, 'chapter-titles.json'), JSON.stringify(chapterTitles));
+
 console.log(`site → ${DIST}`);
 console.log(`corpus → ${ASSETS}: ${graph.nodes.length} nodes, ${graph.exercises.length} exercises, `
-  + `${Object.keys(extras).length} Putnam extras`);
+  + `${Object.keys(extras).length} Putnam extras, ${solutions} MATH solutions`);

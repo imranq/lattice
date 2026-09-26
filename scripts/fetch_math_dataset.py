@@ -180,7 +180,9 @@ def main():
                     # Auto-gradable where MATH boxed an answer, which is almost
                     # everywhere. No model needed to mark these.
                     "answer": answer,
-                    "auto_gradable": answer is not None,
+                    # An empty \boxed{} is a data error in MATH (two in number theory):
+                    # treat it as no answer rather than an answer of "".
+                    "auto_gradable": bool(answer),
                     "has_published_solution": True,
                     "text": problem,
                     "solution": solution,

@@ -8,9 +8,15 @@
     "start": "node server.mjs",
     "dev": "node --watch server.mjs",
     "cloud:build": "node cloud/build.mjs",
-    "cloud:deploy": "node cloud/build.mjs && (cd cloud/api && npx wrangler deploy) && (cd cloud/pages && npx wrangler pages deploy --branch main)"
+    "cloud:deploy": "node cloud/build.mjs && (cd cloud/api && npx wrangler deploy) && (cd cloud/pages && npx wrangler pages deploy --branch main)",
+    "lattice": "node scripts/lattice.mjs",
+    "audit": "node scripts/lattice.mjs audit",
+    "verify": "node scripts/lattice.mjs verify"
   },
   "engines": {
     "node": ">=22.5"
+  },
+  "bin": {
+    "lattice": "scripts/lattice.mjs"
   }
 }
