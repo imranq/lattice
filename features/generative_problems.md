@@ -135,6 +135,87 @@ computational (1996-A5: the argument lives in two long calculations). `site/gene
 The two MATH problems whose answers were lost to an empty `\boxed{}` are both 0 (choice A, read
 off the solutions); they're restored in `ANSWER_FIXES`, so the live site's broken count is 0.
 
+## Grinstead & Snell, and the rest of the analysis and algebra books (2026-09-26, measured)
+
+Three more generator files take the count from 106 to 203 skills:
+
+- **`site/generators-gs.js`: 41 generators, one or more per section of Grinstead & Snell**
+  (GFDL), modelled on that section's exercises: roulette and the loaded die (1.x), exponential
+  lifetimes (2.2), derangements, the birthday problem, binomial and poker counts, rising sequences
+  (3.x), conditioning on a sum, urns and Bayes, the box paradox and n-door Monty Hall (4.x),
+  Poisson, the minimum of n rolls, normal tolerances, density transforms (5.x), expectation,
+  pooled blood tests, variance (6.x), dice convolutions, sums and minima of continuous variables
+  (7.x), Chebyshev and the CLT (8–9), generating functions and branching processes (10.x), Markov
+  chains: n-step, absorbing, fixed vectors, mean first passage (11.x), and random walks, gambler's
+  ruin and the arc sine law (12.x). Answers are exact fractions where the problem allows (a
+  decimal within 0.2 percent is accepted). The same generators are also tagged with the matching
+  Blitzstein & Hwang sections, so that book's course page offers them.
+- **`site/generators-analysis.js`: 28 for Tao and Pugh.** Images and inverse images, counting
+  functions, Cauchy sequences, standard limits, limit points, series sums and convergence tests,
+  extreme values, the IVT, derivatives from the definition, L'Hôpital, inverse functions, the
+  MVT, piecewise-constant and Riemann–Stieltjes integrals, the FTC, uniform convergence,
+  Jacobians and Lebesgue measure; and 10 proofs (limit laws, bounded and monotone sequences,
+  differentiable ⇒ continuous, an IVT root, Cantor's theorem, uniform limits, Rolle, the geometric
+  series).
+- **`site/generators-algebra.js`: 28 for Herstein and Axler.** Lagrange, direct products,
+  homomorphisms of cyclic groups, conjugacy classes, Sylow counts, units, zero divisors and
+  idempotents, ideals of ℤ and ℤₙ, roots mod p and rational roots, field degrees, finite fields,
+  cyclotomic polynomials and constructible polygons; span and subspace dimensions, the
+  differentiation map, inner products on polynomials, Gram–Schmidt and distances, positivity,
+  normality and singular values, Jordan forms, determinants and volume, change of basis; and 8
+  proofs (Lagrange, kernels are normal, subgroups of cyclic groups, ℤ is a PID, ℤₚ is a field,
+  eigenvectors for distinct eigenvalues, self-adjoint ⇒ real spectrum, injective ⇔ null T = 0).
+
+Every one of these computed answers has an independent reference in `generator_refs.py` that
+enumerates the sample space, brute-forces permutations or groups, integrates or takes limits with
+sympy, or raises the matrix to a high power. **Over 5,000 recomputed answers match, with none left failing.** Two real
+generator bugs were caught along the way (e^{−12} rounding to "0" at four places; the answer to
+an exponential tail rounding to 0 for large λt) and one weak reference (midpoint tags sitting next
+to a Stieltjes jump). `--only=gs-,an-` restricts the reference run to some prefixes, since the
+torch references make a full run slow. Filler choices for a probability now stay inside [0, 1]
+(`bounds`).
+
+`lattice audit` now counts all 705 Grinstead & Snell problems, all of Pugh and Tao, and 217 of
+222 Axler problems as sitting in a chapter with generated practice (up from 0, 2 and 1 chapters).
+
+## The machine-learning books and Stein (2026-09-26, measured)
+
+- **A wiring bug hid most of d2l.** The d2l generators cited their section ("7.5 Pooling") but
+  carried no concept id, so neither the course page nor the audit connected them to the book:
+  d2l showed 0 of 740 exercises in a practised chapter. `generators-ml.js` now derives
+  `concept:d2l:chN` from the cited section; that alone reached 453.
+- **`site/generators-mlbooks.js`: 44 generators.** The d2l chapters with nothing yet: conv
+  layer size, parameters and MACs (AlexNet), receptive fields (VGG), batch norm, DenseNet
+  channels (8); RNN/GRU/LSTM parameters, bidirectional shapes, beam-search cost, BLEU by hand
+  (10); roofline and ring all-reduce (13); IoU, anchor counts, transposed convolution (14); BPE
+  merges, subsampling and negative sampling, BERT parameters (15); TextCNN (16); value iteration
+  and a Q-learning update (17); the GP posterior of 18.1's own exercise, RBF kernels (18); grid,
+  random search and successive halving (19); the optimal discriminator (20); matrix factorization
+  (21). For Bishop and Murphy: Gaussian MLE, entropy/KL/mutual information, beta–binomial
+  updating, conditional Gaussians, histogram and k-NN densities, least squares and ridge,
+  bias–variance, precision/recall and loss thresholds, Gaussian generative classifiers, logistic
+  regression, momentum and Adam, weight decay, Bayesian-network parameter counts, message passing
+  and GCN normalisation, rejection/Metropolis/importance sampling, k-means and GMM
+  responsibilities, PCA, flow log-densities, the VAE KL term and the diffusion forward process.
+  It also tags 45 existing generators with the Bishop and Murphy chapters they already practise.
+- **`site/generators-complex.js`: 10 for Stein & Shakarchi.** Moduli, arguments and roots;
+  harmonic functions and conjugates; power-series coefficients (including 1.4's (1 − z)^{−m});
+  Fourier transforms of Gaussians and the Poisson kernel; real integrals by residues; orders of
+  zeros and poles; zeros inside a circle; order of growth; Γ and ζ values; Möbius maps and the
+  pseudo-hyperbolic distance.
+
+The references build the real modules where they can (`nn.Conv2d`, `nn.LSTM`,
+`nn.TransformerEncoderLayer`, `torch.optim.Adam`, `nn.BatchNorm1d`, torchvision's `box_iou`,
+sklearn's `KMeans`, `Ridge` and RBF kernel), trace a receptive field by backpropagating an
+impulse, run value iteration, and integrate the complex-analysis answers numerically with QUADPACK.
+**3,300 answers checked; the 50 disagreements were two generator bugs (a GMM responsibility and
+a Fourier transform small enough to round to "0") and two reference bugs, all fixed and
+re-checked.**
+
+`lattice audit`: d2l 736 of 740 exercises now sit in a practised chapter (was 0), Bishop 227 of
+227 (was 0), Murphy 65 of 66 (was 0), Stein 183 of 191 (was 37). d2l chapters 13–21 and their
+concepts now show titles instead of "Chapter None".
+
 ## Auditing: `lattice audit`
 
 `npm run audit` (or `node scripts/lattice.mjs audit`) counts every hardcoded problem by tier —

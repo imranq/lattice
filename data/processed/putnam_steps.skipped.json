@@ -1,0 +1,74 @@
+[
+ {
+  "id": "1995-A2",
+  "reason": "published solution has typos in its key expansion (writes x^{1/4}(a/4x + \u2026) for \u221a(\u221a(x+a) \u2212 \u221ax))"
+ },
+ {
+  "id": "1995-B5",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "1996-A5",
+  "reason": "the argument lives in two long calculations; excerpted steps would be trivial"
+ },
+ {
+  "id": "2005-A2",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2005-A5",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2009-A4",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2010-A5",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2012-A3",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2012-B1",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2013-B2",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2013-B3",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2014-B5",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2017-A1",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2019-B6",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2020-A1",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2023-A3",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2023-B4",
+  "reason": "statement truncated in the dataset"
+ },
+ {
+  "id": "2025-B4",
+  "reason": "statement truncated in the dataset"
+ }
+]

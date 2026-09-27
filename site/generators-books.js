@@ -1201,4 +1201,7 @@
       };
     },
   });
+  // Shared with the other book files, so every proof problem behaves the same.
+  M.proofProblem = proof;
+  M.bookSource = from;
 })();

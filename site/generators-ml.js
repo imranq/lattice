@@ -62,7 +62,13 @@
   /** Mistakes whose value coincides with the answer are not distractors. */
   const wrong = (answer, list) => list.filter((m) => m.answer !== answer);
 
-  const def = (g) => M.define({ domain: ML, ...g });
+  // Tie each generator to the d2l chapter it cites ("7.5 Pooling" → concept:d2l:ch7), so the
+  // book's course page offers it and the audit counts the chapter as practised.
+  const d2lChapter = (g) => {
+    const ch = g.source?.book === "d2l" && /^(\d+)\./.exec(g.source.section ?? "")?.[1];
+    return ch ? [`concept:d2l:ch${ch}`] : [];
+  };
+  const def = (g) => M.define({ domain: ML, ...g, concepts: [...(g.concepts ?? []), ...d2lChapter(g)] });
 
   // ---- layers and parameters ------------------------------------------------
 

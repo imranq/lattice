@@ -724,7 +724,8 @@
     const frac = /^(-?\d+)\/(\d+)$/.exec(String(answer));
     if (frac) {
       const a = Number(frac[1]), b = Number(frac[2]);
-      return [fmtFrac(-a, b), fmtFrac(b, a || 1), fmtFrac(a + b, b), fmtFrac(a, 2 * b), fmtFrac(2 * a, b)]
+      return [fmtFrac(-a, b), fmtFrac(b, a || 1), fmtFrac(a + b, b), fmtFrac(a, 2 * b), fmtFrac(2 * a, b),
+        fmtFrac(b - a, b), fmtFrac(a + 1, b), fmtFrac(a, b + 1), fmtFrac(Math.max(a - 1, 1), b)]
         .filter((x) => x !== answer && !x.includes("NaN")).sort(() => r() - 0.5);
     }
     const n = Number(answer);
@@ -732,7 +733,7 @@
     const isInt = Number.isInteger(n);
     const out = isInt
       ? [n + 1, n - 1, n * 2, Math.round(n / 2), n + 10, n * 10]
-      : [n * 2, n / 2, n + 0.1, n - 0.1, 1 - n].map((x) => +x.toFixed(4));
+      : [n * 2, n / 2, n + 0.1, n - 0.1, 1 - n, n * 0.9, n + (1 - n) / 2].map((x) => +x.toFixed(4));
     return out.filter((x) => x !== n && Number.isFinite(x) && !(n > 0 && x < 0))
       .sort(() => r() - 0.5);
   }
@@ -758,8 +759,13 @@
         take(`(${d.join(", ")})`, "That shape doesn't follow from the pattern: track each axis from input to output.", false);
       }
     } else if (p.format !== "choice") {
+      // A probability's filler options stay in [0, 1]: "−4/7" teaches nothing.
+      const [lo, hi] = p.bounds ?? [-Infinity, Infinity];
       for (const x of fillerValues(p.answer, r)) {
         if (seen.length >= 4) break;
+        const f = /^(-?\d+)\/(\d+)$/.exec(String(x));
+        const v = f ? Number(f[1]) / Number(f[2]) : Number(x);
+        if (v < lo || v > hi) continue;
         take(x, "Not a value any step of the method produces: recheck the working.", false);
       }
     }

@@ -72,9 +72,9 @@
     "Where do you want to improve?",
   ];
   const HEADLINE = HEADLINES[Math.floor(Math.random() * HEADLINES.length)];
-  // Every machine-learning generator, for the "ML from d2l" chip.
+  // Every machine-learning generator (d2l, Bishop, Murphy), for the ML chip.
   const ML_SKILLS = (window.MathGen?.SKILLS ?? [])
-    .filter((sk) => sk.id.startsWith("ml-")).map((sk) => sk.id).join(",");
+    .filter((sk) => /^(ml|dl|bs)-/.test(sk.id)).map((sk) => sk.id).join(",");
   let placeholderTimer = null;
 
   function rotatePlaceholder() {
@@ -154,14 +154,19 @@
       </details>`;
   }
 
+  /** Every generated skill whose id matches, so new generators join their chip. */
+  const skillsLike = (re) => (window.MathGen?.SKILLS ?? []).filter((sk) => re.test(sk.id)).map((sk) => sk.id).join(",");
+
   function heroPanel() {
     const chips = [
       due ? [`Reviews (${due})`, "#study|kind=review&count=12"] : null,
       ["5 quick ones", "#study|kind=study&count=5&difficulty=target"],
       ["Mental math", "#study|kind=drill&count=10&label=Mental+math"],
+      ["Real-world estimation", `#study|kind=drill&count=6&skills=${skillsLike(/^sf-|^estimate$/)}&label=Real-world+estimation`],
       ["Einsum and shapes", "#study|kind=drill&count=8&skills=es-loop,es-shape,es-which,es-rearrange,es-flops&label=Einsum+and+shapes"],
-      ["ML from d2l", `#study|kind=drill&count=8&skills=${ML_SKILLS}&label=Machine+learning`],
-      ["Proofs", "#study|kind=drill&count=5&skills=ra-proof-sqrt,ra-proof-induction,ra-proof-continuity,ra-proof-unique-limit,aa-proof-fermat&label=Proofs"],
+      ["Machine learning", `#study|kind=drill&count=8&skills=${ML_SKILLS}&label=Machine+learning`],
+      ["Probability", `#study|kind=drill&count=8&skills=${skillsLike(/^gs-/)}&label=Probability`],
+      ["Proofs", `#study|kind=drill&count=5&skills=${skillsLike(/proof/)}&label=Proofs`],
     ].filter(Boolean);
     return `
       <h1 class="hero-title">${esc(HEADLINE)}</h1>

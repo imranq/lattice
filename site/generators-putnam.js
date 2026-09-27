@@ -273,6 +273,18 @@
     },
   ];
 
+  // The full bank is site/putnam-steps.json (built by scripts/build_putnam_steps.mjs):
+  // too big to ship with every page, so it loads on demand and the pilot above
+  // serves until it arrives. Node tools pass it in as PUTNAM_STEPS.
+  const root = typeof self !== "undefined" ? self : this;
+  let BANK = PROBLEMS;
+  if (Array.isArray(root.PUTNAM_STEPS)) BANK = root.PUTNAM_STEPS;
+  else if (typeof fetch === "function") {
+    fetch("putnam-steps.json").then((r) => (r.ok ? r.json() : null))
+      .then((bank) => { if (Array.isArray(bank) && bank.length) BANK = bank; }).catch(() => {});
+  }
+  const shown = (st) => st.show ?? st.ex;
+
   // Word flips that turn a true step false. Checked per problem by the
   // verifier, and listed for review: a flip can occasionally leave a step true.
   const FLIPS = [
@@ -317,52 +329,51 @@
     domain: "competition math", prose: true, source: SOURCE, concepts: [],
     blurb: "Real Putnam solutions: fill in the key step, or put the steps in order.",
     gen(level, r) {
-      const p = r.pick(PROBLEMS);
-      const idx = PROBLEMS.indexOf(p);
+      const p = r.pick(BANK);
       const crucial = p.steps.find((st) => st.id === p.crucial);
       const written = shuffle(p.wrong, r).map((w) => ({ answer: w.text, why: w.why, kind: "written" }));
       const later = dependents(p, crucial.id).map((st) => ({
-        answer: st.ex, kind: "misplaced",
+        answer: shown(st), kind: "misplaced",
         why: "That step comes later: it relies on the step that's missing here.",
       }));
-      const flip = mutate(crucial.ex);
-      const mutated = flip && flip.text !== crucial.ex ? [{ answer: flip.text, why: flip.why, kind: "mutated" }] : [];
-      const others = PROBLEMS.filter((q) => q !== p);
+      const flip = mutate(shown(crucial));
+      const mutated = flip && flip.text !== shown(crucial) ? [{ answer: flip.text, why: flip.why, kind: "mutated" }] : [];
+      const others = BANK.filter((q) => q !== p);
       const other = others[Math.floor(r() * others.length)];
       const foreignStep = other.steps[Math.floor(r() * other.steps.length)];
-      const foreign = [{ answer: foreignStep.ex, kind: "foreign", why: `That step is from a different problem (Putnam ${other.id}).` }];
+      const foreign = [{ answer: shown(foreignStep), kind: "foreign", why: `That step is from a different problem (Putnam ${other.id}).` }];
 
       if (level <= 2) {
         const pool = level === 1
           ? [written[0], ...shuffle([...later, ...foreign], r)]
           : [written[0], ...mutated, ...shuffle(later, r), written[1]];
-        const lines = p.steps.map((st, i) => `${i + 1}. ${st.id === crucial.id ? "[ ? ]" : st.ex}`);
+        const lines = p.steps.map((st, i) => `${i + 1}. ${st.id === crucial.id ? "[ ? ]" : shown(st)}`);
         return {
           prompt: `Putnam ${p.id}. ${p.statement}\n\nWhich line completes this solution?\n\n${lines.join("\n\n")}`,
-          answer: crucial.ex, format: "choice",
+          answer: shown(crucial), format: "choice",
           mistakes: pool.filter(Boolean).slice(0, 3).map(({ answer, why }) => ({ answer, why })),
-          steps: p.steps.map((st) => st.ex), trick: "Each line must follow from the ones above it.",
-          params: { problem: idx },
+          steps: p.steps.map(shown), trick: "Each line must follow from the ones above it.",
+          params: { problem: p.id },
         };
       }
       // Build the whole solution: the steps plus planted lines (one written
       // misconception, and a mutation where one exists).
       const planted = [written[0], ...(level >= 4 ? mutated : [])].filter(Boolean)
         .map((w, i) => ({ id: `x${i + 1}`, text: w.answer, why: w.why }));
-      const steps = p.steps.map((st) => ({ id: st.id, text: st.ex, after: st.after }));
+      const steps = p.steps.map((st) => ({ id: st.id, text: shown(st), after: st.after }));
       return {
         prompt: `Putnam ${p.id}. ${p.statement}\n\nBuild the solution: put the lines in order, and leave out any that don't belong.`,
         answer: steps.map((st) => st.id).join(","), kind: "order", typed: true,
         steps, extras: planted,
         lines: shuffle([...steps, ...planted].map(({ id, text }) => ({ id, text })), r),
         trick: "Each line must follow from the ones above it.",
-        params: { problem: idx },
+        params: { problem: p.id },
       };
     },
   });
 
   // For the verifier: the raw data, so every excerpt can be checked against
   // the published solution.
-  M.putnamSteps = PROBLEMS;
+  Object.defineProperty(M, "putnamSteps", { get: () => BANK });
   M.putnamMutate = mutate;
 })();

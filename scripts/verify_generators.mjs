@@ -3,6 +3,8 @@
 //   node scripts/verify_generators.mjs            structure, all skills
 //   node scripts/verify_generators.mjs --refs     also recompute ML answers in
 //                                                 Python (torch/numpy) and compare
+//   node scripts/verify_generators.mjs --refs --only=gs-,an-
+//                                                 references for these skill prefixes only
 //
 // Structure: the answer is accepted by `check`; no distractor is; a choice set
 // has exactly one correct option and no two options that `check` treats as the
@@ -106,7 +108,8 @@ async function runRefs() {
     const l = spawn('python3', [new URL('./generator_refs.py', import.meta.url).pathname, '--list']);
     let out = ''; l.stdout.on('data', (d) => { out += d; }); l.on('close', () => res(out));
   })));
-  const jobs = refJobs.filter((j) => known.has(j.skill));
+  const only = process.argv.find((a) => a.startsWith('--only='))?.slice(7).split(',');
+  const jobs = refJobs.filter((j) => known.has(j.skill) && (!only || only.some((o) => j.skill.startsWith(o))));
   const missing = [...new Set(refJobs.map((j) => j.skill))].filter((s) => !known.has(s));
   let buf = '';
   const answers = [];
@@ -119,9 +122,10 @@ async function runRefs() {
   for (const j of jobs) py.stdin.write(`${JSON.stringify({ skill: j.skill, params: j.params })}\n`);
   py.stdin.end();
   await new Promise((res) => py.on('close', res));
-  let agree = 0;
+  let agree = 0, skipped = 0;
   jobs.forEach((j, k) => {
     const a = answers[k];
+    if (a?.skip) { skipped += 1; return; }
     const where = `L${j.level} seed ${j.seed} (ref)`;
     if (!a || a.error) return fail(j.skill, `${where}: reference failed: ${a?.error}`);
     // Monte-Carlo references are checked at 2%; exact ones at the generator's own tolerance.
@@ -133,7 +137,7 @@ async function runRefs() {
     if (ok) agree += 1;
     else fail(j.skill, `${where}: generator says ${j.problem.answer}, reference computes ${a.value}`);
   });
-  return { checked: jobs.length, agree, missing };
+  return { checked: jobs.length - skipped, agree, missing };
 }
 
 // Putnam step problems: every correct step must be a verbatim excerpt of the
