@@ -159,6 +159,38 @@
       </details>`;
   }
 
+  /** Today's shared round (site/study.js builds it from the date). Scores live
+   *  in this browser only, so the card reads them straight from storage. */
+  function dailyPanel() {
+    const d = new Date();
+    const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    let all = {};
+    try { all = JSON.parse(localStorage.getItem("lattice_daily_v1")) || {}; } catch { /* */ }
+    const mine = all[date]?.first;
+    let streak = 0;
+    const back = new Date(d);
+    if (!mine) back.setDate(back.getDate() - 1);   // yesterday's streak is still alive
+    for (;;) {
+      const key = `${back.getFullYear()}-${String(back.getMonth() + 1).padStart(2, "0")}-${String(back.getDate()).padStart(2, "0")}`;
+      if (!all[key]?.first) break;
+      streak += 1;
+      back.setDate(back.getDate() - 1);
+    }
+    const day = d.toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" });
+    return `
+      <a class="daily-card${mine ? " is-done" : ""}" href="#study|kind=daily&date=${date}">
+        <span class="daily-clock" aria-hidden="true">2:00</span>
+        <span class="daily-text">
+          <span class="path-kicker">Daily challenge · ${esc(day)}</span>
+          <b>${mine ? `You solved ${mine.solved} today` : "Two minutes, same questions for everyone"}</b>
+          <span class="daily-sub">${mine
+            ? (streak > 1 ? `${streak}-day streak · play again for fun` : "Come back tomorrow for a new round")
+            : (streak ? `Keep your ${streak}-day streak going` : "Mental math, getting harder as you go")}</span>
+        </span>
+        <span class="path-arrow">${mine ? "↻" : "→"}</span>
+      </a>`;
+  }
+
   /** Every generated skill whose id matches, so new generators join their chip. */
   const skillsLike = (re) => (window.MathGen?.SKILLS ?? []).filter((sk) => re.test(sk.id)).map((sk) => sk.id).join(",");
 
@@ -194,6 +226,7 @@
       <div class="home-chips">${chips.map(([label, href, tone]) =>
         `<a class="ask-eg${tone ? ` ask-eg-${tone}` : ""}" href="${href}">${esc(label)}</a>`).join("")}</div>
       <p class="ask-tip">Add a time to make it a challenge: “3 minute einsum sprint”.</p>
+      ${dailyPanel()}
       ${firstRun ? introPanel() + pathPanel() : pathPanel() + introPanel()}`;
   }
 
@@ -495,7 +528,17 @@
     paintProgress(stats, history).catch(() => {});
   }
 
-  window.Lattice.register("home", () => render().catch((err) => {
+  // Home renders once per load; coming back after a round should still show
+  // today's daily score and what you just worked on.
+  let rendered = false;
+  window.addEventListener("lattice:view", (ev) => {
+    if (ev.detail?.view !== "home" || !rendered) return;
+    const card = document.querySelector(".daily-card");
+    if (card) card.outerHTML = dailyPanel();
+    get("/history?limit=8").then(paintHistory).catch(() => {});
+  });
+
+  window.Lattice.register("home", () => render().then(() => { rendered = true; }).catch((err) => {
     el("homeHero").innerHTML = `<p class="dim">Home needs the server API
       (${esc(err.message)}).</p>`;
   }));

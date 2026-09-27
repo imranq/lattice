@@ -214,6 +214,10 @@
   let ability = [];
   let startedAt = 0;
   let session = { seen: 0, solved: 0 };
+  // Every answer in the current set, for the results screen at its end.
+  let answers = [];
+  // The spec as it arrived in the hash, so a result can link back to the same set.
+  let specArg = "";
   // Test mode is the same queue with a fixed length and a score at the end.
   let test = null;   // { length, index, results }
   // A running assessment. Its attempts are logged with a context the level
@@ -268,6 +272,36 @@
     try { localStorage.setItem(PICK_KEY, JSON.stringify(picks)); } catch { /* */ }
   }
 
+  // ---- the daily challenge ---------------------------------------------------
+  const DAILY_SECONDS = 120;
+  // Quick, exact, auto-graded: a shared round has to be fair to a phone keyboard.
+  const DAILY_SKILLS = ["add-chain", "subtract", "multiply", "divide-friendly", "order-of-operations",
+    "powers", "mult-tricks", "squares", "multiply-2x2", "percent"];
+  const today = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  };
+  const dayLabel = (date) => new Date(`${date}T12:00:00`)
+    .toLocaleDateString([], { month: "short", day: "numeric" });
+  /** Small, seedable, and the same in every browser: FNV-1a then xorshift. */
+  function seeded(str) {
+    let h = 2166136261;
+    for (const c of str) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+    return () => {
+      h ^= h << 13; h ^= h >>> 17; h ^= h << 5;
+      return (h >>> 0) / 2 ** 32;
+    };
+  }
+  /** Sixty questions is more than anyone answers in two minutes. They get a
+   *  little harder as the round goes on, so a fast start is not the whole game. */
+  function dailyRound(date) {
+    const rnd = seeded(`lattice-daily-${date}`);
+    const skills = DAILY_SKILLS.filter((id) => MathGen.SKILLS.some((sk) => sk.id === id));
+    return Array.from({ length: 60 }, (_, i) => MathGen.generate(
+      skills[Math.floor(rnd() * skills.length)], i < 10 ? 1 : i < 25 ? 2 : 3,
+      Math.floor(rnd() * 2 ** 31)));
+  }
+
   /** `#study|kind=drill&skills=a,b&count=21&label=Warm+up` */
   function parseSpec(arg) {
     if (!arg) return null;
@@ -275,6 +309,15 @@
     const list = (k) => (q.get(k) || "").split(",").map((x) => x.trim()).filter(Boolean);
     const kind = q.get("kind");
     if (!kind) return null;
+    // The daily challenge is one fixed round per calendar day: everyone who opens
+    // the same date gets the same questions, in the same order, on the same clock.
+    if (kind === "daily") {
+      const date = /^\d{4}-\d{2}-\d{2}$/.test(q.get("date") ?? "") ? q.get("date") : today();
+      return { kind, date, domains: [], books: [], skills: [], concepts: [], items: [],
+               book: "", chapter: null, assessKind: "unit_test", difficulty: "", maxDifficulty: "",
+               count: 0, time: DAILY_SECONDS, path: "",
+               label: `Daily challenge · ${dayLabel(date)}` };
+    }
     // The graph links a skill by its node id ("skill:ml-pooling"); the queue
     // matches bare skill ids, so strip the prefix or the set comes up empty.
     return { kind, domains: list("domains"), books: list("books"),
@@ -338,6 +381,12 @@
       if (!items.length && paper?.reason) assessment.blocked = paper.reason;
       queue = shuffle(items.map((p) => ({ kind: "problem", problem: p })));
       test = { length: items.length, index: 0, results: [] };
+      return;
+    }
+    if (spec?.kind === "daily") {
+      // The round is fixed, so a refill resumes it rather than drawing afresh.
+      queue = dailyRound(spec.date).slice(session.seen)
+        .map((problem) => ({ kind: "drill", problem }));
       return;
     }
     if (spec?.kind === "items" && !itemsServed) {
@@ -644,25 +693,82 @@
       <b>${esc(spec.label || spec.kind)}</b>
       ${goal ? `<span class="test-track"><span style="width:${pctDone}%"></span></span>
         <span>${session.seen} of ${goal}</span>` : ""}
-      <a class="ghost-btn" href="#study">Leave set</a>
+      ${session.seen ? `<button class="ghost-btn" data-act="finishset">Finish</button>`
+        : `<a class="ghost-btn" href="#study">Leave set</a>`}
     </div>`;
   }
 
-  function renderSetComplete() {
-    root().innerHTML = `${setBar()}
-      <section class="card">
-        <h2 class="result-title">Set complete</h2>
-        <p class="dim">${session.solved} of ${session.seen} solved in
-          <b>${esc(spec.label || spec.kind)}</b>.</p>
+  // ---- results -------------------------------------------------------------
+  // Every set ends on the same kind of card: what you got, how long it took,
+  // each answer, and a way to share it or go again.
+
+  const MARK = { solved: "✓", partial: "~", failed: "✗", skipped: "·" };
+  const SQUARE = { solved: "🟩", partial: "🟨", failed: "🟥", skipped: "⬜" };
+  /** Rows of ten, the way a daily-puzzle result is usually posted. */
+  const grid = (rows) => {
+    const sq = rows.map((r) => SQUARE[r.outcome] ?? "⬜");
+    const lines = [];
+    for (let i = 0; i < sq.length; i += 10) lines.push(sq.slice(i, i + 10).join(""));
+    return lines.join("\n");
+  };
+  let lastShare = null;   // { text, url } for the result on screen
+
+  function answerList(rows, limit = 40) {
+    return `<ol class="test-review">${rows.slice(0, limit).map((r) => `
+      <li class="mark-${esc(r.outcome)}"><span class="mark">${MARK[r.outcome] ?? "·"}</span>
+        ${esc(r.label)}
+        ${r.expected && r.given && r.outcome !== "solved"
+          ? `<span class="dim">you said ${esc(r.given)}, answer ${esc(r.expected)}</span>` : ""}
+      </li>`).join("")}</ol>`;
+  }
+
+  const setUrl = () => (specArg ? `${location.origin}${location.pathname}#study|${specArg}` : "");
+
+  async function share(btn) {
+    if (!lastShare) return;
+    const { text, url } = lastShare;
+    const body = url ? `${text}\n${url}` : text;
+    // The share sheet on phones; the clipboard everywhere else.
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+      try { await navigator.share({ text: body }); return; } catch { /* dismissed */ }
+    }
+    await copyToClipboard(body, btn, "Share result");
+  }
+
+  function renderSetComplete(early = false) {
+    const seen = answers.length || session.seen;
+    const solved = answers.length ? answers.filter((r) => r.outcome === "solved").length : session.solved;
+    const secs = answers.reduce((a, r) => a + (r.seconds || 0), 0);
+    const pct = seen ? Math.round((solved / seen) * 100) : 0;
+    const title = spec.label || spec.kind;
+    lastShare = {
+      text: `Lattice · ${title}\n${solved}/${seen} solved (${pct}%)${secs ? ` in ${clock(secs * 1000)}` : ""}\n${grid(answers)}`,
+      url: setUrl(),
+    };
+    root().innerHTML = `
+      <section class="card set-result">
+        <p class="eyebrow">${early ? "Finished early" : "Set complete"}</p>
+        <h2 class="result-title">${esc(title)}</h2>
+        <div class="stat-row">
+          <div class="stat-tile accent"><b>${solved}/${seen}</b><span>Solved</span></div>
+          <div class="stat-tile"><b>${pct}%</b><span>Accuracy</span></div>
+          ${secs ? `<div class="stat-tile"><b>${clock(secs * 1000)}</b><span>Time</span>
+            <span class="stat-foot">${Math.round(secs / Math.max(1, seen))}s per question</span></div>` : ""}
+          ${answers.some((r) => r.hints) ? `<div class="stat-tile"><b>${answers.filter((r) => r.hints).length}</b>
+            <span>With hints</span></div>` : ""}
+        </div>
+        ${answers.length ? `<p class="result-grid" aria-hidden="true">${grid(answers).replace(/\n/g, "<br>")}</p>
+          <h3 class="sub">Answers</h3>${answerList(answers)}` : ""}
         <div class="card-actions">
           ${spec.path
             ? `<button class="btn-primary" data-act="pathnext">Next step</button>
                <button class="ghost-btn" data-act="againset">Run it again</button>`
             : `<button class="btn-primary" data-act="againset">Run it again</button>`}
-          <a class="ghost-btn" href="#home">Back to today</a>
-          <a class="ghost-btn" href="#study">Free practice</a>
+          <button class="ghost-btn" data-act="share">Share result</button>
+          <a class="ghost-btn" href="#home">Home</a>
         </div>
       </section>`;
+    window.Lattice.typeset(root());
   }
 
   // ---- timed challenges ----------------------------------------------------
@@ -679,7 +785,7 @@
     return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`;
   };
   /** One best per challenge shape; the label is presentation, so it is left out. */
-  const bestKey = () => ["kind", "skills", "domains", "books", "concepts", "time", "count"]
+  const bestKey = () => ["kind", "date", "skills", "domains", "books", "concepts", "time", "count"]
     .map((k) => [].concat(spec?.[k] ?? "").join(",")).join("|");
   function readBest() {
     try { return JSON.parse(localStorage.getItem(BEST_KEY))?.[bestKey()] ?? null; }
@@ -691,6 +797,31 @@
       all[bestKey()] = entry;
       localStorage.setItem(BEST_KEY, JSON.stringify(all));
     } catch { /* private mode */ }
+  }
+
+  const DAILY_KEY = "lattice_daily_v1";
+  /** The first play of a day is the score; replays only chase a best. The
+   *  streak counts consecutive days with a first play, ending today. */
+  function saveDaily(date, entry) {
+    let all = {};
+    try { all = JSON.parse(localStorage.getItem(DAILY_KEY)) || {}; } catch { /* */ }
+    const day = all[date] ?? {};
+    const replay = Boolean(day.first);
+    day.first ??= { ...entry, at: Date.now() };
+    if (!day.best || entry.solved > day.best.solved) day.best = entry;
+    all[date] = day;
+    try { localStorage.setItem(DAILY_KEY, JSON.stringify(all)); } catch { /* */ }
+    return { ...day, replay, streak: dailyStreak(all, date) };
+  }
+  function dailyStreak(all, from) {
+    let n = 0;
+    const d = new Date(`${from}T12:00:00`);
+    for (;;) {
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+      if (!all[key]?.first) return n;
+      n += 1;
+      d.setDate(d.getDate() - 1);
+    }
   }
 
   function stopTimer() {
@@ -735,7 +866,7 @@
     stopTimer();
     timed = { seconds: timed.seconds, endsAt: Date.now() + timed.seconds * 1000,
               results: [], tick: null, done: false };
-    session = { seen: 0, solved: 0 };
+    session = { seen: 0, solved: 0 }; answers = [];
     paintSession();
     timed.tick = setInterval(paintTimer, 200);
     return next();
@@ -757,6 +888,13 @@
     if (isBest) writeBest({ solved, seen, at: Date.now() });
     const finished = spec?.count && seen >= spec.count;
     const left = timeLeft();
+    const daily = spec?.kind === "daily" ? saveDaily(spec.date, { solved, seen, grid: grid(results) }) : null;
+    const pct = seen ? Math.round((solved / seen) * 100) : 0;
+    lastShare = {
+      text: `Lattice · ${spec?.label || "Timed challenge"}\n${solved} solved in ${
+        clock(timed.seconds * 1000)} (${pct}% right)${daily?.streak > 1 ? ` · ${daily.streak}-day streak` : ""}\n${grid(results)}`,
+      url: setUrl(),
+    };
     const misses = results.filter((r) => r.outcome !== "solved");
     root().innerHTML = `
       <section class="card timed-result">
@@ -764,6 +902,9 @@
           : left > 0 ? `Stopped with ${clock(left)} left` : "Time"}</p>
         <h2 class="result-title">${esc(spec?.label || "Timed challenge")}</h2>
         ${isBest ? `<p class="timed-badge">${best ? "New personal best" : "First score on the board"}</p>` : ""}
+        ${daily ? `<p class="dim">${daily.replay
+          ? `Today's first score stands at ${daily.first.solved}; replays count toward your best only.`
+          : "Everyone gets these same questions today."}${daily.streak > 1 ? ` ${daily.streak} days in a row.` : ""}</p>` : ""}
         <div class="stat-row">
           <div class="stat-tile accent"><b>${solved}</b><span>Solved</span></div>
           <div class="stat-tile"><b>${seen ? Math.round((solved / seen) * 100) : 0}%</b>
@@ -772,6 +913,7 @@
             <span>Per minute</span></div>` : ""}
           ${best && !isBest ? `<div class="stat-tile"><b>${best.solved}</b><span>Your best</span></div>` : ""}
         </div>
+        ${results.length ? `<p class="result-grid" aria-hidden="true">${grid(results).replace(/\n/g, "<br>")}</p>` : ""}
         ${misses.length ? `<h3 class="sub">To look at again</h3>
           <ol class="test-review">${misses.slice(0, 12).map((r) => `
             <li class="mark-${esc(r.outcome)}"><span class="mark">${r.outcome === "skipped" ? "·" : "✗"}</span>
@@ -779,8 +921,8 @@
               ${r.expected && r.given ? `<span class="dim">you said ${esc(r.given)}, answer ${esc(r.expected)}</span>` : ""}
             </li>`).join("")}</ol>` : ""}
         <div class="card-actions">
-          <button class="btn-primary" data-act="againtimed">Go again</button>
-          <a class="ghost-btn" href="#study">Untimed practice</a>
+          <button class="btn-primary" data-act="share">Share result</button>
+          <button class="ghost-btn" data-act="againtimed">Go again</button>
           <a class="ghost-btn" href="#home">Home</a>
         </div>
       </section>`;
@@ -826,6 +968,11 @@
         .filter((a) => a.before !== a.level);
     }
     const RANK = ["none", "attempted", "familiar", "proficient", "mastered"];
+    lastShare = {
+      text: `Lattice · ${paper ? "Assessment" : "Test"}\n${solved}/${done} correct (${
+        done ? Math.round((solved / done) * 100) : 0}%)\n${grid(results)}`,
+      url: "",
+    };
 
     root().innerHTML = `
       <section class="card">
@@ -865,6 +1012,7 @@
                  >${paper.book ? "Back to the course" : "Back to today"}</a>
                <a class="ghost-btn" href="#study">Free practice</a>`
             : `<button class="btn-primary" data-act="newtest">New test</button>
+               <button class="ghost-btn" data-act="share">Share result</button>
                <button class="ghost-btn" data-act="practice">Back to practice</button>`}
         </div>
       </section>`;
@@ -1348,6 +1496,13 @@
     session.seen += 1;
     if (outcome === "solved") session.solved += 1;
     paintSession();
+    answers.push({
+      label: current.kind === "drill" ? `${current.problem.skillName} · ${current.problem.prompt}`
+        : `${current.problem.cite ?? ""} ${current.problem.section_title ?? ""}`.trim(),
+      outcome, given: given ?? null, seconds, hints: hintsShown,
+      expected: current.kind === "drill" ? current.problem.answer : null,
+      domain: movedDomain,
+    });
     if (timed?.endsAt && !timed.done) {
       timed.results.push({
         label: current.kind === "drill" ? current.problem.prompt
@@ -1380,12 +1535,15 @@
       await post("/attempt", {
         item_id: drillItemId(p), item_type: "drill",
         concept_id: `skill:${p.skill}`, outcome, seconds, hints_used: hintsShown,
+        // Against the clock, a slow right answer and a hurried slip mean
+        // something different; lib/ability.mjs reads this to weigh them.
+        context: timed?.endsAt ? "timed" : "practice",
       });
     } else {
       await post("/attempt", {
         item_id: current.problem.id, item_type: "exercise",
         concept_id: current.problem.concept_id, outcome, seconds, hints_used: hintsShown,
-        context: assessment ? assessment.kind : "practice",
+        context: assessment ? assessment.kind : timed?.endsAt ? "timed" : "practice",
         // What was actually written. The server keeps it and grades it in the
         // background; nothing on this screen waits for that or changes because
         // of it.
@@ -1396,7 +1554,7 @@
     // Step the staircase before the next refill asks for its offset. Hints count
     // as a partial success: you got there, but not unaided.
     const diffNow = test?.difficulty || spec?.difficulty || picks.difficulty || "adaptive";
-    if (diffNow === "adaptive") {
+    if (diffNow === "adaptive" && spec?.kind !== "daily") {
       const step = outcome === "solved" ? (hintsShown ? ADAPT_UP / 2 : ADAPT_UP)
         : outcome === "partial" ? 0
         : outcome === "skipped" ? ADAPT_DOWN / 3
@@ -1422,7 +1580,8 @@
     // Most actions are about the problem on screen. These are not: they run from
     // the setup and results cards, when there is no current problem at all.
     const CARD_ACTS = new Set(["starttest", "newtest", "practice", "againset", "endtest",
-                               "pathnext", "starttimed", "againtimed", "endtimed"]);
+                               "pathnext", "starttimed", "againtimed", "endtimed",
+                               "share", "finishset"]);
     if (!current && !CARD_ACTS.has(act)) return;
 
     if (act === "next") return next();
@@ -1507,6 +1666,8 @@
       await record("skipped", document.getElementById("freeAnswer")?.value ?? null);
       return next();
     }
+    if (act === "share") return share(ev.target.closest("[data-act]"));
+    if (act === "finishset") { current = null; return renderSetComplete(true); }
     if (act === "starttimed") return startTimed();
     if (act === "endtimed") return finishTimed();
     if (act === "againtimed") {
@@ -1528,7 +1689,7 @@
       // one drifted to.
       adaptiveShift = 0;
       adaptiveHistory.length = 0;
-      session = { seen: 0, solved: 0 };
+      session = { seen: 0, solved: 0 }; answers = [];
       paintSession();
       served.clear();
       queue = [];
@@ -1545,7 +1706,7 @@
     }
     if (act === "againset") {
       itemsServed = false;
-      session = { seen: 0, solved: 0 };
+      session = { seen: 0, solved: 0 }; answers = [];
       reshuffle();
       paintSession();
       queue = [];
@@ -1678,7 +1839,7 @@
     }
     test = null;
     reshuffle();
-    session = { seen: 0, solved: 0 };
+    session = { seen: 0, solved: 0 }; answers = [];
     paintSession();
     if (mode === "test") { pendingTest = true; renderTestSetup(); }
     else { pendingTest = false; }
@@ -1855,7 +2016,8 @@
   window.Lattice.register("study", async () => {
     loadPicks();
     picksLoaded = Boolean(localStorage.getItem(PICK_KEY));
-    spec = parseSpec(decodeURIComponent(location.hash.slice(1)).split("|")[1]);
+    specArg = decodeURIComponent(location.hash.slice(1)).split("|")[1] ?? "";
+    spec = parseSpec(specArg);
     timed = spec?.time ? { seconds: spec.time, results: [] } : null;
     await renderAbility();
     await renderPickers();
@@ -1869,10 +2031,11 @@
   window.addEventListener("lattice:route", async (ev) => {
     if (ev.detail?.view !== "study") return;
     const next_ = parseSpec(ev.detail.arg);
+    specArg = ev.detail.arg ?? "";
     const same = JSON.stringify(next_) === JSON.stringify(spec);
     if (same) return;
     spec = next_;
-    session = { seen: 0, solved: 0 };
+    session = { seen: 0, solved: 0 }; answers = [];
     reshuffle();
     served.clear();
     queue = [];
