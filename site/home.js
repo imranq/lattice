@@ -58,6 +58,9 @@
     "Bayes rule", "einops rearrange", "review what's due", "log-sum-exp",
     "counting", "early stopping", "number theory", "FLOPs of a matmul",
     "epsilon-delta", "proof practice", "permutations", "residues", "rank-nullity",
+    // A duration anywhere in the sentence turns it into a timed challenge.
+    "2 minute mental math challenge", "einsum blitz", "10 questions in 3 min on probability",
+    "5 minute sprint on fractions",
   ];
   let placeholderAt = 0;
   // The search box is the product: find the problem worth doing next. One
@@ -75,6 +78,8 @@
   // Every machine-learning generator (d2l, Bishop, Murphy), for the ML chip.
   const ML_SKILLS = (window.MathGen?.SKILLS ?? [])
     .filter((sk) => /^(ml|dl|bs)-/.test(sk.id)).map((sk) => sk.id).join(",");
+  // The mixed arithmetic set the server also serves for a clock with no topic.
+  const MENTAL_SKILLS = "add-chain,subtract,divide-friendly,multiply,powers,order-of-operations";
   let placeholderTimer = null;
 
   function rotatePlaceholder() {
@@ -160,6 +165,8 @@
   function heroPanel() {
     const chips = [
       due ? [`Reviews (${due})`, "#study|kind=review&count=12"] : null,
+      ["⏱ 2-min sprint", `#study|kind=drill&skills=${MENTAL_SKILLS}&time=120&label=${
+        encodeURIComponent("2-min challenge · Mental math")}`, "timed"],
       ["5 quick ones", "#study|kind=study&count=5&difficulty=target"],
       ["Mental math", "#study|kind=drill&count=10&label=Mental+math"],
       ["Real-world estimation", `#study|kind=drill&count=6&skills=${skillsLike(/^sf-|^estimate$/)}&label=Real-world+estimation`],
@@ -184,8 +191,9 @@
         <ul id="askSuggest" class="ask-suggest" role="listbox" hidden></ul>
       </div>
       <div id="askStatus" class="ask-status" hidden></div>
-      <div class="home-chips">${chips.map(([label, href]) =>
-        `<a class="ask-eg" href="${href}">${esc(label)}</a>`).join("")}</div>
+      <div class="home-chips">${chips.map(([label, href, tone]) =>
+        `<a class="ask-eg${tone ? ` ask-eg-${tone}` : ""}" href="${href}">${esc(label)}</a>`).join("")}</div>
+      <p class="ask-tip">Add a time to make it a challenge: “3 minute einsum sprint”.</p>
       ${firstRun ? introPanel() + pathPanel() : pathPanel() + introPanel()}`;
   }
 
@@ -237,7 +245,9 @@
     if (asking || !text) return;
     asking = true;
     el("askSuggest").hidden = true;
-    askStatus("Building a set…");
+    // Same wording the server uses to spot a clock, near enough to set expectations.
+    const timed = /\d\s*-?\s*(min|sec|s\b|m\b)|minute|second|timed|blitz|sprint|speed|race|clock/i.test(text);
+    askStatus(timed ? "Setting the clock…" : "Building a set…");
     try {
       const r = await fetch("/api/practice-request", {
         method: "POST",

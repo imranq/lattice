@@ -2110,7 +2110,8 @@ body { overflow-x: hidden; }
 /* The theme toggle used to be the only thing pushed right. With the search in
    front of it, two `margin-left: auto` would split the free space and leave a
    gap between them, so the search takes the push and the toggle sits beside it. */
-.topbar .topsearch + .theme-toggle { margin-left: 0; }
+.topbar .topsearch + .theme-toggle,
+.topbar .byline + .theme-toggle { margin-left: 0; }
 .topsearch-label { flex: 1; text-align: left; }
 .topsearch-key,
 .palette-foot kbd {
@@ -2830,3 +2831,233 @@ body { overflow-x: hidden; }
 .progress-retry { font-size: 0.88rem; color: var(--primary); text-decoration: none; }
 .progress-map canvas { width: 100%; height: 150px; display: block; flex: 1; }
 .progress-map:hover { border-color: var(--primary-line); }
+
+/* ============================================================================
+   Portfolio link, footer, timed challenges, and the phone layout
+   ========================================================================== */
+
+.nav-button { display: inline-flex; align-items: center; gap: 6px; }
+.nav-icon { display: none; }
+.byline {
+  flex: none;
+  font-size: 0.76rem;
+  color: var(--text-3);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.byline:hover { color: var(--primary); }
+
+.site-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--gap-5) var(--gap-4) var(--gap-6);
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-3);
+}
+.site-foot a { color: var(--text-2); text-decoration: none; }
+.site-foot a:hover { color: var(--primary); }
+body[data-view="explore"] .site-foot { display: none; }
+
+/* Home: the timed chip reads as a different kind of thing from a topic. */
+.ask-eg-timed {
+  color: var(--primary);
+  border-color: var(--primary-line);
+  background: var(--primary-soft);
+  font-weight: 600;
+}
+.ask-tip {
+  margin: var(--gap-3) 0 0;
+  text-align: center;
+  font-size: 0.76rem;
+  color: var(--text-3);
+}
+
+/* ---- timed challenges ---------------------------------------------------- */
+/* The clock stays on screen while you scroll a long statement: that is the
+   whole point of it. */
+.set-bar-timed {
+  position: sticky;
+  top: calc(var(--topbar-h) + 8px);
+  z-index: 30;
+  border-color: var(--primary-line);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  row-gap: 6px;
+}
+.timer-face {
+  font-family: var(--mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--primary);
+  min-width: 3.2em;
+}
+.timer-face.is-urgent { color: var(--danger); animation: timer-pulse 1s ease-in-out infinite; }
+@keyframes timer-pulse { 50% { opacity: 0.55; } }
+.set-bar-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 0; }
+.timer-score { color: var(--text-2); white-space: nowrap; }
+.timer-score b { font-family: var(--serif); font-size: 1.05rem; color: var(--text); }
+.timer-track {
+  order: 10;
+  flex: 1 1 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.timer-track > span {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.2s linear;
+}
+.set-bar-timed .ghost-btn { margin-left: 0; }
+
+.timed-start, .timed-result { text-align: center; }
+.timed-start .card-actions, .timed-result .card-actions { justify-content: center; }
+.timed-start .dim { max-width: 440px; margin-left: auto; margin-right: auto; }
+.timed-dial {
+  margin: var(--gap-4) auto;
+  font-family: var(--mono);
+  font-size: clamp(3rem, 14vw, 4.5rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+}
+.timed-best { color: var(--text-2); }
+.timed-badge {
+  display: inline-block;
+  margin: 0 0 var(--gap-3);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  border: 1px solid var(--primary-line);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.timed-result .stat-row { justify-content: center; }
+.timed-result .test-review { text-align: left; }
+.btn-lg { padding: 12px 22px; font-size: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .timer-face.is-urgent { animation: none; }
+}
+
+/* Keyboard hints mean nothing on a phone. */
+@media (hover: none) and (pointer: coarse) {
+  .shortcut-note, .drill-shortcuts, .rail-shortcuts, .palette-foot, .topsearch-key { display: none !important; }
+}
+
+@media (max-width: 999px) {
+  .byline { display: none; }
+  /* The problem first, the controls after it: on a phone the sidebar used to
+     be a full screen of settings you scrolled past to reach the question. */
+  .study-grid > #studyRoot { order: -1; }
+}
+
+@media (max-width: 760px) {
+  :root { --tabbar-h: 60px; }
+
+  /* A backdrop-filter makes the header the containing block for fixed
+     children, which would pin the tab bar to the header instead of the screen. */
+  .topbar {
+    gap: var(--gap-2);
+    padding: env(safe-area-inset-top) var(--gap-4) 0;
+    height: calc(var(--topbar-h) - 6px + env(safe-area-inset-top));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--bg);
+  }
+  .topbar .brand span { display: block; }
+  .topbar .brand small { display: none; }
+  .topsearch { flex: 1 1 auto; min-width: 0; margin-left: var(--gap-2); padding: 9px 12px; }
+  .topsearch-label { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .topbar nav {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+    background: var(--surface-glass);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+  }
+  .nav-button {
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    min-height: 52px;
+    padding: 4px 0;
+    font-size: 0.68rem;
+    color: var(--text-3);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-button.active { color: var(--primary); background: transparent; box-shadow: none; }
+  .nav-button:hover { background: transparent; }
+  .nav-icon {
+    display: block;
+    width: 22px; height: 22px;
+    fill: none; stroke: currentColor; stroke-width: 1.7;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  body { padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom)); }
+  .graph-stage { height: calc(100dvh - var(--topbar-h) - var(--tabbar-h) - var(--gap-5)); }
+
+  main { padding: var(--gap-4) var(--gap-4) var(--gap-5); }
+  body[data-view="explore"] main { padding: var(--gap-2); }
+  .site-foot { padding-bottom: var(--gap-5); }
+
+  /* 16px stops iOS zooming the page on focus. */
+  .ask-input, .palette input.palette-input, #freeAnswer, #graphSearch, .study-grid select { font-size: 16px; }
+
+  /* Home: chips become one swipeable row rather than three centred lines. */
+  .hero-title { font-size: clamp(1.7rem, 7.5vw, 2.2rem); }
+  .home-chips {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin: var(--gap-3) calc(-1 * var(--gap-4)) 0;
+    padding: 2px var(--gap-4);
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--gap-4);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .home-chips::-webkit-scrollbar { display: none; }
+  .home-chips .ask-eg { flex: none; scroll-snap-align: start; padding: 8px 14px; font-size: 0.82rem; }
+
+  /* The search palette becomes a sheet from the top with room to tap. */
+  .palette { align-items: flex-start; padding: calc(env(safe-area-inset-top) + 8px) 8px 0; }
+  .palette-box { width: 100%; max-width: none; }
+  .palette-row { padding: 12px 14px; }
+
+  /* Touch-sized answer controls: full-width input, buttons that share a row. */
+  .drill-answer-row { flex-wrap: wrap; }
+  .drill-answer-row input { flex: 1 1 100%; }
+  .drill-answer-row .btn-primary { flex: 1 1 100%; }
+  .drill-answer-row .ghost-btn { flex: 1 1 0; justify-content: center; min-height: 44px; }
+  .choice { min-height: 52px; }
+  .card-actions .btn-primary, .card-actions .ghost-btn { min-height: 44px; }
+
+  /* A phone keyboard takes half the screen: the sum and the answer box have
+     to fit in what is left. */
+  .drill-kicker { margin-top: var(--gap-3); }
+  .problem-card .drill-math { min-height: 96px; }
+  .problem-card .statement-drill { min-height: 72px; margin-bottom: var(--gap-3); }
+  .set-bar-timed .ghost-btn { padding: 6px 10px; }
+  .set-bar-timed { top: calc(var(--topbar-h) - 6px + env(safe-area-inset-top) + 6px); }
+  .study-grid .sidebar { margin-top: var(--gap-2); }
+}

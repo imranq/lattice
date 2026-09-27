@@ -220,6 +220,10 @@
   // ladder recognises, which is the only way a concept reaches `mastered` —
   // so this must never be set from anything but a real assessment set.
   let assessment = null;   // { kind, book, chapter, before: Map, meta }
+  // A timed challenge: the set runs until the clock does. `endsAt` is unset
+  // until the learner presses Start, so nothing is timed while a problem loads
+  // or while they read what they are about to do.
+  let timed = null;   // { seconds, endsAt, results, tick, done }
   // An `items` set opens with the problems it names, then carries on as
   // ordinary practice in their field. This records that the opening is done.
   let itemsServed = false;
@@ -283,6 +287,8 @@
              difficulty: q.get("difficulty") || "",
              maxDifficulty: q.get("max_difficulty") || "",
              count: Number(q.get("count")) || 0, label: q.get("label") || "",
+             // Seconds on the clock: a timed challenge rather than a set to finish.
+             time: Math.max(0, Number(q.get("time")) || 0),
              // Set when the set is a step on the guided path (lib/path.mjs).
              path: q.get("path") || "" };
   }
@@ -519,6 +525,11 @@
   // ---- one problem ---------------------------------------------------------
 
   async function next() {
+    if (timed) {
+      if (timed.done) return;
+      if (!timed.endsAt) return renderTimedStart();
+      if (timeLeft() <= 0 || (spec?.count && session.seen >= spec.count)) return finishTimed();
+    }
     if (test && test.index >= test.length) return renderTestResults();
     if (spec?.count && session.seen >= spec.count) return renderSetComplete();
     if (!queue.length) await refill();
@@ -614,6 +625,18 @@
       </div>`;
     }
     if (!spec) return "";
+    if (timed) {
+      const solved = timed.results.filter((r) => r.outcome === "solved").length;
+      return `<div class="set-bar set-bar-timed">
+        <span class="timer-face" data-timer aria-live="off">${clock(timeLeft())}</span>
+        <b class="set-bar-label">${esc(spec.label || "Timed challenge")}</b>
+        <span class="timer-score" title="Solved so far"><b>${solved}</b> solved${
+          spec.count ? ` of ${spec.count}` : ""}</span>
+        <span class="timer-track" aria-hidden="true"><span data-timer-fill
+          style="width:${timerPct()}%"></span></span>
+        <button class="ghost-btn" data-act="endtimed">Stop</button>
+      </div>`;
+    }
     const goal = spec.count;
     const pctDone = goal ? Math.min(100, (session.seen / goal) * 100) : 0;
     return `<div class="set-bar">
@@ -640,6 +663,128 @@
           <a class="ghost-btn" href="#study">Free practice</a>
         </div>
       </section>`;
+  }
+
+  // ---- timed challenges ----------------------------------------------------
+  // Same queue, same grading, same attempt log: the only differences are a
+  // clock that ends the set, answers that move on by themselves, and a best
+  // score to beat. A timed attempt counts toward ratings like any other.
+
+  const BEST_KEY = "lattice_timed_best_v1";
+  const timeLeft = () => (timed?.endsAt ? Math.max(0, timed.endsAt - Date.now())
+    : (timed?.seconds ?? 0) * 1000);
+  const timerPct = () => (timed ? (timeLeft() / (timed.seconds * 1000)) * 100 : 0);
+  const clock = (ms) => {
+    const t = Math.ceil(ms / 1000);
+    return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`;
+  };
+  /** One best per challenge shape; the label is presentation, so it is left out. */
+  const bestKey = () => ["kind", "skills", "domains", "books", "concepts", "time", "count"]
+    .map((k) => [].concat(spec?.[k] ?? "").join(",")).join("|");
+  function readBest() {
+    try { return JSON.parse(localStorage.getItem(BEST_KEY))?.[bestKey()] ?? null; }
+    catch { return null; }
+  }
+  function writeBest(entry) {
+    try {
+      const all = JSON.parse(localStorage.getItem(BEST_KEY)) || {};
+      all[bestKey()] = entry;
+      localStorage.setItem(BEST_KEY, JSON.stringify(all));
+    } catch { /* private mode */ }
+  }
+
+  function stopTimer() {
+    if (timed?.tick) clearInterval(timed.tick);
+    if (timed) timed.tick = null;
+  }
+
+  function paintTimer() {
+    if (!timed?.endsAt) return;
+    const left = timeLeft();
+    for (const t of document.querySelectorAll("[data-timer]")) {
+      t.textContent = clock(left);
+      t.classList.toggle("is-urgent", left <= 10000);
+    }
+    for (const f of document.querySelectorAll("[data-timer-fill]")) f.style.width = `${timerPct()}%`;
+    if (left <= 0) finishTimed();
+  }
+
+  function renderTimedStart() {
+    const best = readBest();
+    const mins = timed.seconds >= 60 ? `${+(timed.seconds / 60).toFixed(1)} minute${
+      timed.seconds === 60 ? "" : "s"}` : `${timed.seconds} seconds`;
+    root().innerHTML = `
+      <section class="card timed-start">
+        <p class="eyebrow">Timed challenge</p>
+        <h2 class="result-title">${esc(spec.label || "Timed challenge")}</h2>
+        <div class="timed-dial" aria-hidden="true">${clock(timed.seconds * 1000)}</div>
+        <p class="dim">${spec.count
+          ? `Answer ${spec.count} questions in ${mins}.`
+          : `Answer as many as you can in ${mins}.`}
+          Right answers move on by themselves; a wrong one shows the answer, then moves on too.</p>
+        ${best ? `<p class="timed-best">Your best: <b>${best.solved}</b> solved${
+          best.seen ? ` of ${best.seen}` : ""}</p>` : ""}
+        <div class="card-actions">
+          <button class="btn-primary btn-lg" data-act="starttimed">Start the clock</button>
+          <a class="ghost-btn" href="#study">Untimed practice</a>
+        </div>
+      </section>`;
+  }
+
+  function startTimed() {
+    stopTimer();
+    timed = { seconds: timed.seconds, endsAt: Date.now() + timed.seconds * 1000,
+              results: [], tick: null, done: false };
+    session = { seen: 0, solved: 0 };
+    paintSession();
+    timed.tick = setInterval(paintTimer, 200);
+    return next();
+  }
+
+  function finishTimed() {
+    if (!timed || timed.done) return;
+    timed.done = true;
+    stopTimer();
+    const results = timed.results;
+    const solved = results.filter((r) => r.outcome === "solved").length;
+    const seen = results.length;
+    const usedMs = Math.min(timed.seconds * 1000,
+      timed.seconds * 1000 - timeLeft());
+    const perMin = usedMs > 0 ? (solved / (usedMs / 60000)) : 0;
+    const best = readBest();
+    const isBest = seen > 0 && (!best || solved > best.solved
+      || (solved === best.solved && seen < best.seen));
+    if (isBest) writeBest({ solved, seen, at: Date.now() });
+    const finished = spec?.count && seen >= spec.count;
+    const left = timeLeft();
+    const misses = results.filter((r) => r.outcome !== "solved");
+    root().innerHTML = `
+      <section class="card timed-result">
+        <p class="eyebrow">${finished ? `Finished with ${clock(left)} to spare`
+          : left > 0 ? `Stopped with ${clock(left)} left` : "Time"}</p>
+        <h2 class="result-title">${esc(spec?.label || "Timed challenge")}</h2>
+        ${isBest ? `<p class="timed-badge">${best ? "New personal best" : "First score on the board"}</p>` : ""}
+        <div class="stat-row">
+          <div class="stat-tile accent"><b>${solved}</b><span>Solved</span></div>
+          <div class="stat-tile"><b>${seen ? Math.round((solved / seen) * 100) : 0}%</b>
+            <span>Accuracy</span><span class="stat-foot">${solved} of ${seen}</span></div>
+          ${usedMs >= 15000 ? `<div class="stat-tile"><b>${perMin.toFixed(perMin < 10 ? 1 : 0)}</b>
+            <span>Per minute</span></div>` : ""}
+          ${best && !isBest ? `<div class="stat-tile"><b>${best.solved}</b><span>Your best</span></div>` : ""}
+        </div>
+        ${misses.length ? `<h3 class="sub">To look at again</h3>
+          <ol class="test-review">${misses.slice(0, 12).map((r) => `
+            <li class="mark-${esc(r.outcome)}"><span class="mark">${r.outcome === "skipped" ? "·" : "✗"}</span>
+              ${esc(r.label)}
+              ${r.expected && r.given ? `<span class="dim">you said ${esc(r.given)}, answer ${esc(r.expected)}</span>` : ""}
+            </li>`).join("")}</ol>` : ""}
+        <div class="card-actions">
+          <button class="btn-primary" data-act="againtimed">Go again</button>
+          <a class="ghost-btn" href="#study">Untimed practice</a>
+          <a class="ghost-btn" href="#home">Home</a>
+        </div>
+      </section>`;
+    window.Lattice.typeset(root());
   }
 
   function sessionBar() {
@@ -911,9 +1056,18 @@
       fb.className = `feedback ${correct ? "ok" : "no"}`;
       window.Lattice.typeset(fb);
       await record(correct ? (hintsShown ? "partial" : "solved") : "failed", ids.join(","));
-      if (correct) setTimeout(next, 1200);
+      advanceAfter(correct, 1200);
     }
   });
+
+  /** Right answers move on. Wrong ones wait to be read, except against the
+   *  clock, where waiting costs the round: the answer shows, then it moves on. */
+  function advanceAfter(correct, delay = 650) {
+    const was = current;
+    const go = () => { if (current === was) next(); };
+    if (correct) setTimeout(go, delay);
+    else if (timed?.endsAt) setTimeout(go, 1600);
+  }
 
   /** Feedback after a drill answer. A wrong answer that matches a known
    *  mistake gets that mistake's explanation, not just the right number. */
@@ -1194,6 +1348,16 @@
     session.seen += 1;
     if (outcome === "solved") session.solved += 1;
     paintSession();
+    if (timed?.endsAt && !timed.done) {
+      timed.results.push({
+        label: current.kind === "drill" ? current.problem.prompt
+          : `${current.problem.cite ?? ""} ${current.problem.section_title ?? ""}`.trim(),
+        outcome, given: given ?? null,
+        expected: current.kind === "drill" ? current.problem.answer : null,
+      });
+      const score = document.querySelector(".timer-score b");
+      if (score) score.textContent = timed.results.filter((r) => r.outcome === "solved").length;
+    }
     if (test) {
       test.results.push({
         label: current.kind === "drill"
@@ -1258,7 +1422,7 @@
     // Most actions are about the problem on screen. These are not: they run from
     // the setup and results cards, when there is no current problem at all.
     const CARD_ACTS = new Set(["starttest", "newtest", "practice", "againset", "endtest",
-                               "pathnext"]);
+                               "pathnext", "starttimed", "againtimed", "endtimed"]);
     if (!current && !CARD_ACTS.has(act)) return;
 
     if (act === "next") return next();
@@ -1327,6 +1491,8 @@
       document.querySelectorAll("[data-grade]").forEach((button) => {
         button.disabled = true;
       });
+      // Against the clock, a graded problem moves on like a drill does.
+      if (timed?.endsAt) return advanceAfter(outcome === "solved");
       const actions = document.querySelector(".card-actions");
       if (actions && !actions.querySelector('[data-act="next"]')) {
         actions.insertAdjacentHTML("beforeend",
@@ -1340,6 +1506,16 @@
     if (act === "skip") {
       await record("skipped", document.getElementById("freeAnswer")?.value ?? null);
       return next();
+    }
+    if (act === "starttimed") return startTimed();
+    if (act === "endtimed") return finishTimed();
+    if (act === "againtimed") {
+      stopTimer();
+      timed = { seconds: timed.seconds, results: [] };
+      served.clear();
+      queue = [];
+      reshuffle();
+      return startTimed();
     }
     if (act === "endtest") return renderTestResults();
     if (act === "newtest") { pendingTest = true; return renderTestSetup(); }
@@ -1466,7 +1642,7 @@
     drillVerdict(p, correct, correct ? null : MathGen.diagnose(p, given)?.why);
     await record(correct ? (hintsShown ? "partial" : "solved") : "failed", given);
     // A right answer moves on; a wrong one waits, so the explanation can be read.
-    if (correct) setTimeout(next, 650);
+    advanceAfter(correct);
   });
 
   document.addEventListener("click", async (ev) => {
@@ -1482,7 +1658,7 @@
     }
     drillVerdict(p, pick.correct, pick.why);
     await record(pick.correct ? (hintsShown ? "partial" : "solved") : "failed", pick.text);
-    if (pick.correct) setTimeout(next, 650);
+    advanceAfter(pick.correct);
   });
 
   let testLength = 10;
@@ -1586,6 +1762,7 @@
       // free-practice controls, and a set ignores them.
       if (spec) {
         spec = null; assessment = null; test = null;
+        stopTimer(); timed = null;
         location.hash = "study";
         el("sideStudy")?.classList.remove("set-active");
       }
@@ -1679,6 +1856,7 @@
     loadPicks();
     picksLoaded = Boolean(localStorage.getItem(PICK_KEY));
     spec = parseSpec(decodeURIComponent(location.hash.slice(1)).split("|")[1]);
+    timed = spec?.time ? { seconds: spec.time, results: [] } : null;
     await renderAbility();
     await renderPickers();
     paintDifficulty();
@@ -1703,6 +1881,8 @@
     // must never outlive the route that started it.
     assessment = null;
     test = null;
+    stopTimer();
+    timed = spec?.time ? { seconds: spec.time, results: [] } : null;
     paintSession();
     const side = el("sideStudy");
     if (side) side.classList.toggle("set-active", Boolean(spec));

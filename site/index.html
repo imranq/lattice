@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1220" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)" />
   <meta name="color-scheme" content="light dark" />
   <title>Lattice</title>
   <script>
@@ -16,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260922-mental-drill" />
+  <link rel="stylesheet" href="styles.css?v=20260927-mobile-timed" />
   <script>
     // Maths is the content here, so the delimiters are generous: books and the
     // Putnam archive both ship \( \) and $ $, and a statement that fails to
@@ -62,7 +64,7 @@
   <script defer src="generators-mlbooks.js"></script>
   <script defer src="generators-complex.js"></script>
   <script defer src="graph.js"></script>
-  <script defer src="study.js?v=20260923-feedback-solution"></script>
+  <script defer src="study.js?v=20260927-timed"></script>
   <script defer src="home.js"></script>
   <script defer src="subject.js"></script>
   <script defer src="course.js"></script>
@@ -75,11 +77,11 @@
       <span><strong>Lattice</strong><small>Concepts, partially ordered</small></span>
     </a>
     <nav aria-label="Primary">
-      <button data-view="home" class="nav-button active">Home</button>
-      <button data-view="study" class="nav-button">Study</button>
-      <button data-view="course" class="nav-button">Courses</button>
-      <button data-view="explore" class="nav-button">Graph</button>
-      <button data-view="stats" class="nav-button">Stats</button>
+      <button data-view="home" class="nav-button active"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg><span>Home</span></button>
+      <button data-view="study" class="nav-button"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l4 4v12H5z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg><span>Study</span></button>
+      <button data-view="course" class="nav-button"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5"/></svg><span>Courses</span></button>
+      <button data-view="explore" class="nav-button"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="8" r="2.2"/><circle cx="10" cy="18" r="2.2"/><path d="M8 7l8 1M7 8l2.5 8M16.5 10l-5 6.5"/></svg><span>Graph</span></button>
+      <button data-view="stats" class="nav-button"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span>Stats</span></button>
     </nav>
     <button id="searchOpen" class="topsearch" type="button" aria-label="Search">
       <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
@@ -90,6 +92,7 @@
       <span class="topsearch-label">Search or jump…</span>
       <kbd class="topsearch-key">⌘K</kbd>
     </button>
+    <a class="byline" href="https://imranq-site.pages.dev/" target="_blank" rel="noopener">by Imran Qureshi ↗</a>
     <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
   </header>
 
@@ -268,6 +271,12 @@
       </div>
     </section>
   </main>
+
+  <footer class="site-foot">
+    <span>Lattice · concepts, partially ordered</span>
+    <a href="https://imranq-site.pages.dev/" target="_blank" rel="noopener">Made by Imran Qureshi ↗</a>
+    <a href="https://github.com/imranq/lattice" target="_blank" rel="noopener">GitHub</a>
+  </footer>
 
 </body>
 </html>
