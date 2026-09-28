@@ -286,6 +286,21 @@ State lives in SQLite at `data/lattice.db` (gitignored — personal history).
 | GET | `/api/due`, `/api/ladder/:id`, `/api/exercises?concept=` | queues and pointers |
 | POST | `/api/attempt`, `/api/star`, `/api/view` | record |
 
+### MCP server
+
+The generators are also exposed to agents, so a tutor model can hand out problems and grade
+them with the verified checkers instead of an answer key it wrote itself:
+
+```bash
+claude mcp add lattice -- node /path/to/lattice/mcp/server.mjs
+```
+
+`list_skills` (by domain, concept or word), `generate` (a problem and its `{skill, level, seed}`
+reference, with no answer), `check` (regenerates the problem, grades the answer, names the
+mistake, then reveals answer and steps) and `path_for` (a concept's prerequisites, each with the
+skills that drill it). Stdio, no dependencies. `order` lines are relabelled `L1…` because
+their ids would give the order away.
+
 ## Known limitations
 
 - **Putnam↔graph matching is lexical** and imprecise; generic labels absorb too many
