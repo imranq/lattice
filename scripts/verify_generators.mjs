@@ -167,6 +167,26 @@ async function runRefs() {
   if (process.argv.includes('--review')) console.log(`mutations to review (${review.length}):\n${review.join('\n')}`);
 }
 
+// Concepts: every generator names at least one topic in the graph. That is what
+// puts it on a course page, lets the audit count the topic as practised, and
+// gives it the graph's prerequisite edges. A typo'd id would do none of that silently.
+{
+  const { readFileSync } = await import('node:fs');
+  const graph = JSON.parse(readFileSync(new URL('../data/processed/graph/math.json', import.meta.url), 'utf8'));
+  const known = new Set(graph.nodes.filter((n) => n.kind === 'concept').map((n) => n.id));
+  for (const { id, concepts } of M.SKILLS) {
+    if (!concepts?.length) fail(id, 'no concepts: tag the graph topic it practises');
+    for (const c of concepts ?? []) if (!known.has(c)) fail(id, `unknown concept ${c}`);
+  }
+  // pt-steps draws from a bank that grows; its tags must cover every problem's topic.
+  const topicOf = new Map(graph.exercises.map((e) => [e.id, e.concept_id]));
+  const tagged = new Set(M.SKILLS.find((s) => s.id === 'pt-steps')?.concepts ?? []);
+  for (const q of M.putnamSteps ?? []) {
+    const c = topicOf.get(q.id);
+    if (c && !tagged.has(c)) fail('pt-steps', `${q.id}: its topic ${c} is not in pt-steps' concepts`);
+  }
+}
+
 const refs = process.argv.includes('--refs') ? await runRefs() : null;
 const skills = M.SKILLS.length;
 console.log(`${skills} skills × 5 levels × ${SEEDS} seeds = ${skills * 5 * SEEDS} problems checked`);

@@ -49,6 +49,7 @@
 
   def({
     id: "add-chain", name: "Adding a chain", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1"],
     blurb: "Left to right, rounding to friendly numbers as you go.",
     gen(level, r) {
       const [lo, hi] = band(level, [range(2, 20), range(10, 99), range(10, 99),
@@ -67,6 +68,7 @@
 
   def({
     id: "subtract", name: "Subtraction", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1"],
     blurb: "Count up from the smaller number instead of borrowing.",
     gen(level, r) {
       const [lo, hi] = band(level, [range(10, 50), range(20, 99), range(100, 999),
@@ -82,6 +84,7 @@
 
   def({
     id: "multiply", name: "Multiplication", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1"],
     blurb: "Split one factor into parts you can handle.",
     gen(level, r) {
       const specs = [[2, 9, 2, 9], [10, 99, 2, 9], [10, 99, 11, 19],
@@ -100,6 +103,7 @@
 
   def({
     id: "multiply-2x2", name: "Two-digit multiplication", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1"],
     blurb: "Multiply two two-digit numbers using friendly decomposition.",
     gen(level, r) {
       const ranges = [[10, 19], [10, 29], [20, 49], [25, 75], [50, 99]];
@@ -118,6 +122,7 @@
 
   def({
     id: "divide-friendly", name: "Division", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1"],
     blurb: "Build the dividend from a clean quotient and divisor.",
     gen(level, r) {
       const divisors = band(level, [[2, 5], [2, 9], [3, 12], [4, 20], [5, 30]]);
@@ -135,6 +140,7 @@
 
   def({
     id: "order-of-operations", name: "Parentheses and order", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1", "concept:math_dataset:prealgebra:L2"],
     blurb: "Evaluate compact expressions without losing the grouping.",
     gen(level, r) {
       const a = r.int(2, band(level, [9, 15, 30, 60, 100]));
@@ -155,6 +161,7 @@
 
   def({
     id: "powers", name: "Powers", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1", "concept:math_dataset:prealgebra:L2"],
     blurb: "Build small powers by repeated multiplication and useful anchors.",
     gen(level, r) {
       const base = r.int(2, band(level, [3, 4, 5, 8, 12]));
@@ -224,6 +231,7 @@
 
   def({
     id: "mult-tricks", name: "Multiplication tricks", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1"],
     blurb: "×11, ×5, ×9, near-100, and difference of squares.",
     gen(level, r) {
       const kinds = band(level, [["x11"], ["x11", "x5"], ["x11", "x5", "x9"],
@@ -274,6 +282,7 @@
 
   def({
     id: "squares", name: "Squares", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1"],
     blurb: "Anchor on a nearby round number.",
     gen(level, r) {
       const [lo, hi] = band(level, [range(2, 15), range(10, 30), range(20, 60),
@@ -290,6 +299,7 @@
 
   def({
     id: "percent", name: "Percentages", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1", "concept:math_dataset:prealgebra:L2"],
     blurb: "Build any percent out of 10% and 1%.",
     gen(level, r) {
       const specs = [[10, 50, [10, 20, 50]], [5, 100, [5, 15, 25]],
@@ -307,6 +317,7 @@
 
   def({
     id: "fractions", name: "Fraction arithmetic", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1", "concept:math_dataset:prealgebra:L2"],
     blurb: "Common denominators, then simplify.",
     gen(level, r) {
       const maxD = band(level, [6, 9, 12, 16, 24]);
@@ -335,6 +346,7 @@
 
   def({
     id: "divisibility", name: "Divisibility", domain: "number theory",
+    concepts: ["concept:math_dataset:number_theory:L1", "concept:math_dataset:number_theory:L2"],
     blurb: "Digit tests for 3, 4, 7, 8, 9, 11.",
     gen(level, r) {
       const ds = band(level, [[2, 3, 5], [3, 4, 9], [4, 8, 11], [7, 11, 13], [7, 11, 13]]);
@@ -360,6 +372,7 @@
 
   def({
     id: "gcd-lcm", name: "GCD and LCM", domain: "number theory",
+    concepts: ["concept:math_dataset:number_theory:L1", "concept:math_dataset:number_theory:L2"],
     blurb: "Euclid's algorithm, then use gcd·lcm = ab.",
     gen(level, r) {
       const hi = band(level, [20, 40, 80, 200, 600]);
@@ -375,6 +388,7 @@
 
   def({
     id: "mod-power", name: "Modular powers", domain: "number theory",
+    concepts: ["concept:math_dataset:number_theory:L2", "concept:math_dataset:number_theory:L3", "concept:andrews:5.1"],
     blurb: "Cycle the exponent; Fermat when the modulus is prime.",
     gen(level, r) {
       const mods = band(level, [[5, 7], [7, 9], [11, 13], [13, 17], [17, 19, 23]]);
@@ -393,6 +407,7 @@
 
   def({
     id: "series", name: "Series and sums", domain: "algebra",
+    concepts: ["concept:math_dataset:algebra:L3", "concept:math_dataset:algebra:L4"],
     blurb: "Closed forms beat adding term by term.",
     gen(level, r) {
       const kind = band(level, ["1n", "1n", "arith", "squares", "geom"]);
@@ -426,6 +441,7 @@
 
   def({
     id: "counting", name: "Counting", domain: "combinatorics",
+    concepts: ["concept:math_dataset:counting_and_probability:L1", "concept:math_dataset:counting_and_probability:L2"],
     blurb: "Permutations, combinations, and when order matters.",
     gen(level, r) {
       const n = r.int(band(level, [4, 5, 6, 8, 10]), band(level, [6, 8, 10, 12, 15]));
@@ -447,6 +463,7 @@
 
   def({
     id: "estimate", name: "Estimation", domain: "arithmetic",
+    concepts: ["concept:math_dataset:prealgebra:L1", "concept:mahajan:ch5"],
     blurb: "Get within 10% without exact arithmetic.",
     tolerance: 0.1,
     gen(level, r) {
@@ -475,6 +492,7 @@
 
   def({
     id: "bases", name: "Number bases", domain: "number theory",
+    concepts: ["concept:math_dataset:number_theory:L1", "concept:math_dataset:number_theory:L2", "concept:andrews:1.2"],
     blurb: "Binary and hex by repeated division.",
     gen(level, r) {
       const base = band(level, [2, 2, 2, 16, 16]);
@@ -493,6 +511,7 @@
 
   def({
     id: "linear", name: "Linear equations", domain: "algebra",
+    concepts: ["concept:math_dataset:algebra:L1", "concept:math_dataset:algebra:L2"],
     blurb: "Isolate the unknown in one pass.",
     gen(level, r) {
       const a = r.int(2, band(level, [5, 9, 12, 15, 20]));
@@ -513,6 +532,7 @@
 
   def({
     id: "logs", name: "Logs and exponents", domain: "algebra",
+    concepts: ["concept:math_dataset:algebra:L2", "concept:math_dataset:algebra:L3"],
     blurb: "Read exponents off powers you already know.",
     gen(level, r) {
       const b = r.pick(band(level, [[2], [2, 3], [2, 3, 5], [2, 3, 5, 10], [2, 3, 5, 7, 10]]));

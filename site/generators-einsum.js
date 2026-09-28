@@ -32,7 +32,9 @@
     url: "https://numpy.org/doc/stable/reference/generated/numpy.einsum.html", fidelity: "inspired",
   };
 
-  const def = (g) => M.define({ domain: ML, ...g });
+  // Einsum is tensor algebra: without a topic of its own, it files under d2l's
+  // Preliminaries chapter, where tensors and their operations are introduced.
+  const def = (g) => M.define({ domain: ML, concepts: ["concept:d2l:ch2"], ...g });
 
   /** Contractions worth knowing, as templates over abstract axis letters. */
   const OPS = [

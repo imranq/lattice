@@ -326,7 +326,9 @@
 
   M.define({
     id: "pt-steps", name: "Putnam proofs, step by step",
-    domain: "competition math", prose: true, source: SOURCE, concepts: [],
+    domain: "competition math", prose: true, source: SOURCE,
+    // The topics the step bank covers; the verifier fails if a problem's topic is missing.
+    concepts: ["concept:putnam:abstract_algebra", "concept:putnam:algebra", "concept:putnam:calculus", "concept:putnam:combinatorics", "concept:putnam:functional_equations", "concept:putnam:geometry", "concept:putnam:linear_algebra", "concept:putnam:number_theory", "concept:putnam:probability"],
     blurb: "Real Putnam solutions: fill in the key step, or put the steps in order.",
     gen(level, r) {
       const p = r.pick(BANK);
